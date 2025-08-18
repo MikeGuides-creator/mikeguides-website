@@ -1,0 +1,2103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatGPT Mastery: Professional AI Communication Simulator</title>
+    <style>
+        :root {
+            --cobalt-blue: #0047AB;
+            --cobalt-light: #1E5BB8;
+            --cobalt-dark: #003580;
+            --silver: #C0C0C0;
+            --silver-light: #E8E8E8;
+            --silver-dark: #A0A0A0;
+            --white: #FFFFFF;
+            --black: #000000;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-400: #9CA3AF;
+            --gray-500: #6B7280;
+            --gray-600: #4B5563;
+            --gray-700: #374151;
+            --gray-800: #1F2937;
+            --gray-900: #111827;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --info: var(--cobalt-blue);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, var(--gray-50) 0%, var(--silver-light) 100%);
+            color: var(--gray-700);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--cobalt-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 71, 171, 0.3);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 71, 171, 0.4);
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--cobalt-blue) 0%, var(--cobalt-dark) 100%);
+            color: var(--white);
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, var(--white), var(--silver));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            min-width: 120px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--silver);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: var(--white);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+            justify-content: center;
+            padding: 0 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-tab {
+            padding: 1.25rem 2rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-weight: 600;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--gray-600);
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            background: var(--gray-50);
+            color: var(--cobalt-blue);
+        }
+
+        .nav-tab.active {
+            border-bottom-color: var(--cobalt-blue);
+            color: var(--cobalt-blue);
+            background: linear-gradient(to bottom, transparent, rgba(0, 71, 171, 0.05));
+        }
+
+        .nav-tab .badge {
+            background: var(--cobalt-blue);
+            color: var(--white);
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            min-width: 18px;
+            text-align: center;
+        }
+
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 2rem;
+        }
+
+        .content-area {
+            min-height: 600px;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Practice Mode Enhancements */
+        .simulator-area {
+            background: var(--white);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 700px;
+            border: 2px solid var(--silver-light);
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, var(--cobalt-blue), var(--cobalt-light));
+            color: var(--white);
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        .chat-header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .chat-status {
+            width: 12px;
+            height: 12px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        .ai-mode {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+
+        .chat-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: var(--white);
+            padding: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .conversation-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            background: linear-gradient(to bottom, var(--gray-50), var(--white));
+            scroll-behavior: smooth;
+        }
+
+        .conversation-area::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .conversation-area::-webkit-scrollbar-track {
+            background: var(--gray-100);
+            border-radius: 4px;
+        }
+
+        .conversation-area::-webkit-scrollbar-thumb {
+            background: var(--silver);
+            border-radius: 4px;
+        }
+
+        .message {
+            display: flex;
+            margin-bottom: 2rem;
+            gap: 1rem;
+            animation: slideIn 0.4s ease-out;
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .message.user .message-avatar {
+            background: linear-gradient(135deg, var(--cobalt-blue), var(--cobalt-light));
+            color: var(--white);
+            box-shadow: 0 4px 12px rgba(0, 71, 171, 0.3);
+        }
+
+        .message.assistant .message-avatar {
+            background: linear-gradient(135deg, var(--gray-700), var(--gray-600));
+            color: var(--white);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .message-content {
+            max-width: 75%;
+            padding: 1rem 1.5rem;
+            border-radius: 16px;
+            position: relative;
+            white-space: pre-wrap;
+            line-height: 1.6;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .message.user .message-content {
+            background: linear-gradient(135deg, var(--cobalt-blue), var(--cobalt-light));
+            color: var(--white);
+            border-bottom-right-radius: 6px;
+        }
+
+        .message.assistant .message-content {
+            background: var(--white);
+            border: 1px solid var(--silver-light);
+            border-bottom-left-radius: 6px;
+            color: var(--gray-700);
+        }
+
+        .message-meta {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .prompt-quality-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+        }
+
+        .typing-indicator {
+            display: none;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .typing-indicator.active {
+            display: flex;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 0.4rem;
+            padding: 1rem 1.5rem;
+            background: var(--white);
+            border: 1px solid var(--silver-light);
+            border-radius: 16px;
+            border-bottom-left-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--gray-400);
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-12px); }
+        }
+
+        .input-area {
+            padding: 1.5rem;
+            border-top: 1px solid var(--silver-light);
+            background: var(--white);
+            flex-shrink: 0;
+        }
+
+        .input-container {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-end;
+            position: relative;
+        }
+
+        .input-wrapper {
+            flex: 1;
+            position: relative;
+        }
+
+        .message-input {
+            width: 100%;
+            border: 2px solid var(--silver-light);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            resize: none;
+            font-family: inherit;
+            font-size: 1rem;
+            min-height: 52px;
+            max-height: 150px;
+            transition: all 0.3s ease;
+            background: var(--gray-50);
+        }
+
+        .message-input:focus {
+            outline: none;
+            border-color: var(--cobalt-blue);
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(0, 71, 171, 0.1);
+        }
+
+        .input-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .send-button {
+            background: linear-gradient(135deg, var(--cobalt-blue), var(--cobalt-light));
+            color: var(--white);
+            border: none;
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 71, 171, 0.3);
+            min-width: 100px;
+        }
+
+        .send-button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 71, 171, 0.4);
+        }
+
+        .send-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .template-btn {
+            background: var(--silver);
+            color: var(--gray-700);
+            border: none;
+            border-radius: 12px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .template-btn:hover {
+            background: var(--silver-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Sidebar Enhancements */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .panel {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--silver-light);
+        }
+
+        .panel h3 {
+            color: var(--cobalt-blue);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .progress-panel {
+            background: linear-gradient(135deg, var(--cobalt-blue), var(--cobalt-light));
+            color: var(--white);
+        }
+
+        .progress-panel h3 {
+            color: var(--white);
+        }
+
+        .progress-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-stat {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .progress-stat-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--silver);
+        }
+
+        .progress-stat-label {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .level-progress {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            height: 8px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .level-progress-fill {
+            background: var(--silver);
+            height: 100%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .feedback-panel {
+            min-height: 200px;
+        }
+
+        .prompt-analysis {
+            background: var(--gray-50);
+            border-left: 4px solid var(--cobalt-blue);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .analysis-score {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .score-bar {
+            flex: 1;
+            height: 8px;
+            background: var(--gray-200);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 0 1rem;
+        }
+
+        .score-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+            position: relative;
+        }
+
+        .score-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .score-excellent { background: var(--success); }
+        .score-good { background: var(--warning); }
+        .score-needs-work { background: var(--error); }
+
+        .achievements {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .achievement-badge {
+            background: var(--silver);
+            color: var(--gray-700);
+            padding: 0.5rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            transition: all 0.3s ease;
+        }
+
+        .achievement-badge.earned {
+            background: linear-gradient(135deg, var(--cobalt-blue), var(--cobalt-light));
+            color: var(--white);
+            animation: bounce 0.5s ease;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 53%, 80%, 100% { transform: translateY(0); }
+            40%, 43% { transform: translateY(-10px); }
+            70% { transform: translateY(-5px); }
+        }
+
+        .templates-panel {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .template-category {
+            margin-bottom: 1.5rem;
+        }
+
+        .template-category h4 {
+            color: var(--gray-700);
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--silver-light);
+        }
+
+        .template-item {
+            background: var(--gray-50);
+            border: 1px solid var(--silver-light);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .template-item:hover {
+            background: var(--cobalt-blue);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 71, 171, 0.3);
+        }
+
+        .template-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .template-preview {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            line-height: 1.4;
+        }
+
+        /* Modal for templates */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--silver-light);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray-500);
+            transition: color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: var(--error);
+        }
+
+        /* Feature grids and content */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid var(--silver-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--cobalt-blue), var(--cobalt-light));
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 71, 171, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+            color: var(--cobalt-blue);
+        }
+
+        .feature-card h3 {
+            color: var(--gray-800);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .feature-card p {
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        /* Dark theme */
+        .dark-theme {
+            --gray-50: #1F2937;
+            --gray-100: #374151;
+            --gray-200: #4B5563;
+            --white: #1F2937;
+            --gray-700: #F9FAFB;
+            --silver-light: #374151;
+        }
+
+        .dark-theme body {
+            background: linear-gradient(135deg, #111827 0%, #1F2937 100%);
+            color: #F9FAFB;
+        }
+
+        /* Responsive design */
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .sidebar {
+                order: -1;
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 1rem;
+            }
+            
+            .nav-tabs {
+                justify-content: flex-start;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .simulator-area {
+                height: 500px;
+            }
+            
+            .stats-bar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Export functionality styles */
+        .export-options {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .export-btn {
+            background: var(--silver);
+            color: var(--gray-700);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .export-btn:hover {
+            background: var(--cobalt-blue);
+            color: var(--white);
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" id="themeToggle" title="Toggle Dark Mode">🌙</button>
+
+    <div class="header">
+        <div class="header-content">
+            <h1>ChatGPT Mastery Simulator</h1>
+            <p>Master AI communication with real-time feedback, interactive learning, and professional prompt templates</p>
+            
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-number" id="totalPrompts">0</div>
+                    <div class="stat-label">Prompts Sent</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="avgScore">0</div>
+                    <div class="stat-label">Avg Score</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="currentLevel">1</div>
+                    <div class="stat-label">Level</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="achievementCount">0</div>
+                    <div class="stat-label">Achievements</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-tabs">
+        <button class="nav-tab active" data-tab="practice">
+            <span>🎯</span> Practice Mode
+            <span class="badge" id="practiceCount">0</span>
+        </button>
+        <button class="nav-tab" data-tab="templates">
+            <span>📋</span> Prompt Templates
+            <span class="badge">50+</span>
+        </button>
+        <button class="nav-tab" data-tab="strategies">
+            <span>💡</span> Strategies
+        </button>
+        <button class="nav-tab" data-tab="examples">
+            <span>📚</span> Examples
+        </button>
+        <button class="nav-tab" data-tab="troubleshoot">
+            <span>🔧</span> Troubleshooting
+        </button>
+        <button class="nav-tab" data-tab="analytics">
+            <span>📊</span> Analytics
+        </button>
+    </div>
+
+    <div class="main-content">
+        <div class="content-area">
+            <!-- Practice Mode Tab -->
+            <div class="tab-content active" id="practice">
+                <div class="simulator-area">
+                    <div class="chat-header">
+                        <div class="chat-header-left">
+                            <div class="chat-status"></div>
+                            <span>AI Practice Simulator</span>
+                        </div>
+                        <div class="ai-mode">Real AI Responses</div>
+                        <div class="chat-controls">
+                            <button class="control-btn" id="clearChat" title="Clear conversation">🗑️</button>
+                            <button class="control-btn" id="exportChat" title="Export conversation">💾</button>
+                            <button class="control-btn" id="shareChat" title="Share conversation">📤</button>
+                        </div>
+                    </div>
+                    <div class="conversation-area" id="conversation-area">
+                        <div class="message assistant">
+                            <div class="message-avatar">AI</div>
+                            <div class="message-content">Welcome to your enhanced AI conversation practice! I'm powered by real AI and can respond to any question or request. 
+
+This simulator now includes:
+• Real-time prompt quality analysis
+• Progress tracking and achievements
+• Professional prompt templates
+• Conversation history and export
+• Difficulty progression system
+
+Try asking me anything - I'll provide feedback on your prompting techniques to help you improve. Use the template button for quick access to professional prompts!
+                                <div class="message-meta">
+                                    <span>🤖 AI Assistant</span>
+                                    <span>•</span>
+                                    <span>Just now</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="typing-indicator">
+                        <div class="message-avatar" style="background: linear-gradient(135deg, var(--gray-700), var(--gray-600)); color: var(--white);">AI</div>
+                        <div class="typing-dots">
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                        </div>
+                    </div>
+                    <div class="input-area">
+                        <div class="input-container">
+                            <div class="input-wrapper">
+                                <textarea class="message-input" placeholder="Ask me anything! Try being specific about what you want..." rows="1"></textarea>
+                            </div>
+                            <div class="input-actions">
+                                <button class="template-btn" id="templateBtn" title="Use template">📋</button>
+                                <button class="send-button">Send</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Templates Tab -->
+            <div class="tab-content" id="templates">
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <span class="feature-icon">💼</span>
+                        <h3>Business & Professional</h3>
+                        <p>Email templates, meeting agendas, project planning, and business strategy prompts.</p>
+                        <button class="export-btn" onclick="showTemplateCategory('business')">View Templates</button>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">✍️</span>
+                        <h3>Creative Writing</h3>
+                        <p>Story generation, character development, creative briefs, and content creation prompts.</p>
+                        <button class="export-btn" onclick="showTemplateCategory('creative')">View Templates</button>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">📊</span>
+                        <h3>Data & Analysis</h3>
+                        <p>Research requests, data interpretation, statistical analysis, and report generation.</p>
+                        <button class="export-btn" onclick="showTemplateCategory('analysis')">View Templates</button>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🎓</span>
+                        <h3>Learning & Education</h3>
+                        <p>Study guides, explanations, tutoring prompts, and educational content creation.</p>
+                        <button class="export-btn" onclick="showTemplateCategory('education')">View Templates</button>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">💻</span>
+                        <h3>Programming & Tech</h3>
+                        <p>Code generation, debugging, technical explanations, and software development.</p>
+                        <button class="export-btn" onclick="showTemplateCategory('programming')">View Templates</button>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🎯</span>
+                        <h3>Problem Solving</h3>
+                        <p>Decision frameworks, troubleshooting guides, strategic thinking, and solution development.</p>
+                        <button class="export-btn" onclick="showTemplateCategory('problem-solving')">View Templates</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Strategies Tab -->
+            <div class="tab-content" id="strategies">
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <span class="feature-icon">🎯</span>
+                        <h3>Be Ultra-Specific</h3>
+                        <p>Instead of "Help me write," try "Help me write a professional email declining a job offer while maintaining a positive relationship for future opportunities."</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">📋</span>
+                        <h3>Provide Rich Context</h3>
+                        <p>Share relevant background: "I'm a marketing manager at a SaaS startup targeting small businesses, working on our Q4 campaign launch."</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">📄</span>
+                        <h3>Use Detailed Examples</h3>
+                        <p>Show the exact format: "Write like this example..." or "Match this tone and structure..." for consistent results.</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🎭</span>
+                        <h3>Assign Expert Roles</h3>
+                        <p>"Act as a senior financial advisor with 15 years experience" or "You're a creative director at a top advertising agency."</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">📏</span>
+                        <h3>Set Clear Constraints</h3>
+                        <p>Specify everything: "Write a 150-word executive summary for C-level executives, using bullet points, formal tone, focus on ROI."</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🔄</span>
+                        <h3>Iterate Systematically</h3>
+                        <p>Build progressively: "Make it more technical," "Add specific metrics," "Adjust for a younger audience."</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🧠</span>
+                        <h3>Chain of Thought</h3>
+                        <p>Request step-by-step reasoning: "Think through this problem step by step, showing your reasoning at each stage."</p>
+                    </div>
+                    <div class="feature-card">
+                        <span class="feature-icon">🔍</span>
+                        <h3>Multiple Perspectives</h3>
+                        <p>Ask for various viewpoints: "Analyze this from the perspectives of customers, employees, and shareholders."</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Examples Tab -->
+            <div class="tab-content" id="examples">
+                <div style="display: grid; gap: 2rem;">
+                    <div class="feature-card" style="border-left: 4px solid var(--error);">
+                        <h3 style="color: var(--error); margin-bottom: 1rem;">❌ Poor Prompt</h3>
+                        <div style="background: #FEF2F2; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border: 1px solid #FECACA;">
+                            "Help me with marketing"
+                        </div>
+                        <p style="color: var(--gray-600); font-size: 0.9rem;"><strong>Problems:</strong> Too vague, no context, unclear goals, no specifications</p>
+                    </div>
+
+                    <div class="feature-card" style="border-left: 4px solid var(--success);">
+                        <h3 style="color: var(--success); margin-bottom: 1rem;">✅ Excellent Prompt</h3>
+                        <div style="background: #F0FDF4; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border: 1px solid #BBF7D0;">
+                            "I'm launching a fitness app called 'QuickFit' for busy professionals aged 25-40 who want effective 15-minute workouts. Help me create 5 social media campaign ideas that emphasize convenience and quick results. Each idea should include: a compelling hook, key message, suggested visual concept, and recommended posting time. Keep the tone motivational but realistic - avoid overpromising. Format as numbered list with clear sections."
+                        </div>
+                        <p style="color: var(--gray-600); font-size: 0.9rem;"><strong>Why it works:</strong> Specific context, clear audience, defined deliverable, detailed format, tone guidance, realistic expectations</p>
+                    </div>
+
+                    <div class="feature-card" style="border-left: 4px solid var(--error);">
+                        <h3 style="color: var(--error); margin-bottom: 1rem;">❌ Poor Prompt</h3>
+                        <div style="background: #FEF2F2; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border: 1px solid #FECACA;">
+                            "Write code"
+                        </div>
+                        <p style="color: var(--gray-600); font-size: 0.9rem;"><strong>Problems:</strong> No language specified, no functionality described, no context or requirements</p>
+                    </div>
+
+                    <div class="feature-card" style="border-left: 4px solid var(--success);">
+                        <h3 style="color: var(--success); margin-bottom: 1rem;">✅ Excellent Prompt</h3>
+                        <div style="background: #F0FDF4; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border: 1px solid #BBF7D0;">
+                            "Write a Python function called 'validate_email_list' that takes a list of email addresses and validates them using regex. Requirements: (1) Use Python 3.8+ syntax, (2) Include comprehensive error handling for invalid formats, (3) Return a dictionary with 'valid_emails' list and 'invalid_count' integer, (4) Add detailed docstring explaining parameters and return values, (5) Include 3 test cases showing different scenarios. Comment the regex pattern to explain each part."
+                        </div>
+                        <p style="color: var(--gray-600); font-size: 0.9rem;"><strong>Why it works:</strong> Language specified, clear functionality, detailed requirements, expected output format, documentation requests, testing examples</p>
+                    </div>
+
+                    <div class="feature-card" style="border-left: 4px solid var(--warning);">
+                        <h3 style="color: var(--warning); margin-bottom: 1rem;">⚠️ Needs Improvement</h3>
+                        <div style="background: #FFFBEB; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border: 1px solid #FDE68A;">
+                            "Explain artificial intelligence"
+                        </div>
+                        <p style="color: var(--gray-600); font-size: 0.9rem; margin-bottom: 1rem;"><strong>Issues:</strong> Too broad, no audience specified, no depth indicated</p>
+                        
+                        <h4 style="color: var(--success); margin: 1rem 0 0.5rem;">✅ Improved Version:</h4>
+                        <div style="background: #F0FDF4; padding: 1rem; border-radius: 8px; border: 1px solid #BBF7D0;">
+                            "Explain artificial intelligence to a non-technical business executive who needs to understand: (1) basic concepts in simple terms, (2) current practical applications in business, (3) potential ROI and implementation considerations, (4) common myths vs. reality. Keep it under 500 words, use business-focused examples, and structure with clear headings."
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Troubleshooting Tab -->
+            <div class="tab-content" id="troubleshoot">
+                <div style="display: grid; gap: 2rem;">
+                    <div class="feature-card">
+                        <h3 style="color: var(--error);">🚫 AI gives generic, unhelpful responses</h3>
+                        <p style="margin: 1rem 0;"><strong>Root Cause:</strong> Lack of specific context, constraints, and examples</p>
+                        <div style="background: var(--gray-50); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                            <strong>Solution:</strong> Use the "Context + Role + Task + Format" framework
+                        </div>
+                        <div style="background: #F0FDF4; padding: 1rem; border-radius: 8px; border: 1px solid #BBF7D0;">
+                            <strong>Try this template:</strong> "You are a [specific role] helping [specific audience] with [specific goal]. Context: [relevant background]. Task: [exact deliverable]. Format: [structure, length, tone]."
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3 style="color: var(--error);">📄 Responses are inconsistent between conversations</h3>
+                        <p style="margin: 1rem 0;"><strong>Root Cause:</strong> No formatting examples or style guidelines provided</p>
+                        <div style="background: var(--gray-50); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                            <strong>Solution:</strong> Provide explicit formatting templates and style rules
+                        </div>
+                        <div style="background: #F0FDF4; padding: 1rem; border-radius: 8px; border: 1px solid #BBF7D0;">
+                            <strong>Try this:</strong> "Follow this exact format: [show example]. Maintain consistent tone throughout. Use [specific style guide] principles."
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3 style="color: var(--error);">⛔ AI refuses reasonable, legitimate requests</h3>
+                        <p style="margin: 1rem 0;"><strong>Root Cause:</strong> Ambiguous intent or insufficient educational context</p>
+                        <div style="background: var(--gray-50); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                            <strong>Solution:</strong> Clearly state educational purpose and legitimate use case
+                        </div>
+                        <div style="background: #F0FDF4; padding: 1rem; border-radius: 8px; border: 1px solid #BBF7D0;">
+                            <strong>Try this:</strong> "I'm learning about [topic] for [specific educational/professional purpose]. Please help me understand [specific aspect] so I can [legitimate goal]."
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3 style="color: var(--error);">📊 Need more detailed analysis and reasoning</h3>
+                        <p style="margin: 1rem 0;"><strong>Root Cause:</strong> Not requesting explicit reasoning or multiple perspectives</p>
+                        <div style="background: var(--gray-50); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                            <strong>Solution:</strong> Request step-by-step thinking and comprehensive analysis
+                        </div>
+                        <div style="background: #F0FDF4; padding: 1rem; border-radius: 8px; border: 1px solid #BBF7D0;">
+                            <strong>Try this:</strong> "Think through this step-by-step. For each option, analyze: pros, cons, risks, opportunities, and implementation challenges. Provide reasoning for your final recommendation."
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3 style="color: var(--error);">🔄 AI outputs are too long or too short</h3>
+                        <p style="margin: 1rem 0;"><strong>Root Cause:</strong> No length specifications or format constraints</p>
+                        <div style="background: var(--gray-50); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                            <strong>Solution:</strong> Set specific length and format requirements
+                        </div>
+                        <div style="background: #F0FDF4; padding: 1rem; border-radius: 8px; border: 1px solid #BBF7D0;">
+                            <strong>Try this:</strong> "Provide exactly [X] words/sentences/paragraphs. Use [format: bullet points/numbered list/paragraphs]. Include [specific sections]."
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3 style="color: var(--error);">🎯 AI misses the point or focuses on wrong aspects</h3>
+                        <p style="margin: 1rem 0;"><strong>Root Cause:</strong> Unclear priorities or missing focus guidance</p>
+                        <div style="background: var(--gray-50); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                            <strong>Solution:</strong> Explicitly state priorities and focus areas
+                        </div>
+                        <div style="background: #F0FDF4; padding: 1rem; border-radius: 8px; border: 1px solid #BBF7D0;">
+                            <strong>Try this:</strong> "Focus primarily on [main aspect]. Secondary priority: [aspect 2]. Ignore [irrelevant aspects]. Most important outcome: [specific goal]."
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Tab -->
+            <div class="tab-content" id="analytics">
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <span class="feature-icon">📈</span>
+                        <h3>Progress Overview</h3>
+                        <div class="progress-stats" style="margin-top: 1rem;">
+                            <div style="text-align: center; padding: 1rem; background: var(--gray-50); border-radius: 8px;">
+                                <div style="font-size: 2rem; font-weight: bold; color: var(--cobalt-blue);" id="totalPromptsAnalytics">0</div>
+                                <div style="font-size: 0.9rem; color: var(--gray-600);">Total Prompts</div>
+                            </div>
+                            <div style="text-align: center; padding: 1rem; background: var(--gray-50); border-radius: 8px;">
+                                <div style="font-size: 2rem; font-weight: bold; color: var(--success);" id="avgScoreAnalytics">0%</div>
+                                <div style="font-size: 0.9rem; color: var(--gray-600);">Average Score</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="feature-icon">🏆</span>
+                        <h3>Achievements Earned</h3>
+                        <div id="achievementsList" style="margin-top: 1rem;">
+                            <p style="color: var(--gray-500); font-style: italic;">Send some prompts to earn achievements!</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="feature-icon">📊</span>
+                        <h3>Skill Breakdown</h3>
+                        <div id="skillBreakdown" style="margin-top: 1rem;">
+                            <div style="margin-bottom: 1rem;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                    <span>Specificity</span>
+                                    <span id="specificityScore">0%</span>
+                                </div>
+                                <div class="score-bar">
+                                    <div class="score-fill score-good" id="specificityBar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div style="margin-bottom: 1rem;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                    <span>Context Provision</span>
+                                    <span id="contextScore">0%</span>
+                                </div>
+                                <div class="score-bar">
+                                    <div class="score-fill score-good" id="contextBar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <div style="margin-bottom: 1rem;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                                    <span>Clear Constraints</span>
+                                    <span id="constraintsScore">0%</span>
+                                </div>
+                                <div class="score-bar">
+                                    <div class="score-fill score-good" id="constraintsBar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="feature-icon">💾</span>
+                        <h3>Export Options</h3>
+                        <p style="margin-bottom: 1rem;">Download your conversation history and progress data.</p>
+                        <div class="export-options">
+                            <button class="export-btn" onclick="exportConversations()">Export Chats</button>
+                            <button class="export-btn" onclick="exportProgress()">Export Progress</button>
+                            <button class="export-btn" onclick="exportAchievements()">Export Achievements</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Progress Panel -->
+            <div class="panel progress-panel">
+                <h3>🚀 Your Progress</h3>
+                <div class="progress-stats">
+                    <div class="progress-stat">
+                        <div class="progress-stat-number" id="sidebarLevel">1</div>
+                        <div class="progress-stat-label">Level</div>
+                    </div>
+                    <div class="progress-stat">
+                        <div class="progress-stat-number" id="sidebarXP">0</div>
+                        <div class="progress-stat-label">XP</div>
+                    </div>
+                </div>
+                <div class="level-progress">
+                    <div class="level-progress-fill" id="levelProgressBar" style="width: 0%"></div>
+                </div>
+                <p style="font-size: 0.85rem; opacity: 0.9; text-align: center;">Next level: <span id="xpToNext">100</span> XP</p>
+            </div>
+
+            <!-- Feedback Panel -->
+            <div class="panel feedback-panel">
+                <h3>💡 Prompt Analysis</h3>
+                <div id="current-analysis">
+                    <p style="color: var(--gray-500); font-style: italic;">Send a message to get real-time feedback on your prompting technique!</p>
+                </div>
+                <div class="achievements" id="recentAchievements"></div>
+            </div>
+
+            <!-- Templates Quick Access -->
+            <div class="panel templates-panel">
+                <h3>📋 Quick Templates</h3>
+                <div class="template-category">
+                    <h4>Popular</h4>
+                    <div class="template-item" onclick="insertTemplate('business-email')">
+                        <div class="template-title">Professional Email</div>
+                        <div class="template-preview">Help me write a professional email...</div>
+                    </div>
+                    <div class="template-item" onclick="insertTemplate('content-creation')">
+                        <div class="template-title">Content Creation</div>
+                        <div class="template-preview">Create engaging content about...</div>
+                    </div>
+                    <div class="template-item" onclick="insertTemplate('problem-solving')">
+                        <div class="template-title">Problem Analysis</div>
+                        <div class="template-preview">Help me analyze this problem...</div>
+                    </div>
+                </div>
+                <button class="export-btn" onclick="showAllTemplates()" style="width: 100%; margin-top: 1rem;">View All Templates</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Template Modal -->
+    <div class="modal" id="templateModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Prompt Templates</h3>
+                <button class="modal-close" onclick="closeModal('templateModal')">&times;</button>
+            </div>
+            <div id="templateModalContent">
+                <!-- Templates will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced JavaScript with all new features
+        
+        // Data storage
+        let userData = {
+            totalPrompts: 0,
+            totalScore: 0,
+            level: 1,
+            xp: 0,
+            achievements: [],
+            conversations: [],
+            skillStats: {
+                specificity: 0,
+                context: 0,
+                constraints: 0,
+                roleAssignment: 0,
+                examples: 0
+            }
+        };
+
+        // Load saved data
+        function loadUserData() {
+            const saved = localStorage.getItem('chatgpt-simulator-data');
+            if (saved) {
+                userData = { ...userData, ...JSON.parse(saved) };
+                updateUI();
+            }
+        }
+
+        // Save data
+        function saveUserData() {
+            localStorage.setItem('chatgpt-simulator-data', JSON.stringify(userData));
+        }
+
+        // Template library
+        const promptTemplates = {
+            'business-email': {
+                title: 'Professional Email',
+                template: `Help me write a professional email with the following specifications:
+
+Context: I am a [YOUR ROLE] at [COMPANY TYPE]
+Recipient: [RECIPIENT ROLE/NAME]
+Purpose: [SPECIFIC PURPOSE]
+Tone: [Professional/Friendly/Formal]
+Key points to include:
+1. [MAIN POINT 1]
+2. [MAIN POINT 2]
+3. [MAIN POINT 3]
+
+Please format as a complete email with subject line. Keep it under [WORD COUNT] words.`
+            },
+            'content-creation': {
+                title: 'Content Creation',
+                template: `Create engaging content about [TOPIC] with these specifications:
+
+Target Audience: [SPECIFIC AUDIENCE]
+Content Type: [Blog post/Social media/Newsletter/etc.]
+Key Message: [MAIN MESSAGE TO CONVEY]
+Tone: [Conversational/Professional/Enthusiastic/etc.]
+Length: [SPECIFIC WORD/CHARACTER COUNT]
+Include:
+- Compelling hook/opening
+- [SPECIFIC REQUIREMENT 1]
+- [SPECIFIC REQUIREMENT 2]
+- Clear call-to-action
+
+Format: [Specific structure requirements]`
+            },
+            'problem-solving': {
+                title: 'Problem Analysis',
+                template: `Help me analyze and solve this problem using a structured approach:
+
+Context: [RELEVANT BACKGROUND INFORMATION]
+Problem: [SPECIFIC PROBLEM DESCRIPTION]
+Current Situation: [WHAT'S HAPPENING NOW]
+Desired Outcome: [WHAT SUCCESS LOOKS LIKE]
+Constraints: [LIMITATIONS, BUDGET, TIME, ETC.]
+
+Please provide:
+1. Root cause analysis
+2. 3-5 potential solutions with pros/cons
+3. Recommended approach with reasoning
+4. Implementation steps
+5. Success metrics
+
+Think step-by-step and show your reasoning.`
+            }
+        };
+
+        // Achievements system
+        const achievements = [
+            { id: 'first-prompt', name: 'First Steps', description: 'Send your first prompt', icon: '🎯', condition: () => userData.totalPrompts >= 1 },
+            { id: 'ten-prompts', name: 'Getting Started', description: 'Send 10 prompts', icon: '📈', condition: () => userData.totalPrompts >= 10 },
+            { id: 'high-quality', name: 'Quality Communicator', description: 'Score 80+ on a prompt', icon: '⭐', condition: () => userData.conversations.some(c => c.score >= 80) },
+            { id: 'perfect-score', name: 'Perfectionist', description: 'Score 100 on a prompt', icon: '🏆', condition: () => userData.conversations.some(c => c.score >= 100) },
+            { id: 'level-up', name: 'Level Up', description: 'Reach level 2', icon: '🚀', condition: () => userData.level >= 2 },
+            { id: 'template-user', name: 'Template Master', description: 'Use 5 different templates', icon: '📋', condition: () => userData.templatesUsed >= 5 },
+            { id: 'conversation-export', name: 'Data Keeper', description: 'Export your first conversation', icon: '💾', condition: () => userData.exportCount >= 1 }
+        ];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadUserData();
+            setupEventListeners();
+            setupThemeToggle();
+            updateUI();
+        });
+
+        function setupEventListeners() {
+            // Tab switching
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    
+                    tab.classList.add('active');
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            // Message handling
+            const messageInput = document.querySelector('.message-input');
+            const sendButton = document.querySelector('.send-button');
+
+            sendButton.addEventListener('click', sendMessage);
+            messageInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    sendMessage();
+                }
+            });
+
+            // Auto-resize textarea
+            messageInput.addEventListener('input', function() {
+                this.style.height = 'auto';
+                this.style.height = Math.min(this.scrollHeight, 150) + 'px';
+            });
+
+            // Chat controls
+            document.getElementById('clearChat').addEventListener('click', clearConversation);
+            document.getElementById('exportChat').addEventListener('click', exportCurrentConversation);
+            document.getElementById('templateBtn').addEventListener('click', showAllTemplates);
+
+            messageInput.focus();
+        }
+
+        function setupThemeToggle() {
+            const themeToggle = document.getElementById('themeToggle');
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            
+            if (currentTheme === 'dark') {
+                document.body.classList.add('dark-theme');
+                themeToggle.textContent = '☀️';
+            }
+
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-theme');
+                const isDark = document.body.classList.contains('dark-theme');
+                themeToggle.textContent = isDark ? '☀️' : '🌙';
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            });
+        }
+
+        function updateUI() {
+            // Update stats in header
+            document.getElementById('totalPrompts').textContent = userData.totalPrompts;
+            document.getElementById('avgScore').textContent = userData.totalPrompts > 0 ? 
+                Math.round(userData.totalScore / userData.totalPrompts) : 0;
+            document.getElementById('currentLevel').textContent = userData.level;
+            document.getElementById('achievementCount').textContent = userData.achievements.length;
+
+            // Update sidebar
+            document.getElementById('sidebarLevel').textContent = userData.level;
+            document.getElementById('sidebarXP').textContent = userData.xp;
+            
+            const xpForNextLevel = userData.level * 100;
+            const xpProgress = (userData.xp % 100) / 100 * 100;
+            document.getElementById('levelProgressBar').style.width = xpProgress + '%';
+            document.getElementById('xpToNext').textContent = 100 - (userData.xp % 100);
+
+            // Update practice count
+            document.getElementById('practiceCount').textContent = userData.totalPrompts;
+
+            // Update analytics
+            document.getElementById('totalPromptsAnalytics').textContent = userData.totalPrompts;
+            document.getElementById('avgScoreAnalytics').textContent = userData.totalPrompts > 0 ? 
+                Math.round(userData.totalScore / userData.totalPrompts) + '%' : '0%';
+
+            // Update skill breakdown
+            updateSkillBreakdown();
+            checkAchievements();
+        }
+
+        function updateSkillBreakdown() {
+            const skills = ['specificity', 'context', 'constraints'];
+            skills.forEach(skill => {
+                const score = userData.skillStats[skill] || 0;
+                document.getElementById(skill + 'Score').textContent = score + '%';
+                document.getElementById(skill + 'Bar').style.width = score + '%';
+                
+                const bar = document.getElementById(skill + 'Bar');
+                bar.className = 'score-fill ' + 
+                    (score >= 80 ? 'score-excellent' : score >= 60 ? 'score-good' : 'score-needs-work');
+            });
+        }
+
+        function checkAchievements() {
+            achievements.forEach(achievement => {
+                if (!userData.achievements.includes(achievement.id) && achievement.condition()) {
+                    userData.achievements.push(achievement.id);
+                    showAchievement(achievement);
+                    saveUserData();
+                }
+            });
+            updateAchievementsList();
+        }
+
+        function showAchievement(achievement) {
+            const achievementEl = document.createElement('div');
+            achievementEl.className = 'achievement-badge earned';
+            achievementEl.innerHTML = `${achievement.icon} ${achievement.name}`;
+            
+            document.getElementById('recentAchievements').appendChild(achievementEl);
+            
+            // Animate and remove after delay
+            setTimeout(() => {
+                achievementEl.style.opacity = '0.7';
+                achievementEl.style.transform = 'scale(0.9)';
+            }, 3000);
+        }
+
+        function updateAchievementsList() {
+            const achievementsList = document.getElementById('achievementsList');
+            if (userData.achievements.length === 0) {
+                achievementsList.innerHTML = '<p style="color: var(--gray-500); font-style: italic;">Send some prompts to earn achievements!</p>';
+                return;
+            }
+
+            achievementsList.innerHTML = userData.achievements.map(id => {
+                const achievement = achievements.find(a => a.id === id);
+                return `<div class="achievement-badge earned">${achievement.icon} ${achievement.name}</div>`;
+            }).join('');
+        }
+
+        async function sendMessage() {
+            const messageInput = document.querySelector('.message-input');
+            const sendButton = document.querySelector('.send-button');
+            const message = messageInput.value.trim();
+            
+            if (!message) return;
+            
+            // Disable input and show user message
+            sendButton.disabled = true;
+            addMessage('user', message);
+            messageInput.value = '';
+            
+            // Analyze prompt and update feedback
+            const analysis = analyzePrompt(message);
+            updateFeedbackPanel(message, analysis);
+            
+            // Update user data
+            userData.totalPrompts++;
+            userData.totalScore += analysis.score;
+            userData.xp += Math.round(analysis.score / 10);
+            
+            // Check for level up
+            while (userData.xp >= userData.level * 100) {
+                userData.xp -= userData.level * 100;
+                userData.level++;
+            }
+            
+            // Save conversation
+            userData.conversations.push({
+                prompt: message,
+                score: analysis.score,
+                timestamp: new Date().toISOString()
+            });
+            
+            saveUserData();
+            updateUI();
+            
+            // Show typing indicator
+            showTyping();
+            
+            try {
+                // Enhanced educational prompt
+                const educationalPrompt = `You are an AI assistant helping someone learn to communicate effectively with AI through practice. They just sent: "${message}"
+
+Please:
+1. Respond to their request naturally and helpfully
+2. Add a brief educational note about their prompting technique
+3. If their prompt scored ${analysis.score}/100, acknowledge specific strengths or suggest 1-2 key improvements
+4. Keep educational feedback encouraging and actionable
+
+Their prompt analysis showed:
+- Specificity: ${analysis.breakdown.specificity ? 'Good' : 'Could be more specific'}
+- Context: ${analysis.breakdown.context ? 'Provided' : 'Missing context'}
+- Constraints: ${analysis.breakdown.constraints ? 'Clear' : 'Unclear constraints'}
+- Role Assignment: ${analysis.breakdown.roleAssignment ? 'Present' : 'Missing'}
+
+Focus on being helpful first, educational second.`;
+
+                const response = await fetch("https://api.anthropic.com/v1/messages", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        model: "claude-sonnet-4-20250514",
+                        max_tokens: 1000,
+                        messages: [
+                            { role: "user", content: educationalPrompt }
+                        ]
+                    })
+                });
+
+                const data = await response.json();
+                const aiResponse = data.content[0].text;
+                
+                hideTyping();
+                addMessage('assistant', aiResponse, analysis.score);
+                
+            } catch (error) {
+                hideTyping();
+                addMessage('assistant', "I'm having trouble connecting right now. Please try again in a moment!");
+                console.error('Error:', error);
+            }
+            
+            sendButton.disabled = false;
+            messageInput.focus();
+        }
+
+        function analyzePrompt(prompt) {
+            let score = 0;
+            let feedback = [];
+            let breakdown = {
+                specificity: false,
+                context: false,
+                constraints: false,
+                roleAssignment: false,
+                examples: false
+            };
+            
+            // Enhanced analysis
+            
+            // Specificity (25 points)
+            if (prompt.length > 100) {
+                score += 25;
+                breakdown.specificity = true;
+            } else if (prompt.length > 50) {
+                score += 15;
+                feedback.push("Try being more specific and detailed about what you want");
+            } else {
+                feedback.push("Add much more detail about your specific requirements");
+            }
+            
+            // Context (20 points)
+            const contextIndicators = ['I am', 'I\'m', 'I work', 'I need', 'my situation', 'my role', 'my company'];
+            if (contextIndicators.some(indicator => prompt.toLowerCase().includes(indicator.toLowerCase()))) {
+                score += 20;
+                breakdown.context = true;
+            } else {
+                feedback.push("Provide context about yourself, your role, or your situation");
+            }
+            
+            // Constraints and specifications (20 points)
+            const constraintIndicators = [
+                /\d+\s*(words?|sentences?|items?|points?|examples?|minutes?)/i,
+                /format/i, /tone/i, /style/i, /length/i, /audience/i
+            ];
+            if (constraintIndicators.some(pattern => pattern.test(prompt))) {
+                score += 20;
+                breakdown.constraints = true;
+            } else {
+                feedback.push("Specify format, length, tone, or style preferences");
+            }
+            
+            // Role assignment (15 points)
+            const roleIndicators = ['act as', 'you are', 'pretend you', 'imagine you', 'as a'];
+            if (roleIndicators.some(indicator => prompt.toLowerCase().includes(indicator))) {
+                score += 15;
+                breakdown.roleAssignment = true;
+            } else {
+                feedback.push("Consider asking me to take on a specific role or expertise");
+            }
+            
+            // Examples or comparisons (10 points)
+            const exampleIndicators = ['like', 'similar to', 'example', 'such as', 'for instance'];
+            if (exampleIndicators.some(indicator => prompt.toLowerCase().includes(indicator))) {
+                score += 10;
+                breakdown.examples = true;
+            } else {
+                feedback.push("Providing examples helps me understand exactly what you want");
+            }
+            
+            // Advanced techniques bonus (10 points)
+            const advancedIndicators = ['step by step', 'think through', 'analyze', 'compare', 'pros and cons'];
+            if (advancedIndicators.some(indicator => prompt.toLowerCase().includes(indicator))) {
+                score += 10;
+            }
+            
+            // Update skill stats
+            Object.keys(breakdown).forEach(skill => {
+                if (breakdown[skill]) {
+                    userData.skillStats[skill] = Math.min(100, (userData.skillStats[skill] || 0) + 2);
+                }
+            });
+            
+            return { score: Math.min(100, score), feedback, breakdown };
+        }
+
+        function updateFeedbackPanel(prompt, analysis) {
+            const analysisDiv = document.getElementById('current-analysis');
+            
+            let scoreClass = 'score-needs-work';
+            let scoreText = 'Needs Work';
+            let scoreColor = 'var(--error)';
+            
+            if (analysis.score >= 80) {
+                scoreClass = 'score-excellent';
+                scoreText = 'Excellent!';
+                scoreColor = 'var(--success)';
+            } else if (analysis.score >= 60) {
+                scoreClass = 'score-good';
+                scoreText = 'Good';
+                scoreColor = 'var(--warning)';
+            }
+            
+            analysisDiv.innerHTML = `
+                <div class="prompt-analysis">
+                    <div class="analysis-score">
+                        <strong style="color: ${scoreColor};">Prompt Quality: ${scoreText} (${analysis.score}/100)</strong>
+                        <div class="score-bar">
+                            <div class="score-fill ${scoreClass}" style="width: ${analysis.score}%"></div>
+                        </div>
+                    </div>
+                    ${analysis.feedback.length > 0 ? `
+                        <div style="background: #FEF3C7; border: 1px solid #F59E0B; border-radius: 6px; padding: 1rem; margin-top: 1rem;">
+                            <strong>💡 Tips to improve:</strong>
+                            <ul style="margin-top: 0.5rem; padding-left: 1rem;">
+                                ${analysis.feedback.map(tip => `<li style="margin-bottom: 0.25rem;">${tip}</li>`).join('')}
+                            </ul>
+                        </div>
+                    ` : '<div style="color: var(--success); font-weight: 500; margin-top: 1rem;">🎉 Outstanding prompt! You covered all the key elements.</div>'}
+                    
+                    <div style="margin-top: 1rem; font-size: 0.85rem;">
+                        <strong>Breakdown:</strong>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; margin-top: 0.5rem;">
+                            <span>Specificity: ${analysis.breakdown.specificity ? '✅' : '❌'}</span>
+                            <span>Context: ${analysis.breakdown.context ? '✅' : '❌'}</span>
+                            <span>Constraints: ${analysis.breakdown.constraints ? '✅' : '❌'}</span>
+                            <span>Role Assignment: ${analysis.breakdown.roleAssignment ? '✅' : '❌'}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function addMessage(type, content, score = null) {
+            const conversationArea = document.getElementById('conversation-area');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            
+            const timestamp = new Date().toLocaleTimeString();
+            const avatar = type === 'user' ? 'You' : 'AI';
+            
+            let metaInfo = `<div class="message-meta">
+                <span>${type === 'user' ? '👤' : '🤖'} ${avatar}</span>
+                <span>•</span>
+                <span>${timestamp}</span>`;
+            
+            if (type === 'user' && score !== null) {
+                const scoreColor = score >= 80 ? 'var(--success)' : score >= 60 ? 'var(--warning)' : 'var(--error)';
+                metaInfo += `<span class="prompt-quality-indicator" style="background: ${scoreColor};">
+                    ${score}/100
+                </span>`;
+            }
+            
+            metaInfo += '</div>';
+            
+            messageDiv.innerHTML = `
+                <div class="message-avatar">${avatar}</div>
+                <div class="message-content">${content}${metaInfo}</div>
+            `;
+            
+            conversationArea.appendChild(messageDiv);
+            conversationArea.scrollTop = conversationArea.scrollHeight;
+        }
+
+        function showTyping() {
+            document.querySelector('.typing-indicator').classList.add('active');
+            document.getElementById('conversation-area').scrollTop = document.getElementById('conversation-area').scrollHeight;
+        }
+
+        function hideTyping() {
+            document.querySelector('.typing-indicator').classList.remove('active');
+        }
+
+        function clearConversation() {
+            if (confirm('Clear this conversation? This action cannot be undone.')) {
+                const conversationArea = document.getElementById('conversation-area');
+                conversationArea.innerHTML = `
+                    <div class="message assistant">
+                        <div class="message-avatar">AI</div>
+                        <div class="message-content">Conversation cleared! Ready for a fresh start. Try using one of the prompt templates for better results.
+                            <div class="message-meta">
+                                <span>🤖 AI Assistant</span>
+                                <span>•</span>
+                                <span>${new Date().toLocaleTimeString()}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function exportCurrentConversation() {
+            const messages = Array.from(document.querySelectorAll('.message')).map(msg => {
+                const isUser = msg.classList.contains('user');
+                const content = msg.querySelector('.message-content').textContent;
+                return {
+                    type: isUser ? 'user' : 'assistant',
+                    content: content.split('\n')[0], // Remove meta info
+                    timestamp: new Date().toISOString()
+                };
+            });
+            
+            const exportData = {
+                conversation: messages,
+                exportDate: new Date().toISOString(),
+                userStats: userData
+            };
+            
+            const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `chatgpt-simulator-conversation-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            userData.exportCount = (userData.exportCount || 0) + 1;
+            saveUserData();
+            updateUI();
+        }
+
+        function exportConversations() {
+            const blob = new Blob([JSON.stringify(userData.conversations, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `chatgpt-simulator-all-conversations-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function exportProgress() {
+            const progressData = {
+                level: userData.level,
+                xp: userData.xp,
+                totalPrompts: userData.totalPrompts,
+                averageScore: userData.totalPrompts > 0 ? userData.totalScore / userData.totalPrompts : 0,
+                achievements: userData.achievements,
+                skillStats: userData.skillStats,
+                exportDate: new Date().toISOString()
+            };
+            
+            const blob = new Blob([JSON.stringify(progressData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `chatgpt-simulator-progress-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function exportAchievements() {
+            const achievementData = userData.achievements.map(id => {
+                const achievement = achievements.find(a => a.id === id);
+                return {
+                    id,
+                    name: achievement.name,
+                    description: achievement.description,
+                    icon: achievement.icon,
+                    earnedDate: new Date().toISOString() // In a real app, you'd track when each was earned
+                };
+            });
+            
+            const blob = new Blob([JSON.stringify(achievementData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `chatgpt-simulator-achievements-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function insertTemplate(templateId) {
+            const template = promptTemplates[templateId];
+            if (template) {
+                document.querySelector('.message-input').value = template.template;
+                document.querySelector('.message-input').focus();
+                
+                userData.templatesUsed = (userData.templatesUsed || 0) + 1;
+                saveUserData();
+                updateUI();
+            }
+        }
+
+        function showAllTemplates() {
+            const modal = document.getElementById('templateModal');
+            const content = document.getElementById('templateModalContent');
+            
+            content.innerHTML = Object.entries(promptTemplates).map(([id, template]) => `
+                <div class="template-item" onclick="insertTemplate('${id}'); closeModal('templateModal');" style="margin-bottom: 1rem;">
+                    <div class="template-title">${template.title}</div>
+                    <div class="template-preview">${template.template.substring(0, 150)}...</div>
+                </div>
+            `).join('');
+            
+            modal.classList.add('active');
+        }
+
+        function showTemplateCategory(category) {
+            // This would show templates filtered by category
+            showAllTemplates();
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                e.target.classList.remove('active');
+            }
+        });
+
+        // Auto-update rotating placeholders
+        const samplePrompts = [
+            "Ask me anything! Try being specific about what you want...",
+            "Try: 'Help me write a professional email about...'",
+            "Example: 'Act as a [role] and help me with [specific task]'",
+            "Be specific: 'I need 5 ideas for [topic] that [criteria]'",
+            "Set the scene: 'I'm a [your role] working on [project]...'",
+            "Use templates for better results! Click the 📋 button"
+        ];
+
+        let promptIndex = 0;
+        setInterval(() => {
+            const messageInput = document.querySelector('.message-input');
+            if (messageInput && messageInput.value === '' && document.querySelector('.tab-content.active').id === 'practice') {
+                messageInput.placeholder = samplePrompts[promptIndex];
+                promptIndex = (promptIndex + 1) % samplePrompts.length;
+            }
+        }, 4000);
+    </script>
+
+    <!-- Enhanced Footer -->
+    <div style="background: var(--white); padding: 3rem 2rem; margin-top: 3rem; border-top: 1px solid var(--silver-light);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h3 style="color: var(--cobalt-blue); margin-bottom: 2rem; text-align: center; font-size: 1.5rem;">📚 Master AI Communication</h3>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+                <div>
+                    <h4 style="color: var(--gray-800); margin-bottom: 1rem;">🎯 What You'll Learn</h4>
+                    <ul style="color: var(--gray-600); line-height: 1.8; padding-left: 1rem;">
+                        <li>Advanced prompting techniques</li>
+                        <li>Context and constraint setting</li>
+                        <li>Role-based AI interactions</li>
+                        <li>Professional communication</li>
+                        <li>Iterative improvement methods</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 style="color: var(--gray-800); margin-bottom: 1rem;">🚀 Features</h4>
+                    <ul style="color: var(--gray-600); line-height: 1.8; padding-left: 1rem;">
+                        <li>Real AI responses for practice</li>
+                        <li>Instant prompt quality feedback</li>
+                        <li>Progress tracking & achievements</li>
+                        <li>Professional template library</li>
+                        <li>Conversation export & analysis</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 style="color: var(--gray-800); margin-bottom: 1rem;">💼 Professional Use</h4>
+                    <ul style="color: var(--gray-600); line-height: 1.8; padding-left: 1rem;">
+                        <li>Business communication</li>
+                        <li>Content creation</li>
+                        <li>Problem solving</li>
+                        <li>Research and analysis</li>
+                        <li>Creative projects</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 style="color: var(--gray-800); margin-bottom: 1rem;">📊 Track Progress</h4>
+                    <ul style="color: var(--gray-600); line-height: 1.8; padding-left: 1rem;">
+                        <li>Skill development metrics</li>
+                        <li>Achievement system</li>
+                        <li>Performance analytics</li>
+                        <li>Conversation history</li>
+                        <li>Exportable data</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="text-align: center; padding-top: 2rem; border-top: 1px solid var(--silver-light);">
+                <div style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                    <span style="color: var(--cobalt-blue); font-weight: 600;">🎯 Interactive Learning</span>
+                    <span style="color: var(--cobalt-blue); font-weight: 600;">🤖 Real AI Responses</span>
+                    <span style="color: var(--cobalt-blue); font-weight: 600;">📈 Progress Tracking</span>
+                    <span style="color: var(--cobalt-blue); font-weight: 600;">💼 Professional Templates</span>
+                </div>
+                <p style="color: var(--gray-500); font-size: 0.9rem; max-width: 600px; margin: 0 auto;">
+                    Master the art of AI communication through hands-on practice with real AI responses, 
+                    professional feedback, and comprehensive progress tracking. Build the skills that matter 
+                    in today's AI-powered workplace.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
