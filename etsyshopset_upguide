@@ -1,0 +1,2136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Etsy Shop Setup Guide</title>
+    <style>
+        :root {
+            --primary-color: #f56500;
+            --primary-dark: #e55a00;
+            --success-color: #38a169;
+            --warning-color: #ed8936;
+            --white: #ffffff;
+            --dark-text: #2d3748;
+            --medium-text: #4a5568;
+            --light-bg: #f7fafc;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 15px rgba(0,0,0,0.1);
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            background-color: var(--light-bg);
+        }
+
+        .etsy-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .etsy-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 50px 30px;
+            border-radius: var(--border-radius);
+            margin-bottom: 40px;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .etsy-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="80" r="3" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="70" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .etsy-header h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin: 0 0 20px 0;
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
+        }
+
+        .etsy-header p {
+            font-size: clamp(1.1rem, 3vw, 1.3rem);
+            margin: 0;
+            opacity: 0.95;
+            position: relative;
+            z-index: 2;
+        }
+
+        .progress-section {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 2px solid var(--border-color);
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 16px;
+            background: var(--border-color);
+            border-radius: 8px;
+            margin: 20px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--success-color));
+            width: 40%;
+            border-radius: 8px;
+            position: relative;
+            animation: progressGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes progressGlow {
+            0%, 100% { box-shadow: 0 0 10px rgba(245, 101, 0, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(245, 101, 0, 0.8), 0 0 30px rgba(245, 101, 0, 0.3); }
+        }
+
+        .step-box {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 35px;
+            margin-bottom: 30px;
+            border: 2px solid var(--border-color);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(245, 101, 0, 0.05), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .step-box:hover::before {
+            left: 100%;
+        }
+
+        .step-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border-color: var(--primary-color);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .step-number {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: var(--white);
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 20px;
+            font-size: 1.4rem;
+            box-shadow: 0 6px 15px rgba(245, 101, 0, 0.4);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .step-title {
+            font-size: clamp(1.4rem, 4vw, 1.9rem);
+            margin: 0;
+            color: var(--dark-text);
+            font-weight: 600;
+        }
+
+        .pro-tip {
+            background: linear-gradient(135deg, #fffaf0 0%, #fef5e7 100%);
+            border: 2px solid var(--warning-color);
+            border-radius: var(--border-radius);
+            margin: 30px 0;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(237, 137, 54, 0.2);
+            transition: var(--transition);
+        }
+
+        .pro-tip:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(237, 137, 54, 0.3);
+        }
+
+        .pro-tip-header {
+            background: linear-gradient(135deg, var(--warning-color), #d69e2e);
+            color: var(--white);
+            padding: 20px 25px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .pro-tip-header:hover {
+            background: linear-gradient(135deg, #d69e2e, #b7791f);
+        }
+
+        .pro-tip-header::after {
+            content: '👆 Click to expand';
+            position: absolute;
+            right: 25px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .pro-tip-content {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+.pro-tip-content.expanded {
+    padding: 20px;
+    max-height: 1000px;
+}
+        .pro-tip-content h4 {
+            color: #744210;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .pro-tip-content ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+
+        .pro-tip-content li {
+            margin-bottom: 10px;
+            color: #744210;
+            line-height: 1.6;
+        }
+
+        .interactive-form {
+            background: linear-gradient(135deg, var(--light-bg) 0%, #edf2f7 100%);
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: var(--dark-text);
+            font-size: 1rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: var(--transition);
+            background: var(--white);
+            font-family: inherit;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(245, 101, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .form-input:hover {
+            border-color: var(--primary-color);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: var(--white);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(245, 101, 0, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(245, 101, 0, 0.4);
+            background: linear-gradient(135deg, var(--primary-dark), #cc4a00);
+        }
+
+        .checklist {
+            background: linear-gradient(135deg, var(--light-bg) 0%, #edf2f7 100%);
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .checklist h4 {
+            color: var(--dark-text);
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .checklist-item:hover {
+            background: rgba(245, 101, 0, 0.05);
+            padding-left: 15px;
+            border-radius: 8px;
+            margin: 0 -15px;
+        }
+
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            margin-right: 15px;
+            margin-top: 3px;
+            transform: scale(1.5);
+            cursor: pointer;
+            accent-color: var(--primary-color);
+            flex-shrink: 0;
+        }
+
+        .checklist-item span {
+            font-size: 1rem;
+            color: var(--medium-text);
+            transition: var(--transition);
+            line-height: 1.5;
+        }
+
+        .checklist-item input[type="checkbox"]:checked + span {
+            text-decoration: line-through;
+            opacity: 0.7;
+            color: var(--success-color);
+        }
+
+        .alert {
+            padding: 20px 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+            border-left: 5px solid;
+            font-weight: 500;
+            box-shadow: var(--shadow);
+        }
+
+        .alert-success {
+            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+            border-color: var(--success-color);
+            color: #22543d;
+        }
+
+        .alert-warning {
+            background: linear-gradient(135deg, #fffbf0 0%, #fef5e7 100%);
+            border-color: var(--warning-color);
+            color: #744210;
+        }
+
+        .alert-info {
+            background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%);
+            border-color: #4299e1;
+            color: #2c5aa0;
+        }
+
+        .completion-box {
+            background: linear-gradient(135deg, var(--success-color) 0%, #2f855a 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 40px 30px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(56, 161, 105, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .completion-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.05) 10px,
+                rgba(255,255,255,0.05) 20px
+            );
+            animation: slide 20s linear infinite;
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(-100px) translateY(-100px); }
+            100% { transform: translateX(100px) translateY(100px); }
+        }
+
+        .completion-box h3 {
+            margin-bottom: 20px;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            position: relative;
+            z-index: 2;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .feature-item {
+            background: rgba(255,255,255,0.15);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        .feature-item:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-3px);
+        }
+
+        .feature-item h4 {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .feature-item p {
+            margin: 0;
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+ /* Interactive JavaScript Elements */
+       <p><strong>Master your finances:</strong> Connect payment processing, understand all Etsy fees, and set up pricing that ensures profitability.</p>
+
+            <div class="interactive-form">
+                <h4>💰 Advanced Etsy Fee Calculator</h4>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <div class="form-group">
+                        <label class="form-label" for="finalItemPrice">Item Price ($):</label>
+                        <input type="number" id="finalItemPrice" class="form-input" placeholder="25.00" min="0" step="0.01" oninput="calculateAllEtsyFees()">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="finalShippingCost">Shipping Cost ($):</label>
+                        <input type="number" id="finalShippingCost" class="form-input" placeholder="5.99" min="0" step="0.01" oninput="calculateAllEtsyFees()">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="materialCosts">Your Material Costs ($):</label>
+                        <input type="number" id="materialCosts" class="form-input" placeholder="8.00" min="0" step="0.01" oninput="calculateAllEtsyFees()">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="laborTime">Labor Time (hours):</label>
+                        <input type="number" id="laborTime" class="form-input" placeholder="2.0" min="0" step="0.1" oninput="calculateAllEtsyFees()">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="hourlyRate">Desired Hourly Rate ($):</label>
+                    <input type="number" id="hourlyRate" class="form-input" placeholder="15.00" min="0" step="0.50" oninput="calculateAllEtsyFees()">
+                </div>
+
+                <div id="advancedFeeCalculator" style="display: none; margin-top: 25px;">
+                    <div style="background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%); border: 2px solid #38a169; border-radius: 12px; padding: 25px; margin-bottom: 20px;">
+                        <h4 style="color: #22543d; margin-bottom: 20px; text-align: center;">💸 Complete Fee Breakdown</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px;">
+                            <div style="text-align: center; padding: 15px; background: white; border-radius: 8px; border: 1px solid #e2e8f0;">
+                                <strong>Listing Fee:</strong><br>
+                                <span id="advancedListingFee" style="font-size: 1.1rem; color: #22543d;">$0.20</span>
+                            </div>
+                            <div style="text-align: center; padding: 15px; background: white; border-radius: 8px; border: 1px solid #e2e8f0;">
+                                <strong>Transaction Fee:</strong><br>
+                                <span id="advancedTransactionFee" style="font-size: 1.1rem; color: #22543d;">$0.00</span>
+                            </div>
+                            <div style="text-align: center; padding: 15px; background: white; border-radius: 8px; border: 1px solid #e2e8f0;">
+                                <strong>Payment Processing:</strong><br>
+                                <span id="advancedPaymentFee" style="font-size: 1.1rem; color: #22543d;">$0.00</span>
+                            </div>
+                            <div style="text-align: center; padding: 15px; background: #ed8936; color: white; border-radius: 8px;">
+                                <strong>Total Etsy Fees:</strong><br>
+                                <span id="advancedTotalFees" style="font-size: 1.2rem; font-weight: bold;">$0.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 12px; padding: 25px;">
+                        <h4 style="margin-bottom: 20px; text-align: center;">📊 Profitability Analysis</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                            <div style="text-align: center; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                                <strong>Revenue:</strong><br>
+                                <span id="totalRevenue" style="font-size: 1.2rem;">$0.00</span>
+                            </div>
+                            <div style="text-align: center; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                                <strong>Total Costs:</strong><br>
+                                <span id="totalCosts" style="font-size: 1.2rem;">$0.00</span>
+                            </div>
+                            <div style="text-align: center; padding: 15px; background: rgba(255,255,255,0.2); border-radius: 8px; border: 2px solid rgba(255,255,255,0.3);">
+                                <strong>Your Profit:</strong><br>
+                                <span id="finalProfit" style="font-size: 1.4rem; font-weight: bold;">$0.00</span>
+                            </div>
+                            <div style="text-align: center; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                                <strong>Hourly Rate:</strong><br>
+                                <span id="actualHourlyRate" style="font-size: 1.2rem;">$0.00</span>
+                            </div>
+                        </div>
+                        
+                        <div id="profitabilityAdvice" style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 8px; text-align: center;">
+                            <strong id="profitAdviceText">Enter your costs above to see profitability analysis</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pro-tip">
+                <div class="pro-tip-header"onclick="toggleProTip(this)">
+                    💳 Pro Tip: Payment Setup & Financial Management
+        <span class="pro-tip-toggle">+</span>
+                </div>
+                <div class="pro-tip-content">
+                    <h4>Complete Etsy Fee Structure (2024):</h4>
+                    <ul>
+                        <li><strong>Listing Fee:</strong> $0.20 per item (lasts 4 months or until sold)</li>
+                        <li><strong>Transaction Fee:</strong> 6.5% of item price + shipping cost</li>
+                        <li><strong>Payment Processing:</strong> 3% + $0.25 per transaction</li>
+                        <li><strong>Etsy Ads (Optional):</strong> Set daily budget, pay per click (typical: $0.20-$2.00/click)</li>
+                        <li><strong>Currency Conversion:</strong> 2.5% if selling internationally in different currencies</li>
+                    </ul>
+                    
+                    <h4>Pricing Formula for Profitability:</h4>
+                    <p><strong>Formula:</strong> (Material Cost + Labor Cost + Overhead) × 2.5 + Etsy Fees = Minimum Price</p>
+                    <ul>
+                        <li><strong>Materials:</strong> All supplies, packaging, shipping materials</li>
+                        <li><strong>Labor:</strong> Your time × desired hourly rate (minimum $15-25/hour)</li>
+                        <li><strong>Overhead:</strong> 10-20% for tools, workspace, utilities</li>
+                        <li><strong>Profit Margin:</strong> 150% markup ensures sustainability</li>
+                    </ul>
+                    
+                    <h4>Business Banking & Tax Setup:</h4>
+                    <ul>
+                        <li><strong>Separate Business Account:</strong> Essential for clean bookkeeping and tax filing</li>
+                        <li><strong>EIN (Tax ID):</strong> Get free from IRS - adds legitimacy and simplifies taxes</li>
+                        <li><strong>Quarterly Taxes:</strong> Set aside 25-30% of profits for tax payments</li>
+                        <li><strong>Expense Tracking:</strong> Track all business expenses for deductions</li>
+                        <li><strong>Business License:</strong> Check local requirements (varies by location/product type)</li>
+                    </ul>
+                    
+                    <h4>Etsy Payments Setup:</h4>
+                    <ul>
+                        <li>Funds deposited 1-3 business days after sale</li>
+                        <li>Connect checking account (not savings) for faster transfers</li>
+                        <li>Set up automatic tax document generation for year-end filing</li>
+                        <li>Enable buyer protection programs for increased trust</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <h4>✅ Payment & Billing Checklist</h4>
+                <div class="checklist-item">
+                    <input type="checkbox" id="payment1">
+                    <span>Connected bank account to Etsy Payments and completed verification</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="payment2">
+                    <span>Completed tax information (W-9/W-8) and identity verification</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="payment3">
+                    <span>Calculated profitable pricing for all products including all fees and labor</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="payment4">
+                    <span>Set up separate business banking and record-keeping system</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="payment5">
+                    <span>Obtained EIN (tax ID) and researched local business license requirements</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="payment6">
+                    <span>Established system for tracking expenses and quarterly tax savings</span>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <strong>✅ Ready for Step 6:</strong> With payment processing secure and profitable pricing set, launch your shop with confidence!
+            </div>
+        </div>
+        .js-demo {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .demo-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+       .demo-btn {
+    background: rgba(255,255,255,0.2) !important;
+    border: 2px solid rgba(255,255,255,0.3) !important;
+    color: white !important;
+    padding: 25px 50px !important;
+    border-radius: 12px !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    backdrop-filter: blur(10px) !important;
+    font-size: 1.4rem !important;
+    font-weight: bold !important;
+    min-width: 250px !important;
+    margin: 15px !important;
+    display: inline-block !important;
+}
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .etsy-container {
+                padding: 15px;
+            }
+            
+            .step-box {
+                padding: 25px 20px;
+            }
+            
+            .step-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .step-number {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .demo-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+        }
+
+        @media (max-width: 480px) {
+            .etsy-header {
+                padding: 30px 20px;
+            }
+            
+            .step-box {
+                padding: 20px 15px;
+            }
+            
+            .interactive-form, .checklist, .pro-tip-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="etsy-container">
+        <header class="etsy-header">
+            <h1>🛍️ Complete Etsy Shop Setup Guide</h1>
+            <p>Transform your creative passion into a profitable online business</p>
+        </header>
+
+        <div class="progress-section">
+            <h3>📊 Your Setup Progress</h3>
+            <div class="progress-bar">
+                <div class="progress-fill" id="mainProgress"></div>
+            </div>
+            <p><strong>Steps Completed:</strong> <span id="progressText">2 of 6 sections shown</span> • <em>Account setup and shop naming in progress</em></p>
+        </div>
+
+        <div class="step-box">
+            <div class="step-header">
+                <div class="step-number">1</div>
+                <h2 class="step-title">Create Shop Account</h2>
+            </div>
+            
+            <p><strong>First step:</strong> Register your Etsy seller account to get started. Visit <strong>Etsy.com → "Sell on Etsy" → Register</strong> to begin your journey.</p>
+            
+            <div class="alert alert-warning">
+                <strong>⚠️ Important Requirements:</strong> You'll need government-issued ID and tax information ready for verification. This process typically takes 5-10 minutes but ensures your account security and buyer trust.
+            </div>
+
+            <div class="pro-tip">
+                <div class="pro-tip-header"onclick="toggleProTip(this)">
+                    📸 Pro Tip: Account Setup Best Practices
+                    <span class="pro-tip-toggle">+</span>
+                </div>
+                <div class="pro-tip-content">
+                    <h4>Essential Account Setup Steps:</h4>
+                    <ul>
+                        <li><strong>Professional Email:</strong> Use a business email address (yourname@yourdomain.com) rather than personal Gmail for credibility</li>
+                        <li><strong>Strong Password:</strong> 12+ characters with uppercase, lowercase, numbers, and symbols - use a password manager</li>
+                        <li><strong>Profile Photo:</strong> Use a clear headshot or professional logo in square format (400x400px minimum)</li>
+                        <li><strong>Two-Factor Authentication:</strong> Enable immediately for account security - this is crucial for business accounts</li>
+                        <li><strong>Phone Verification:</strong> Add your phone number for account recovery and buyer trust signals</li>
+                        <li><strong>Complete Profile:</strong> Fill out all sections including bio, location, and social media links</li>
+                    </ul>
+                    <h4>Time-Saving Preparation Tips:</h4>
+                    <ul>
+                        <li>Have your business information, tax ID (EIN), and banking details ready before starting</li>
+                        <li>Prepare a 2-3 sentence bio about your creative journey and what makes your products special</li>
+                        <li>Take a high-quality profile photo in advance with good lighting and professional appearance</li>
+                        <li>Research your competitors' profiles to see what works in your niche</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <h4>✅ Account Setup Checklist</h4>
+                <div class="checklist-item">
+                    <input type="checkbox" id="account1">
+                    <span>Created Etsy seller account with professional business email address</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="account2">
+                    <span>Verified email address and added phone number for security</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="account3">
+                    <span>Enabled two-factor authentication for account protection</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="account4">
+                    <span>Completed identity verification process with government ID</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="account5">
+                    <span>Added professional profile photo and wrote compelling bio</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="account6">
+                    <span>Connected social media accounts and completed all profile sections</span>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <strong>✅ Ready for Step 2:</strong> Once your account is verified, secure, and professionally set up, move on to choosing your perfect shop name.
+            </div>
+        </div>
+
+        <div class="step-box">
+            <div class="step-header">
+                <div class="step-number">2</div>
+                <h2 class="step-title">Name Your Shop</h2>
+            </div>
+            
+            <p><strong>Choose wisely:</strong> Your shop name is permanent and becomes your brand identity. It must be 4-20 characters and effectively represent your products and personality.</p>
+
+            <div class="interactive-form">
+                <h4>🎯 Shop Name Brainstorming Tool</h4>
+                <div class="form-group">
+                    <label class="form-label" for="shopNameInput">Test Your Shop Name Ideas:</label>
+                    <input type="text" id="shopNameInput" class="form-input" placeholder="e.g., CozyWoodCrafts, VintageGemFinds, ArtisanAlley, CreativeCorner" oninput="validateShopName()">
+                    <small id="nameValidation" style="display: block; margin-top: 8px; font-weight: 500;"></small>
+                </div>
+                
+                <button class="btn" onclick="generateRandomName()">🎲 Generate Random Name</button>
+                
+                <div class="alert alert-info" style="margin-top: 20px;">
+                    <strong>💡 Popular Name Patterns:</strong><br>
+                    <strong>Descriptive:</strong> CozyWoodCrafts • VintageGemFinds • RusticHomeDecor<br>
+                    <strong>Personal:</strong> SarahsStudio • EmmaMakes • AlexArtistry<br>
+                    <strong>Creative:</strong> MoonbeamMakers • StardustStudio • DreamCrafters<br>
+                    <strong>Modern:</strong> ZenCraft • PureMakers • EchoDesigns
+                </div>
+            </div>
+
+            <div class="pro-tip">
+                <div class="pro-tip-header"onclick="toggleProTip(this)">
+                    💡 Pro Tip: Shop Naming Strategy That Converts
+                    <span class="pro-tip-toggle">+</span>
+                </div>
+                <div class="pro-tip-content">
+                    <h4>The Perfect Shop Name Formula:</h4>
+                    <ul>
+                        <li><strong>Include Product Keywords:</strong> Wood, Vintage, Handmade, Art, Craft, Studio - helps with Etsy search</li>
+                        <li><strong>Keep It Memorable:</strong> 4-15 characters work best for word-of-mouth marketing and easy typing</li>
+                        <li><strong>Easy to Spell:</strong> Avoid complex words, numbers, or unusual spellings that confuse customers</li>
+                        <li><strong>Think Long-term:</strong> Don't limit yourself to just one product category - allow room for growth</li>
+                        <li><strong>Check Social Media:</strong> Ensure the name is available across Instagram, Pinterest, Facebook, TikTok</li>
+                        <li><strong>Test Pronunciation:</strong> Say it out loud - customers should be able to remember and recommend you</li>
+                    </ul>
+                    
+                    <h4>Proven Examples by Category:</h4>
+                    <ul>
+                        <li><strong>Jewelry & Accessories:</strong> GemGlow, SilverStream, BaubleBox, CharmCraft, SparkleStudio</li>
+                        <li><strong>Home & Living:</strong> CozyNook, RusticRoots, ModernNest, HomeHaven, ComfortCrafts</li>
+                        <li><strong>Art & Prints:</strong> ColorCraft, ArtisanAlley, CreativeCorner, StudioSpark, InkAndImagination</li>
+                        <li><strong>Vintage & Antiques:</strong> TimeTreasures, RetroRevival, VintageVault, PastPerfect, EraElegance</li>
+                        <li><strong>Handmade Crafts:</strong> MakersMoon, CraftedCharm, HandmadeHeart, StitchStudio, CreatedWithLove</li>
+                    </ul>
+                    
+                    <h4>Name Testing Checklist:</h4>
+                    <ul>
+                        <li>Search Etsy to ensure it's not already taken or too similar to existing shops</li>
+                        <li>Check domain availability (yourshoponame.com) for future website expansion</li>
+                        <li>Ask friends if they can spell it correctly after hearing it once</li>
+                        <li>Imagine it on business cards, packaging, and social media - does it look professional?</li>
+                        <li>Consider trademark issues - avoid using brand names or copyrighted terms</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <h4>✅ Shop Naming Checklist</h4>
+                <div class="checklist-item">
+                    <input type="checkbox" id="naming1">
+                    <span>Brainstormed 20+ potential shop names using different strategies and patterns</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="naming2">
+                    <span>Checked name availability on Etsy and verified no similar existing shops</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="naming3">
+                    <span>Confirmed name reflects brand personality and target audience appeal</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="naming4">
+                    <span>Verified name is easy to spell, pronounce, and remember</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="naming5">
+                    <span>Tested name with friends/family for memorability and first impressions</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="naming6">
+                    <span>Checked social media handle availability across platforms</span>
+                </div>
+            </div>
+<!-- Step 3: Create Listings -->
+        <div class="step-box">
+            <div class="step-header">
+                <div class="step-number">3</div>
+                <h2 class="step-title">Create Your First Listings</h2>
+            </div>
+            
+            <p><strong>Time to showcase your products:</strong> Create compelling listings with SEO-optimized titles and descriptions that buyers can easily find and love.</p>
+
+            <div class="interactive-form">
+                <h4>📝 Listing Builder Tool</h4>
+                
+                <div class="form-group">
+                    <label class="form-label" for="productTitle">Product Title (Max 140 characters):</label>
+                    <input type="text" id="productTitle" class="form-input" placeholder="Handmade Wooden Coffee Mug Holder - Rustic Kitchen Organizer - Natural Wood Storage" oninput="updateCharacterCount('productTitle', 140)">
+                    <small id="productTitleCount" style="color: #4a5568; font-weight: 500;">0/140 characters</small>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+                    <div class="form-group">
+                        <label class="form-label" for="productPrice">Price ($):</label>
+                        <input type="number" id="productPrice" class="form-input" placeholder="25.99" min="0" step="0.01" oninput="calculateListingFees()">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="productCategory">Category:</label>
+                        <select id="productCategory" class="form-input">
+                            <option value="">Select Category</option>
+                            <option value="home-living">Home & Living</option>
+                            <option value="clothing">Clothing</option>
+                            <option value="jewelry">Jewelry</option>
+                            <option value="art">Art & Collectibles</option>
+                            <option value="craft-supplies">Craft Supplies & Tools</option>
+                            <option value="vintage">Vintage</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="feeCalculatorOutput" style="display: none; margin-top: 20px; padding: 20px; background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%); border-radius: 10px; border: 2px solid #38a169;">
+                    <h4 style="color: #22543d; margin-bottom: 15px;">💰 Etsy Fee Breakdown:</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        <div style="text-align: center;">
+                            <strong>Listing Fee:</strong><br>
+                            <span id="listingFeeAmount" style="font-size: 1.2rem; color: #22543d;">$0.20</span>
+                        </div>
+                        <div style="text-align: center;">
+                            <strong>Transaction Fee:</strong><br>
+                            <span id="transactionFeeAmount" style="font-size: 1.2rem; color: #22543d;">$0.00</span>
+                        </div>
+                        <div style="text-align: center;">
+                            <strong>Payment Fee:</strong><br>
+                            <span id="paymentFeeAmount" style="font-size: 1.2rem; color: #22543d;">$0.00</span>
+                        </div>
+                        <div style="text-align: center; background: #38a169; color: white; padding: 10px; border-radius: 8px;">
+                            <strong>You Keep:</strong><br>
+                            <span id="youKeepAmount" style="font-size: 1.3rem;">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pro-tip">
+                <div class="pro-tip-header" onclick="toggleProTip(this)">
+    💡 Pro Tip: [Title Here]
+    <span class="pro-tip-toggle">+</span>
+</div>
+                <div class="pro-tip-content">
+                    <h4>Photo Requirements (5-10 photos per listing):</h4>
+                    <ul>
+                        <li><strong>Main Photo:</strong> Clean white/neutral background, product centered, well-lit natural lighting</li>
+                        <li><strong>Detail Shots:</strong> Close-ups of texture, craftsmanship, unique features, and quality</li>
+                        <li><strong>Lifestyle Photos:</strong> Product in use, styled in a room, or being worn/used</li>
+                        <li><strong>Size Reference:</strong> Show scale with hands, coins, rulers, or common objects</li>
+                        <li><strong>Variations:</strong> Different colors, angles, or packaging options available</li>
+                        <li><strong>Behind-the-Scenes:</strong> Your workspace, process, or you creating the item</li>
+                    </ul>
+                    
+                    <h4>SEO Title Formula That Gets Found:</h4>
+                    <ul>
+                        <li><strong>Primary Keyword + Descriptors + Benefits + Style</strong></li>
+                        <li>Example: "Handmade Wooden Coffee Mug Rack - Rustic Kitchen Organizer - Natural Wood Storage"</li>
+                        <li>Use all 140 characters - every character counts for search visibility</li>
+                        <li>Research competitor titles and Etsy search suggestions</li>
+                        <li>Include gift occasions: "Perfect Gift for Coffee Lovers"</li>
+                    </ul>
+                    
+                    <h4>Description Structure That Converts:</h4>
+                    <ol>
+                        <li><strong>Hook (First 160 characters):</strong> Benefits-focused opening that appears in search</li>
+                        <li><strong>Product Details:</strong> Materials, dimensions, colors, customization options</li>
+                        <li><strong>Benefits & Uses:</strong> How it solves problems or improves the buyer's life</li>
+                        <li><strong>Care Instructions:</strong> How to maintain and clean the product</li>
+                        <li><strong>Shipping & Policies:</strong> processing time, packaging, return policy</li>
+                        <li><strong>Call to Action:</strong> Encourage immediate purchase or contact</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <h4>✅ Listing Creation Checklist</h4>
+                <div class="checklist-item">
+                    <input type="checkbox" id="listing1">
+                    <span>Created SEO-optimized product title using full 140 characters</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="listing2">
+                    <span>Uploaded 7-10 high-quality photos including main, detail, lifestyle, and scale shots</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="listing3">
+                    <span>Written detailed product description with benefits, materials, and dimensions</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="listing4">
+                    <span>Set competitive pricing with healthy profit margin after all fees</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="listing5">
+                    <span>Added all 13 relevant tags for maximum search visibility</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="listing6">
+                    <span>Configured inventory, SKU, and variation options if applicable</span>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <strong>✅ Ready for Step 4:</strong> With compelling listings created, set up shipping rates and policies to complete the buyer experience.
+            </div>
+        </div>
+            <div class="alert alert-success">
+                <strong>✅ Ready for Step 3:</strong> With your perfect shop name chosen and verified, you're ready to create compelling product listings that sell.
+            </div>
+        </div>
+<!-- Step 4: Shipping Setup -->
+        <div class="step-box">
+            <div class="step-header">
+                <div class="step-number">4</div>
+                <h2 class="step-title">Configure Shipping</h2>
+            </div>
+            
+            <p><strong>Set up professional shipping:</strong> Configure rates, processing times, and shipping profiles that work for your business and build customer trust.</p>
+
+            <div class="interactive-form">
+                <h4>📦 Shipping Calculator & Setup</h4>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <div class="form-group">
+                        <label class="form-label" for="domesticShipping">Domestic Shipping ($):</label>
+                        <input type="number" id="domesticShipping" class="form-input" placeholder="5.99" min="0" step="0.01" oninput="calculateShippingTotals()">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="internationalShipping">International Shipping ($):</label>
+                        <input type="number" id="internationalShipping" class="form-input" placeholder="15.99" min="0" step="0.01" oninput="calculateShippingTotals()">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="processingTime">Processing Time:</label>
+                    <select id="processingTime" class="form-input" onchange="updateProcessingAdvice()">
+                        <option value="">Select Processing Time</option>
+                        <option value="1-2">1-2 business days</option>
+                        <option value="3-5">3-5 business days</option>
+                        <option value="1-2 weeks">1-2 weeks</option>
+                        <option value="2-3 weeks">2-3 weeks</option>
+                        <option value="4-6 weeks">4-6 weeks</option>
+                    </select>
+                </div>
+
+                <div id="shippingCalculatorOutput" style="display: none; margin-top: 20px; padding: 20px; background: linear-gradient(135deg, #f0f8ff 0%, #e6f3ff 100%); border-radius: 10px; border: 2px solid #4299e1;">
+                    <h4 style="color: #2c5aa0; margin-bottom: 15px;">📦 Shipping Strategy Analysis:</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        <div style="text-align: center; padding: 15px; background: white; border-radius: 8px;">
+                            <strong>Domestic Total:</strong><br>
+                            <span id="domesticTotal" style="font-size: 1.2rem; color: #2c5aa0;">Product + $0.00</span>
+                        </div>
+                        <div style="text-align: center; padding: 15px; background: white; border-radius: 8px;">
+                            <strong>International Total:</strong><br>
+                            <span id="internationalTotal" style="font-size: 1.2rem; color: #2c5aa0;">Product + $0.00</span>
+                        </div>
+                        <div style="text-align: center; padding: 15px; background: #4299e1; color: white; border-radius: 8px;">
+                            <strong>Recommendation:</strong><br>
+                            <span id="shippingAdvice" style="font-size: 1rem;">Enter rates above</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="processingAdvice" style="display: none; margin-top: 15px; padding: 15px; background: #fffaf0; border: 2px solid #ed8936; border-radius: 8px;">
+                    <strong>⏰ Processing Time Impact:</strong> <span id="processingImpact">Select a processing time to see advice</span>
+                </div>
+            </div>
+<div class="pro-tip-header" onclick="toggleProTip(this)">
+    💡 Pro Tip: [Title Here]
+    <span class="pro-tip-toggle">+</span>
+</div>
+                <div class="pro-tip-content">
+                    <h4>Free Shipping Psychology (Recommended):</h4>
+                    <ul>
+                        <li><strong>Build shipping into product price:</strong> $25 item + $5 shipping = $30 item with "free" shipping</li>
+                        <li><strong>Etsy search algorithm boost:</strong> Free shipping listings rank significantly higher in search results</li>
+                        <li><strong>Customer preference:</strong> 90% of buyers prefer free shipping even at higher product prices</li>
+                        <li><strong>International strategy:</strong> Offer free domestic shipping, charge actual rates for international</li>
+                    </ul>
+                    
+                    <h4>Shipping Profiles to Create:</h4>
+                    <ul>
+                        <li><strong>Small Items (under 4 oz):</strong> First-class mail, 3-5 days, $3-5</li>
+                        <li><strong>Standard Items (1-13 oz):</strong> Priority mail, 1-3 days, $8-12</li>
+                        <li><strong>Large/Heavy Items:</strong> Priority mail or UPS, 2-5 days, $15-25</li>
+                        <li><strong>Fragile Items:</strong> Priority Express or UPS with insurance, 1-2 days, $25-40</li>
+                    </ul>
+                    
+                    <h4>Processing Time Best Practices:</h4>
+                    <ul>
+                        <li><strong>1-2 business days:</strong> Ready-to-ship items, digital products, simple crafts</li>
+                        <li><strong>3-5 business days:</strong> Made-to-order items, custom colors, personalization</li>
+                        <li><strong>1-2 weeks:</strong> Complex custom work, seasonal high-demand periods</li>
+                        <li><strong>2+ weeks:</strong> Completely custom designs, intricate handwork</li>
+                    </ul>
+                    
+                    <h4>Customer Communication Tips:</h4>
+                    <ul>
+                        <li>Send tracking information immediately when shipped</li>
+                        <li>Update customers if processing takes longer than expected</li>
+                        <li>Offer expedited shipping options for urgent orders</li>
+                        <li>Package items securely with branded materials when possible</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <h4>✅ Shipping Setup Checklist</h4>
+                <div class="checklist-item">
+                    <input type="checkbox" id="shipping1">
+                    <span>Created shipping profiles for different product types and sizes</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="shipping2">
+                    <span>Set realistic processing times based on actual production capability</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="shipping3">
+                    <span>Configured domestic and international shipping rates or free shipping strategy</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="shipping4">
+                    <span>Tested shipping calculator with sample orders and weights</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="shipping5">
+                    <span>Written clear shipping policies including handling time and carrier information</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="shipping6">
+                    <span>Set up packaging materials and branded shipping supplies</span>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <strong>✅ Ready for Step 5:</strong> With shipping configured professionally, set up payment processing and understand the complete fee structure.
+            </div>
+        </div>
+      
+          
+            <p><strong>Go live with confidence:</strong> Execute a proven launch strategy that generates your first sales and builds momentum for long-term success.</p>
+
+            <div class="interactive-form">
+                <h4>🚀 Pre-Launch Readiness Checker</h4>
+                
+                <div class="form-group">
+                    <label class="form-label" for="launchDate">Planned Launch Date:</label>
+                    <input type="date" id="launchDate" class="form-input" onchange="calculateLaunchDays()">
+                </div>
+
+                <div id="launchCountdown" style="display: none; margin-top: 15px; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 10px; text-align: center;">
+                    <h4 style="margin-bottom: 10px;">⏰ Launch Countdown</h4>
+                    <div style="font-size: 1.5rem; font-weight: bold;" id="daysUntilLaunch">0 days until launch!</div>
+                    <div style="margin-top: 10px; font-size: 0.9rem;" id="launchAdvice">Perfect timing for a successful launch!</div>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <h4>📊 Launch Readiness Score: <span id="readinessScore" style="color: #f56500; font-weight: bold;">0%</span></h4>
+                    <div style="background: #e2e8f0; height: 10px; border-radius: 5px; overflow: hidden;">
+                        <div id="readinessBar" style="height: 100%; background: linear-gradient(90deg, #f56500, #38a169); width: 0%; transition: width 0.5s ease;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pro-tip">
+                <div class="pro-tip-header"onclick="toggleProTip(this)">
+                    🎯 Pro Tip: Launch Week Strategy That Works
+                    <span class="pro-tip-toggle">+</span>
+                </div>
+                <div class="pro-tip-content">
+                    <h4>Week Before Launch:</h4>
+                    <ul>
+                        <li><strong>Monday-Tuesday:</strong> Final product photos, complete all listings, test checkout process</li>
+                        <li><strong>Wednesday-Thursday:</strong> Write launch announcement content, prepare social media posts</li>
+                        <li><strong>Friday-Weekend:</strong> Soft launch to family/friends for feedback and first reviews</li>
+                    </ul>
+                    
+                    <h4>Launch Week (Recommended: Tuesday-Thursday):</h4>
+                    <ul>
+                        <li><strong>Day 1:</strong> Official announcement on personal social media, email to contacts</li>
+                        <li><strong>Day 2-3:</strong> Join Etsy seller Facebook groups, share in relevant communities</li>
+                        <li><strong>Day 4-5:</strong> Start Pinterest marketing, create boards for your products</li>
+                        <li><strong>Weekend:</strong> Engage with customers, respond to messages, analyze first week data</li>
+                    </ul>
+                    
+                    <h4>First Month Marketing Strategy:</h4>
+                    <ul>
+                        <li><strong>Etsy Ads:</strong> Start with $5-10/day budget, focus on your best listings</li>
+                        <li><strong>SEO Optimization:</strong> Update titles and tags based on search performance</li>
+                        <li><strong>Social Proof:</strong> Encourage reviews, share customer photos (with permission)</li>
+                        <li><strong>Content Marketing:</strong> Behind-the-scenes posts, process videos, customer stories</li>
+                    </ul>
+                    
+                    <h4>Success Metrics to Track:</h4>
+                    <ul>
+                        <li><strong>Week 1 Goal:</strong> 10+ shop favorites, 3+ listing favorites per item</li>
+                        <li><strong>Month 1 Goal:</strong> First 5 sales (even if from friends/family)</li>
+                        <li><strong>Month 2 Goal:</strong> 10+ sales, 5-star average rating, repeat customers</li>
+                        <li><strong>Month 3 Goal:</strong> Consistent weekly sales, established brand presence</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <h4>✅ Complete Pre-Launch Checklist</h4>
+                <div class="checklist-item" onclick="updateReadinessScore()">
+                    <input type="checkbox" id="launch1">
+                    <span>Shop banner, logo, and branding elements uploaded and optimized</span>
+                </div>
+                <div class="checklist-item" onclick="updateReadinessScore()">
+                    <input type="checkbox" id="launch2">
+                    <span>Minimum 10 listings created with high-quality photos and SEO-optimized titles</span>
+                </div>
+                <div class="checklist-item" onclick="updateReadinessScore()">
+                    <input type="checkbox" id="launch3">
+                    <span>All shop policies written (shipping, returns, privacy, terms of service)</span>
+                </div>
+                <div class="checklist-item" onclick="updateReadinessScore()">
+                    <input type="checkbox" id="launch4">
+                    <span>About section completed with compelling brand story and mission</span>
+                </div>
+                <div class="checklist-item" onclick="updateReadinessScore()">
+                    <input type="checkbox" id="launch5">
+                    <span>FAQ section addresses common customer questions and concerns</span>
+                </div>
+                <div class="checklist-item" onclick="updateReadinessScore()">
+                    <input type="checkbox" id="launch6">
+                    <span>Social media accounts created and linked (Instagram, Pinterest, Facebook)</span>
+                </div>
+                <div class="checklist-item" onclick="updateReadinessScore()">
+                    <input type="checkbox" id="launch7">
+                    <span>Shipping materials and packaging prepared, branded if possible</span>
+                </div>
+                <div class="checklist-item" onclick="updateReadinessScore()">
+                    <input type="checkbox" id="launch8">
+                    <span>Customer service system established (response templates, tracking system)</span>
+                </div>
+                <div class="checklist-item" onclick="updateReadinessScore()">
+                    <input type="checkbox" id="launch9">
+                    <span>Inventory tracking system set up for managing stock levels</span>
+                </div>
+                <div class="checklist-item" onclick="updateReadinessScore()">
+                    <input type="checkbox" id="launch10">
+                    <span>Launch marketing content prepared (social posts, email announcement)</span>
+                </div>
+            </div>
+    </div>
+</div>
+        <!-- Step 5: Payment & Billing Setup -->
+        <div class="step-box">
+            <div class="step-header">
+                <div class="step-number">5</div>
+                <h2 class="step-title">Payment & Billing Setup</h2>
+            </div>
+            
+            <p><strong>Master your finances:</strong> Connect payment processing, understand all Etsy fees, and set up pricing that ensures profitability.</p>
+
+            <div class="interactive-form">
+                <h4>💰 Advanced Etsy Fee Calculator</h4>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <div class="form-group">
+                        <label class="form-label" for="finalItemPrice">Item Price ($):</label>
+                        <input type="number" id="finalItemPrice" class="form-input" placeholder="25.00" min="0" step="0.01" oninput="calculateAllEtsyFees()">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="finalShippingCost">Shipping Cost ($):</label>
+                        <input type="number" id="finalShippingCost" class="form-input" placeholder="5.99" min="0" step="0.01" oninput="calculateAllEtsyFees()">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="materialCosts">Your Material Costs ($):</label>
+                        <input type="number" id="materialCosts" class="form-input" placeholder="8.00" min="0" step="0.01" oninput="calculateAllEtsyFees()">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="laborTime">Labor Time (hours):</label>
+                        <input type="number" id="laborTime" class="form-input" placeholder="2.0" min="0" step="0.1" oninput="calculateAllEtsyFees()">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="hourlyRate">Desired Hourly Rate ($):</label>
+                    <input type="number" id="hourlyRate" class="form-input" placeholder="15.00" min="0" step="0.50" oninput="calculateAllEtsyFees()">
+                </div>
+
+                <div id="advancedFeeCalculator" style="display: none; margin-top: 25px;">
+                    <div style="background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%); border: 2px solid #38a169; border-radius: 12px; padding: 25px; margin-bottom: 20px;">
+                        <h4 style="color: #22543d; margin-bottom: 20px; text-align: center;">💸 Complete Fee Breakdown</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px;">
+                            <div style="text-align: center; padding: 15px; background: white; border-radius: 8px;">
+                                <strong>Listing Fee:</strong><br>
+                                <span id="advancedListingFee" style="font-size: 1.1rem; color: #22543d;">$0.20</span>
+                            </div>
+                            <div style="text-align: center; padding: 15px; background: white; border-radius: 8px;">
+                                <strong>Transaction Fee:</strong><br>
+                                <span id="advancedTransactionFee" style="font-size: 1.1rem; color: #22543d;">$0.00</span>
+                            </div>
+                            <div style="text-align: center; padding: 15px; background: white; border-radius: 8px;">
+                                <strong>Payment Processing:</strong><br>
+                                <span id="advancedPaymentFee" style="font-size: 1.1rem; color: #22543d;">$0.00</span>
+                            </div>
+                            <div style="text-align: center; padding: 15px; background: #ed8936; color: white; border-radius: 8px;">
+                                <strong>Total Etsy Fees:</strong><br>
+                                <span id="advancedTotalFees" style="font-size: 1.2rem; font-weight: bold;">$0.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 12px; padding: 25px;">
+                        <h4 style="margin-bottom: 20px; text-align: center;">📊 Profitability Analysis</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                            <div style="text-align: center; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                                <strong>Revenue:</strong><br>
+                                <span id="totalRevenue" style="font-size: 1.2rem;">$0.00</span>
+                            </div>
+                            <div style="text-align: center; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                                <strong>Total Costs:</strong><br>
+                                <span id="totalCosts" style="font-size: 1.2rem;">$0.00</span>
+                            </div>
+                            <div style="text-align: center; padding: 15px; background: rgba(255,255,255,0.2); border-radius: 8px; border: 2px solid rgba(255,255,255,0.3);">
+                                <strong>Your Profit:</strong><br>
+                                <span id="finalProfit" style="font-size: 1.4rem; font-weight: bold;">$0.00</span>
+                            </div>
+                            <div style="text-align: center; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                                <strong>Hourly Rate:</strong><br>
+                                <span id="actualHourlyRate" style="font-size: 1.2rem;">$0.00</span>
+                            </div>
+                        </div>
+                        
+                        <div id="profitabilityAdvice" style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.1); border-radius: 8px; text-align: center;">
+                            <strong id="profitAdviceText">Enter your costs above to see profitability analysis</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pro-tip">
+                <div class="pro-tip-header"onclick="toggleProTip(this)">
+                    💳 Pro Tip: Payment Setup & Financial Management
+                    <span class="pro-tip-toggle">+</span> 
+                </div>
+                <div class="pro-tip-content">
+                    <h4>Complete Etsy Fee Structure (2024):</h4>
+                    <ul>
+                        <li><strong>Listing Fee:</strong> $0.20 per item (lasts 4 months or until sold)</li>
+                        <li><strong>Transaction Fee:</strong> 6.5% of item price + shipping cost</li>
+                        <li><strong>Payment Processing:</strong> 3% + $0.25 per transaction</li>
+                        <li><strong>Etsy Ads (Optional):</strong> Set daily budget, pay per click</li>
+                        <li><strong>Currency Conversion:</strong> 2.5% if selling internationally</li>
+                    </ul>
+                    
+                    <h4>Pricing Formula for Profitability:</h4>
+                    <p><strong>Formula:</strong> (Material Cost + Labor Cost + Overhead) × 2.5 + Etsy Fees = Minimum Price</p>
+                    
+                    <h4>Business Banking & Tax Setup:</h4>
+                    <ul>
+                        <li><strong>Separate Business Account:</strong> Essential for clean bookkeeping</li>
+                        <li><strong>EIN (Tax ID):</strong> Get free from IRS for legitimacy</li>
+                        <li><strong>Quarterly Taxes:</strong> Set aside 25-30% of profits</li>
+                        <li><strong>Expense Tracking:</strong> Track all business expenses</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <h4>✅ Payment & Billing Checklist</h4>
+                <div class="checklist-item">
+                    <input type="checkbox" id="payment1">
+                    <span>Connected bank account to Etsy Payments and completed verification</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="payment2">
+                    <span>Completed tax information and identity verification</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="payment3">
+                    <span>Calculated profitable pricing including all fees and labor</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="payment4">
+                    <span>Set up separate business banking and record-keeping</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="payment5">
+                    <span>Obtained EIN and researched business license requirements</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="payment6">
+                    <span>Established expense tracking and tax savings system</span>
+                </div>
+            </div>
+<!-- Step 6: Launch Your Shop -->
+        <div class="step-box">
+            <div class="step-header">
+                <div class="step-number">6</div>
+                <h2 class="step-title">Launch Your Shop</h2>
+            </div>
+            
+            <p><strong>Go live with confidence:</strong> Execute a proven launch strategy that generates your first sales and builds momentum for long-term success.</p>
+
+            <div class="interactive-form">
+                <h4>🚀 Pre-Launch Readiness Checker</h4>
+                
+                <div class="form-group">
+                    <label class="form-label" for="launchDate">Planned Launch Date:</label>
+                    <input type="date" id="launchDate" class="form-input" onchange="calculateLaunchDays()">
+                </div>
+
+                <div id="launchCountdown" style="display: none; margin-top: 15px; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 10px; text-align: center;">
+                    <h4 style="margin-bottom: 10px;">⏰ Launch Countdown</h4>
+                    <div style="font-size: 1.5rem; font-weight: bold;" id="daysUntilLaunch">0 days until launch!</div>
+                    <div style="margin-top: 10px; font-size: 0.9rem;" id="launchAdvice">Perfect timing for a successful launch!</div>
+                </div>
+
+                <div style="margin-top: 20px;">
+                    <h4>📊 Launch Readiness Score: <span id="readinessScore" style="color: #f56500; font-weight: bold;">0%</span></h4>
+                    <div style="background: #e2e8f0; height: 10px; border-radius: 5px; overflow: hidden;">
+                        <div id="readinessBar" style="height: 100%; background: linear-gradient(90deg, #f56500, #38a169); width: 0%; transition: width 0.5s ease;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pro-tip">
+                <div class="pro-tip-header"onclick="toggleProTip(this)">
+                    🎯 Pro Tip: Launch Week Strategy That Works
+                    <span class="pro-tip-toggle">+</span> 
+                </div>
+                <div class="pro-tip-content">
+                    <h4>Week Before Launch:</h4>
+                    <ul>
+                        <li><strong>Monday-Tuesday:</strong> Final product photos, complete all listings, test checkout process</li>
+                        <li><strong>Wednesday-Thursday:</strong> Write launch announcement content, prepare social media posts</li>
+                        <li><strong>Friday-Weekend:</strong> Soft launch to family/friends for feedback and first reviews</li>
+                    </ul>
+                    
+                    <h4>Launch Week (Recommended: Tuesday-Thursday):</h4>
+                    <ul>
+                        <li><strong>Day 1:</strong> Official announcement on personal social media, email to contacts</li>
+                        <li><strong>Day 2-3:</strong> Join Etsy seller Facebook groups, share in relevant communities</li>
+                        <li><strong>Day 4-5:</strong> Start Pinterest marketing, create boards for your products</li>
+                        <li><strong>Weekend:</strong> Engage with customers, respond to messages, analyze first week data</li>
+                    </ul>
+                    
+                    <h4>First Month Marketing Strategy:</h4>
+                    <ul>
+                        <li><strong>Etsy Ads:</strong> Start with $5-10/day budget, focus on your best listings</li>
+                        <li><strong>SEO Optimization:</strong> Update titles and tags based on search performance</li>
+                        <li><strong>Social Proof:</strong> Encourage reviews, share customer photos (with permission)</li>
+                        <li><strong>Content Marketing:</strong> Behind-the-scenes posts, process videos, customer stories</li>
+                    </ul>
+                    
+                    <h4>Success Metrics to Track:</h4>
+                    <ul>
+                        <li><strong>Week 1 Goal:</strong> 10+ shop favorites, 3+ listing favorites per item</li>
+                        <li><strong>Month 1 Goal:</strong> First 5 sales (even if from friends/family)</li>
+                        <li><strong>Month 2 Goal:</strong> 10+ sales, 5-star average rating, repeat customers</li>
+                        <li><strong>Month 3 Goal:</strong> Consistent weekly sales, established brand presence</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <h4>✅ Complete Pre-Launch Checklist</h4>
+                <div class="checklist-item" onclick="updateReadinessScore()">
+                    <input type="checkbox" id="launch1">
+                    <span>Shop banner, logo, and branding elements uploaded and optimized</span>
+                </div>
+                <div class="checklist-item" onclick="updateReadinessScore()">
+                    <input type="checkbox" id="launch2">
+                    <span>Minimum 10 listings created with high-quality photos and SEO-optimized titles</span>
+                </div>
+                <div class="checklist-item" onclick="updateReadinessScore()">
+                    <input type="checkbox" id="launch3">
+                    <span>All shop policies written (shipping, returns, privacy, terms of service)</span>
+                </div>
+                <div class="checklist-item" onclick="updateReadinessScore()">
+                    <input type="checkbox" id="launch4">
+                    <span>About section completed with compelling brand story and mission</span>
+                </div>
+                <div class="checklist-item" onclick="updateReadinessScore()">
+                    <input type="checkbox" id="launch5">
+                    <span>FAQ section addresses common customer questions and concerns</span>
+                </div>
+                <div class="checklist-item" onclick="updateReadinessScore()">
+                    <input type="checkbox" id="launch6">
+                    <span>Social media accounts created and linked (Instagram, Pinterest, Facebook)</span>
+                </div>
+                <div class="checklist-item" onclick="updateReadinessScore()">
+                    <input type="checkbox" id="launch7">
+                    <span>Shipping materials and packaging prepared, branded if possible</span>
+                </div>
+                <div class="checklist-item" onclick="updateReadinessScore()">
+                    <input type="checkbox" id="launch8">
+                    <span>Customer service system established (response templates, tracking system)</span>
+                </div>
+                <div class="checklist-item" onclick="updateReadinessScore()">
+                    <input type="checkbox" id="launch9">
+                    <span>Inventory tracking system set up for managing stock levels</span>
+                </div>
+                <div class="checklist-item" onclick="updateReadinessScore()">
+                    <input type="checkbox" id="launch10">
+                    <span>Launch marketing content prepared (social posts, email announcement)</span>
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%); border: 2px solid #38a169; border-radius: 12px; padding: 25px; margin: 25px 0;">
+                <h4 style="color: #22543d; text-align: center; margin-bottom: 20px;">🎉 Launch Troubleshooting Guide</h4>
+                        <h5 style="color: #22543d;">❓ "No views on my listings"</h5>
+                        <ul style="font-size: 0.9rem; color: #2d3748;">
+                            <li>Improve SEO titles with popular keywords</li>
+                            <li>Use all 13 tags effectively</li>
+                            <li>Ensure competitive pricing</li>
+                            <li>Add more high-quality photos</li>
+                        </ul>
+                    <div>
+                        <h5 style="color: #22543d;">❓ "Views but no sales"</h5>
+                        <ul style="font-size: 0.9rem; color: #2d3748;">
+                            <li>Review pricing vs. competitors</li>
+                            <li>Improve product photos (main photo crucial)</li>
+                            <li>Enhance product descriptions</li>
+                            <li>Add customer reviews and social proof</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 style="color: #22543d;">❓ "Shipping complaints"</h5>
+                        <ul style="font-size: 0.9rem; color: #2d3748;">
+                            <li>Use Etsy's shipping calculator</li>
+                            <li>Offer free shipping (build into price)</li>
+                            <li>Provide tracking numbers immediately</li>
+                            <li>Set realistic processing times</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h5 style="color: #22543d;">❓ "Slow start, losing motivation"</h5>
+                        <ul style="font-size: 0.9rem; color: #2d3748;">
+                            <li>Focus on getting first 5 sales (any source)</li>
+                            <li>Join Etsy seller communities for support</li>
+                            <li>Celebrate small wins and progress</li>
+                            <li>Keep adding 2-3 new listings weekly</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="alert alert-success">
+                <strong>✅ Ready for Step 6:</strong> With payment processing secure and profitable pricing set, launch your shop with confidence!
+            </div>
+        </div>  
+            <div class="completion-box">
+            <h3>🎉 Template System Successfully Deployed!</h3>
+            
+            <div class="feature-item">
+                    <h4>✅ Beautiful Design</h4>
+                    <p>Professional layout with CSS animations, gradients, and hover effects</p>
+                </div>
+                <div class="feature-item">
+                    <h4>✅ Full JavaScript</h4>
+                    <p>Interactive elements, form validation, and dynamic content updates</p>
+                </div>
+                <div class="feature-item">
+                    <h4>✅ Mobile Responsive</h4>
+                    <p>Perfect experience on phones, tablets, and desktops</p>
+                </div>
+                <div class="feature-item">
+                    <h4>✅ Business Ready</h4>
+                    <p>Professional template system ready for client customization</p>
+                </div>
+            </div>
+            
+            <div class="alert alert-info">
+                <strong>🚀 Business Opportunity:</strong> This template system is worth $500+ for custom client work. Add the remaining sections (Listings, Shipping, Payment, Launch) and you'll have a complete professional guide system!
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Progress tracking and interactivity
+        let progressData = {
+            currentStep: 2,
+            totalSteps: 6,
+            checklistProgress: 0
+        };
+
+        // Shop name validation
+        function validateShopName() {
+            const input = document.getElementById('shopNameInput');
+            const validation = document.getElementById('nameValidation');
+            const name = input.value.trim();
+            
+            if (name.length === 0) {
+                validation.textContent = '';
+                validation.style.color = '#4a5568';
+                return;
+            }
+            
+            if (name.length < 4) {
+                validation.textContent = '❌ Too short - minimum 4 characters required';
+                validation.style.color = '#e53e3e';
+            } else if (name.length > 20) {
+                validation.textContent = '❌ Too long - maximum 20 characters allowed';
+                validation.style.color = '#e53e3e';
+            } else if (!/^[a-zA-Z0-9]+$/.test(name)) {
+                validation.textContent = '⚠️ Use only letters and numbers (no spaces or symbols)';
+                validation.style.color = '#ed8936';
+            } else {
+                validation.textContent = '✅ Perfect! This name looks great and meets all requirements';
+                validation.style.color = '#38a169';
+            }
+        }
+
+        // Random name generator
+        function generateRandomName() {
+            const prefixes = ['Cozy', 'Rustic', 'Modern', 'Vintage', 'Creative', 'Artisan', 'Handmade', 'Studio', 'Craft', 'Design'];
+            const suffixes = ['Works', 'Studio', 'Crafts', 'Creations', 'Designs', 'Gallery', 'Shop', 'Corner', 'Haven', 'Nest'];
+            
+            const randomPrefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+            const randomSuffix = suffixes[Math.floor(Math.random() * suffixes.length)];
+            const randomName = randomPrefix + randomSuffix;
+            
+            document.getElementById('shopNameInput').value = randomName;
+            validateShopName();
+            
+            // Show a success message
+            const validation = document.getElementById('nameValidation');
+            validation.textContent = `🎲 Generated: "${randomName}" - Try it out or generate another!`;
+            validation.style.color = '#667eea';
+        }
+
+        // Demo functions
+// Pro tip toggle functionality
+        function toggleProTip(header) {
+            const content = header.nextElementSibling;
+            const toggle = header.querySelector('.pro-tip-toggle');
+            
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                toggle.textContent = '+';
+            } else {
+                content.classList.add('expanded');
+                toggle.textContent = '−';
+            }
+        }
+        function showAlert() {
+            alert('🎉 Congratulations! Your template is working perfectly with full JavaScript functionality!');
+        }
+
+        function updateProgress() {
+            const progressFill = document.getElementById('mainProgress');
+            const progressText = document.getElementById('progressText');
+            
+            // Animate progress increase
+            let currentWidth = parseInt(progressFill.style.width) || 40;
+            let newWidth = Math.min(currentWidth + 20, 100);
+            
+            progressFill.style.width = newWidth + '%';
+            progressText.textContent = `Progress updated to ${newWidth}%`;
+            
+            // Show demo output
+            const output = document.getElementById('demoOutput');
+            const text = document.getElementById('demoText');
+            output.style.display = 'block';
+            text.textContent = `Progress bar updated to ${newWidth}%! 🚀`;
+        }
+
+        function toggleDemo() {
+            const output = document.getElementById('demoOutput');
+            const text = document.getElementById('demoText');
+            
+            if (output.style.display === 'none' || !output.style.display) {
+                output.style.display = 'block';
+                text.textContent = 'Demo panel activated! All interactive features are working! ✨';
+            } else {
+                output.style.display = 'none';
+            }
+        }
+
+        function calculateExample() {
+            const output = document.getElementById('demoOutput');
+            const text = document.getElementById('demoText');
+            
+            // Example calculation (Etsy fees)
+            const itemPrice = 25.00;
+            const listingFee = 0.20;
+            const transactionFee = itemPrice * 0.065;
+            const paymentFee = itemPrice * 0.03 + 0.25;
+            const totalFees = listingFee + transactionFee + paymentFee;
+            const profit = itemPrice - totalFees;
+            
+            output.style.display = 'block';
+            text.innerHTML = `
+                <strong>Etsy Fee Calculator Demo:</strong><br>
+                Item Price: ${itemPrice.toFixed(2)} → 
+                Total Fees: ${totalFees.toFixed(2)} → 
+                You Keep: ${profit.toFixed(2)} 💰
+            `;
+        }
+
+        // Update checklist progress
+        function updateChecklistProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            const progressPercentage = checkboxes.length > 0 ? (checkedBoxes.length / checkboxes.length) * 100 : 0;
+            
+            progressData.checklistProgress = progressPercentage;
+            
+            // Update progress text
+            const progressText = document.getElementById('progressText');
+            if (progressText) {
+                const completedSteps = Math.floor((progressPercentage / 100) * progressData.totalSteps);
+                progressText.textContent = `${completedSteps} of ${progressData.totalSteps} sections completed (${Math.round(progressPercentage)}% checklist progress)`;
+            }
+        }
+
+        // Add event listeners to all checkboxes
+        document.addEventListener('DOMContentLoaded', function() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', updateChecklistProgress);
+            });
+            
+            // Initialize progress
+            updateChecklistProgress();
+            
+            // Add smooth scroll behavior
+            document.documentElement.style.scrollBehavior = 'smooth';
+        });
+
+        // Add some fun interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click effects to step boxes
+            const stepBoxes = document.querySelectorAll('.step-box');
+            stepBoxes.forEach(box => {
+                box.addEventListener('click', function(e) {
+                    if (e.target.type !== 'checkbox' && e.target.tagName !== 'INPUT' && e.target.tagName !== 'BUTTON') {
+                        this.style.transform = 'scale(0.98)';
+                        setTimeout(() => {
+                            this.style.transform = '';
+                        }, 150);
+                    }
+                });
+            });
+            
+            // Add typing effect for form validation
+            const shopNameInput = document.getElementById('shopNameInput');
+            if (shopNameInput) {
+                shopNameInput.addEventListener('input', function() {
+                    this.style.borderColor = '#f56500';
+                    setTimeout(() => {
+                        if (!this.matches(':focus')) {
+                            this.style.borderColor = '';
+                        }
+                    }, 2000);
+                });
+            }
+        });
+        // Export functions for potential external use
+        // Character count for product title
+        function updateCharacterCount(inputId, maxLength) {
+            const input = document.getElementById(inputId);
+            const counter = document.getElementById(inputId + 'Count');
+            const currentLength = input.value.length;
+            
+            if (counter) {
+                counter.textContent = `${currentLength}/${maxLength} characters`;
+                counter.style.color = currentLength > maxLength ? '#e53e3e' : '#4a5568';
+                
+                if (currentLength > maxLength) {
+                    counter.style.fontWeight = 'bold';
+                    input.style.borderColor = '#e53e3e';
+                } else if (currentLength > maxLength * 0.9) {
+                    counter.style.color = '#ed8936';
+                    input.style.borderColor = '#ed8936';
+                } else {
+                    input.style.borderColor = '#38a169';
+                }
+            }
+        }
+
+        // Etsy fee calculator
+        function calculateListingFees() {
+            const price = parseFloat(document.getElementById('productPrice').value) || 0;
+            const calculator = document.getElementById('feeCalculatorOutput');
+            
+            if (price > 0) {
+                const listingFee = 0.20;
+                const transactionFee = price * 0.065; // 6.5%
+                const paymentFee = price * 0.03 + 0.25; // 3% + $0.25
+                const totalFees = listingFee + transactionFee + paymentFee;
+                const youKeep = price - totalFees;
+                
+                document.getElementById('listingFeeAmount').textContent = '$' + listingFee.toFixed(2);
+                document.getElementById('transactionFeeAmount').textContent = '$' + transactionFee.toFixed(2);
+                document.getElementById('paymentFeeAmount').textContent = '$' + paymentFee.toFixed(2);
+                document.getElementById('youKeepAmount').textContent = '$' + youKeep.toFixed(2);
+                
+                calculator.style.display = 'block';
+            } else {
+                calculator.style.display = 'none';
+            }
+        }
+
+        // Fix the progress calculation
+        function updateChecklistProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            const progressPercentage = checkboxes.length > 0 ? (checkedBoxes.length / checkboxes.length) * 100 : 0;
+            
+            // background: linear-gradient(135deg, #667eea bar
+            const progressFill = document.getElementById('mainProgress');
+            if (progressFill) {
+                progressFill.style.width = progressPercentage + '%';
+            }
+            
+            // background: linear-gradient(135deg, #667eea text
+            const progressText = document.getElementById('progressText');
+            if (progressText) {
+                progressText.textContent = `${checkedBoxes.length} of ${checkboxes.length} tasks completed (${Math.round(progressPercentage)}% progress)`;
+            }
+        }
+        // Shipping calculator functions
+        function calculateShippingTotals() {
+            const domestic = parseFloat(document.getElementById('domesticShipping').value) || 0;
+            const international = parseFloat(document.getElementById('internationalShipping').value) || 0;
+            const calculator = document.getElementById('shippingCalculatorOutput');
+            
+            if (domestic > 0 || international > 0) {
+                document.getElementById('domesticTotal').textContent = `Product + $${domestic.toFixed(2)}`;
+                document.getElementById('internationalTotal').textContent = `Product + $${international.toFixed(2)}`;
+                
+                // Provide shipping strategy advice
+                let advice = "Good setup!";
+                if (domestic === 0) {
+                    advice = "Consider FREE shipping strategy!";
+                } else if (domestic > 10) {
+                    advice = "Rates might be too high - test free shipping";
+                } else if (domestic < 5 && international < 15) {
+                    advice = "Competitive rates - good for conversions!";
+                }
+                
+                document.getElementById('shippingAdvice').textContent = advice;
+                calculator.style.display = 'block';
+            } else {
+                calculator.style.display = 'none';
+            }
+        }
+
+        // Processing time advisor
+        function updateProcessingAdvice() {
+            const processingTime = document.getElementById('processingTime').value;
+            const adviceBox = document.getElementById('processingAdvice');
+            const impactText = document.getElementById('processingImpact');
+            
+            let impact = "";
+            
+            switch(processingTime) {
+                case "1-2":
+                    impact = "Excellent for customer satisfaction! Ensure you can consistently meet this timeline.";
+                    break;
+                case "3-5":
+                    impact = "Good balance of speed and reliability. Most customers find this acceptable.";
+                    break;
+                case "1-2 weeks":
+                    impact = "Acceptable for custom work. Clearly communicate this is made-to-order.";
+                    break;
+                case "2-3 weeks":
+                    impact = "Longer timeline - ensure your product quality justifies the wait.";
+                    break;
+                case "4-6 weeks":
+                    impact = "Very long timeline - only use for highly complex custom work. Consider offering rush options.";
+                    break;
+                default:
+                    adviceBox.style.display = 'none';
+                    return;
+            }
+            
+            impactText.textContent = impact;
+            adviceBox.style.display = 'block';
+        }
+        // Advanced Etsy fee calculator with profitability analysis
+        function calculateAllEtsyFees() {
+            const itemPrice = parseFloat(document.getElementById('finalItemPrice').value) || 0;
+            const shipping = parseFloat(document.getElementById('finalShippingCost').value) || 0;
+            const materials = parseFloat(document.getElementById('materialCosts').value) || 0;
+            const laborHours = parseFloat(document.getElementById('laborTime').value) || 0;
+            const hourlyRate = parseFloat(document.getElementById('hourlyRate').value) || 0;
+            
+            const calculator = document.getElementById('advancedFeeCalculator');
+            
+            if (itemPrice > 0) {
+                // Calculate Etsy fees
+                const listingFee = 0.20;
+                const transactionFee = (itemPrice + shipping) * 0.065; // 6.5%
+                const paymentFee = (itemPrice + shipping) * 0.03 + 0.25; // 3% + $0.25
+                const totalFees = listingFee + transactionFee + paymentFee;
+                
+                // Calculate costs and profit
+                const laborCost = laborHours * hourlyRate;
+                const totalRevenue = itemPrice + shipping;
+                const totalCosts = materials + laborCost + totalFees;
+                const profit = totalRevenue - totalCosts;
+                const actualHourlyRate = laborHours > 0 ? profit / laborHours : 0;
+                
+                // Update fee breakdown
+                document.getElementById('advancedListingFee').textContent = '$' + listingFee.toFixed(2);
+                document.getElementById('advancedTransactionFee').textContent = '$' + transactionFee.toFixed(2);
+                document.getElementById('advancedPaymentFee').textContent = '$' + paymentFee.toFixed(2);
+                document.getElementById('advancedTotalFees').textContent = '$' + totalFees.toFixed(2);
+                
+                // Update profitability analysis
+                document.getElementById('totalRevenue').textContent = '$' + totalRevenue.toFixed(2);
+                document.getElementById('totalCosts').textContent = '$' + totalCosts.toFixed(2);
+                document.getElementById('finalProfit').textContent = '$' + profit.toFixed(2);
+                document.getElementById('actualHourlyRate').textContent = '$' + actualHourlyRate.toFixed(2);
+                
+                // Profitability advice
+                let advice = "";
+                let adviceColor = "#ffffff";
+                
+                if (profit <= 0) {
+                    advice = "⚠️ Not profitable! Increase price or reduce costs.";
+                    adviceColor = "#fed7d7";
+                } else if (actualHourlyRate < 10) {
+                    advice = "💡 Low hourly rate. Consider increasing prices for better profit.";
+                    adviceColor = "#fef5e7";
+                } else if (actualHourlyRate >= 15) {
+                    advice = "🎉 Excellent profitability! This pricing works well.";
+                    adviceColor = "#f0fff4";
+                } else {
+                    advice = "✓ Decent profit margin. Could optimize pricing further.";
+                    adviceColor = "#e6f3ff";
+                }
+                
+                document.getElementById('profitAdviceText').textContent = advice;
+                document.getElementById('profitabilityAdvice').style.background = adviceColor;
+                document.getElementById('profitabilityAdvice').style.color = profit <= 0 ? "#742a2a" : "#2d3748";
+                
+                calculator.style.display = 'block';
+            } else {
+                calculator.style.display = 'none';
+            }
+        }
+        // Advanced Etsy fee calculator with profitability analysis
+        function calculateAllEtsyFees() {
+            const itemPrice = parseFloat(document.getElementById('finalItemPrice').value) || 0;
+            const shipping = parseFloat(document.getElementById('finalShippingCost').value) || 0;
+            const materials = parseFloat(document.getElementById('materialCosts').value) || 0;
+            const laborHours = parseFloat(document.getElementById('laborTime').value) || 0;
+            const hourlyRate = parseFloat(document.getElementById('hourlyRate').value) || 0;
+            
+            const calculator = document.getElementById('advancedFeeCalculator');
+            
+            if (itemPrice > 0) {
+                // Calculate Etsy fees
+                const listingFee = 0.20;
+                const transactionFee = (itemPrice + shipping) * 0.065; // 6.5%
+                const paymentFee = (itemPrice + shipping) * 0.03 + 0.25; // 3% + $0.25
+                const totalFees = listingFee + transactionFee + paymentFee;
+                
+                // Calculate costs and profit
+                const laborCost = laborHours * hourlyRate;
+                const totalRevenue = itemPrice + shipping;
+                const totalCosts = materials + laborCost + totalFees;
+                const profit = totalRevenue - totalCosts;
+                const actualHourlyRate = laborHours > 0 ? profit / laborHours : 0;
+                
+                // Update fee breakdown
+                document.getElementById('advancedListingFee').textContent = '$' + listingFee.toFixed(2);
+                document.getElementById('advancedTransactionFee').textContent = '$' + transactionFee.toFixed(2);
+                document.getElementById('advancedPaymentFee').textContent = '$' + paymentFee.toFixed(2);
+                document.getElementById('advancedTotalFees').textContent = '$' + totalFees.toFixed(2);
+                
+                // Update profitability analysis
+                document.getElementById('totalRevenue').textContent = '$' + totalRevenue.toFixed(2);
+                document.getElementById('totalCosts').textContent = '$' + totalCosts.toFixed(2);
+                document.getElementById('finalProfit').textContent = '$' + profit.toFixed(2);
+                document.getElementById('actualHourlyRate').textContent = '$' + actualHourlyRate.toFixed(2);
+                
+                // Profitability advice
+                let advice = "";
+                let adviceColor = "#ffffff";
+                
+                if (profit <= 0) {
+                    advice = "⚠️ Not profitable! Increase price or reduce costs.";
+                    adviceColor = "#fed7d7";
+                } else if (actualHourlyRate < 10) {
+                    advice = "💡 Low hourly rate. Consider increasing prices for better profit.";
+                    adviceColor = "#fef5e7";
+                } else if (actualHourlyRate >= 15) {
+                    advice = "🎉 Excellent profitability! This pricing works well.";
+                    adviceColor = "#f0fff4";
+                } else {
+                    advice = "✓ Decent profit margin. Could optimize pricing further.";
+                    adviceColor = "#e6f3ff";
+                }
+                
+                document.getElementById('profitAdviceText').textContent = advice;
+                document.getElementById('profitabilityAdvice').style.background = adviceColor;
+                document.getElementById('profitabilityAdvice').style.color = profit <= 0 ? "#742a2a" : "#2d3748";
+                
+                calculator.style.display = 'block';
+            } else {
+                calculator.style.display = 'none';
+            }
+        }
+        // Launch date calculator and readiness tracker
+        function calculateLaunchDays() {
+            const launchDate = new Date(document.getElementById('launchDate').value);
+            const today = new Date();
+            const countdown = document.getElementById('launchCountdown');
+            const daysElement = document.getElementById('daysUntilLaunch');
+            const adviceElement = document.getElementById('launchAdvice');
+            
+            if (launchDate && !isNaN(launchDate)) {
+                const timeDiff = launchDate.getTime() - today.getTime();
+                const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                
+                let advice = "";
+                
+                if (daysDiff < 0) {
+                    daysElement.textContent = "Launch date has passed!";
+                    advice = "Time to launch! If you haven't already, go live now!";
+                } else if (daysDiff === 0) {
+                    daysElement.textContent = "Launch day is TODAY!";
+                    advice = "🚀 LAUNCH DAY! Make your announcement and start promoting!";
+                } else if (daysDiff === 1) {
+                    daysElement.textContent = "1 day until launch!";
+                    advice = "Final preparations! Double-check everything is ready.";
+                } else if (daysDiff <= 7) {
+                    daysElement.textContent = `${daysDiff} days until launch!`;
+                    advice = "Perfect timing! Focus on final preparations and launch content.";
+                } else if (daysDiff <= 14) {
+                    daysElement.textContent = `${daysDiff} days until launch!`;
+                    advice = "Great planning ahead! Use this time to perfect your listings and prepare marketing materials.";
+                } else if (daysDiff <= 30) {
+                    daysElement.textContent = `${daysDiff} days until launch!`;
+                    advice = "Excellent advance planning! Plenty of time to prepare everything perfectly.";
+                } else {
+                    daysElement.textContent = `${daysDiff} days until launch!`;
+                    advice = "Very long timeline - consider a sooner launch date to maintain momentum.";
+                }
+                
+                adviceElement.textContent = advice;
+                countdown.style.display = 'block';
+            } else {
+                countdown.style.display = 'none';
+            }
+        }
+
+        // Launch readiness score calculator
+        function updateReadinessScore() {
+            // Small delay to ensure checkbox state is updated
+            setTimeout(() => {
+                const totalItems = document.querySelectorAll('#launch1, #launch2, #launch3, #launch4, #launch5, #launch6, #launch7, #launch8, #launch9, #launch10').length;
+                const checkedItems = document.querySelectorAll('#launch1:checked, #launch2:checked, #launch3:checked, #launch4:checked, #launch5:checked, #launch6:checked, #launch7:checked, #launch8:checked, #launch9:checked, #launch10:checked').length;
+                
+                const percentage = totalItems > 0 ? Math.round((checkedItems / totalItems) * 100) : 0;
+                
+                document.getElementById('readinessScore').textContent = percentage + '%';
+                document.getElementById('readinessBar').style.width = percentage + '%';
+                
+                // Update progress bar color based on readiness
+                const bar = document.getElementById('readinessBar');
+                if (percentage < 50) {
+                    bar.style.background = 'linear-gradient(90deg, #e53e3e, #ed8936)';
+                } else if (percentage < 80) {
+                    bar.style.background = 'linear-gradient(90deg, #ed8936, #f56500)';
+                } else {
+                    bar.style.background = 'linear-gradient(90deg, #f56500, #38a169)';
+                }
+                
+                // Update overall progress calculation to include launch items
+                updateChecklistProgress();
+            }, 100);
+        }
+
+        // Update the main progress to include all checklist items
+        function updateChecklistProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const checkedBoxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            const progressPercentage = checkboxes.length > 0 ? (checkedBoxes.length / checkboxes.length) * 100 : 0;
+            
+            // Update progress bar
+            const progressFill = document.getElementById('mainProgress');
+            if (progressFill) {
+                progressFill.style.width = progressPercentage + '%';
+            }
+            
+            // Update progress text
+            const progressText = document.getElementById('progressText');
+            if (progressText) {
+                const totalSteps = 6;
+                const currentStep = progressPercentage >= 100 ? 6 : Math.ceil((progressPercentage / 100) * totalSteps);
+                progressText.textContent = `${checkedBoxes.length} of ${checkboxes.length} tasks completed (${Math.round(progressPercentage)}% progress) - Step ${currentStep} of ${totalSteps}`;
+            }
+        }
+        window.TemplateSystem = {
+            validateShopName,
+            generateRandomName,
+            updateProgress,
+            updateChecklistProgress,
+            progressData
+        };
+    </script>
+<div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 40px; border-radius: 15px; text-align: center; margin: 30px 0;">
+            <h3 style="margin-bottom: 20px; font-size: 2rem;">🚀 Interactive Features Demo</h3>
+            <p style="margin-bottom: 30px; font-size: 1.1rem;">This template includes full JavaScript functionality that works perfectly on GitHub Pages!</p>
+            
+            <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                <button onclick="showAlert()" style="background: rgba(255,255,255,0.2); border: 2px solid white; color: white; padding: 20px 40px; border-radius: 10px; cursor: pointer; font-size: 1.2rem; font-weight: bold; min-width: 200px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">🎉 Test Alert</button>
+                
+                <button onclick="updateProgress()" style="background: rgba(255,255,255,0.2); border: 2px solid white; color: white; padding: 20px 40px; border-radius: 10px; cursor: pointer; font-size: 1.2rem; font-weight: bold; min-width: 200px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">📊 Update Progress</button>
+                
+                <button onclick="toggleDemo()" style="background: rgba(255,255,255,0.2); border: 2px solid white; color: white; padding: 20px 40px; border-radius: 10px; cursor: pointer; font-size: 1.2rem; font-weight: bold; min-width: 200px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">🔄 Toggle Features</button>
+                
+                <button onclick="calculateExample()" style="background: rgba(255,255,255,0.2); border: 2px solid white; color: white; padding: 20px 40px; border-radius: 10px; cursor: pointer; font-size: 1.2rem; font-weight: bold; min-width: 200px; transition: all 0.3s ease;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">🧮 Run Calculator</button>
+            </div>
+            <div id="demoOutput" style="margin-top: 25px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 10px; display: none;">
+                <strong>Demo Output:</strong> <span id="demoText">Interactive features working perfectly!</span>
+            </div>
+        </div></body>
+</html>
+
