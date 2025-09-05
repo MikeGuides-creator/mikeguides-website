@@ -80,10 +80,9 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;b
     <article class="card p-5"><h3 class="heading text-xl font-semibold">ChatGPT Mastery Simulator</h3><p class="mt-2 text-gray-600">Master prompting with scenarios.</p><div class="mt-4 flex items-center justify-between"><span class="font-semibold">$49</span><button class="btn btn-primary" data-product="chatgpt-mastery">Buy on Gumroad</button></div></article>
     <article class="card p-5"><h3 class="heading text-xl font-semibold">Visual AI Studio</h3><p class="mt-2 text-gray-600">Plan & brief images smartly.</p><div class="mt-4 flex items-center justify-between"><span class="font-semibold">$49</span><button class="btn btn-primary" data-product="visual-ai-studio">Buy on Gumroad</button></div></article>
     <article class="card p-5"><h3 class="heading text-xl font-semibold">AI Business Automation</h3><p class="mt-2 text-gray-600">Blueprints that actually help.</p><div class="mt-4 flex items-center justify-between"><span class="font-semibold">$49</span><button class="btn btn-primary" data-product="business-automation">Buy on Gumroad</button></div></article>
-    <article class="card p-5 ring-2 ring-green-300"><div class="badge bg-green-50 text-green-700 ring-1 ring-green-200">New</div><h3 class="heading text-xl font-semibold mt-2">AI Marketing Toolkit</h3><p class="mt-2 text-gray-600">Prompts, checklists, swipe files, mini‑apps.</p><div class="mt-4 flex items-center justify-between"><span class="font-semibold">$49</span><a class="btn btn-accent" href="toolkit/index.html">Open Toolkit</a></div></article>
-  </div>
+  <article class="card p-5 ring-2 ring-green-300"><div class="badge bg-green-50 text-green-700 ring-1 ring-green-200">New</div><h3 class="heading text-xl font-semibold mt-2">AI Marketing Toolkit</h3><p class="mt-2 text-gray-600">Prompts, checklists, swipe files, mini‑apps.</p><div class="mt-4 flex items-center justify-between"><span class="font-semibold">$49</span><a class="btn btn-accent" href="toolkit/index.html">Open Toolkit</a></div></article>
+</div>
 </section>
-
 <section id="bundle" class="section py-12">
   <div class="card p-6 lg:p-10">
     <div class="grid gap-8 lg:grid-cols-2">
@@ -94,7 +93,7 @@ body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;b
       </div>
       <div class="rounded-2xl bg-gray-50 p-6 ring-1 ring-gray-200">
         <div class="flex items-end gap-3"><span class="text-4xl font-bold">$145</span><span class="text-sm text-gray-500 line-through">$245</span><span class="ml-2 rounded-full bg-green-100 px-2 py-1 text-xs font-semibold text-green-700">Save $100</span></div>
-        <p class="mt-2 text-sm text-gray-600">One‑time payment. Instant download.</p>
+<p class="mt-2 text-sm text-gray-600">One‑time payment. Instant download.</p>
         <div class="mt-6 grid gap-3">
           <button class="btn btn-primary w-full text-lg" id="buy-bundle">Buy Bundle + Toolkit</button>
           <button class="btn btn-ghost w-full" id="compare">Compare what’s inside</button>
@@ -135,5 +134,52 @@ document.getElementById('buy-bundle')?.addEventListener('click',e=>{e.preventDef
 const compareBtn=document.getElementById('compare'),panel=document.getElementById('compare-panel');compareBtn?.addEventListener('click',()=>{panel.classList.toggle('hidden');compareBtn.textContent=panel.classList.contains('hidden')?'Compare what’s inside':'Hide comparison'});
 function newsletterSignup(){document.getElementById('newsletter-msg').textContent='Thanks! Please check your inbox to confirm.'}window.newsletterSignup=newsletterSignup;
 </script>
+   <script>
+(function () {
+  // Show if URL has #thanks or ?thanks=1
+  const url = new URL(window.location.href);
+  const show = (url.hash === '#thanks') || url.searchParams.has('thanks');
+  if (!show) return;
+
+  // Build the toast
+  const toast = document.createElement('div');
+  toast.setAttribute('role', 'status');
+  toast.setAttribute('aria-live', 'polite');
+  toast.style.cssText = [
+    'position:fixed','top:16px','left:50%','transform:translateX(-50%)',
+    'z-index:9999','background:#ecfdf5','color:#065f46',
+    'border:1px solid #86efac','padding:12px 16px',
+    'border-radius:12px','box-shadow:0 6px 20px rgba(0,0,0,.08)',
+    'display:flex','align-items:center','gap:10px','font:600 14px/1.4 Inter,system-ui,sans-serif'
+  ].join(';');
+
+  const icon = document.createElement('span');
+  icon.textContent = '✅';
+  icon.style.fontSize = '18px';
+
+  const text = document.createElement('span');
+  text.textContent = "You're all set! Check your email for the Gumroad receipt.";
+
+  const links = document.createElement('span');
+  links.innerHTML = ' &nbsp; <a href="/toolkit/" style="text-decoration:underline; color:#065f46">Open Toolkit</a> · <a href="/#guides" style="text-decoration:underline; color:#065f46">Guides</a>';
+
+  const close = document.createElement('button');
+  close.setAttribute('aria-label','Close');
+  close.textContent = '×';
+  close.style.cssText = 'margin-left:8px;border:0;background:transparent;font:700 20px/1 Inter,system-ui,sans-serif;color:#065f46;cursor:pointer';
+  close.onclick = () => {
+    toast.remove();
+    // Clean the URL if it used #thanks
+    if (url.hash === '#thanks') history.replaceState(null, '', url.pathname + url.search);
+  };
+
+  toast.append(icon, text, links, close);
+  document.body.appendChild(toast);
+
+  // Auto-hide after 8s
+  setTimeout(() => close.click(), 8000);
+})();
+</script>
+
 </body>
 </html>
