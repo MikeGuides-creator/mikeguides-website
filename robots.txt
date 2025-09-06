@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mikeguides.co/sitemap.xml
