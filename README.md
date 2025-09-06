@@ -4,7 +4,7 @@
 **Build date:** 2025-09-04
 
 This bundle keeps it tiny to avoid timeouts:
-- `index.html` — homepage (Etsy removed, Gumroad wired, comfy max‑width & gutters)
+- `index.html` —  homepage (Etsy removed, Gumroad wired, comfy max‑width & gutters)
 - `toolkit/index.html` — Toolkit UI
 - `toolkit/toolkit.js` — Toolkit logic (offline keyword + draft generator)
 
