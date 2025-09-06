@@ -1,5 +1,5 @@
 [README.md](https://github.com/user-attachments/files/22141469/README.md)
-# MikeGuides — Lean Package (v2)
+# MikeGuides — Lean Package  (v2)
 
 **Build date:** 2025-09-04
 
