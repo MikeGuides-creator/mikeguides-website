@@ -1,152 +1,88 @@
 <!doctype html>
 <html lang="en">
 <head>
-   <!-- Primary (put charset/viewport first) -->
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+  <!-- Primary -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MikeGuides — AI Guides & Toolkit</title>
+  <meta name="description" content="Practical, high-impact AI guides, tools, and templates.">
+  <meta name="theme-color" content="#0047AB">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://mikeguides.co/">
 
-<title>MikeGuides — AI Guides & Toolkit</title>
-<meta name="description" content="Practical, high-impact AI guides, tools, and templates.">
-<meta name="theme-color" content="#0047AB">
-<meta name="robots" content="index,follow">
+  <!-- Icons -->
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="mask-icon" href="/favicon.svg" color="#0047AB">
 
-<!-- Canonical -->
-<link rel="canonical" href="https://mikeguides.co/">
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mikeguides.co/">
+  <meta property="og:site_name" content="MikeGuides">
+  <meta property="og:title" content="MikeGuides — AI Guides & Toolkit">
+  <meta property="og:description" content="Practical, high-impact AI guides, tools, and templates.">
+  <meta property="og:image" content="https://mikeguides.co/images/og-cover-v2.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="MikeGuides wordmark on cobalt background with silver frame">
 
-<!-- Icons -->
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="alternate icon" href="/favicon.ico">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="mask-icon" href="/favicon.svg" color="#0047AB">
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MikeGuides — AI Guides & Toolkit">
+  <meta name="twitter:description" content="Practical, high-impact AI guides, tools, and templates.">
+  <meta name="twitter:image" content="https://mikeguides.co/images/og-cover-v2.png">
 
-<!-- Open Graph -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://mikeguides.co/">
-<meta property="og:site_name" content="MikeGuides">
-<meta property="og:title" content="MikeGuides — AI Guides & Toolkit">
-<meta property="og:description" content="Practical, high-impact AI guides, tools, and templates.">
-<meta property="og:image" content="https://mikeguides.co/images/og-cover-v2.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="MikeGuides wordmark on cobalt background with silver frame">
+  <!-- Performance preconnects -->
+  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://gumroad.com" crossorigin>
 
-<!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="MikeGuides — AI Guides & Toolkit">
-<meta name="twitter:description" content="Practical, high-impact AI guides, tools, and templates.">
-<meta name="twitter:image" content="https://mikeguides.co/images/og-cover-v2.png">
-<!-- Optional if you have one: -->
-<!-- <meta name="twitter:site" content="@YourHandle"> -->
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"MikeGuides",
+    "url":"https://mikeguides.co/",
+    "logo":"https://mikeguides.co/images/mikeguides-avatar-1024-v2.png",
+    "sameAs":[]
+  }
+  </script>
 
-<!-- Performance: preconnect to third-party CDNs -->
-<link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
-<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
-<link rel="preconnect" href="https://gumroad.com" crossorigin>
-
-<!-- JSON-LD (Organization) -->
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"Organization",
-  "name":"MikeGuides",
-  "url":"https://mikeguides.co/",
-  "logo":"https://mikeguides.co/images/mikeguides-avatar-1024-v2.png",
-  "sameAs":[]
-}
-</script>
-
-<!-- Tailwind brand config (must be before the Tailwind CDN script) -->
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          cobalt: '#0047AB',
-          silver: '#C0C0C0',
-          deepPurple: '#5B21B6',
+  <!-- Tailwind config (must be before Tailwind CDN) -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cobalt: '#0047AB',
+            silver: '#C0C0C0',
+            deepPurple: '#5B21B6',
+          }
         }
       }
     }
-  }
-</script>
-<script src="https://cdn.tailwindcss.com/3.4.10"></script>
+  </script>
+  <script src="https://cdn.tailwindcss.com/3.4.10"></script>
 
-<!-- Gumroad -->
-<script src="https://gumroad.com/js/gumroad.js" async></script>
+  <!-- Gumroad -->
+  <script src="https://gumroad.com/js/gumroad.js" async></script>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PHWLTS997T"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-PHWLTS997T');
-</script>
-<!-- GA4 debug helper (remove after verifying) -->
-<script>
-  (function () {
-    // 1) Log any existing dataLayer entries (if GA4 already pushed some)
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PHWLTS997T"></script>
+  <script>
     window.dataLayer = window.dataLayer || [];
-    if (window.dataLayer.length) {
-      console.log('[GA4] Existing dataLayer:', window.dataLayer);
-    }
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PHWLTS997T');
+  </script>
 
-    // 2) Monkey-patch dataLayer.push to log future GA events
-    const origPush = window.dataLayer.push.bind(window.dataLayer);
-    window.dataLayer.push = function () {
-      console.log('%c[GA4] dataLayer.push →', 'color:#0047AB;font-weight:bold', ...arguments);
-      return origPush(...arguments);
-    };
-
-    // 3) Ensure gtag is present, enable debug mode, and send a test event
-    if (window.gtag) {
-      // Enable debug mode (shows up in GA4 DebugView)
-      gtag('config', 'G-PHWLTS997T', { debug_mode: true });
-
-      // Fire a one-time test event so you can confirm ingestion
-      gtag('event', 'debug_test', { source: 'inline-check', ts: Date.now() });
-
-      console.log('[GA4] Debug mode enabled + test event sent');
-    } else {
-      console.warn('[GA4] gtag not found yet — make sure this runs after the GA tag');
-    }
-
-    // 4) (Optional) Detect outgoing GA4 network hits in the console
-    if ('PerformanceObserver' in window) {
-      try {
-        new PerformanceObserver((list) => {
-          for (const e of list.getEntries()) {
-            if (e.name.includes('https://www.google-analytics.com/g/collect')) {
-              console.log('%c[GA4] Hit sent →', 'color:#16a34a;font-weight:bold', e.name);
-            }
-          }
-        }).observe({ entryTypes: ['resource'] });
-      } catch {}
-    }
-  })();
-</script>
-
-<style>
-/* your custom CSS here */
-</style>
-
-:root{--primary:#2563eb;--accent:#22c55e;--bg:#f9fafb}
-body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg)}
-.heading{font-family:Poppins,Inter,sans-serif}
-.card{background:#fff;border-radius:1rem;box-shadow:0 1px 2px rgba(0,0,0,.06),0 1px 1px rgba(0,0,0,.04);border:1px solid #e5e7eb}
-.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:1rem;padding:.75rem 1.25rem;font-weight:600}
-.btn-primary{background:var(--primary);color:#fff}.btn-accent{background:var(--accent);color:#052e12}.btn-ghost{border:1px solid #d1d5db;background:#fff}
-.badge{display:inline-flex;align-items:center;gap:.25rem;border-radius:9999px;padding:.25rem .75rem;font-size:.875rem;font-weight:500}
-.pill{display:flex;align-items:center;gap:.5rem;border-radius:9999px;background:rgba(255,255,255,.7);backdrop-filter:saturate(180%) blur(10px);padding:.25rem .75rem;font-size:.875rem;color:#374151;border:1px solid #e5e7eb}
-.grid-cards{display:grid;gap:1.5rem;grid-template-columns:1fr}
-@media (min-width:640px){.grid-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (min-width:1024px){.grid-cards{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.section{position:relative;margin:0 auto;max-width:72rem;padding-left:1.25rem;padding-right:1.25rem}
-@media (min-width:640px){.section{padding-left:2rem;padding-right:2rem}}
-@media (min-width:1024px){.section{padding-left:3rem;padding-right:3rem}}
-@media (min-width:1280px){.section{padding-left:4rem;padding-right:4rem}}
-</style>
+  <!-- (Optional) your custom CSS — be sure to close this tag if you use it -->
+  <!-- <style>
+  </style> -->
 </head>
+
 <body>
 <header class="section py-6">
   <div class="flex items-center justify-between">
