@@ -1,29 +1,23 @@
 <!doctype html>
 <html lang="en">
 <head>
-   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PHWLTS997T"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-PHWLTS997T');
-</script>
-<!-- Primary -->
+   <!-- Primary (put charset/viewport first) -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
 <title>MikeGuides — AI Guides & Toolkit</title>
 <meta name="description" content="Practical, high-impact AI guides, tools, and templates.">
+<meta name="theme-color" content="#0047AB">
+<meta name="robots" content="index,follow">
+
+<!-- Canonical -->
+<link rel="canonical" href="https://mikeguides.co/">
 
 <!-- Icons -->
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<meta name="theme-color" content="#0047AB">
-
-<!-- Canonical -->
-<link rel="canonical" href="https://mikeguides.co/">
+<link rel="mask-icon" href="/favicon.svg" color="#0047AB">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
@@ -41,8 +35,27 @@
 <meta name="twitter:title" content="MikeGuides — AI Guides & Toolkit">
 <meta name="twitter:description" content="Practical, high-impact AI guides, tools, and templates.">
 <meta name="twitter:image" content="https://mikeguides.co/images/og-cover-v2.png">
-   
-<!-- Tailwind config (must be before the Tailwind CDN script) -->
+<!-- Optional if you have one: -->
+<!-- <meta name="twitter:site" content="@YourHandle"> -->
+
+<!-- Performance: preconnect to third-party CDNs -->
+<link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+<link rel="preconnect" href="https://gumroad.com" crossorigin>
+
+<!-- JSON-LD (Organization) -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Organization",
+  "name":"MikeGuides",
+  "url":"https://mikeguides.co/",
+  "logo":"https://mikeguides.co/images/mikeguides-avatar-1024-v2.png",
+  "sameAs":[]
+}
+</script>
+
+<!-- Tailwind brand config (must be before the Tailwind CDN script) -->
 <script>
   tailwind.config = {
     theme: {
@@ -57,9 +70,66 @@
   }
 </script>
 <script src="https://cdn.tailwindcss.com/3.4.10"></script>
-   
+
+<!-- Gumroad -->
 <script src="https://gumroad.com/js/gumroad.js" async></script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PHWLTS997T"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PHWLTS997T');
+</script>
+<!-- GA4 debug helper (remove after verifying) -->
+<script>
+  (function () {
+    // 1) Log any existing dataLayer entries (if GA4 already pushed some)
+    window.dataLayer = window.dataLayer || [];
+    if (window.dataLayer.length) {
+      console.log('[GA4] Existing dataLayer:', window.dataLayer);
+    }
+
+    // 2) Monkey-patch dataLayer.push to log future GA events
+    const origPush = window.dataLayer.push.bind(window.dataLayer);
+    window.dataLayer.push = function () {
+      console.log('%c[GA4] dataLayer.push →', 'color:#0047AB;font-weight:bold', ...arguments);
+      return origPush(...arguments);
+    };
+
+    // 3) Ensure gtag is present, enable debug mode, and send a test event
+    if (window.gtag) {
+      // Enable debug mode (shows up in GA4 DebugView)
+      gtag('config', 'G-PHWLTS997T', { debug_mode: true });
+
+      // Fire a one-time test event so you can confirm ingestion
+      gtag('event', 'debug_test', { source: 'inline-check', ts: Date.now() });
+
+      console.log('[GA4] Debug mode enabled + test event sent');
+    } else {
+      console.warn('[GA4] gtag not found yet — make sure this runs after the GA tag');
+    }
+
+    // 4) (Optional) Detect outgoing GA4 network hits in the console
+    if ('PerformanceObserver' in window) {
+      try {
+        new PerformanceObserver((list) => {
+          for (const e of list.getEntries()) {
+            if (e.name.includes('https://www.google-analytics.com/g/collect')) {
+              console.log('%c[GA4] Hit sent →', 'color:#16a34a;font-weight:bold', e.name);
+            }
+          }
+        }).observe({ entryTypes: ['resource'] });
+      } catch {}
+    }
+  })();
+</script>
+
 <style>
+/* your custom CSS here */
+</style>
+
 :root{--primary:#2563eb;--accent:#22c55e;--bg:#f9fafb}
 body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg)}
 .heading{font-family:Poppins,Inter,sans-serif}
