@@ -12,6 +12,6 @@ This bundle  keeps it tiny to avoid timeouts:
 Open `index.html` and replace the placeholder URLs in the `GUMROAD` object.
 
 ## Deploy
-Drag this folder to Netlify or upload to GitHub Pages. Toolkit lives at `/toolkit/`.
+Drag  this folder to Netlify or upload to GitHub Pages. Toolkit lives at `/toolkit/`.
 <!-- deploy bump: 2025-09-05 --></>
 
