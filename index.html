@@ -77,15 +77,152 @@
     gtag('js', new Date());
     gtag('config', 'G-PHWLTS997T');
   </script>
-
-  <!-- (Optional) your custom CSS — be sure to close this tag if you use it -->
-  <!-- <style>
-  </style> -->
 </head>
 
 <body>
-  <main class="min-h-screen flex items-center justify-center bg-white">
-    <h1 class="text-3xl font-bold text-cobalt">Hello from MikeGuides</h1>
-  </main>
+<header class="section py-6">
+  <div class="flex items-center justify-between">
+    <a href="#" class="flex items-center gap-3">
+      <div class="h-10 w-10 rounded-2xl bg-blue-600 grid place-items-center text-white font-bold">MG</div>
+      <span class="heading text-xl font-semibold">MikeGuides</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+      <a href="#guides" class="text-gray-700 hover:text-gray-900">Guides</a>
+      <a href="toolkit/index.html" class="text-gray-700 hover:text-gray-900">AI Toolkit</a>
+      <a href="#bundle" class="text-gray-700 hover:text-gray-900">Bundle</a>
+      <a href="#faq" class="text-gray-700 hover:text-gray-900">FAQ</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <a href="#newsletter" class="btn btn-ghost">Subscribe</a>
+      <a href="#bundle" class="btn btn-primary">Get the Bundle</a>
+    </div>
+  </div>
+</header>
+
+<section class="section py-12 lg:py-20">
+  <div class="grid items-center gap-10 lg:grid-cols-2">
+    <div>
+      <div class="badge bg-blue-50 text-blue-700 ring-1 ring-blue-200 mb-4">Interactive HTML Guides</div>
+      <h1 class="heading text-4xl sm:text-5xl font-bold leading-tight">Learn faster with <span class="text-blue-600">interactive guides</span>.</h1>
+      <p class="mt-5 text-lg text-gray-700">From AI writing to business automation, MikeGuides turns complex topics into hands‑on, memorable experiences.</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="#bundle" class="btn btn-primary">Save with the Bundle</a>
+        <a href="#guides" class="btn btn-ghost">Browse Guides</a>
+      </div>
+    </div>
+    <div class="card p-6"><p class="text-gray-700">“Interactive > passive. MikeGuides kept my attention and made the concepts stick.”</p><div class="mt-4 font-semibold">— Priya S.</div></div>
+  </div>
+</section>
+
+<section id="guides" class="section py-12">
+  <div class="flex items-end justify-between">
+    <h2 class="heading text-3xl font-bold">Shop the Guides</h2>
+    <a class="text-blue-700 hover:underline" href="#bundle">Or grab the bundle →</a>
+  </div>
+  <div class="mt-8 grid-cards">
+    <article class="card p-5"><h3 class="heading text-xl font-semibold">AI Writing Workshop</h3><p class="mt-2 text-gray-600">Produce great drafts fast.</p><div class="mt-4 flex items-center justify-between"><span class="font-semibold">$49</span><button class="btn btn-primary" data-product="ai-writing">Buy on Gumroad</button></div></article>
+    <article class="card p-5"><h3 class="heading text-xl font-semibold">ChatGPT Mastery Simulator</h3><p class="mt-2 text-gray-600">Master prompting with scenarios.</p><div class="mt-4 flex items-center justify-between"><span class="font-semibold">$49</span><button class="btn btn-primary" data-product="chatgpt-mastery">Buy on Gumroad</button></div></article>
+    <article class="card p-5"><h3 class="heading text-xl font-semibold">Visual AI Studio</h3><p class="mt-2 text-gray-600">Plan & brief images smartly.</p><div class="mt-4 flex items-center justify-between"><span class="font-semibold">$49</span><button class="btn btn-primary" data-product="visual-ai-studio">Buy on Gumroad</button></div></article>
+    <article class="card p-5"><h3 class="heading text-xl font-semibold">AI Business Automation</h3><p class="mt-2 text-gray-600">Blueprints that actually help.</p><div class="mt-4 flex items-center justify-between"><span class="font-semibold">$49</span><button class="btn btn-primary" data-product="business-automation">Buy on Gumroad</button></div></article>
+  <article class="card p-5 ring-2 ring-green-300"><div class="badge bg-green-50 text-green-700 ring-1 ring-green-200">New</div><h3 class="heading text-xl font-semibold mt-2">AI Marketing Toolkit</h3><p class="mt-2 text-gray-600">Prompts, checklists, swipe files, mini‑apps.</p><div class="mt-4 flex items-center justify-between"><span class="font-semibold">$49</span><a class="btn btn-accent" href="toolkit/index.html">Open Toolkit</a></div></article>
+</div>
+</section>
+<section id="bundle" class="section py-12">
+  <div class="card p-6 lg:p-10">
+    <div class="grid gap-8 lg:grid-cols-2">
+      <div>
+        <div class="badge bg-blue-50 text-blue-700 ring-1 ring-blue-200">Best Value</div>
+        <h3 class="heading mt-3 text-3xl font-bold">Bundle + AI Marketing Toolkit</h3>
+        <p class="mt-3 text-gray-700">All 4 interactive guides <em>plus</em> the AI Marketing Toolkit. Instant access, lifetime updates, 30‑day guarantee.</p>
+      </div>
+      <div class="rounded-2xl bg-gray-50 p-6 ring-1 ring-gray-200">
+        <div class="flex items-end gap-3"><span class="text-4xl font-bold">$145</span><span class="text-sm text-gray-500 line-through">$245</span><span class="ml-2 rounded-full bg-green-100 px-2 py-1 text-xs font-semibold text-green-700">Save $100</span></div>
+<p class="mt-2 text-sm text-gray-600">One‑time payment. Instant download.</p>
+        <div class="mt-6 grid gap-3">
+          <button class="btn btn-primary w-full text-lg" id="buy-bundle">Buy Bundle + Toolkit</button>
+          <button class="btn btn-ghost w-full" id="compare">Compare what’s inside</button>
+        </div>
+        <div id="compare-panel" class="hidden mt-4 text-sm text-gray-700">
+          <p class="font-semibold mb-1">Includes:</p>
+          <ul class="list-disc pl-5 space-y-1">
+            <li>AI Writing Workshop</li><li>ChatGPT Mastery Simulator</li><li>Visual AI Studio</li><li>AI Business Automation</li><li>AI Marketing Toolkit</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="newsletter" class="section pb-16">
+  <div class="card p-6 lg:p-10 grid gap-6 lg:grid-cols-2">
+    <div><div class="badge bg-indigo-50 text-indigo-700 ring-1 ring-indigo-200">Free Resource</div><h4 class="heading mt-2 text-2xl font-bold">Free mini‑guide: “5 Prompt Patterns that Never Miss”</h4><p class="mt-2 text-gray-700">Join for practical tutorials, launch discounts, and exclusive templates.</p></div>
+    <form class="grid gap-3 sm:grid-cols-[1fr_auto]" onsubmit="event.preventDefault(); newsletterSignup()">
+      <input required type="email" placeholder="you@example.com" class="rounded-2xl border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+      <button class="btn btn-primary">Subscribe</button>
+      <p id="newsletter-msg" class="sm:col-span-2 text-sm text-gray-600"></p>
+    </form>
+  </div>
+</section>
+
+<footer class="border-t border-gray-200 bg-white">
+  <div class="section py-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
+    <div class="text-sm text-gray-600">© 2025 MikeGuides.co • All rights reserved</div>
+    <div class="flex flex-wrap items-center gap-3 text-sm"><a href="#" class="text-gray-700">Terms</a><a href="#" class="text-gray-700">Privacy</a><a href="#" class="text-gray-700">Support</a></div>
+  </div>
+</footer>
+
+<script>
+const GUMROAD={bundle:'https://mikeguides.gumroad.com/l/bundle-plus-toolkit',products:{'ai-writing':'https://mikeguides.gumroad.com/l/ai-writing','chatgpt-mastery':'https://mikeguides.gumroad.com/l/chatgpt-mastery','visual-ai-studio':'https://mikeguides.gumroad.com/l/visual-ai-studio','business-automation':'https://mikeguides.gumroad.com/l/business-automation'}};
+document.querySelectorAll('[data-product]').forEach(btn=>{const url=GUMROAD.products[btn.dataset.product];if(url){btn.addEventListener('click',e=>{e.preventDefault();window.open(url,'_blank','noopener')})}else{btn.disabled=true;btn.textContent='Coming Soon';btn.classList.add('opacity-60','cursor-not-allowed')}});
+document.getElementById('buy-bundle')?.addEventListener('click',e=>{e.preventDefault();if(GUMROAD.bundle)window.open(GUMROAD.bundle,'_blank','noopener')});
+const compareBtn=document.getElementById('compare'),panel=document.getElementById('compare-panel');compareBtn?.addEventListener('click',()=>{panel.classList.toggle('hidden');compareBtn.textContent=panel.classList.contains('hidden')?'Compare what’s inside':'Hide comparison'});
+function newsletterSignup(){document.getElementById('newsletter-msg').textContent='Thanks! Please check your inbox to confirm.'}window.newsletterSignup=newsletterSignup;
+</script>
+   <script>
+(function () {
+  // Show if URL has #thanks or ?thanks=1
+  const url = new URL(window.location.href);
+  const show = (url.hash === '#thanks') || url.searchParams.has('thanks');
+  if (!show) return;
+
+  // Build the toast
+  const toast = document.createElement('div');
+  toast.setAttribute('role', 'status');
+  toast.setAttribute('aria-live', 'polite');
+  toast.style.cssText = [
+    'position:fixed','top:16px','left:50%','transform:translateX(-50%)',
+    'z-index:9999','background:#ecfdf5','color:#065f46',
+    'border:1px solid #86efac','padding:12px 16px',
+    'border-radius:12px','box-shadow:0 6px 20px rgba(0,0,0,.08)',
+    'display:flex','align-items:center','gap:10px','font:600 14px/1.4 Inter,system-ui,sans-serif'
+  ].join(';');
+
+  const icon = document.createElement('span');
+  icon.textContent = '✅';
+  icon.style.fontSize = '18px';
+
+  const text = document.createElement('span');
+  text.textContent = "You're all set! Check your email for the Gumroad receipt.";
+
+  const links = document.createElement('span');
+  links.innerHTML = ' &nbsp; <a href="/toolkit/" style="text-decoration:underline; color:#065f46">Open Toolkit</a> · <a href="/#guides" style="text-decoration:underline; color:#065f46">Guides</a>';
+
+  const close = document.createElement('button');
+  close.setAttribute('aria-label','Close');
+  close.textContent = '×';
+  close.style.cssText = 'margin-left:8px;border:0;background:transparent;font:700 20px/1 Inter,system-ui,sans-serif;color:#065f46;cursor:pointer';
+  close.onclick = () => {
+    toast.remove();
+    // Clean the URL if it used #thanks
+    if (url.hash === '#thanks') history.replaceState(null, '', url.pathname + url.search);
+  };
+
+  toast.append(icon, text, links, close);
+  document.body.appendChild(toast);
+
+  // Auto-hide after 8s
+  setTimeout(() => close.click(), 8000);
+})();
+</script>
 </body>
 </html>
