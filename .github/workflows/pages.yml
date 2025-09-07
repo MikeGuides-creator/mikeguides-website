@@ -21,6 +21,6 @@ jobs:
       - uses: actions/configure-pages@v4
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: '.'   # publish the repo root
+          path: '.'    # publish the repo root
       - id: deployment
         uses: actions/deploy-pages@v4
