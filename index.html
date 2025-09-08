@@ -65,6 +65,38 @@
     }
   </script>
   <script src="https://cdn.tailwindcss.com/3.4.10"></script>
+<!-- Component styles built on Tailwind utilities -->
+<style type="text/tailwindcss">
+  @layer base {
+    html { scroll-behavior: smooth; }
+    img { @apply block max-w-full h-auto; }
+    body { @apply bg-white text-gray-800; }
+  }
+
+  @layer components {
+    /* Centered content sections + nice side padding */
+    .section { @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8; }
+
+    /* Card look */
+    .card { @apply bg-white rounded-2xl ring-1 ring-gray-200 shadow-sm; }
+
+    /* Unified grid for product cards */
+    .grid-cards { @apply grid gap-6 sm:grid-cols-2 lg:grid-cols-4; }
+
+    /* Buttons */
+    .btn { @apply inline-flex items-center justify-center rounded-2xl px-4 py-2 font-semibold transition;
+           @apply focus:outline-none focus:ring-2 focus:ring-offset-1; }
+    .btn-primary { @apply bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-600; }
+    .btn-ghost   { @apply border border-gray-300 text-gray-700 hover:bg-gray-50 focus:ring-gray-400; }
+    .btn-accent  { @apply bg-deepPurple text-white hover:bg-purple-700 focus:ring-purple-700; }
+
+    /* Little pills */
+    .badge { @apply inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold; }
+
+    /* Headings color baseline */
+    .heading { @apply text-gray-900; }
+  }
+</style>
 
   <!-- Gumroad -->
   <script src="https://gumroad.com/js/gumroad.js" async></script>
