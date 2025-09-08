@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI Marketing Toolkit — MikeGuides</title>
+  <meta name="description" content="Prompts, checklists, swipe files, and mini-apps to market smarter with AI." />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="alternate icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#0047AB" />
+
+  <!-- Tailwind (pinned) -->
+  <script src="https://cdn.tailwindcss.com/3.4.10"></script>
+
+  <!-- Same helper CSS your homepage uses -->
+  <style>
+    :root { --cobalt:#0047AB; --deepPurple:#5B21B6; }
+    html { scroll-behavior:smooth; } *,*::before,*::after { box-sizing:border-box; }
+    img { display:block; max-width:100%; height:auto; }
+    .section { max-width:72rem; margin-left:auto; margin-right:auto; padding-left:1rem; padding-right:1rem; }
+    @media (min-width:640px){ .section { padding-left:1.5rem; padding-right:1.5rem; } }
+    @media (min-width:1024px){ .section { padding-left:2rem;  padding-right:2rem;  } }
+    .card { background:#fff; border-radius:1rem; border:1px solid #e5e7eb; box-shadow:0 1px 2px rgba(0,0,0,.05); }
+    .grid-cards { display:grid; gap:1.5rem; grid-template-columns:1fr; }
+    @media (min-width:640px){ .grid-cards { grid-template-columns:repeat(2,1fr); } }
+    @media (min-width:1024px){ .grid-cards { grid-template-columns:repeat(3,1fr); } }
+    .btn { display:inline-flex; align-items:center; justify-content:center; border-radius:1rem; padding:.5rem 1rem; font-weight:600; transition:background .15s ease,border-color .15s ease,box-shadow .15s ease; }
+    .btn:focus-visible { outline:2px solid transparent; box-shadow:0 0 0 3px rgba(0,71,171,.35); }
+    .btn-primary { background:var(--cobalt); color:#fff; } .btn-primary:hover { background:#003a8e; }
+    .btn-ghost { border:1px solid #d1d5db; color:#374151; background:#fff; } .btn-ghost:hover { background:#f9fafb; }
+    .btn-accent { background:var(--deepPurple); color:#fff; } .btn-accent:hover { background:#4c1d95; }
+    .badge { display:inline-flex; align-items:center; border-radius:9999px; padding:.25rem .625rem; font-size:.75rem; font-weight:600; }
+    .heading { color:#111827; }
+  </style>
+</head>
+<body class="bg-white text-gray-800">
+  <!-- Header -->
+  <header class="section py-6">
+    <div class="flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3">
+        <div class="h-10 w-10 rounded-2xl bg-blue-600 grid place-items-center text-white font-bold">MG</div>
+        <span class="heading text-xl font-semibold">MikeGuides</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+        <a href="/#guides" class="text-gray-700 hover:text-gray-900">Guides</a>
+        <a href="/toolkit/" class="text-gray-900 font-semibold">AI Toolkit</a>
+        <a href="/#bundle" class="text-gray-700 hover:text-gray-900">Bundle</a>
+        <a href="/#newsletter" class="text-gray-700 hover:text-gray-900">Newsletter</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <a href="/#bundle" class="btn btn-ghost">Back to Home</a>
+        <a href="/#bundle" class="btn btn-primary">Get the Bundle</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="section py-10 lg:py-16">
+    <div class="grid gap-10 lg:grid-cols-2">
+      <div>
+        <div class="badge bg-blue-50 text-blue-700 ring-1 ring-blue-200 mb-3">AI Marketing Toolkit</div>
+        <h1 class="heading text-4xl sm:text-5xl font-bold leading-tight">Prompts, checklists, and mini-apps for smarter marketing.</h1>
+        <p class="mt-4 text-lg text-gray-700">Everything you need to launch and scale faster: campaign briefs, audience research, copy frameworks, and automation helpers.</p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="/#bundle" class="btn btn-primary">Save with the Bundle</a>
+          <a href="/#guides" class="btn btn-ghost">Browse Guides</a>
+        </div>
+      </div>
+      <div class="card p-6">
+        <p class="text-gray-700">“This toolkit gave me launch-ready copy and a repeatable workflow. Huge time saver.”</p>
+        <div class="mt-4 font-semibold">— A. Rivera</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Toolkit contents -->
+  <section class="section pb-16">
+    <h2 class="heading text-2xl font-bold">What’s inside</h2>
+    <div class="mt-6 grid-cards">
+      <article class="card p-5">
+        <h3 class="heading text-xl font-semibold">Prompt Packs</h3>
+        <p class="mt-2 text-gray-600">Headline, hook, and CTA frameworks; persona builders; research prompts.</p>
+      </article>
+      <article class="card p-5">
+        <h3 class="heading text-xl font-semibold">Checklists</h3>
+        <p class="mt-2 text-gray-600">Campaign QA, landing page audit, email launch checklist.</p>
+      </article>
+      <article class="card p-5">
+        <h3 class="heading text-xl font-semibold">Swipe Files</h3>
+        <p class="mt-2 text-gray-600">Battle-tested subject lines, social angles, and ad copy patterns.</p>
+      </article>
+      <article class="card p-5">
+        <h3 class="heading text-xl font-semibold">Mini-apps</h3>
+        <p class="mt-2 text-gray-600">Brief generator, angle mixer, and outline composer (browser-only).</p>
+      </article>
+      <article class="card p-5">
+        <h3 class="heading text-xl font-semibold">Templates</h3>
+        <p class="mt-2 text-gray-600">Campaign brief, persona sheet, messaging map, and KPI tracker.</p>
+      </article>
+      <article class="card p-5">
+        <h3 class="heading text-xl font-semibold">Updates</h3>
+        <p class="mt-2 text-gray-600">Lifetime updates included – new prompts & tools added regularly.</p>
+      </article>
+    </div>
+
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a class="btn btn-primary" target="_blank" rel="noopener noreferrer"
+         href="https://mikeguides8.gumroad.com/l/business_bundle_builder">Buy Bundle + Toolkit</a>
+      <a class="btn btn-ghost" href="/">Back to Home</a>
+    </div>
+  </section>
+</body>
+</html>
