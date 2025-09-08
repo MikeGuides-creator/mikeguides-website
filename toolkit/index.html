@@ -5,20 +5,39 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>AI Marketing Toolkit — MikeGuides</title>
   <meta name="description" content="Prompts, checklists, swipe files, and mini-apps to market smarter with AI." />
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-  <link rel="alternate icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
   <meta name="theme-color" content="#0047AB" />
   <link rel="canonical" href="https://mikeguides.co/toolkit/">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://mikeguides.co/toolkit/">
-<meta property="og:title" content="AI Marketing Toolkit — MikeGuides">
-<meta property="og:description" content="Prompts, checklists, swipe files, and mini-apps to market smarter with AI.">
-<meta property="og:image" content="https://mikeguides.co/images/og-cover-v2.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="AI Marketing Toolkit — MikeGuides">
-<meta name="twitter:description" content="Prompts, checklists, swipe files, and mini-apps to market smarter with AI.">
-<meta name="twitter:image" content="https://mikeguides.co/images/og-cover-v2.png">
+
+  <!-- Icons -->
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mikeguides.co/toolkit/">
+  <meta property="og:site_name" content="MikeGuides">
+  <meta property="og:title" content="AI Marketing Toolkit — MikeGuides">
+  <meta property="og:description" content="Prompts, checklists, swipe files, and mini-apps to market smarter with AI.">
+  <meta property="og:image" content="https://mikeguides.co/images/og-cover-v2.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="MikeGuides wordmark on cobalt background with silver frame">
+  <meta property="og:locale" content="en_US">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI Marketing Toolkit — MikeGuides">
+  <meta name="twitter:description" content="Prompts, checklists, swipe files, and mini-apps to market smarter with AI.">
+  <meta name="twitter:image" content="https://mikeguides.co/images/og-cover-v2.png">
+
+  <!-- Perf preconnects -->
+  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://mikeguides8.gumroad.com" crossorigin>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 
   <!-- Tailwind (pinned) -->
   <script src="https://cdn.tailwindcss.com/3.4.10"></script>
@@ -28,6 +47,11 @@
     :root { --cobalt:#0047AB; --deepPurple:#5B21B6; }
     html { scroll-behavior:smooth; } *,*::before,*::after { box-sizing:border-box; }
     img { display:block; max-width:100%; height:auto; }
+
+    /* Typography baseline */
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial}
+    h1,h2,h3,.heading{font-family:Poppins,Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial}
+
     .section { max-width:72rem; margin-left:auto; margin-right:auto; padding-left:1rem; padding-right:1rem; }
     @media (min-width:640px){ .section { padding-left:1.5rem; padding-right:1.5rem; } }
     @media (min-width:1024px){ .section { padding-left:2rem;  padding-right:2rem;  } }
@@ -43,15 +67,30 @@
     .badge { display:inline-flex; align-items:center; border-radius:9999px; padding:.25rem .625rem; font-size:.75rem; font-weight:600; }
     .heading { color:#111827; }
   </style>
-   <!-- Google tag (gtag.js) -->
+
+  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PHWLTS997T"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-PHWLTS997T');
+    gtag('config', 'G-PHWLTS997T', { 'anonymize_ip': true });
+  </script>
+
+  <!-- JSON-LD (Product) — add offers later when Toolkit product is live on Gumroad -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Product",
+    "name":"AI Marketing Toolkit",
+    "description":"Prompts, checklists, swipe files, and mini-apps to market smarter with AI.",
+    "image":"https://mikeguides.co/images/og-cover-v2.png",
+    "brand":{"@type":"Brand","name":"MikeGuides"},
+    "url":"https://mikeguides.co/toolkit/"
+  }
   </script>
 </head>
+
 <body class="bg-white text-gray-800">
   <!-- Header -->
   <header class="section py-6">
@@ -123,10 +162,23 @@
     </div>
 
     <div class="mt-8 flex flex-wrap gap-3">
-      <a class="btn btn-primary" target="_blank" rel="noopener noreferrer"
-         href="https://mikeguides8.gumroad.com/l/business_bundle_builder">Buy Bundle + Toolkit</a>
+      <a class="btn btn-primary" target="_blank" rel="noopener noreferrer" id="buy-bundle"
+         href="https://mikeguides8.gumroad.com/l/business_bundle_builder?utm_source=site&utm_medium=cta&utm_campaign=toolkit&utm_content=bundle-cta">
+         Buy Bundle + Toolkit
+      </a>
       <a class="btn btn-ghost" href="/">Back to Home</a>
     </div>
   </section>
+
+  <script>
+    // GA4 click tracking for the bundle CTA
+    (function(){
+      var btn = document.getElementById('buy-bundle');
+      if(!btn) return;
+      btn.addEventListener('click', function(){
+        try { window.gtag && gtag('event', 'select_content', {content_type:'cta', item_id:'bundle-from-toolkit'}); } catch(e){}
+      });
+    })();
+  </script>
 </body>
 </html>
