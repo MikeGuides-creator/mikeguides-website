@@ -299,6 +299,53 @@
     </div>
   </div>
 </footer>
+<script>
+  // Map data-product → Gumroad URL (clean slugs)
+  const GUMROAD = {
+    'ai-writing': 'https://mikeguides8.gumroad.com/l/AI_Writing_Workshop',
+    'chatgpt-mastery': 'https://mikeguides8.gumroad.com/l/chatgpt-mastery',
+    'visual-ai-studio': 'https://mikeguides8.gumroad.com/l/visual-ai-studio',
+    'business-automation': 'https://mikeguides8.gumroad.com/l/ai-business-automation',
+    'bundle': 'https://mikeguides8.gumroad.com/l/business_bundle_builder'
+  };
+
+  function openGumroad(slug) {
+    const url = GUMROAD[slug];
+    if (!url) return;
+    // Optional GA4 click event (safe if gtag exists)
+    try { window.gtag && gtag('event', 'purchase_click', { product: slug, destination: 'gumroad' }); } catch {}
+    window.open(url, '_blank', 'noopener,noreferrer');
+  }
+
+  // Delegate clicks for product buttons
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-product]');
+    if (!btn) return;
+    e.preventDefault();
+    openGumroad(btn.dataset.product);
+  });
+
+  // Bundle button
+  document.getElementById('buy-bundle')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    openGumroad('bundle');
+  });
+
+  // Compare toggle
+  document.getElementById('compare')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    const panel = document.getElementById('compare-panel');
+    if (panel) panel.classList.toggle('hidden');
+  });
+
+  // Newsletter mini-handler (matches your onsubmit)
+  function newsletterSignup() {
+    const msg = document.getElementById('newsletter-msg');
+    if (msg) msg.textContent = 'Thanks! You’re on the list. Check your inbox for a confirmation.';
+  }
+  // Expose to inline onsubmit
+  window.newsletterSignup = newsletterSignup;
+</script>
 
 </body>
 </html>
