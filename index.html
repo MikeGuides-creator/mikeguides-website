@@ -67,7 +67,13 @@
   <script src="https://cdn.tailwindcss.com/3.4.10"></script>
 <!-- Component styles built on Tailwind utilities -->
   <style>
+  /* Brand tokens */
   :root { --cobalt:#0047AB; --deepPurple:#5B21B6; }
+
+  /* Sensible defaults */
+  html { scroll-behavior:smooth; }
+  *,*::before,*::after { box-sizing:border-box; }
+  img { display:block; max-width:100%; height:auto; }
 
   /* Centered sections with side padding */
   .section { max-width:72rem; margin-left:auto; margin-right:auto; padding-left:1rem; padding-right:1rem; }
@@ -83,15 +89,16 @@
   @media (min-width:1024px){ .grid-cards { grid-template-columns:repeat(4,1fr); } }
 
   /* Buttons */
-  .btn { display:inline-flex; align-items:center; justify-content:center; border-radius:1rem; padding:.5rem 1rem; font-weight:600; transition:background .15s ease, border-color .15s ease; }
+  .btn { display:inline-flex; align-items:center; justify-content:center; border-radius:1rem; padding:.5rem 1rem; font-weight:600; transition:background .15s ease,border-color .15s ease,box-shadow .15s ease; }
+  .btn:focus-visible { outline:2px solid transparent; box-shadow:0 0 0 3px rgba(0,71,171,.35); }
   .btn-primary { background:var(--cobalt); color:#fff; }
   .btn-primary:hover { background:#003a8e; }
-  .btn-ghost { border:1px solid #d1d5db; color:#374151; }
+  .btn-ghost { border:1px solid #d1d5db; color:#374151; background:#fff; }
   .btn-ghost:hover { background:#f9fafb; }
   .btn-accent { background:var(--deepPurple); color:#fff; }
   .btn-accent:hover { background:#4c1d95; }
 
-  /* Little pills + heading tint */
+  /* Pills + headings */
   .badge { display:inline-flex; align-items:center; border-radius:9999px; padding:.25rem .625rem; font-size:.75rem; font-weight:600; }
   .heading { color:#111827; }
 </style>
