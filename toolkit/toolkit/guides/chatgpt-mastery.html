@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatGPT Mastery: Your AI Conversation Partner</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #f7f7f8;
+            color: #374151;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #10a37f 0%, #1a7f64 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(16, 163, 127, 0.2);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+            justify-content: center;
+            padding: 0 1rem;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-tab:hover {
+            background: #f9f9f9;
+        }
+
+        .nav-tab.active {
+            border-bottom-color: #10a37f;
+            color: #10a37f;
+            background: #f0fdf4;
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 2rem;
+        }
+
+        .simulator-area {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 600px;
+        }
+
+        .chat-header {
+            background: #10a37f;
+            color: white;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        .chat-header-left {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chat-status {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .ai-mode {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .conversation-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            background: #fafafa;
+        }
+
+        .message {
+            display: flex;
+            margin-bottom: 1.5rem;
+            gap: 0.75rem;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .message.user .message-avatar {
+            background: #10a37f;
+            color: white;
+        }
+
+        .message.assistant .message-avatar {
+            background: #374151;
+            color: white;
+        }
+
+        .message-content {
+            max-width: 70%;
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            position: relative;
+            white-space: pre-wrap;
+        }
+
+        .message.user .message-content {
+            background: #10a37f;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message.assistant .message-content {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-bottom-left-radius: 4px;
+        }
+
+        .typing-indicator {
+            display: none;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .typing-indicator.active {
+            display: flex;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 0.25rem;
+            padding: 0.75rem 1rem;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            border-bottom-left-radius: 4px;
+        }
+
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            background: #9ca3af;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .input-area {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid #e5e7eb;
+            background: white;
+            flex-shrink: 0;
+        }
+
+        .input-container {
+            display: flex;
+            gap: 0.75rem;
+            align-items: flex-end;
+        }
+
+        .message-input {
+            flex: 1;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            padding: 0.75rem;
+            resize: none;
+            font-family: inherit;
+            font-size: 0.9rem;
+            min-height: 44px;
+            max-height: 120px;
+        }
+
+        .send-button {
+            background: #10a37f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .send-button:hover:not(:disabled) {
+            background: #0d8a6b;
+        }
+
+        .send-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .feedback-panel {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .feedback-panel h3 {
+            color: #10a37f;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .prompt-analysis {
+            background: #f8fafc;
+            border-left: 3px solid #10a37f;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .analysis-score {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .score-bar {
+            flex: 1;
+            height: 6px;
+            background: #e5e7eb;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .score-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .score-excellent { background: #22c55e; }
+        .score-good { background: #eab308; }
+        .score-needs-work { background: #ef4444; }
+
+        .feedback-tip {
+            background: #fef3c7;
+            border: 1px solid #fbbf24;
+            border-radius: 6px;
+            padding: 0.75rem;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .cheat-sheet {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .cheat-sheet h3 {
+            color: #10a37f;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .cheat-item {
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border-left: 3px solid #10a37f;
+        }
+
+        .cheat-item strong {
+            color: #374151;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .cheat-item span {
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 0.75rem;
+            display: block;
+        }
+
+        .loading-message {
+            text-align: center;
+            color: #6b7280;
+            font-style: italic;
+            margin: 2rem 0;
+        }
+
+        .error-message {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+            
+            .nav-tabs {
+                justify-content: flex-start;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .simulator-area {
+                height: 500px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>ChatGPT Mastery: Your AI Conversation Partner</h1>
+        <p>Practice with real AI responses while learning effective conversation techniques</p>
+    </div>
+
+    <div class="nav-tabs">
+        <button class="nav-tab active" data-tab="practice">
+            <span>🎯</span> Practice Mode
+        </button>
+        <button class="nav-tab" data-tab="strategies">
+            <span>💬</span> Strategies
+        </button>
+        <button class="nav-tab" data-tab="examples">
+            <span>📝</span> Examples
+        </button>
+        <button class="nav-tab" data-tab="troubleshoot">
+            <span>🔧</span> Troubleshooting
+        </button>
+    </div>
+
+    <div class="main-content">
+        <!-- Practice Mode Tab -->
+        <div class="tab-content active" id="practice">
+            <div class="simulator-area">
+                <div class="chat-header">
+                    <div class="chat-header-left">
+                        <div class="chat-status"></div>
+                        <span>AI Practice Simulator</span>
+                    </div>
+                    <div class="ai-mode">Real AI Responses</div>
+                </div>
+                <div class="conversation-area" id="conversation-area">
+                    <div class="message assistant">
+                        <div class="message-avatar">AI</div>
+                        <div class="message-content">Welcome to your AI conversation practice! I'm powered by real AI and can respond to any question or request. As we chat, I'll provide feedback on your prompting techniques to help you improve.
+
+Try asking me anything - a question, a creative request, a problem to solve, or a task to help with. Let's see how effectively you can communicate with AI!</div>
+                    </div>
+                </div>
+                <div class="typing-indicator">
+                    <div class="message-avatar" style="background: #374151; color: white;">AI</div>
+                    <div class="typing-dots">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                </div>
+                <div class="input-area">
+                    <div class="input-container">
+                        <textarea class="message-input" placeholder="Ask me anything! Try being specific about what you want..." rows="1"></textarea>
+                        <button class="send-button">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Strategies Tab -->
+        <div class="tab-content" id="strategies">
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">🎯</span>
+                    <h3>Be Specific</h3>
+                    <p>Instead of "Help me write," try "Help me write a professional email declining a job offer while maintaining a positive relationship."</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">📋</span>
+                    <h3>Provide Context</h3>
+                    <p>Share relevant background information. "I'm a marketing manager at a tech startup" gives better context than no details.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🔄</span>
+                    <h3>Use Examples</h3>
+                    <p>Show the format you want: "Write like this example..." or "Use this tone..." to get consistent results.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🎭</span>
+                    <h3>Assign Roles</h3>
+                    <p>"Act as a financial advisor," "You're a creative director," or "Be my coding mentor" for specialized responses.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">📐</span>
+                    <h3>Set Constraints</h3>
+                    <p>Specify length, format, audience: "Write a 100-word summary for executives" vs. "Explain this concept."</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🔁</span>
+                    <h3>Iterate & Refine</h3>
+                    <p>Build on responses: "Make it more formal," "Add specific examples," "Focus on the technical aspects."</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Examples Tab -->
+        <div class="tab-content" id="examples">
+            <div style="display: grid; gap: 1.5rem;">
+                <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);">
+                    <h3 style="color: #dc2626; margin-bottom: 1rem;">❌ Poor Prompt</h3>
+                    <div style="background: #fef2f2; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                        "Help me with marketing"
+                    </div>
+                    <p style="color: #6b7280; font-size: 0.9rem;"><strong>Problems:</strong> Too vague, no context, unclear goals</p>
+                </div>
+
+                <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);">
+                    <h3 style="color: #22c55e; margin-bottom: 1rem;">✅ Excellent Prompt</h3>
+                    <div style="background: #f0fdf4; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                        "I'm launching a fitness app for busy professionals aged 25-40. Help me create 5 social media campaign ideas that emphasize convenience and quick results. Each idea should include a hook, key message, and suggested visual concept. Keep the tone motivational but realistic."
+                    </div>
+                    <p style="color: #6b7280; font-size: 0.9rem;"><strong>Why it works:</strong> Specific context, clear audience, defined deliverable, format specified, tone guidance</p>
+                </div>
+
+                <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);">
+                    <h3 style="color: #dc2626; margin-bottom: 1rem;">❌ Poor Prompt</h3>
+                    <div style="background: #fef2f2; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                        "Write code"
+                    </div>
+                    <p style="color: #6b7280; font-size: 0.9rem;"><strong>Problems:</strong> No language specified, no functionality described, no context</p>
+                </div>
+
+                <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);">
+                    <h3 style="color: #22c55e; margin-bottom: 1rem;">✅ Excellent Prompt</h3>
+                    <div style="background: #f0fdf4; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+                        "Write a Python function that takes a list of email addresses and validates them using regex. Include error handling for invalid formats and return both valid emails and a count of invalid ones. Add comments explaining the regex pattern and include 2-3 test cases."
+                    </div>
+                    <p style="color: #6b7280; font-size: 0.9rem;"><strong>Why it works:</strong> Language specified, clear functionality, requirements detailed, examples requested</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Troubleshooting Tab -->
+        <div class="tab-content" id="troubleshoot">
+            <div style="display: grid; gap: 1.5rem;">
+                <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);">
+                    <h3 style="color: #dc2626;">🚫 AI gives generic responses</h3>
+                    <p style="margin: 1rem 0;"><strong>Solution:</strong> Add specific context, constraints, and examples</p>
+                    <div style="background: #f0fdf4; padding: 1rem; border-radius: 8px;">
+                        <strong>Try:</strong> "Act as [specific role] helping [specific audience] with [specific goal]. Use [tone/style]. Format as [structure]."
+                    </div>
+                </div>
+
+                <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);">
+                    <h3 style="color: #dc2626;">🔄 Responses are inconsistent</h3>
+                    <p style="margin: 1rem 0;"><strong>Solution:</strong> Provide clear formatting examples and style guidelines</p>
+                    <div style="background: #f0fdf4; padding: 1rem; border-radius: 8px;">
+                        <strong>Try:</strong> "Follow this exact format: [example]. Keep the same tone throughout."
+                    </div>
+                </div>
+
+                <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);">
+                    <h3 style="color: #dc2626;">❌ AI refuses reasonable requests</h3>
+                    <p style="margin: 1rem 0;"><strong>Solution:</strong> Clarify your intent and provide educational context</p>
+                    <div style="background: #f0fdf4; padding: 1rem; border-radius: 8px;">
+                        <strong>Try:</strong> "I'm learning about [topic] for [legitimate purpose]. Please help me understand [specific aspect]."
+                    </div>
+                </div>
+
+                <div style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);">
+                    <h3 style="color: #dc2626;">📊 Need more detailed analysis</h3>
+                    <p style="margin: 1rem 0;"><strong>Solution:</strong> Request step-by-step reasoning and multiple perspectives</p>
+                    <div style="background: #f0fdf4; padding: 1rem; border-radius: 8px;">
+                        <strong>Try:</strong> "Think through this step by step. Consider pros/cons and provide reasoning for your recommendations."
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="feedback-panel">
+                <h3>💡 Prompt Analysis</h3>
+                <div id="current-analysis">
+                    <p style="color: #6b7280; font-style: italic;">Send a message to get feedback on your prompting technique!</p>
+                </div>
+            </div>
+
+            <div class="cheat-sheet">
+                <h3>⚡ Quick Reference</h3>
+                <div class="cheat-item">
+                    <strong>Be Specific</strong>
+                    <span>Context + Goal + Constraints</span>
+                </div>
+                <div class="cheat-item">
+                    <strong>Set the Scene</strong>
+                    <span>"You are a [role]..." or "I need help with..."</span>
+                </div>
+                <div class="cheat-item">
+                    <strong>Show Examples</strong>
+                    <span>"Format like this:" or "Similar to..."</span>
+                </div>
+                <div class="cheat-item">
+                    <strong>Specify Output</strong>
+                    <span>Length, format, tone, audience</span>
+                </div>
+                <div class="cheat-item">
+                    <strong>Iterate</strong>
+                    <span>"Make it more..." or "Focus on..."</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+
+        // Message handling
+        const conversationArea = document.getElementById('conversation-area');
+        const messageInput = document.querySelector('.message-input');
+        const sendButton = document.querySelector('.send-button');
+        const typingIndicator = document.querySelector('.typing-indicator');
+
+        function addMessage(type, content) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            
+            const avatar = type === 'user' ? 'You' : 'AI';
+            messageDiv.innerHTML = `
+                <div class="message-avatar">${avatar}</div>
+                <div class="message-content">${content}</div>
+            `;
+            
+            conversationArea.appendChild(messageDiv);
+            conversationArea.scrollTop = conversationArea.scrollHeight;
+        }
+
+        function showTyping() {
+            typingIndicator.classList.add('active');
+            conversationArea.scrollTop = conversationArea.scrollHeight;
+        }
+
+        function hideTyping() {
+            typingIndicator.classList.remove('active');
+        }
+
+        function analyzePrompt(prompt) {
+            let score = 0;
+            let feedback = [];
+            
+            // Check specificity
+            if (prompt.length > 50) score += 20;
+            else feedback.push("Try being more specific about what you want");
+            
+            // Check for context
+            if (prompt.includes('I am') || prompt.includes('I\'m') || prompt.includes('I need') || prompt.includes('help me')) {
+                score += 20;
+            } else {
+                feedback.push("Consider providing context about yourself or your situation");
+            }
+            
+            // Check for constraints
+            if (prompt.match(/\d+\s*(words?|sentences?|items?|points?|examples?)/i) || 
+                prompt.includes('format') || prompt.includes('tone') || prompt.includes('style')) {
+                score += 20;
+            } else {
+                feedback.push("Try specifying format, length, or style preferences");
+            }
+            
+            // Check for role assignment
+            if (prompt.toLowerCase().includes('act as') || prompt.toLowerCase().includes('you are')) {
+                score += 20;
+            } else {
+                feedback.push("Consider asking me to take on a specific role or expertise");
+            }
+            
+            // Check for examples or comparisons
+            if (prompt.includes('like') || prompt.includes('similar') || prompt.includes('example')) {
+                score += 20;
+            } else {
+                feedback.push("Providing examples helps me understand what you want");
+            }
+            
+            return { score, feedback };
+        }
+
+        function updateFeedbackPanel(prompt) {
+            const analysis = analyzePrompt(prompt);
+            const analysisDiv = document.getElementById('current-analysis');
+            
+            let scoreClass = 'score-needs-work';
+            let scoreText = 'Needs Work';
+            
+            if (analysis.score >= 80) {
+                scoreClass = 'score-excellent';
+                scoreText = 'Excellent!';
+            } else if (analysis.score >= 60) {
+                scoreClass = 'score-good';
+                scoreText = 'Good';
+            }
+            
+            analysisDiv.innerHTML = `
+                <div class="prompt-analysis">
+                    <div class="analysis-score">
+                        <strong>Prompt Quality: ${scoreText}</strong>
+                        <div class="score-bar">
+                            <div class="score-fill ${scoreClass}" style="width: ${analysis.score}%"></div>
+                        </div>
+                    </div>
+                    ${analysis.feedback.length > 0 ? `
+                        <div class="feedback-tip">
+                            <strong>💡 Tips to improve:</strong>
+                            <ul style="margin-top: 0.5rem; padding-left: 1rem;">
+                                ${analysis.feedback.map(tip => `<li>${tip}</li>`).join('')}
+                            </ul>
+                        </div>
+                    ` : '<div style="color: #22c55e; font-weight: 500;">🎉 Great prompt! You covered all the key elements.</div>'}
+                </div>
+            `;
+        }
+
+        async function sendMessage() {
+            const message = messageInput.value.trim();
+            if (!message) return;
+            
+            // Disable input and show user message
+            sendButton.disabled = true;
+            addMessage('user', message);
+            messageInput.value = '';
+            
+            // Analyze prompt and update feedback
+            updateFeedbackPanel(message);
+            
+            // Show typing indicator
+            showTyping();
+            
+            try {
+                // Create educational context for the AI
+                const educationalPrompt = `You are an AI assistant helping someone learn to communicate effectively with AI. They just sent this message: "${message}"
+
+                Please respond to their request naturally and helpfully. Then, add a brief educational note about their prompting technique. If their prompt was good, praise specific elements (specificity, context, clear goals, etc.). If it could be improved, gently suggest 1-2 improvements.
+
+                Keep the educational feedback brief and encouraging - focus on being helpful first, educational second.`;
+
+                const response = await fetch("https://api.anthropic.com/v1/messages", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        model: "claude-sonnet-4-20250514",
+                        max_tokens: 1000,
+                        messages: [
+                            { role: "user", content: educationalPrompt }
+                        ]
+                    })
+                });
+
+                const data = await response.json();
+                const aiResponse = data.content[0].text;
+                
+                // Hide typing and show response
+                hideTyping();
+                addMessage('assistant', aiResponse);
+                
+            } catch (error) {
+                hideTyping();
+                addMessage('assistant', "I'm having trouble connecting right now. Please try again in a moment!");
+                console.error('Error:', error);
+            }
+            
+            // Re-enable input
+            sendButton.disabled = false;
+            messageInput.focus();
+        }
+
+        // Event listeners
+        sendButton.addEventListener('click', sendMessage);
+
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // Auto-resize textarea
+        messageInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+        });
+
+        // Initialize
+        messageInput.focus();
+
+        // Add some helpful prompts that rotate
+        const samplePrompts = [
+            "Ask me anything! Try being specific about what you want...",
+            "Try: 'Help me write a professional email about...'",
+            "Example: 'Act as a [role] and help me with [specific task]'",
+            "Be specific: 'I need 5 ideas for [topic] that [specific criteria]'",
+            "Set the scene: 'I'm a [your role] working on [project]...'"
+        ];
+
+        let promptIndex = 0;
+        setInterval(() => {
+            if (messageInput.value === '' && document.querySelector('.tab-content.active').id === 'practice') {
+                messageInput.placeholder = samplePrompts[promptIndex];
+                promptIndex = (promptIndex + 1) % samplePrompts.length;
+            }
+        }, 5000);
+    </script>
+
+    <!-- Footer with sources -->
+    <div style="background: white; padding: 2rem; margin-top: 2rem; border-top: 1px solid #e5e7eb;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h3 style="color: #10a37f; margin-bottom: 1rem; text-align: center;">📚 Sources & Further Learning</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; font-size: 0.9rem;">
+                <div>
+                    <strong>Official Resources:</strong>
+                    <ul style="margin-top: 0.5rem; padding-left: 1rem;">
+                        <li>OpenAI ChatGPT Documentation</li>
+                        <li>ChatGPT Help Center & Tutorials</li>
+                        <li>OpenAI Community Forum</li>
+                        <li>ChatGPT Best Practices Guide</li>
+                    </ul>
+                </div>
+                <div>
+                    <strong>Learning Materials:</strong>
+                    <ul style="margin-top: 0.5rem; padding-left: 1rem;">
+                        <li>"The ChatGPT Handbook" - AI Communication Guide</li>
+                        <li>Prompt Engineering Course Materials</li>
+                        <li>AI Literacy Training Resources</li>
+                        <li>Conversational AI Research Papers</li>
+                    </ul>
+                </div>
+                <div>
+                    <strong>Best Practices:</strong>
+                    <ul style="margin-top: 0.5rem; padding-left: 1rem;">
+                        <li>Professional AI Use Guidelines</li>
+                        <li>Ethical AI Communication Principles</li>
+                        <li>Fact-Checking & Verification Methods</li>
+                        <li>Privacy and Security Considerations</li>
+                    </ul>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e5e7eb;">
+                <p style="color: #6b7280; font-size: 0.85rem;">
+                    <strong>Note:</strong> This simulator uses real AI to provide authentic responses and personalized learning feedback. 
+                    Practice here to build confidence before applying these skills with ChatGPT and other AI tools.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

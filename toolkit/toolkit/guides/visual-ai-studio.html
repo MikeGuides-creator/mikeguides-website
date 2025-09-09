@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual AI Tools: Interactive Creative Studio</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow-x: auto;
+            justify-content: center;
+            padding: 0 1rem;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-tab:hover {
+            background: rgba(102, 126, 234, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .nav-tab.active {
+            border-bottom-color: #667eea;
+            color: #667eea;
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .main-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .studio-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .prompt-laboratory {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .lab-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .lab-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .prompt-builder {
+            background: #f8fafc;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .prompt-input {
+            width: 100%;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 1rem;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 100px;
+            transition: border-color 0.3s ease;
+            background: white;
+        }
+
+        .prompt-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .prompt-tools {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .tool-button {
+            padding: 0.5rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+        }
+
+        .tool-button:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .tool-comparison {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .tool-card {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateX(5px);
+        }
+
+        .tool-card h4 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .gallery-item:hover .image-overlay {
+            opacity: 1;
+        }
+
+        .overlay-content {
+            text-align: center;
+            color: white;
+            padding: 1rem;
+        }
+
+        .gallery-content {
+            padding: 1.5rem;
+        }
+
+        .generation-info {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 8px;
+            padding: 0.5rem;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .ai-badge {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .gallery-prompt {
+            background: #f8fafc;
+            border-left: 4px solid #667eea;
+            padding: 1rem;
+            border-radius: 0 8px 8px 0;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: #4a5568;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .footer {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            color: white;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .footer ul {
+            margin-top: 0.5rem;
+            padding-left: 1rem;
+            opacity: 0.9;
+        }
+
+        .disclaimer {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            opacity: 0.8;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .studio-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-content {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Visual AI Tools: Interactive Creative Studio</h1>
+        <p>Master AI image and video generation with hands-on tools, real-time feedback, and professional workflows</p>
+    </div>
+
+    <div class="nav-tabs">
+        <button class="nav-tab active" data-tab="prompt-lab">
+            <span>🎨</span> Prompt Laboratory
+        </button>
+        <button class="nav-tab" data-tab="style-gallery">
+            <span>🖼️</span> Style Gallery
+        </button>
+        <button class="nav-tab" data-tab="tool-comparison">
+            <span>⚡</span> Tool Comparison
+        </button>
+        <button class="nav-tab" data-tab="workflows">
+            <span>🔄</span> Workflows
+        </button>
+    </div>
+
+    <div class="main-content">
+        <!-- Prompt Laboratory -->
+        <div class="tab-content active" id="prompt-lab">
+            <div class="studio-layout">
+                <div class="prompt-laboratory">
+                    <div class="lab-header">
+                        <div class="lab-icon">🧪</div>
+                        <div>
+                            <h2>AI Image Prompt Laboratory</h2>
+                            <p>Craft and test your image generation prompts with real-time feedback</p>
+                        </div>
+                    </div>
+
+                    <div class="prompt-builder">
+                        <label for="main-prompt" style="font-weight: 600; margin-bottom: 0.5rem; display: block;">Main Prompt</label>
+                        <textarea id="main-prompt" class="prompt-input" placeholder="Describe the image you want to create... Be specific about subject, style, composition, and mood.">A majestic dragon soaring through a misty mountain landscape at golden hour</textarea>
+                        
+                        <div class="prompt-tools">
+                            <button class="tool-button" onclick="addToPrompt('photorealistic, high detail, 8K resolution')">📷 Photorealistic</button>
+                            <button class="tool-button" onclick="addToPrompt('digital art, concept art')">🎨 Digital Art</button>
+                            <button class="tool-button" onclick="addToPrompt('oil painting, classical art style')">🖌️ Oil Painting</button>
+                            <button class="tool-button" onclick="addToPrompt('anime style, Studio Ghibli inspired')">🌸 Anime</button>
+                            <button class="tool-button" onclick="addToPrompt('minimalist, clean, simple')">⚡ Minimalist</button>
+                            <button class="tool-button" onclick="addToPrompt('vintage, retro, 1980s aesthetic')">📻 Retro</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar">
+                    <div class="tool-comparison">
+                        <h3 style="color: #667eea; margin-bottom: 1rem;">🛠️ AI Image Tools</h3>
+                        <div class="tool-card">
+                            <h4>DALL-E 3</h4>
+                            <p style="font-size: 0.85rem; color: #64748b;">Best for: Precise prompt following, text in images</p>
+                        </div>
+                        <div class="tool-card">
+                            <h4>Midjourney</h4>
+                            <p style="font-size: 0.85rem; color: #64748b;">Best for: Artistic styles, creative interpretation</p>
+                        </div>
+                        <div class="tool-card">
+                            <h4>Stable Diffusion</h4>
+                            <p style="font-size: 0.85rem; color: #64748b;">Best for: Customization, control, free use</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Style Gallery -->
+        <div class="tab-content" id="style-gallery">
+            <h2 style="color: white; text-align: center; margin-bottom: 1rem;">🖼️ Interactive Style Reference Gallery</h2>
+            
+            <!-- Quick Prompt Builder for Gallery -->
+            <div style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border-radius: 15px; padding: 1.5rem; margin-bottom: 2rem; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);">
+                <h3 style="color: #667eea; margin-bottom: 1rem;">✨ Try These Styles</h3>
+                <textarea id="gallery-prompt" style="width: 100%; border: 2px solid #e2e8f0; border-radius: 10px; padding: 1rem; font-size: 1rem; min-height: 80px; background: white;" placeholder="Enter your prompt here, then click any gallery item to see how that style would be applied...">A serene landscape with mountains and a lake</textarea>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+                    <div style="font-size: 0.85rem; color: #64748b;">
+                        💡 <strong>How it works:</strong> Type your prompt above → Click any gallery image → See your prompt + that style!
+                    </div>
+                    <button onclick="analyzeGalleryPrompt()" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 10px; font-weight: 600; cursor: pointer;">🎨 Analyze My Prompt</button>
+                </div>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="showPromptDetails(this)">
+                    <div class="gallery-image" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=200&fit=crop&crop=face');">
+                        <div class="image-overlay">
+                            <div class="overlay-content">
+                                <div style="font-size: 1rem; margin-bottom: 0.5rem;">🎯 Click to View Prompt</div>
+                                <div style="font-size: 0.8rem; opacity: 0.9;">Professional AI-generated headshot</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-content">
+                        <h3>Professional Headshot</h3>
+                        <p style="font-size: 0.9rem; color: #64748b;">Perfect for business profiles and LinkedIn</p>
+                        <div class="generation-info">
+                            <span>Generated with DALL-E 3</span>
+                            <div class="ai-badge">AI Generated</div>
+                        </div>
+                        <div class="gallery-prompt">professional headshot, business attire, soft studio lighting, shallow depth of field, Canon 85mm lens, photorealistic</div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="showPromptDetails(this)">
+                    <div class="gallery-image" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=200&fit=crop');">
+                        <div class="image-overlay">
+                            <div class="overlay-content">
+                                <div style="font-size: 1rem; margin-bottom: 0.5rem;">🎯 Click to View Prompt</div>
+                                <div style="font-size: 0.8rem; opacity: 0.9;">Fantasy landscape artwork</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-content">
+                        <h3>Fantasy Environment</h3>
+                        <p style="font-size: 0.9rem; color: #64748b;">Magical landscapes for games and books</p>
+                        <div class="generation-info">
+                            <span>Generated with Midjourney</span>
+                            <div class="ai-badge">AI Generated</div>
+                        </div>
+                        <div class="gallery-prompt">mystical forest, glowing mushrooms, ethereal lighting, digital art, concept art, trending on ArtStation, highly detailed</div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="showPromptDetails(this)">
+                    <div class="gallery-image" style="background-image: url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=200&fit=crop');">
+                        <div class="image-overlay">
+                            <div class="overlay-content">
+                                <div style="font-size: 1rem; margin-bottom: 0.5rem;">🎯 Click to View Prompt</div>
+                                <div style="font-size: 0.8rem; opacity: 0.9;">Minimalist product photography</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-content">
+                        <h3>Clean Product Shot</h3>
+                        <p style="font-size: 0.9rem; color: #64748b;">Perfect for e-commerce and marketing</p>
+                        <div class="generation-info">
+                            <span>Generated with DALL-E 3</span>
+                            <div class="ai-badge">AI Generated</div>
+                        </div>
+                        <div class="gallery-prompt">minimalist product photography, white background, soft shadows, clean composition, commercial quality, high resolution</div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="showPromptDetails(this)">
+                    <div class="gallery-image" style="background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=200&fit=crop');">
+                        <div class="image-overlay">
+                            <div class="overlay-content">
+                                <div style="font-size: 1rem; margin-bottom: 0.5rem;">🎯 Click to View Prompt</div>
+                                <div style="font-size: 0.8rem; opacity: 0.9;">Anime-style character art</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-content">
+                        <h3>Studio Ghibli Style</h3>
+                        <p style="font-size: 0.9rem; color: #64748b;">Whimsical characters and scenes</p>
+                        <div class="generation-info">
+                            <span>Generated with Stable Diffusion</span>
+                            <div class="ai-badge">AI Generated</div>
+                        </div>
+                        <div class="gallery-prompt">anime character, Studio Ghibli style, soft colors, magical atmosphere, detailed background, cel shading</div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="showPromptDetails(this)">
+                    <div class="gallery-image" style="background-image: url('https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=400&h=200&fit=crop');">
+                        <div class="image-overlay">
+                            <div class="overlay-content">
+                                <div style="font-size: 1rem; margin-bottom: 0.5rem;">🎯 Click to View Prompt</div>
+                                <div style="font-size: 0.8rem; opacity: 0.9;">Retro poster design</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-content">
+                        <h3>Retro Advertisement</h3>
+                        <p style="font-size: 0.9rem; color: #64748b;">1950s style promotional graphics</p>
+                        <div class="generation-info">
+                            <span>Generated with Midjourney</span>
+                            <div class="ai-badge">AI Generated</div>
+                        </div>
+                        <div class="gallery-prompt">vintage poster design, 1950s aesthetic, bold typography, retro colors, advertising style, high contrast</div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" onclick="showPromptDetails(this)">
+                    <div class="gallery-image" style="background-image: url('https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=400&h=200&fit=crop');">
+                        <div class="image-overlay">
+                            <div class="overlay-content">
+                                <div style="font-size: 1rem; margin-bottom: 0.5rem;">🎯 Click to View Prompt</div>
+                                <div style="font-size: 0.8rem; opacity: 0.9;">Classical art style</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gallery-content">
+                        <h3>Classical Portrait</h3>
+                        <p style="font-size: 0.9rem; color: #64748b;">Renaissance-inspired artwork</p>
+                        <div class="generation-info">
+                            <span>Generated with DALL-E 3</span>
+                            <div class="ai-badge">AI Generated</div>
+                        </div>
+                        <div class="gallery-prompt">oil painting, classical portrait, Renaissance style, rich colors, detailed brushwork, museum quality</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tool Comparison -->
+        <div class="tab-content" id="tool-comparison">
+            <div style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border-radius: 20px; padding: 2rem; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);">
+                <h2 style="color: #667eea; text-align: center; margin-bottom: 2rem;">⚡ AI Image Generation Tool Comparison</h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                    <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 2rem; border-radius: 15px;">
+                        <h3>DALL-E 3</h3>
+                        <p style="margin: 1rem 0; opacity: 0.9;">Best for precise prompt following and text integration</p>
+                        <ul style="font-size: 0.9rem; opacity: 0.8;">
+                            <li>✅ Excellent text rendering</li>
+                            <li>✅ Precise prompt following</li>
+                            <li>✅ Simple interface</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 2rem; border-radius: 15px;">
+                        <h3>Midjourney</h3>
+                        <p style="margin: 1rem 0; opacity: 0.9;">Superior artistic quality and creative interpretation</p>
+                        <ul style="font-size: 0.9rem; opacity: 0.8;">
+                            <li>✅ Outstanding image quality</li>
+                            <li>✅ Artistic styles</li>
+                            <li>✅ Creative interpretation</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 2rem; border-radius: 15px;">
+                        <h3>Stable Diffusion</h3>
+                        <p style="margin: 1rem 0; opacity: 0.9;">Complete control and customization options</p>
+                        <ul style="font-size: 0.9rem; opacity: 0.8;">
+                            <li>✅ Full customization</li>
+                            <li>✅ Free and open source</li>
+                            <li>✅ Local generation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Workflows -->
+        <div class="tab-content" id="workflows">
+            <div style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border-radius: 20px; padding: 2rem; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);">
+                <h2 style="color: #667eea; text-align: center; margin-bottom: 2rem;">🔄 Professional AI Visual Workflows</h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
+                    <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 2rem; border-radius: 15px;">
+                        <h3>📱 Social Media Content</h3>
+                        <div style="margin-top: 1rem; font-size: 0.9rem; line-height: 1.6;">
+                            <strong>1.</strong> Generate base image with AI<br>
+                            <strong>2.</strong> Edit in Canva/Figma<br>
+                            <strong>3.</strong> Add brand elements<br>
+                            <strong>4.</strong> Optimize for platform<br>
+                            <strong>5.</strong> A/B test variations
+                        </div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 2rem; border-radius: 15px;">
+                        <h3>🛍️ E-commerce Products</h3>
+                        <div style="margin-top: 1rem; font-size: 0.9rem; line-height: 1.6;">
+                            <strong>1.</strong> Create product mockups<br>
+                            <strong>2.</strong> Generate lifestyle scenes<br>
+                            <strong>3.</strong> Consistent lighting/style<br>
+                            <strong>4.</strong> Background variations<br>
+                            <strong>5.</strong> Optimize for web
+                        </div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; padding: 2rem; border-radius: 15px;">
+                        <h3>📰 Editorial Content</h3>
+                        <div style="margin-top: 1rem; font-size: 0.9rem; line-height: 1.6;">
+                            <strong>1.</strong> Concept visualization<br>
+                            <strong>2.</strong> Copyright-safe creation<br>
+                            <strong>3.</strong> Editorial style matching<br>
+                            <strong>4.</strong> Fact-checking imagery<br>
+                            <strong>5.</strong> Attribution documentation
+                        </div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; padding: 2rem; border-radius: 15px;">
+                        <h3>🎨 Creative Projects</h3>
+                        <div style="margin-top: 1rem; font-size: 0.9rem; line-height: 1.6;">
+                            <strong>1.</strong> Ideation and concepts<br>
+                            <strong>2.</strong> Style exploration<br>
+                            <strong>3.</strong> Iteration and refinement<br>
+                            <strong>4.</strong> Post-processing enhancement<br>
+                            <strong>5.</strong> Final production
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-content">
+            <h3>📚 Essential Resources & Further Learning</h3>
+            <div class="footer-grid">
+                <div>
+                    <strong>Official Documentation:</strong>
+                    <ul>
+                        <li>OpenAI DALL-E API Documentation</li>
+                        <li>Midjourney User Guide & Parameters</li>
+                        <li>Stable Diffusion Model Cards</li>
+                        <li>Runway ML Video Generation Docs</li>
+                    </ul>
+                </div>
+                <div>
+                    <strong>Legal & Compliance:</strong>
+                    <ul>
+                        <li>AI-Generated Content Copyright Guidelines</li>
+                        <li>Commercial Use Terms & Conditions</li>
+                        <li>Platform-Specific Content Policies</li>
+                        <li>International IP Law Considerations</li>
+                    </ul>
+                </div>
+                <div>
+                    <strong>Creative Communities:</strong>
+                    <ul>
+                        <li>r/StableDiffusion & r/MediaSynthesis</li>
+                        <li>Midjourney Discord Community</li>
+                        <li>AI Art Gallery Platforms</li>
+                        <li>Professional AI Design Forums</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="disclaimer">
+                <p><strong>Disclaimer:</strong> AI-generated content laws vary by jurisdiction. Always consult legal professionals for commercial projects and stay updated on evolving regulations.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab switching functionality
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+
+        // Prompt builder functions
+        function addToPrompt(text) {
+            const input = document.getElementById('main-prompt');
+            const current = input.value.trim();
+            input.value = current + (current ? ', ' : '') + text;
+        }
+
+        // Gallery interaction
+        function showPromptDetails(item) {
+            const promptText = item.querySelector('.gallery-prompt').textContent;
+            const title = item.querySelector('h3').textContent;
+            const toolInfo = item.querySelector('.generation-info span').textContent;
+            
+            // Get user's custom prompt from gallery if available
+            const galleryPrompt = document.getElementById('gallery-prompt');
+            const userPrompt = galleryPrompt && galleryPrompt.value.trim() ? galleryPrompt.value.trim() : '';
+            
+            // Combine user prompt with style
+            const combinedPrompt = userPrompt ? `${userPrompt}, ${promptText}` : promptText;
+            
+            // Create modal
+            const overlay = document.createElement('div');
+            overlay.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px);
+                z-index: 1000; display: flex; align-items: center; justify-content: center;
+                padding: 1rem;
+            `;
+
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                background: white; border-radius: 20px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+                max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto;
+            `;
+
+            modal.innerHTML = `
+                <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 2rem; border-radius: 20px 20px 0 0; position: relative;">
+                    <h2 style="margin-bottom: 0.5rem;">${title}</h2>
+                    <div style="background: rgba(255, 255, 255, 0.2); padding: 0.5rem 1rem; border-radius: 20px; display: inline-block;">
+                        ${toolInfo}
+                    </div>
+                    <button onclick="closeModal()" style="position: absolute; top: 1rem; right: 1rem; width: 30px; height: 30px; border-radius: 50%; background: rgba(255, 255, 255, 0.2); border: none; color: white; cursor: pointer;">×</button>
+                </div>
+                <div style="padding: 2rem;">
+                    ${userPrompt ? `
+                        <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 1rem; margin-bottom: 1.5rem;">
+                            <h4 style="color: #166534; margin-bottom: 0.5rem;">✨ Your Custom Prompt + ${title} Style</h4>
+                            <div style="font-family: monospace; font-size: 0.85rem; color: #166534;">"${combinedPrompt}"</div>
+                        </div>
+                    ` : ''}
+                    <h3 style="color: #667eea; margin-bottom: 1rem;">🎨 ${userPrompt ? 'Style Template' : 'Complete Prompt'}</h3>
+                    <div style="background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 12px; padding: 1.5rem; font-family: monospace; font-size: 0.9rem; position: relative;">
+                        ${userPrompt ? promptText : promptText}
+                        <button onclick="copyToClipboard('${(userPrompt ? combinedPrompt : promptText).replace(/'/g, "\\'")}', this)" style="position: absolute; top: 0.5rem; right: 0.5rem; background: #667eea; color: white; border: none; padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.8rem; cursor: pointer;">📋 Copy</button>
+                    </div>
+                    <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+                        <button onclick="usePrompt('${(userPrompt ? combinedPrompt : promptText).replace(/'/g, "\\'")}'); closeModal()" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 1rem 2rem; border-radius: 12px; font-weight: 600; cursor: pointer;">🚀 Use This Prompt</button>
+                    </div>
+                </div>
+            `;
+
+            overlay.appendChild(modal);
+            document.body.appendChild(overlay);
+            
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) closeModal();
+            });
+            
+            window.currentModal = overlay;
+        }
+
+        async function copyToClipboard(text, button) {
+            try {
+                await navigator.clipboard.writeText(text);
+                button.textContent = '✅ Copied!';
+                button.style.background = '#10b981';
+                setTimeout(() => {
+                    button.textContent = '📋 Copy';
+                    button.style.background = '#667eea';
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy:', err);
+            }
+        }
+
+        function usePrompt(promptText) {
+            document.getElementById('main-prompt').value = promptText;
+            closeModal();
+        }
+
+        function analyzeGalleryPrompt() {
+            const galleryPrompt = document.getElementById('gallery-prompt');
+            if (!galleryPrompt || !galleryPrompt.value.trim()) {
+                alert('Please enter a prompt first!');
+                return;
+            }
+            
+            // Switch to Prompt Laboratory tab and fill the prompt
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            
+            document.querySelector('[data-tab="prompt-lab"]').classList.add('active');
+            document.getElementById('prompt-lab').classList.add('active');
+            
+            // Fill the main prompt input
+            document.getElementById('main-prompt').value = galleryPrompt.value.trim();
+            
+            // Show success message
+            showNotification('✅ Prompt moved to Laboratory! Ready for analysis.', 'success');
+        }
+
+        function showNotification(message, type = 'info') {
+            const colors = {
+                success: { bg: '#f0fdf4', border: '#22c55e', text: '#166534' },
+                info: { bg: '#eff6ff', border: '#3b82f6', text: '#1e40af' }
+            };
+            
+            const color = colors[type];
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 2rem;
+                right: 2rem;
+                background: ${color.bg};
+                border: 2px solid ${color.border};
+                color: ${color.text};
+                padding: 1rem 1.5rem;
+                border-radius: 12px;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+                z-index: 1001;
+                max-width: 300px;
+                font-weight: 500;
+                animation: slideInRight 0.3s ease-out;
+            `;
+            notification.textContent = message;
+            
+            // Add animation keyframes
+            if (!document.getElementById('notification-styles')) {
+                const style = document.createElement('style');
+                style.id = 'notification-styles';
+                style.textContent = `
+                    @keyframes slideInRight {
+                        from { opacity: 0; transform: translateX(100%); }
+                        to { opacity: 1; transform: translateX(0); }
+                    }
+                    @keyframes slideOutRight {
+                        from { opacity: 1; transform: translateX(0); }
+                        to { opacity: 0; transform: translateX(100%); }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease-in forwards';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        function closeModal() {
+            if (window.currentModal) {
+                window.currentModal.remove();
+                window.currentModal = null;
+            }
+        }
+    </script>
+</body>
+</html>

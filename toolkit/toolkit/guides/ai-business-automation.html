@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI for Business: Productivity and Automation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .nav-tab {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            padding: 15px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-tab:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .content-section {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #4a5568;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 5px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h3 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .tool-section {
+            background: linear-gradient(135deg, #e6fffa 0%, #b2f5ea 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .calculator {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 15px;
+            border-left: 5px solid #38a169;
+        }
+
+        .checklist {
+            list-style: none;
+        }
+
+        .checklist li {
+            background: white;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checklist li:hover {
+            background: #f7fafc;
+            transform: translateX(5px);
+        }
+
+        .checklist li.completed {
+            background: #f0fff4;
+            border-left-color: #38a169;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .nav-tab {
+                width: 100%;
+            }
+            
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AI for Business: Productivity and Automation</h1>
+            <p>Transform your business with intelligent automation solutions</p>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" data-tab="overview">Overview</button>
+            <button class="nav-tab" data-tab="opportunities">Opportunities</button>
+            <button class="nav-tab" data-tab="chatbots">Customer Service</button>
+            <button class="nav-tab" data-tab="analytics">Data Analysis</button>
+            <button class="nav-tab" data-tab="marketing">Marketing</button>
+            <button class="nav-tab" data-tab="roi">ROI Calculator</button>
+        </div>
+
+        <!-- Overview Section -->
+        <div id="overview" class="content-section active">
+            <h2 class="section-title">AI Business Automation Overview</h2>
+            
+            <div class="card-grid">
+                <div class="card">
+                    <h3>Strategic Benefits</h3>
+                    <p>Reduce operational costs by 20-40%, improve accuracy by 85%, and accelerate decision-making processes through intelligent automation.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Quick Wins</h3>
+                    <p>Start with email automation, data entry, and basic customer inquiries. These typically show ROI within 3-6 months.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Scalability</h3>
+                    <p>AI solutions grow with your business, handling increased volume without proportional cost increases.</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Continuous Improvement</h3>
+                    <p>Machine learning algorithms improve performance over time, becoming more accurate and efficient.</p>
+                </div>
+            </div>
+
+            <div class="tool-section">
+                <h3>Business Readiness Assessment</h3>
+                <div class="calculator">
+                    <div class="input-group">
+                        <label>Annual Revenue ($)</label>
+                        <input type="number" id="revenue" placeholder="e.g., 1000000">
+                    </div>
+                    <div class="input-group">
+                        <label>Number of Employees</label>
+                        <input type="number" id="employees" placeholder="e.g., 50">
+                    </div>
+                    <div class="input-group">
+                        <label>Current Automation Level</label>
+                        <select id="automation">
+                            <option value="low">Low (Manual processes)</option>
+                            <option value="medium">Medium (Some digital tools)</option>
+                            <option value="high">High (Significant automation)</option>
+                        </select>
+                    </div>
+                    <button class="btn" onclick="assessReadiness()">Assess AI Readiness</button>
+                    <div id="readiness-result"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Opportunities Section -->
+        <div id="opportunities" class="content-section">
+            <h2 class="section-title">Identifying Automation Opportunities</h2>
+            
+            <div class="tool-section">
+                <h3>Process Evaluation Framework</h3>
+                <div class="calculator">
+                    <div class="input-group">
+                        <label>Process Name</label>
+                        <input type="text" id="processName" placeholder="e.g., Invoice Processing">
+                    </div>
+                    <div class="input-group">
+                        <label>Volume (How often performed?)</label>
+                        <select id="volume">
+                            <option value="1">Rarely (1)</option>
+                            <option value="2">Monthly (2)</option>
+                            <option value="3">Weekly (3)</option>
+                            <option value="4">Daily (4)</option>
+                            <option value="5">Hourly (5)</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Repetitiveness (How standardized?)</label>
+                        <select id="repetitiveness">
+                            <option value="1">Highly variable (1)</option>
+                            <option value="2">Some variation (2)</option>
+                            <option value="3">Mostly standard (3)</option>
+                            <option value="4">Very standard (4)</option>
+                            <option value="5">Completely standardized (5)</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Time Consumption (Hours per week)</label>
+                        <input type="number" id="timeConsumption" placeholder="e.g., 10">
+                    </div>
+                    <button class="btn" onclick="evaluateProcess()">Evaluate Process</button>
+                    <div id="process-result"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Customer Service Section -->
+        <div id="chatbots" class="content-section">
+            <h2 class="section-title">Customer Service Automation</h2>
+            
+            <div class="tool-section">
+                <h3>Chatbot ROI Calculator</h3>
+                <div class="calculator">
+                    <div class="input-group">
+                        <label>Current Support Tickets per Month</label>
+                        <input type="number" id="tickets" placeholder="e.g., 1000">
+                    </div>
+                    <div class="input-group">
+                        <label>Average Agent Cost per Hour ($)</label>
+                        <input type="number" id="agentCost" placeholder="e.g., 25">
+                    </div>
+                    <div class="input-group">
+                        <label>Average Resolution Time (minutes)</label>
+                        <input type="number" id="resolutionTime" placeholder="e.g., 15">
+                    </div>
+                    <div class="input-group">
+                        <label>Expected Automation Rate (%)</label>
+                        <input type="number" id="automationRate" placeholder="e.g., 70" max="100">
+                    </div>
+                    <button class="btn" onclick="calculateChatbotROI()">Calculate Savings</button>
+                    <div id="chatbot-result"></div>
+                </div>
+            </div>
+
+            <div class="tool-section">
+                <h3>Implementation Checklist</h3>
+                <ul class="checklist">
+                    <li onclick="toggleCheck(this)">Define chatbot scope and objectives</li>
+                    <li onclick="toggleCheck(this)">Analyze current support ticket categories</li>
+                    <li onclick="toggleCheck(this)">Create conversation flows</li>
+                    <li onclick="toggleCheck(this)">Choose chatbot platform</li>
+                    <li onclick="toggleCheck(this)">Train chatbot with FAQ data</li>
+                    <li onclick="toggleCheck(this)">Set up escalation rules</li>
+                    <li onclick="toggleCheck(this)">Test with internal team</li>
+                    <li onclick="toggleCheck(this)">Launch pilot with limited users</li>
+                    <li onclick="toggleCheck(this)">Monitor and optimize responses</li>
+                    <li onclick="toggleCheck(this)">Full deployment</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Analytics Section -->
+        <div id="analytics" class="content-section">
+            <h2 class="section-title">AI-Powered Data Analysis</h2>
+            
+            <div class="tool-section">
+                <h3>Data Analytics Impact Calculator</h3>
+                <div class="calculator">
+                    <div class="input-group">
+                        <label>Hours Spent on Manual Reporting (per week)</label>
+                        <input type="number" id="reportingHours" placeholder="e.g., 15">
+                    </div>
+                    <div class="input-group">
+                        <label>Average Analyst Hourly Rate ($)</label>
+                        <input type="number" id="analystRate" placeholder="e.g., 45">
+                    </div>
+                    <div class="input-group">
+                        <label>Revenue at Risk per Week ($)</label>
+                        <input type="number" id="revenueRisk" placeholder="e.g., 50000">
+                    </div>
+                    <button class="btn" onclick="calculateAnalyticsROI()">Calculate Impact</button>
+                    <div id="analytics-result"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Marketing Section -->
+        <div id="marketing" class="content-section">
+            <h2 class="section-title">Marketing Automation</h2>
+            
+            <div class="tool-section">
+                <h3>Marketing ROI Calculator</h3>
+                <div class="calculator">
+                    <div class="input-group">
+                        <label>Monthly Marketing Leads</label>
+                        <input type="number" id="monthlyLeads" placeholder="e.g., 500">
+                    </div>
+                    <div class="input-group">
+                        <label>Current Conversion Rate (%)</label>
+                        <input type="number" id="conversionRate" placeholder="e.g., 2.5" step="0.1">
+                    </div>
+                    <div class="input-group">
+                        <label>Average Customer Value ($)</label>
+                        <input type="number" id="customerValue" placeholder="e.g., 1000">
+                    </div>
+                    <div class="input-group">
+                        <label>Expected Improvement (%)</label>
+                        <input type="number" id="aiImprovement" placeholder="e.g., 40">
+                    </div>
+                    <button class="btn" onclick="calculateMarketingROI()">Calculate Revenue Impact</button>
+                    <div id="marketing-result"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ROI Calculator Section -->
+        <div id="roi" class="content-section">
+            <h2 class="section-title">ROI Calculator</h2>
+            
+            <div class="tool-section">
+                <h3>AI Investment Analysis</h3>
+                <div class="calculator">
+                    <div class="input-group">
+                        <label>Software Licensing (Annual $)</label>
+                        <input type="number" id="softwareCost" placeholder="e.g., 50000">
+                    </div>
+                    <div class="input-group">
+                        <label>Implementation Services ($)</label>
+                        <input type="number" id="implementationCost" placeholder="e.g., 25000">
+                    </div>
+                    <div class="input-group">
+                        <label>Training Costs ($)</label>
+                        <input type="number" id="trainingCost" placeholder="e.g., 15000">
+                    </div>
+                    <div class="input-group">
+                        <label>Labor Cost Savings (Annual $)</label>
+                        <input type="number" id="laborSavings" placeholder="e.g., 120000">
+                    </div>
+                    <div class="input-group">
+                        <label>Efficiency Gains (Annual $)</label>
+                        <input type="number" id="efficiencyGains" placeholder="e.g., 80000">
+                    </div>
+                    <button class="btn" onclick="calculateROI()">Calculate ROI</button>
+                    <div id="roi-result"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function assessReadiness() {
+            var revenue = parseInt(document.getElementById('revenue').value) || 0;
+            var employees = parseInt(document.getElementById('employees').value) || 0;
+            var automation = document.getElementById('automation').value;
+            
+            var score = 0;
+            var recommendations = [];
+            
+            if (revenue > 5000000) score += 30;
+            else if (revenue > 1000000) score += 20;
+            else if (revenue > 500000) score += 10;
+            else recommendations.push("Consider starting with low-cost automation solutions");
+            
+            if (employees > 100) score += 25;
+            else if (employees > 50) score += 20;
+            else if (employees > 10) score += 15;
+            else recommendations.push("Focus on high-impact, simple automation first");
+            
+            switch(automation) {
+                case 'high': score += 45; break;
+                case 'medium': score += 30; break;
+                case 'low': score += 15; recommendations.push("Consider digital transformation initiatives alongside AI"); break;
+            }
+            
+            var readinessLevel, color, advice;
+            if (score >= 80) {
+                readinessLevel = "High - Ready for Advanced AI";
+                color = "#38a169";
+                advice = "Your organization is well-positioned for comprehensive AI implementation.";
+            } else if (score >= 60) {
+                readinessLevel = "Medium - Good Foundation";
+                color = "#d69e2e";
+                advice = "Start with pilot projects and build capabilities gradually.";
+            } else {
+                readinessLevel = "Low - Build Foundation First";
+                color = "#e53e3e";
+                advice = "Focus on digitization and process optimization before AI.";
+            }
+            
+            var resultHTML = '<div class="result-box" style="border-left-color: ' + color + '">';
+            resultHTML += '<h4>AI Readiness Score: ' + score + '/100</h4>';
+            resultHTML += '<p><strong>Level:</strong> ' + readinessLevel + '</p>';
+            resultHTML += '<p><strong>Advice:</strong> ' + advice + '</p>';
+            if (recommendations.length > 0) {
+                resultHTML += '<p><strong>Recommendations:</strong></p><ul>';
+                for (var i = 0; i < recommendations.length; i++) {
+                    resultHTML += '<li>' + recommendations[i] + '</li>';
+                }
+                resultHTML += '</ul>';
+            }
+            resultHTML += '</div>';
+            document.getElementById('readiness-result').innerHTML = resultHTML;
+        }
+
+        function evaluateProcess() {
+            var processName = document.getElementById('processName').value || "Unnamed Process";
+            var volume = parseInt(document.getElementById('volume').value) || 1;
+            var repetitiveness = parseInt(document.getElementById('repetitiveness').value) || 1;
+            var timeConsumption = parseInt(document.getElementById('timeConsumption').value) || 0;
+            
+            var automationScore = (volume * 0.4 + repetitiveness * 0.4 + Math.min(timeConsumption/10, 5) * 0.2);
+            
+            var priority, color, recommendation;
+            if (automationScore >= 4) {
+                priority = "HIGH PRIORITY";
+                color = "#38a169";
+                recommendation = "Excellent candidate for automation. Start implementation immediately.";
+            } else if (automationScore >= 3) {
+                priority = "MEDIUM PRIORITY";
+                color = "#d69e2e";
+                recommendation = "Good candidate for automation. Include in phase 2 implementation.";
+            } else {
+                priority = "LOW PRIORITY";
+                color = "#e53e3e";
+                recommendation = "Consider process optimization before automation.";
+            }
+            
+            var annualSavings = timeConsumption * 52 * 30;
+            
+            var resultHTML = '<div class="result-box" style="border-left-color: ' + color + '">';
+            resultHTML += '<h4>' + processName + ' - ' + priority + '</h4>';
+            resultHTML += '<p><strong>Automation Score:</strong> ' + automationScore.toFixed(1) + '/5.0</p>';
+            resultHTML += '<p><strong>Recommendation:</strong> ' + recommendation + '</p>';
+            resultHTML += '<p><strong>Potential Annual Savings:</strong> $' + annualSavings.toLocaleString() + '</p>';
+            resultHTML += '</div>';
+            document.getElementById('process-result').innerHTML = resultHTML;
+        }
+
+        function calculateChatbotROI() {
+            var tickets = parseInt(document.getElementById('tickets').value) || 0;
+            var agentCost = parseFloat(document.getElementById('agentCost').value) || 0;
+            var resolutionTime = parseInt(document.getElementById('resolutionTime').value) || 0;
+            var automationRate = parseInt(document.getElementById('automationRate').value) || 0;
+            
+            var currentMonthlyCost = tickets * (resolutionTime / 60) * agentCost;
+            var automatedTickets = tickets * (automationRate / 100);
+            var monthlySavings = automatedTickets * (resolutionTime / 60) * agentCost;
+            var annualSavings = monthlySavings * 12;
+            
+            var resultHTML = '<div class="result-box">';
+            resultHTML += '<h4>Chatbot Implementation Savings</h4>';
+            resultHTML += '<p><strong>Current Monthly Cost:</strong> $' + currentMonthlyCost.toLocaleString() + '</p>';
+            resultHTML += '<p><strong>Automated Tickets:</strong> ' + automatedTickets.toLocaleString() + ' per month</p>';
+            resultHTML += '<p><strong>Monthly Savings:</strong> $' + monthlySavings.toLocaleString() + '</p>';
+            resultHTML += '<p><strong>Annual Savings:</strong> $' + annualSavings.toLocaleString() + '</p>';
+            resultHTML += '<p><strong>Efficiency Gain:</strong> ' + automationRate + '% of tickets automated</p>';
+            resultHTML += '</div>';
+            document.getElementById('chatbot-result').innerHTML = resultHTML;
+        }
+
+        function calculateAnalyticsROI() {
+            var reportingHours = parseInt(document.getElementById('reportingHours').value) || 0;
+            var analystRate = parseFloat(document.getElementById('analystRate').value) || 0;
+            var revenueRisk = parseFloat(document.getElementById('revenueRisk').value) || 0;
+            
+            var weeklySavings = reportingHours * analystRate * 0.8;
+            var annualTimeSavings = weeklySavings * 52;
+            var annualRevenueSavings = revenueRisk * 52 * 0.3;
+            var totalAnnualBenefit = annualTimeSavings + annualRevenueSavings;
+            
+            var resultHTML = '<div class="result-box">';
+            resultHTML += '<h4>AI Analytics Impact</h4>';
+            resultHTML += '<p><strong>Annual Time Savings:</strong> $' + annualTimeSavings.toLocaleString() + '</p>';
+            resultHTML += '<p><strong>Revenue Protection:</strong> $' + annualRevenueSavings.toLocaleString() + '</p>';
+            resultHTML += '<p><strong>Total Annual Benefit:</strong> $' + totalAnnualBenefit.toLocaleString() + '</p>';
+            resultHTML += '<p><strong>Weekly Hours Saved:</strong> ' + (reportingHours * 0.8).toFixed(1) + ' hours</p>';
+            resultHTML += '</div>';
+            document.getElementById('analytics-result').innerHTML = resultHTML;
+        }
+
+        function calculateMarketingROI() {
+            var monthlyLeads = parseInt(document.getElementById('monthlyLeads').value) || 0;
+            var conversionRate = parseFloat(document.getElementById('conversionRate').value) || 0;
+            var customerValue = parseFloat(document.getElementById('customerValue').value) || 0;
+            var aiImprovement = parseInt(document.getElementById('aiImprovement').value) || 0;
+            
+            var currentMonthlyRevenue = monthlyLeads * (conversionRate / 100) * customerValue;
+            var improvedConversionRate = conversionRate * (1 + aiImprovement / 100);
+            var newMonthlyRevenue = monthlyLeads * (improvedConversionRate / 100) * customerValue;
+            var monthlyIncrease = newMonthlyRevenue - currentMonthlyRevenue;
+            var annualIncrease = monthlyIncrease * 12;
+            
+            var resultHTML = '<div class="result-box">';
+            resultHTML += '<h4>Marketing Automation Impact</h4>';
+            resultHTML += '<p><strong>Current Monthly Revenue:</strong> $' + currentMonthlyRevenue.toLocaleString() + '</p>';
+            resultHTML += '<p><strong>Improved Conversion Rate:</strong> ' + improvedConversionRate.toFixed(2) + '%</p>';
+            resultHTML += '<p><strong>New Monthly Revenue:</strong> $' + newMonthlyRevenue.toLocaleString() + '</p>';
+            resultHTML += '<p><strong>Monthly Revenue Increase:</strong> $' + monthlyIncrease.toLocaleString() + '</p>';
+            resultHTML += '<p><strong>Annual Revenue Increase:</strong> $' + annualIncrease.toLocaleString() + '</p>';
+            resultHTML += '</div>';
+            document.getElementById('marketing-result').innerHTML = resultHTML;
+        }
+
+        function calculateROI() {
+            var softwareCost = parseFloat(document.getElementById('softwareCost').value) || 0;
+            var implementationCost = parseFloat(document.getElementById('implementationCost').value) || 0;
+            var trainingCost = parseFloat(document.getElementById('trainingCost').value) || 0;
+            var laborSavings = parseFloat(document.getElementById('laborSavings').value) || 0;
+            var efficiencyGains = parseFloat(document.getElementById('efficiencyGains').value) || 0;
+            
+            var totalInvestment = implementationCost + trainingCost;
+            var annualBenefits = laborSavings + efficiencyGains;
+            var annualOperatingCost = softwareCost;
+            var netAnnualBenefit = annualBenefits - annualOperatingCost;
+            
+            var paybackPeriod = totalInvestment / (netAnnualBenefit / 12);
+            var threeYearROI = ((netAnnualBenefit * 3 - totalInvestment) / totalInvestment * 100);
+            
+            var resultHTML = '<div class="result-box">';
+            resultHTML += '<h4>AI Investment Analysis Results</h4>';
+            resultHTML += '<p><strong>Total Investment:</strong> $' + totalInvestment.toLocaleString() + '</p>';
+            resultHTML += '<p><strong>Annual Benefits:</strong> $' + annualBenefits.toLocaleString() + '</p>';
+            resultHTML += '<p><strong>Net Annual Benefit:</strong> $' + netAnnualBenefit.toLocaleString() + '</p>';
+            resultHTML += '<p><strong>3-Year ROI:</strong> ' + threeYearROI.toFixed(1) + '%</p>';
+            resultHTML += '<p><strong>Payback Period:</strong> ' + paybackPeriod.toFixed(1) + ' months</p>';
+            if (threeYearROI > 100) {
+                resultHTML += '<p style="color: #38a169;"><strong>Excellent investment opportunity</strong></p>';
+            } else if (threeYearROI > 50) {
+                resultHTML += '<p style="color: #d69e2e;"><strong>Good investment with solid returns</strong></p>';
+            } else {
+                resultHTML += '<p style="color: #e53e3e;"><strong>Consider optimizing implementation approach</strong></p>';
+            }
+            resultHTML += '</div>';
+            document.getElementById('roi-result').innerHTML = resultHTML;
+        }
+
+        function toggleCheck(item) {
+            item.classList.toggle('completed');
+        }
+
+        // Tab navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            var tabs = document.querySelectorAll('.nav-tab');
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].addEventListener('click', function() {
+                    var allTabs = document.querySelectorAll('.nav-tab');
+                    var allSections = document.querySelectorAll('.content-section');
+                    
+                    for (var j = 0; j < allTabs.length; j++) {
+                        allTabs[j].classList.remove('active');
+                    }
+                    for (var k = 0; k < allSections.length; k++) {
+                        allSections[k].classList.remove('active');
+                    }
+                    
+                    this.classList.add('active');
+                    document.getElementById(this.dataset.tab).classList.add('active');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
