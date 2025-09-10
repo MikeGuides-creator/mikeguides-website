@@ -519,5 +519,15 @@
     }
     $('#exportAllBtn').addEventListener('click', exportAll);
   </script>
+  <script>
+  (function () {
+    var el = document.getElementById('subscribe-link-nav');
+    if (!el) return;
+    el.addEventListener('click', function () {
+      try { gtag('event','select_content',{content_type:'cta', item_id:'subscribe-nav'}); } catch(e) {}
+    });
+  })();
+</script>
+
 </body>
 </html>
