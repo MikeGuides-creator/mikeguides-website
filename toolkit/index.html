@@ -184,229 +184,247 @@
       </div>
     </section>
 
-    <!-- Tabs -->
-    <section class="tabs" aria-label="Toolkit modules">
-      <div class="tab-list" role="tablist">
-        <button class="tab-btn active" role="tab" aria-selected="true" data-tab="ads">Ads</button>
-        <button class="tab-btn" role="tab" data-tab="emails">Emails</button>
-        <button class="tab-btn" role="tab" data-tab="social">Social Calendar</button>
-        <button class="tab-btn" role="tab" data-tab="landing">Landing Page</button>
-        <button class="tab-btn" role="tab" data-tab="images">Image Prompts</button>
-        <button class="tab-btn" role="tab" data-tab="checklist">Quick‑Start</button>
-      </div>
-<div class="toolbar" style="margin-top:10px">
-  <button class="btn btn-neutral" id="saveBtn">Save progress</button>
-  <button class="btn btn-ghost" id="exportAllBtn">Export All (.md)</button>
-</div>
+   <section class="tabs" aria-label="Toolkit modules">
+  <div class="tab-list" role="tablist" aria-label="Toolkit modules">
+    <button class="tab-btn active" role="tab"
+            id="tabbtn-ads" aria-controls="tab-ads"
+            aria-selected="true" tabindex="0" data-tab="ads">Ads</button>
 
-      <!-- ========== ADS PANEL ========== -->
-      <div id="tab-ads" class="tab-panel active" role="tabpanel" aria-labelledby="ads">
-        <div class="card">
-          <h2 style="margin-top:0">Ad Copy Generator</h2>
-          <p class="small">Generate both a <strong>prompt</strong> you can paste into an AI tool and a <strong>first‑draft ad</strong> you can refine.</p>
-          <div class="grid">
-            <div class="col-6">
-              <label for="adPlatform">Platform</label>
-              <select id="adPlatform">
-                <option>Google Search</option>
-                <option>Facebook / Instagram</option>
-                <option>LinkedIn</option>
-                <option>YouTube</option>
-              </select>
-            </div>
-            <div class="col-6">
-              <label for="adTone">Tone/Voice</label>
-              <select id="adTone">
-                <option>Helpful & straight‑to‑the‑point</option>
-                <option>Confident & expert</option>
-                <option>Friendly & encouraging</option>
-                <option>Bold & urgent</option>
-              </select>
-            </div>
-            <div class="col-6">
-              <label for="adAudience">Audience</label>
-              <input id="adAudience" type="text" placeholder="e.g., local service business owners in Minnesota" />
-            </div>
-            <div class="col-6">
-              <label for="adOffer">Offer / Product</label>
-              <input id="adOffer" type="text" placeholder="e.g., AI Writing Workshop – save 10+ hrs/week" />
-            </div>
-            <div class="col-12">
-              <label for="adPain">Pain Points (comma‑separated)</label>
-              <input id="adPain" type="text" placeholder="e.g., no time to write, inconsistent content, low engagement" />
-            </div>
-            <div class="col-12">
-              <label for="adCTA">Desired Action</label>
-              <input id="adCTA" type="text" placeholder="e.g., Start free preview, Book demo, Get the toolkit" />
-            </div>
-          </div>
-          <div class="toolbar" style="margin-top:12px">
-            <button class="btn btn-primary" id="genAdPrompt">Generate Prompt</button>
-            <button class="btn" id="genAdDraft">Generate Draft Ad</button>
-            <button class="btn" data-copy="#adPromptOut">Copy Prompt</button>
-            <button class="btn" data-copy="#adDraftOut">Copy Ad</button>
-          </div>
-          <div class="grid" style="margin-top:12px">
-            <div class="col-6"><label>AI Prompt</label><textarea id="adPromptOut" class="out" spellcheck="false"></textarea></div>
-            <div class="col-6"><label>Draft Ad</label><textarea id="adDraftOut" class="out" spellcheck="false"></textarea></div>
+    <button class="tab-btn" role="tab"
+            id="tabbtn-emails" aria-controls="tab-emails"
+            aria-selected="false" tabindex="-1" data-tab="emails">Emails</button>
+
+    <button class="tab-btn" role="tab"
+            id="tabbtn-social" aria-controls="tab-social"
+            aria-selected="false" tabindex="-1" data-tab="social">Social Calendar</button>
+
+    <button class="tab-btn" role="tab"
+            id="tabbtn-landing" aria-controls="tab-landing"
+            aria-selected="false" tabindex="-1" data-tab="landing">Landing Page</button>
+
+    <button class="tab-btn" role="tab"
+            id="tabbtn-images" aria-controls="tab-images"
+            aria-selected="false" tabindex="-1" data-tab="images">Image Prompts</button>
+
+    <button class="tab-btn" role="tab"
+            id="tabbtn-checklist" aria-controls="tab-checklist"
+            aria-selected="false" tabindex="-1" data-tab="checklist">Quick-Start</button>
+  </div>
+
+  <!-- Save / Export toolbar (uses your existing saveAll/exportAll functions) -->
+  <div class="toolbar" style="margin-top:10px">
+    <button class="btn btn-neutral" id="saveBtn">Save progress</button>
+    <button class="btn btn-ghost" id="exportAllBtn">Export All (.md)</button>
+  </div>
+
+  <!-- ========== ADS PANEL ========== -->
+  <div id="tab-ads" class="tab-panel active" role="tabpanel" aria-labelledby="tabbtn-ads">
+    <div class="card">
+      <h2 style="margin-top:0">Ad Copy Generator</h2>
+      <p class="small">Generate both a <strong>prompt</strong> you can paste into an AI tool and a <strong>first-draft ad</strong> you can refine.</p>
+      <div class="grid">
+        <div class="col-6">
+          <label for="adPlatform">Platform</label>
+          <select id="adPlatform">
+            <option>Google Search</option>
+            <option>Facebook / Instagram</option>
+            <option>LinkedIn</option>
+            <option>YouTube</option>
+          </select>
+        </div>
+        <div class="col-6">
+          <label for="adTone">Tone/Voice</label>
+          <select id="adTone">
+            <option>Helpful & straight-to-the-point</option>
+            <option>Confident & expert</option>
+            <option>Friendly & encouraging</option>
+            <option>Bold & urgent</option>
+          </select>
+        </div>
+        <div class="col-6">
+          <label for="adAudience">Audience</label>
+          <input id="adAudience" type="text" placeholder="e.g., local service business owners in Minnesota" />
+        </div>
+        <div class="col-6">
+          <label for="adOffer">Offer / Product</label>
+          <input id="adOffer" type="text" placeholder="e.g., AI Writing Workshop – save 10+ hrs/week" />
+        </div>
+        <div class="col-12">
+          <label for="adPain">Pain Points (comma-separated)</label>
+          <input id="adPain" type="text" placeholder="e.g., no time to write, inconsistent content, low engagement" />
+        </div>
+        <div class="col-12">
+          <label for="adCTA">Desired Action</label>
+          <input id="adCTA" type="text" placeholder="e.g., Start free preview, Book demo, Get the toolkit" />
+        </div>
+      </div>
+      <div class="toolbar" style="margin-top:12px">
+        <button class="btn btn-primary" id="genAdPrompt">Generate Prompt</button>
+        <button class="btn" id="genAdDraft">Generate Draft Ad</button>
+        <button class="btn" data-copy="#adPromptOut">Copy Prompt</button>
+        <button class="btn" data-copy="#adDraftOut">Copy Ad</button>
+      </div>
+      <div class="grid" style="margin-top:12px">
+        <div class="col-6"><label>AI Prompt</label><textarea id="adPromptOut" class="out" spellcheck="false"></textarea></div>
+        <div class="col-6"><label>Draft Ad</label><textarea id="adDraftOut" class="out" spellcheck="false"></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== EMAILS PANEL ========== -->
+  <div id="tab-emails" class="tab-panel" role="tabpanel" aria-labelledby="tabbtn-emails" hidden>
+    <div class="card">
+      <h2 style="margin-top:0">Email Builder</h2>
+      <div class="grid">
+        <div class="col-4">
+          <label for="emailType">Campaign Type</label>
+          <select id="emailType">
+            <option>Welcome</option>
+            <option>Promotion</option>
+            <option>Re-engagement</option>
+            <option>Newsletter</option>
+          </select>
+        </div>
+        <div class="col-4">
+          <label for="emailVoice">Voice/Tone</label>
+          <select id="emailVoice">
+            <option>Friendly mentor</option>
+            <option>Direct & concise</option>
+            <option>Story-driven</option>
+            <option>Professional expert</option>
+          </select>
+        </div>
+        <div class="col-4">
+          <label for="emailOffer">Offer / Topic</label>
+          <input id="emailOffer" type="text" placeholder="e.g., AI Marketing Toolkit launch price"/>
+        </div>
+        <div class="col-12">
+          <label for="emailAudience">Audience</label>
+          <input id="emailAudience" type="text" placeholder="e.g., small business owners wanting faster content"/>
+        </div>
+      </div>
+      <div class="toolbar" style="margin-top:12px">
+        <button class="btn btn-primary" id="genEmail">Generate Email</button>
+        <button class="btn" data-copy="#emailOut">Copy Email</button>
+      </div>
+      <div style="margin-top:12px"><label>Subject + Body</label><textarea id="emailOut" class="out" spellcheck="false"></textarea></div>
+    </div>
+  </div>
+
+  <!-- ========== SOCIAL PANEL ========== -->
+  <div id="tab-social" class="tab-panel" role="tabpanel" aria-labelledby="tabbtn-social" hidden>
+    <div class="card">
+      <h2 style="margin-top:0">Social Caption Batch & Calendar</h2>
+      <div class="grid">
+        <div class="col-4">
+          <label for="socialTopic">Primary Topic</label>
+          <input id="socialTopic" type="text" placeholder="e.g., using AI to write faster" />
+        </div>
+        <div class="col-4">
+          <label for="socialVoice">Voice</label>
+          <select id="socialVoice">
+            <option>Helpful</option>
+            <option>Bold</option>
+            <option>Inspirational</option>
+            <option>Humorous</option>
+          </select>
+        </div>
+        <div class="col-4">
+          <label for="socialDays">Days</label>
+          <select id="socialDays">
+            <option value="7">7</option>
+            <option value="14">14</option>
+            <option value="30">30</option>
+          </select>
+        </div>
+        <div class="col-12">
+          <label>Content Mix</label>
+          <div class="row">
+            <label><input type="checkbox" class="mix" value="Educate" checked> Educate</label>
+            <label><input type="checkbox" class="mix" value="Engage" checked> Engage</label>
+            <label><input type="checkbox" class="mix" value="Promote" checked> Promote</label>
+            <label><input type="checkbox" class="mix" value="Proof"> Proof (testimonials)</label>
           </div>
         </div>
       </div>
-
-      <!-- ========== EMAILS PANEL ========== -->
-      <div id="tab-emails" class="tab-panel" role="tabpanel">
-        <div class="card">
-          <h2 style="margin-top:0">Email Builder</h2>
-          <div class="grid">
-            <div class="col-4">
-              <label for="emailType">Campaign Type</label>
-              <select id="emailType">
-                <option>Welcome</option>
-                <option>Promotion</option>
-                <option>Re‑engagement</option>
-                <option>Newsletter</option>
-              </select>
-            </div>
-            <div class="col-4">
-              <label for="emailVoice">Voice/Tone</label>
-              <select id="emailVoice">
-                <option>Friendly mentor</option>
-                <option>Direct & concise</option>
-                <option>Story‑driven</option>
-                <option>Professional expert</option>
-              </select>
-            </div>
-            <div class="col-4">
-              <label for="emailOffer">Offer / Topic</label>
-              <input id="emailOffer" type="text" placeholder="e.g., AI Marketing Toolkit launch price"/>
-            </div>
-            <div class="col-12">
-              <label for="emailAudience">Audience</label>
-              <input id="emailAudience" type="text" placeholder="e.g., small business owners wanting faster content"/>
-            </div>
-          </div>
-          <div class="toolbar" style="margin-top:12px">
-            <button class="btn btn-primary" id="genEmail">Generate Email</button>
-            <button class="btn" data-copy="#emailOut">Copy Email</button>
-          </div>
-          <div style="margin-top:12px"><label>Subject + Body</label><textarea id="emailOut" class="out" spellcheck="false"></textarea></div>
+      <div class="toolbar" style="margin-top:12px">
+        <button class="btn btn-primary" id="genSocial">Generate Calendar</button>
+        <button class="btn" id="exportCsv">Export CSV</button>
+      </div>
+      <div style="margin-top:12px" class="card">
+        <div style="overflow:auto">
+          <table id="socialTable" aria-label="Social calendar">
+            <thead><tr><th>Day</th><th>Theme</th><th>Caption</th></tr></thead>
+            <tbody></tbody>
+          </table>
         </div>
       </div>
+    </div>
+  </div>
 
-      <!-- ========== SOCIAL PANEL ========== -->
-      <div id="tab-social" class="tab-panel" role="tabpanel">
-        <div class="card">
-          <h2 style="margin-top:0">Social Caption Batch & Calendar</h2>
-          <div class="grid">
-            <div class="col-4">
-              <label for="socialTopic">Primary Topic</label>
-              <input id="socialTopic" type="text" placeholder="e.g., using AI to write faster" />
-            </div>
-            <div class="col-4">
-              <label for="socialVoice">Voice</label>
-              <select id="socialVoice">
-                <option>Helpful</option>
-                <option>Bold</option>
-                <option>Inspirational</option>
-                <option>Humorous</option>
-              </select>
-            </div>
-            <div class="col-4">
-              <label for="socialDays">Days</label>
-              <select id="socialDays">
-                <option value="7">7</option>
-                <option value="14">14</option>
-                <option value="30">30</option>
-              </select>
-            </div>
-            <div class="col-12">
-              <label>Content Mix</label>
-              <div class="row">
-                <label><input type="checkbox" class="mix" value="Educate" checked> Educate</label>
-                <label><input type="checkbox" class="mix" value="Engage" checked> Engage</label>
-                <label><input type="checkbox" class="mix" value="Promote" checked> Promote</label>
-                <label><input type="checkbox" class="mix" value="Proof"> Proof (testimonials)</label>
-              </div>
-            </div>
-          </div>
-          <div class="toolbar" style="margin-top:12px">
-            <button class="btn btn-primary" id="genSocial">Generate Calendar</button>
-            <button class="btn" id="exportCsv">Export CSV</button>
-          </div>
-          <div style="margin-top:12px" class="card">
-            <div style="overflow:auto">
-              <table id="socialTable" aria-label="Social calendar">
-                <thead><tr><th>Day</th><th>Theme</th><th>Caption</th></tr></thead>
-                <tbody></tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+  <!-- ========== LANDING PANEL ========== -->
+  <div id="tab-landing" class="tab-panel" role="tabpanel" aria-labelledby="tabbtn-landing" hidden>
+    <div class="card">
+      <h2 style="margin-top:0">Landing Page Copy Builder</h2>
+      <div class="grid">
+        <div class="col-6"><label for="lpAudience">Audience</label><input id="lpAudience" type="text" placeholder="e.g., solo service providers"/></div>
+        <div class="col-6"><label for="lpOutcome">Desired Outcome</label><input id="lpOutcome" type="text" placeholder="e.g., publish content 3x faster"/></div>
+        <div class="col-6"><label for="lpProduct">Product/Offer</label><input id="lpProduct" type="text" placeholder="e.g., AI Marketing Toolkit"/></div>
+        <div class="col-6"><label for="lpMechanism">Unique Mechanism</label><input id="lpMechanism" type="text" placeholder="e.g., 50+ plug-and-play prompts + calendar generator"/></div>
+        <div class="col-12"><label for="lpPains">Top Pain Points (comma-separated)</label><input id="lpPains" type="text" placeholder="e.g., blank page, low engagement, inconsistency"/></div>
       </div>
-
-      <!-- ========== LANDING PANEL ========== -->
-      <div id="tab-landing" class="tab-panel" role="tabpanel">
-        <div class="card">
-          <h2 style="margin-top:0">Landing Page Copy Builder</h2>
-          <div class="grid">
-            <div class="col-6"><label for="lpAudience">Audience</label><input id="lpAudience" type="text" placeholder="e.g., solo service providers"/></div>
-            <div class="col-6"><label for="lpOutcome">Desired Outcome</label><input id="lpOutcome" type="text" placeholder="e.g., publish content 3x faster"/></div>
-            <div class="col-6"><label for="lpProduct">Product/Offer</label><input id="lpProduct" type="text" placeholder="e.g., AI Marketing Toolkit"/></div>
-            <div class="col-6"><label for="lpMechanism">Unique Mechanism</label><input id="lpMechanism" type="text" placeholder="e.g., 50+ plug‑and‑play prompts + calendar generator"/></div>
-            <div class="col-12"><label for="lpPains">Top Pain Points (comma‑separated)</label><input id="lpPains" type="text" placeholder="e.g., blank page, inconsistent posts, low engagement"/></div>
-          </div>
-          <div class="toolbar" style="margin-top:12px">
-            <button class="btn btn-primary" id="genLanding">Generate Sections</button>
-            <button class="btn" data-copy="#lpOut">Copy Sections</button>
-          </div>
-          <div class="grid" style="margin-top:12px">
-            <div class="col-12"><label>Sections (Markdown)</label><textarea id="lpOut" class="out" spellcheck="false"></textarea></div>
-          </div>
-          <div class="card" style="margin-top:12px">
-            <h3 style="margin-top:0">Preview</h3>
-            <div id="lpPreview" style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px"></div>
-          </div>
-        </div>
+      <div class="toolbar" style="margin-top:12px">
+        <button class="btn btn-primary" id="genLanding">Generate Sections</button>
+        <button class="btn" data-copy="#lpOut">Copy Sections</button>
       </div>
-
-      <!-- ========== IMAGE PROMPTS PANEL ========== -->
-      <div id="tab-images" class="tab-panel" role="tabpanel">
-        <div class="card">
-          <h2 style="margin-top:0">Image Prompt Library</h2>
-          <div class="grid">
-            <div class="col-4"><label for="imgSubject">Subject</label><input id="imgSubject" type="text" placeholder="e.g., laptop on desk, marketing icons"/></div>
-            <div class="col-4"><label for="imgUse">Use‑Case</label><select id="imgUse"><option>Ad Creative</option><option>Social Post</option><option>Website Hero</option><option>Icon Set</option></select></div>
-            <div class="col-4"><label for="imgStyle">Style</label><select id="imgStyle"><option>Clean vector illustration</option><option>Flat 3D icon</option><option>Photorealistic product shot</option><option>Gradient mesh background</option><option>Isometric illustration</option></select></div>
-            <div class="col-12"><label><input type="checkbox" id="brandColors" checked> Use brand colors (#2563eb and #22c55e)</label></div>
-          </div>
-          <div class="toolbar" style="margin-top:12px">
-            <button class="btn btn-primary" id="genImgPrompts">Generate Prompts</button>
-            <button class="btn" data-copy="#imgDalle">Copy DALL·E</button>
-            <button class="btn" data-copy="#imgMidjourney">Copy Midjourney</button>
-          </div>
-          <div class="grid" style="margin-top:12px">
-            <div class="col-6"><label>DALL·E Prompt</label><textarea id="imgDalle" class="out"></textarea></div>
-            <div class="col-6"><label>Midjourney Prompt</label><textarea id="imgMidjourney" class="out"></textarea></div>
-          </div>
-        </div>
+      <div class="grid" style="margin-top:12px">
+        <div class="col-12"><label>Sections (Markdown)</label><textarea id="lpOut" class="out" spellcheck="false"></textarea></div>
       </div>
-
-      <!-- ========== QUICK START PANEL ========== -->
-      <div id="tab-checklist" class="tab-panel" role="tabpanel">
-        <div class="card">
-          <h2 style="margin-top:0">Quick‑Start Checklist (15 minutes)</h2>
-          <ol style="margin-left:18px">
-            <li>Write one <strong>Google Search ad</strong> + one <strong>FB/IG ad</strong> in the Ads tab.</li>
-            <li>Generate a <strong>7‑day social calendar</strong> and export CSV.</li>
-            <li>Draft a <strong>Welcome email</strong> in the Emails tab.</li>
-            <li>Build a <strong>Landing Page outline</strong>; paste it into your site builder.</li>
-            <li>Create 1–2 <strong>image prompts</strong> for your hero + first post.</li>
-          </ol>
-          <p class="small">Tip: Connect the ROI calculators inside the Business Automation guide to estimate savings/time impact and showcase wins.</p>
-        </div>
+      <div class="card" style="margin-top:12px">
+        <h3 style="margin-top:0">Preview</h3>
+        <div id="lpPreview" style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:18px"></div>
       </div>
+    </div>
+  </div>
 
-    </section>
+  <!-- ========== IMAGE PROMPTS PANEL ========== -->
+  <div id="tab-images" class="tab-panel" role="tabpanel" aria-labelledby="tabbtn-images" hidden>
+    <div class="card">
+      <h2 style="margin-top:0">Image Prompt Library</h2>
+      <div class="grid">
+        <div class="col-4"><label for="imgSubject">Subject</label><input id="imgSubject" type="text" placeholder="e.g., laptop on desk, marketing icons"/></div>
+        <div class="col-4"><label for="imgUse">Use-Case</label><select id="imgUse"><option>Ad Creative</option><option>Social Post</option><option>Website Hero</option><option>Icon Set</option></select></div>
+        <div class="col-4"><label for="imgStyle">Style</label><select id="imgStyle"><option>Clean vector illustration</option><option>Flat 3D icon</option><option>Photorealistic product shot</option><option>Gradient mesh background</option><option>Isometric illustration</option></select></div>
+        <div class="col-12"><label><input type="checkbox" id="brandColors" checked> Use brand colors (#2563eb and #22c55e)</label></div>
+      </div>
+      <div class="toolbar" style="margin-top:12px">
+        <button class="btn btn-primary" id="genImgPrompts">Generate Prompts</button>
+        <button class="btn" data-copy="#imgDalle">Copy DALL·E</button>
+        <button class="btn" data-copy="#imgMidjourney">Copy Midjourney</button>
+      </div>
+      <div class="grid" style="margin-top:12px">
+        <div class="col-6"><label>DALL·E Prompt</label><textarea id="imgDalle" class="out"></textarea></div>
+        <div class="col-6"><label>Midjourney Prompt</label><textarea id="imgMidjourney" class="out"></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== QUICK START PANEL ========== -->
+  <div id="tab-checklist" class="tab-panel" role="tabpanel" aria-labelledby="tabbtn-checklist" hidden>
+    <div class="card">
+      <h2 style="margin-top:0">Quick-Start Checklist (15 minutes)</h2>
+      <ol style="margin-left:18px">
+        <li>Write one <strong>Google Search ad</strong> + one <strong>FB/IG ad</strong> in the Ads tab.</li>
+        <li>Generate a <strong>7-day social calendar</strong> and export CSV.</li>
+        <li>Draft a <strong>Welcome email</strong> in the Emails tab.</li>
+        <li>Build a <strong>Landing Page outline</strong>; paste it into your site builder.</li>
+        <li>Create 1–2 <strong>image prompts</strong> for your hero + first post.</li>
+      </ol>
+      <p class="small">Tip: Connect the ROI calculators inside the Business Automation guide to estimate savings/time impact and showcase wins.</p>
+    </div>
+  </div>
+</section>
+
 
     <p class="footer">© 2025 MikeGuides – Practical AI for Small Business</p>
   </main>
