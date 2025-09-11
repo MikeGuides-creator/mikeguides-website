@@ -194,6 +194,10 @@
         <button class="tab-btn" role="tab" data-tab="images">Image Prompts</button>
         <button class="tab-btn" role="tab" data-tab="checklist">Quick‑Start</button>
       </div>
+<div class="toolbar" style="margin-top:10px">
+  <button class="btn btn-neutral" id="saveBtn">Save progress</button>
+  <button class="btn btn-ghost" id="exportAllBtn">Export All (.md)</button>
+</div>
 
       <!-- ========== ADS PANEL ========== -->
       <div id="tab-ads" class="tab-panel active" role="tabpanel" aria-labelledby="ads">
@@ -562,10 +566,15 @@
       Object.keys(d).forEach(k=>set(k,d[k]));
       if(d.table) $('#socialTable').innerHTML=d.table; if(d.lpPreview) $('#lpPreview').innerHTML=d.lpPreview; if(d.mixes){ $$('.mix').forEach(x=>{ const m=d.mixes.find(m=>m.v===x.value); if(m) x.checked=m.c; }); }
     }
-    $('#saveBtn').addEventListener('click', saveAll);
-    window.addEventListener('load', loadAll);
+    <script>
+  // ...
+  document.getElementById('saveBtn')?.addEventListener('click', saveAll);
+  window.addEventListener('load', loadAll);
+  function exportAll(){ /* stays as-is */ }
+  document.getElementById('exportAllBtn')?.addEventListener('click', exportAll);
+</script>
 
-    function exportAll(){
+  function exportAll(){
       const sections=[
 `# AI Marketing Toolkit\n\nGenerated on: ${new Date().toLocaleString()}\n\n---`,
 `## Ads\n\n### Prompt\n\n${$('#adPromptOut').value}\n\n### Draft Ad\n\n${$('#adDraftOut').value}`,
