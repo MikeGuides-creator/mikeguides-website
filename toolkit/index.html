@@ -435,15 +435,33 @@
     const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
     const toast = (msg) => { const n=document.createElement('div'); n.textContent=msg; Object.assign(n.style,{position:'fixed',bottom:'20px',right:'20px',background:'#111827',color:'#fff',padding:'10px 14px',borderRadius:'10px',zIndex:1000}); document.body.appendChild(n); setTimeout(()=>n.remove(),1800); };
 
-    // ===== Tabs =====
-    $$('.tab-btn').forEach(btn=>{
-      btn.addEventListener('click',()=>{
-        $$('.tab-btn').forEach(b=>b.classList.remove('active'));
-        btn.classList.add('active');
-        $$('.tab-panel').forEach(p=>p.classList.remove('active'));
-        $('#tab-'+btn.dataset.tab).classList.add('active');
+   <script>
+  // Accessible tabs: keep ARIA in sync
+  $$('.tab-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      // buttons
+      $$('.tab-btn').forEach(b=>{
+        b.classList.remove('active');
+        b.setAttribute('aria-selected','false');
+        b.setAttribute('tabindex','-1');
       });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected','true');
+      btn.setAttribute('tabindex','0');
+
+      // panels
+      $$('.tab-panel').forEach(p=>{
+        p.classList.remove('active');
+        p.setAttribute('hidden','');
+      });
+      const panel = document.getElementById('tab-'+btn.dataset.tab);
+      panel.classList.add('active');
+      panel.removeAttribute('hidden');
+      panel.setAttribute('aria-labelledby','tabbtn-'+btn.dataset.tab);
     });
+  });
+</script>
+
 
     // ===== Ads generator =====
     function buildAdPrompt({platform,tone,audience,offer,pains,cta}){
