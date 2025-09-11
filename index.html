@@ -341,7 +341,8 @@
     const panel = document.getElementById('compare-panel');
     if (panel) panel.classList.toggle('hidden');
   });
-<script>
+
+  // Click tracking for Subscribe buttons
   (function () {
     function track(id, item) {
       var el = document.getElementById(id);
@@ -350,13 +351,12 @@
         try { gtag('event','select_content',{content_type:'cta', item_id:item}); } catch(e) {}
       });
     }
-    // Homepage newsletter button
-    track('subscribe-link', 'subscribe-newsletter');
-    // Header subscribe button
-    track('subscribe-link-header', 'subscribe-header');
-    // (If you add a subscribe link on /toolkit/, give it id="subscribe-link-nav" and uncomment below)
+    track('subscribe-link', 'subscribe-newsletter');     // newsletter section
+    track('subscribe-link-header', 'subscribe-header');  // header
+    // If you add one on /toolkit/, give it id="subscribe-link-nav" and uncomment:
     // track('subscribe-link-nav', 'subscribe-nav');
   })();
 </script>
+
 </body>
 </html>
