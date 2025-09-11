@@ -90,15 +90,37 @@
   </style>
 </head>
 <body>
-  <header class="header" role="banner">
-    <nav class="nav" aria-label="Primary">
-      <a class="brand" href="/"><span>🎯 MikeGuides</span></a>
-      <div class="actions">
-        <button id="saveBtn" class="btn btn-ghost" title="Save your inputs to this browser">💾 Save Progress</button>
-        <button id="exportAllBtn" class="btn btn-primary" title="Download all outputs as Markdown">⬇️ Export All (.md)</button>
-      </div>
+  <header class="header">
+  <div class="nav">
+    <!-- Brand -->
+    <a href="/" class="brand">
+      <div style="height:40px;width:40px;border-radius:12px;background:#1d4ed8;display:grid;place-items:center;color:#fff;font-weight:800">MG</div>
+      <span>MikeGuides</span>
+    </a>
+
+    <!-- Primary nav -->
+    <nav style="display:flex;gap:16px;align-items:center;font-size:14px;font-weight:600">
+      <a href="/#guides" class="text-gray-700 hover:text-gray-900">Guides</a>
+      <a href="/toolkit/" class="text-gray-900" style="font-weight:700">AI Toolkit</a>
+      <a href="/#bundle" class="text-gray-700 hover:text-gray-900">Bundle</a>
+      <a href="https://mikeguides.beehiiv.com/subscribe?utm_source=site&utm_medium=nav&utm_campaign=subscribe"
+         class="text-gray-700 hover:text-gray-900"
+         id="subscribe-link-nav" target="_blank" rel="noopener">
+        Newsletter
+      </a>
     </nav>
-  </header>
+
+    <!-- Actions (right side) -->
+    <div class="actions">
+      <a href="/#bundle" class="btn btn-ghost">Back to Home</a>
+      <a href="https://mikeguides8.gumroad.com/l/ai-marketing-toolkit?utm_source=site&utm_medium=cta&utm_campaign=toolkit&utm_content=buy-toolkit"
+         class="btn btn-primary" target="_blank" rel="noopener">
+        Get the Toolkit
+      </a>
+    </div>
+  </div>
+</header>
+
 
   <main class="wrap" id="top">
     <!-- Hero -->
