@@ -16,6 +16,13 @@
     :root{ --mg-blue:#2563eb; --mg-green:#22c55e; --mg-bg:#f9fafb; --mg-ink:#0f172a; }
     body{ font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif; background:var(--mg-bg); color:var(--mg-ink); }
     .brand{ font-family:Poppins,Inter,sans-serif; }
+    
+  /* Fallback grid in case Tailwind doesn't load */
+  #shop-guides .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
