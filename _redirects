@@ -1,1 +1,19 @@
-/*  /index.html  200
+# Product pages
+/Visual%20AI%20Studio/* /products/visual-ai-studio/:splat 301!
+/EnhancedChatGPT_Simulator/* /products/chatgpt-mastery-simulator/:splat 301!
+/Enhanced_ai_business_automation/* /products/ai-business-automation-roi/:splat 301!
+/ai-writing-workshop.html /products/ai-writing-workshop/ 301!
+/5HTML_v52_ai-writing-workshop-finished_product_jmk.html /products/ai-writing-workshop/ 301!
+/bundle/* /products/business-builder-bundle/:splat 301!
+/toolkit/* /products/ai-marketing-toolkit/:splat 301!
+/products.html /products/ 301!
+/store/* /products/:splat 301!
+/store /products/ 301!
+
+
+# Blog → external site
+/blog/* https://blog.pricingforprofit.co/:splat 301!
+
+
+# If you relocate /images to /assets/images
+/images/* /assets/images/:splat 301!
