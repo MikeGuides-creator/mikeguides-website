@@ -10,6 +10,7 @@
 /store/* /products/:splat 301!
 /store /products/ 301!
 
+https://www.mikeguides.co/*  https://mikeguides.co/:splat  301!
 
 # Blog → external site
 /blog/* https://blog.pricingforprofit.co/:splat 301!
