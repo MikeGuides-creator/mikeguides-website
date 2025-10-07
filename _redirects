@@ -4,6 +4,8 @@
 
 /EnhancedChatGPT_Simulator/*          /products/chatgpt-mastery-simulator/:splat   301!
 /enhancedChatGPT%20simulator/*        /products/chatgpt-mastery-simulator/:splat   301!
+/Visual AI Studio/*              /products/visual-ai-studio/:splat            301!
+/enhancedChatGPT simulator/*     /products/chatgpt-mastery-simulator/:splat   301!
 
 /Enhanced_ai_business_automation/*    /products/ai-business-automation-roi/:splat  301!
 /program/ai-business-automation-roi/* /products/ai-business-automation-roi/:splat  301!
