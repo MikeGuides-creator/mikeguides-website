@@ -12,7 +12,7 @@
 /program/ai-business-automation/*     /products/ai-business-automation-roi/:splat  301!
 
 /ai-writing-workshop.html             /products/ai-writing-workshop/               301!
-/5HTML_v52_ai-writing-workshop-finished_product_jmk.html  /products/ai-writing-workshop/  301!
+/buy/ai-writing-workshop  https://mikeguides8.gumroad.com/l/AI_Writing_Workshop  301!
 
 /bundle/*                             /products/business-builder-bundle/:splat     301!
 /toolkit/*                            /products/ai-marketing-toolkit/:splat        301!
