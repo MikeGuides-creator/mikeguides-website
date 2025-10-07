@@ -9,6 +9,7 @@
 /products.html /products/ 301!
 /store/* /products/:splat 301!
 /store /products/ 301!
+/buy/visual-ai-studio  https://mikeguides8.gumroad.com/l/visual-ai-studio  301!
 
 https://www.mikeguides.co/*  https://mikeguides.co/:splat  301!
 
