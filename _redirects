@@ -29,6 +29,28 @@
 /store/*                              /products/:splat                              301!
 /store                                /products/                                    301!
 
+# Force HTTPS (Netlify usually does this, but we make it explicit)
+http://mikeguides.co/*   https://mikeguides.co/:splat   301!
+http://www.mikeguides.co/* https://mikeguides.co/:splat 301!
+
+# Canonical host (send www → apex)
+https://www.mikeguides.co/*  https://mikeguides.co/:splat  301!
+
+# Shortcuts
+/blog        https://blog.pricingforprofit.co         301
+/store       https://mikeguides8.gumroad.com          301
+/gumroad     https://mikeguides8.gumroad.com          301
+
+# (Optional) Pretty product links (add more as you like)
+/buy/bundle  https://mikeguides8.gumroad.com/l/business_bundle_builder  301
+
+# Trailing slash conveniences
+/guides      /guides/    301
+/toolkit     /toolkit/   301
+
+# 404 fallback (if you have /404.html)
+/*           /404.html   404
+
 /buy/visual-ai-studio  https://mikeguides8.gumroad.com/l/visual-ai-studio  301!?utm_source=site
 
 https://www.mikeguides.co/*  https://mikeguides.co/:splat  301!?utm_source=site
