@@ -23,6 +23,9 @@
 /bundle/*                             /products/business-builder-bundle/:splat     301!?utm_source=site
 /toolkit/*                            /products/ai-marketing-toolkit/:splat        301!?utm_source=site
 
+/buy/pricing-for-profit  https://mikeguides8.gumroad.com/l/PRICING_FOR_PROFIT?utm_source=site  301!
+
+
 /products.html                        /products/                                    301!
 /store/*                              /products/:splat                              301!
 /store                                /products/                                    301!
