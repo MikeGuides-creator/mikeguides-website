@@ -13,19 +13,20 @@
     :root{
       --mg-blue:#2563eb; /* brand primary */
       --mg-green:#22c55e; /* brand accent */
-      --mg-bg:#f9fafb; /* page background */
-      --mg-ink:#0f172a; /* slate-900 */
+      --mg-bg:#f9fafb;   /* page background */
+      --mg-ink:#0f172a;  /* slate-900 */
     }
     html,body{height:100%}
     body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--mg-bg);color:var(--mg-ink)}
     .h1{font-family:Poppins,Inter,sans-serif}
     .card{box-shadow:0 10px 25px -10px rgba(2,6,23,.1);}
-    .glass{backdrop-filter:saturate(180%) blur(10px);}
+    /* Kept for future use (not applied to header anymore) */
+    .glass{backdrop-filter:saturate(140%) blur(3px);}
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
-  <!-- Header / Nav -->
-  <header class="sticky top-0 z-40 bg-white/80 glass border-b border-slate-200">
+  <!-- Header / Nav (solid, no fog) -->
+  <header class="sticky top-0 z-40 bg-white border-b border-slate-200">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <a href="/" class="flex items-center gap-2 font-extrabold h1 text-slate-900 text-xl">
         <span class="inline-block w-2.5 h-6 rounded bg-[var(--mg-blue)]"></span>
@@ -43,9 +44,8 @@
     </div>
   </header>
 
-  <!-- Hero -->
-  <section class="relative">
-    <div class="absolute inset-0 bg-gradient-to-b from-white via-white to-transparent pointer-events-none"></div>
+  <!-- Hero (no full overlay) -->
+  <section class="">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10 pb-6">
       <div class="max-w-3xl">
         <h1 class="h1 text-4xl sm:text-5xl font-extrabold leading-tight">Explore the Guides</h1>
@@ -68,79 +68,6 @@
         <button data-filter="writing" class="filter-btn inline-flex items-center rounded-full border px-3 py-1.5 text-sm font-semibold text-slate-700 border-slate-200 bg-white hover:border-slate-300">Writing</button>
         <button data-filter="bundle" class="filter-btn inline-flex items-center rounded-full border px-3 py-1.5 text-sm font-semibold text-slate-700 border-slate-200 bg-white hover:border-slate-300">Bundle</button>
       </div>
-      <!-- DROP‑IN REPLACEMENT: “Shop the Guides” section for index.html -->
-<!-- Paste this where your current Shop/Guides grid lives on the homepage. Requires Tailwind + the CSS vars --mg-blue / --mg-green. -->
-
-<section id="shop-guides" class="relative py-12 sm:py-16">
-  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-    <div class="max-w-3xl">
-      <h2 class="font-extrabold text-3xl sm:text-4xl" style="font-family:Poppins,Inter,sans-serif">Shop the Guides</h2>
-      <p class="mt-2 text-slate-600">Interactive HTML guides, calculators, and toolkits to help you price smarter, market better, and grow profits.</p>
-      <div class="mt-6 flex flex-col sm:flex-row gap-3">
-        <a href="https://mikeguides8.gumroad.com/l/business_bundle_builder?_gl=1*1jswvh1*_ga*MjAyMzE1OTg3NC4xNzU0ODgwNzA0*_ga_6LJN6D94N6*czE3NTkyNTE1MzMkbzEwJGcxJHQxNzU5MjUzMTE0JGo2MCRsMCRoMA.." target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-xl px-5 py-3 font-semibold text-white bg-[var(--mg-blue)] hover:opacity-90 transition">🎁 WEEK1000 Bundle — Save $100</a>
-        <a href="/toolkit/" class="inline-flex items-center justify-center rounded-xl px-5 py-3 font-semibold text-[var(--mg-blue)] border border-[var(--mg-blue)] hover:bg-[var(--mg-blue)] hover:text-white transition">Open AI Marketing Toolkit</a>
-      </div>
-    </div>
-
-    <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      <!-- Business Builder Bundle -->
-      <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_10px_25px_-10px_rgba(2,6,23,.1)]">
-        <div class="flex items-center gap-2 text-xs font-semibold text-slate-500">
-          <span class="inline-flex h-2.5 w-2.5 rounded-full bg-[var(--mg-blue)]"></span>
-          Bundle
-        </div>
-        <h3 class="mt-3 text-2xl font-bold" style="font-family:Poppins,Inter,sans-serif">Business Builder Bundle</h3>
-        <p class="mt-2 text-slate-600">A curated set of MikeGuides tools to price smarter, market better, and move faster — all in one discounted package.</p>
-        <div class="mt-5 flex flex-wrap gap-3">
-          <a href="https://mikeguides8.gumroad.com/l/business_bundle_builder?_gl=1*1jswvh1*_ga*MjAyMzE1OTg3NC4xNzU0ODgwNzA0*_ga_6LJN6D94N6*czE3NTkyNTE1MzMkbzEwJGcxJHQxNzU5MjUzMTE0JGo2MCRsMCRoMA.." target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white bg-[var(--mg-blue)] hover:opacity-90">Get the Bundle</a>
-        </div>
-      </article>
-
-      <!-- AI Marketing Toolkit -->
-      <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_10px_25px_-10px_rgba(2,6,23,.1)]">
-        <div class="flex items-center gap-2 text-xs font-semibold text-slate-500">
-          <span class="inline-flex h-2.5 w-2.5 rounded-full bg-[var(--mg-green)]"></span>
-          Toolkit
-        </div>
-        <h3 class="mt-3 text-2xl font-bold" style="font-family:Poppins,Inter,sans-serif">AI Marketing Toolkit</h3>
-        <p class="mt-2 text-slate-600">Plan, draft, and ship marketing assets with interactive prompts and workflows. Built for speed and consistency.</p>
-        <div class="mt-5 flex flex-wrap gap-3">
-          <a href="/toolkit/" class="inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white bg-[var(--mg-green)] hover:opacity-90">Open Toolkit</a>
-          <a href="https://mikeguides8.gumroad.com" target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold text-[var(--mg-blue)] border border-[var(--mg-blue)] hover:bg-[var(--mg-blue)] hover:text-white">On Gumroad</a>
-        </div>
-      </article>
-
-      <!-- AI Writing Workshop -->
-      <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_10px_25px_-10px_rgba(2,6,23,.1)]">
-        <div class="flex items-center gap-2 text-xs font-semibold text-slate-500">
-          <span class="inline-flex h-2.5 w-2.5 rounded-full bg-[var(--mg-blue)]"></span>
-          Workshop
-        </div>
-        <h3 class="mt-3 text-2xl font-bold" style="font-family:Poppins,Inter,sans-serif">AI Writing Workshop</h3>
-        <p class="mt-2 text-slate-600">An interactive guide that interviews you, builds perfect prompts, and generates drafts for any post or document.</p>
-        <div class="mt-5 flex flex-wrap gap-3">
-          <a href="https://mikeguides8.gumroad.com/l/apiqo" target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white bg-[var(--mg-blue)] hover:opacity-90">View on Gumroad</a>
-        </div>
-      </article>
-
-      <!-- Free Pricing Checklist -->
-      <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_10px_25px_-10px_rgba(2,6,23,.1)]">
-        <div class="flex items-center gap-2 text-xs font-semibold text-slate-500">
-          <span class="inline-flex h-2.5 w-2.5 rounded-full bg-[var(--mg-green)]"></span>
-          Free
-        </div>
-        <h3 class="mt-3 text-2xl font-bold" style="font-family:Poppins,Inter,sans-serif">5 Pricing Mistakes Checklist</h3>
-        <p class="mt-2 text-slate-600">A one-page checklist to avoid the most common pricing errors and start charging with confidence.</p>
-        <div class="mt-5 flex flex-wrap gap-3">
-          <!-- TODO: replace with your actual freebie slug if different -->
-          <a href="https://mikeguides8.gumroad.com/l/pricing-mistakes-checklist" target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white bg-[var(--mg-green)] hover:opacity-90">Get it Free</a>
-        </div>
-      </article>
-
-    </div>
-  </div>
-</section>
-
       <div class="relative">
         <input id="search" type="search" placeholder="Search guides…" class="w-full md:w-80 rounded-xl border border-slate-200 bg-white px-4 py-2.5 outline-none focus:ring-2 focus:ring-[var(--mg-blue)]" />
         <span class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-slate-400">⌕</span>
@@ -153,81 +80,80 @@
     <div id="grid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 
       <!-- Business Builder Bundle -->
-      <article class="card rounded-2xl border border-slate-200 bg-white p-6" data-tags="bundle pricing">
+      <article class="card rounded-2xl border border-slate-200 bg-white p-6 h-full flex flex-col" data-tags="bundle pricing">
         <div class="flex items-center gap-2 text-xs font-semibold text-slate-500">
           <span class="inline-flex h-2.5 w-2.5 rounded-full bg-[var(--mg-blue)]"></span>
           Bundle
         </div>
         <h3 class="mt-3 h1 text-2xl font-bold">Business Builder Bundle</h3>
         <p class="mt-2 text-slate-600">A curated set of MikeGuides tools to price smarter, market better, and move faster — all in one discounted package.</p>
-        <div class="mt-5 flex flex-wrap gap-3">
+        <div class="mt-5 flex flex-wrap gap-3 mt-auto">
           <a href="https://mikeguides8.gumroad.com/l/business_bundle_builder?_gl=1*1jswvh1*_ga*MjAyMzE1OTg3NC4xNzU0ODgwNzA0*_ga_6LJN6D94N6*czE3NTkyNTE1MzMkbzEwJGcxJHQxNzU5MjUzMTE0JGo2MCRsMCRoMA.." target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white bg-[var(--mg-blue)] hover:opacity-90">Get the Bundle</a>
         </div>
       </article>
 
       <!-- AI Marketing Toolkit -->
-      <article class="card rounded-2xl border border-slate-200 bg-white p-6" data-tags="ai marketing">
+      <article class="card rounded-2xl border border-slate-200 bg-white p-6 h-full flex flex-col" data-tags="ai marketing">
         <div class="flex items-center gap-2 text-xs font-semibold text-slate-500">
           <span class="inline-flex h-2.5 w-2.5 rounded-full bg-[var(--mg-green)]"></span>
           Toolkit
         </div>
         <h3 class="mt-3 h1 text-2xl font-bold">AI Marketing Toolkit</h3>
         <p class="mt-2 text-slate-600">Plan, draft, and ship marketing assets with interactive prompts and workflows. Built for speed and consistency.</p>
-        <div class="mt-5 flex flex-wrap gap-3">
+        <div class="mt-5 flex flex-wrap gap-3 mt-auto">
           <a href="/toolkit/" class="inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white bg-[var(--mg-green)] hover:opacity-90">Open Toolkit</a>
           <a href="https://mikeguides8.gumroad.com" target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold text-[var(--mg-blue)] border border-[var(--mg-blue)] hover:bg-[var(--mg-blue)] hover:text-white">On Gumroad</a>
         </div>
       </article>
 
       <!-- AI Writing Workshop -->
-      <article class="card rounded-2xl border border-slate-200 bg-white p-6" data-tags="writing ai">
+      <article class="card rounded-2xl border border-slate-200 bg-white p-6 h-full flex flex-col" data-tags="writing ai">
         <div class="flex items-center gap-2 text-xs font-semibold text-slate-500">
           <span class="inline-flex h-2.5 w-2.5 rounded-full bg-[var(--mg-blue)]"></span>
           Workshop
         </div>
         <h3 class="mt-3 h1 text-2xl font-bold">AI Writing Workshop</h3>
         <p class="mt-2 text-slate-600">An interactive guide that interviews you, builds perfect prompts, and generates drafts for any post or document.</p>
-        <div class="mt-5 flex flex-wrap gap-3">
+        <div class="mt-5 flex flex-wrap gap-3 mt-auto">
           <a href="https://mikeguides8.gumroad.com/l/apiqo" target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white bg-[var(--mg-blue)] hover:opacity-90">View on Gumroad</a>
         </div>
       </article>
 
       <!-- Free Pricing Checklist -->
-      <article class="card rounded-2xl border border-slate-200 bg-white p-6" data-tags="pricing free">
+      <article class="card rounded-2xl border border-slate-200 bg-white p-6 h-full flex flex-col" data-tags="pricing free">
         <div class="flex items-center gap-2 text-xs font-semibold text-slate-500">
           <span class="inline-flex h-2.5 w-2.5 rounded-full bg-[var(--mg-green)]"></span>
           Free
         </div>
         <h3 class="mt-3 h1 text-2xl font-bold">5 Pricing Mistakes Checklist</h3>
         <p class="mt-2 text-slate-600">A one-page checklist to avoid the most common pricing errors and start charging with confidence.</p>
-        <div class="mt-5 flex flex-wrap gap-3">
-          <!-- TODO: replace with your actual freebie slug if different -->
+        <div class="mt-5 flex flex-wrap gap-3 mt-auto">
           <a href="https://mikeguides8.gumroad.com/l/pricing-mistakes-checklist" target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white bg-[var(--mg-green)] hover:opacity-90">Get it Free</a>
         </div>
       </article>
 
       <!-- Visual AI Studio (placeholder) -->
-      <article class="card rounded-2xl border border-slate-200 bg-white p-6 opacity-90" data-tags="ai studio coming-soon">
+      <article class="card rounded-2xl border border-slate-200 bg-white p-6 h-full flex flex-col opacity-90" data-tags="ai studio coming-soon">
         <div class="flex items-center gap-2 text-xs font-semibold text-slate-500">
           <span class="inline-flex h-2.5 w-2.5 rounded-full bg-slate-300"></span>
           Coming Soon
         </div>
         <h3 class="mt-3 h1 text-2xl font-bold">Visual AI Studio</h3>
         <p class="mt-2 text-slate-600">A visual workspace to plan and generate branded assets with AI — templates, shots, and publishing flows.</p>
-        <div class="mt-5 flex flex-wrap gap-3">
+        <div class="mt-5 flex flex-wrap gap-3 mt-auto">
           <button disabled class="inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white bg-slate-300 cursor-not-allowed">Coming Soon</button>
         </div>
       </article>
 
       <!-- Business Plan Generator (placeholder) -->
-      <article class="card rounded-2xl border border-slate-200 bg-white p-6 opacity-90" data-tags="planning ai coming-soon">
+      <article class="card rounded-2xl border border-slate-200 bg-white p-6 h-full flex flex-col opacity-90" data-tags="planning ai coming-soon">
         <div class="flex items-center gap-2 text-xs font-semibold text-slate-500">
           <span class="inline-flex h-2.5 w-2.5 rounded-full bg-slate-300"></span>
           Coming Soon
         </div>
         <h3 class="mt-3 h1 text-2xl font-bold">Business Plan Generator Pro</h3>
         <p class="mt-2 text-slate-600">Turn your idea into a lean, shippable plan with prompts, financial scaffolding, and exportable sections.</p>
-        <div class="mt-5 flex flex-wrap gap-3">
+        <div class="mt-5 flex flex-wrap gap-3 mt-auto">
           <button disabled class="inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white bg-slate-300 cursor-not-allowed">Coming Soon</button>
         </div>
       </article>
