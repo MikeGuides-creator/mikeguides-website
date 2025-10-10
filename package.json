@@ -1,0 +1,11 @@
+{
+  "name": "mikeguides-site",
+  "private": true,
+  "scripts": {
+    "build:css": "npx tailwindcss -i ./css/tailwind.input.css -o ./css/site.css --minify",
+    "build": "npm run build:css"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.14"
+  }
+}
