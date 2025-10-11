@@ -1,5 +1,5 @@
 [build]
-  command = "rm -f ./css/site.css || true && echo '--- TAILWIND VERSION ---' && npx tailwindcss -v && echo '--- PWD ---' && pwd && echo '--- LIST CSS DIR BEFORE ---' && ls -la css || true && echo '--- INPUT HEAD ---' && head -n 40 ./css/tailwind.input.css || true && npx --yes tailwindcss -c tailwind.config.js --content './*.html,./{blog,bundle,free,guides,products,store,toolkit}/**/*.html,./**/*.md,./**/*.js' -i ./css/tailwind.input.css -o ./css/site.css --verbose && echo '--- LIST CSS DIR AFTER ---' && ls -la css || true && echo '--- OUTPUT HEAD ---' && head -n 40 ./css/site.css || true && echo '--- OUTPUT SIZE ---' && wc -c ./css/site.css || true"
+  command = "npx --yes tailwindcss -i ./css/tailwind.input.css -o ./css/site.css --minify"
   publish = "."
 
 [build.environment]
