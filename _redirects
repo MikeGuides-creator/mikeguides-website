@@ -37,19 +37,20 @@ http://www.mikeguides.co/* https://mikeguides.co/:splat 301!
 https://www.mikeguides.co/*  https://mikeguides.co/:splat  301!
 
 # Shortcuts
-/blog        https://blog.pricingforprofit.co         301
-/store       https://mikeguides8.gumroad.com          301
-/gumroad     https://mikeguides8.gumroad.com          301
+/blog        https://blog.pricingforprofit.co                    301
+/store       https://mikeguides8.gumroad.com                     301
+/gumroad     https://mikeguides8.gumroad.com                     301
 
-# (Optional) Pretty product links (add more as you like)
+# Pretty product links
 /buy/bundle  https://mikeguides8.gumroad.com/l/business_bundle_builder  301
 
 # Trailing slash conveniences
-/guides      /guides/    301
-/toolkit     /toolkit/   301
+/guides      /guides/   301
+/toolkit     /toolkit/  301
 
-# 404 fallback (if you have /404.html)
-/*           /404.html   404
+# Catch-all (must be last)
+# Unmatched paths go to your 404 page
+/*  /404.html  404
 
 /buy/visual-ai-studio  https://mikeguides8.gumroad.com/l/visual-ai-studio  301!?utm_source=site
 
