@@ -2,10 +2,13 @@
   "name": "mikeguides-site",
   "private": true,
   "scripts": {
-    "build:css": "npx tailwindcss -i ./css/tailwind.input.css -o ./css/site.css --minify",
+    "build:css": "npx tailwindcss -c tailwind.config.js -i ./css/tailwind.input.css -o ./css/site.css --minify",
     "build": "npm run build:css"
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.14"
+    "tailwindcss": "^3.4.14",
+    "@tailwindcss/typography": "^0.5.10",
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/aspect-ratio": "^0.4.2"
   }
 }
