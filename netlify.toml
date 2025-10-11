@@ -1,5 +1,5 @@
 [build]
-  command = "npx --yes tailwindcss -i ./css/tailwind.input.css -o ./css/site.css --minify"
+  command = "ls -la && ls -la css || true && echo '----- INPUT HEAD -----' && head -n 40 ./css/tailwind.input.css || true && npx --yes tailwindcss -i ./css/tailwind.input.css -o ./css/site.css --minify --verbose && echo '----- OUTPUT HEAD -----' && head -n 40 ./css/site.css || true"
   publish = "."
 
 [build.environment]
