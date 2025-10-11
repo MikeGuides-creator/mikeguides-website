@@ -1,4 +1,4 @@
-/* ===== Inter (variable: normal + italic) ===== */
+/* ===== Local fonts ===== */
 @font-face {
   font-family: 'Inter';
   src: url('/fonts/Inter-Variable.woff2') format('woff2');
@@ -13,8 +13,6 @@
   font-style: italic;
   font-display: swap;
 }
-
-/* ===== Poppins (static weights) ===== */
 @font-face {
   font-family: 'Poppins';
   src: url('/fonts/Poppins-Regular.woff2') format('woff2');
@@ -43,3 +41,13 @@
   font-style: normal;
   font-display: swap;
 }
+
+/* Tailwind layers */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Brand defaults */
+:root { --mg-blue:#2563eb; --mg-green:#22c55e; }
+html { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial; }
+h1, h2, h3, h4 { font-family: Poppins, Inter, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial; }
