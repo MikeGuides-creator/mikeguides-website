@@ -1,5 +1,5 @@
 [build]
-  command = "npx --yes tailwindcss -c tailwind.config.js --content './*.html,./{blog,bundle,free,guides,products,store,toolkit}/**/*.html,./**/*.md,./**/*.js' -i ./css/tailwind.input.css -o ./css/site.css --minify"
+  command = "npm install --no-audit --no-fund && npm run build"
   publish = "."
 
 [build.environment]
