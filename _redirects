@@ -1,35 +1,43 @@
-# Product pages
-/Visual%20AI%20Studio/*               /products/visual-ai-studio/:splat            301!?utm_source=site
-/visual%20ai%20studio/*               /products/visual-ai-studio/:splat            301!?utm_source=site
+# Force legacy single-file route to the folder page
+/products.html      /products/                                  301!
 
-/EnhancedChatGPT_Simulator/*          /products/chatgpt-mastery-simulator/:splat   301!?utm_source=site
-/enhancedChatGPT%20simulator/*        /products/chatgpt-mastery-simulator/:splat   301!?utm_source=site
-/Visual AI Studio/*              /products/visual-ai-studio/:splat            301!?utm_source=site
-/enhancedChatGPT simulator/*     /products/chatgpt-mastery-simulator/:splat   301!?utm_source=site
+# Legacy / shortlinks to product pages (URL-encoded spaces)
+# Visual AI Studio
+/Visual%20AI%20Studio/*               /products/visual-ai-studio/:splat            301!
+/visual%20ai%20studio/*               /products/visual-ai-studio/:splat            301!
 
-/Enhanced_ai_business_automation/*    /products/ai-business-automation-roi/:splat  301!?utm_source=site
-/program/ai-business-automation-roi/* /products/ai-business-automation-roi/:splat  301!?utm_source=site
-/program/ai-business-automation/*     /products/ai-business-automation-roi/:splat  301!?utm_source=site
+# ChatGPT Mastery Simulator
+/EnhancedChatGPT_Simulator/*          /products/chatgpt-mastery-simulator/:splat   301!
+/enhancedChatGPT%20simulator/*        /products/chatgpt-mastery-simulator/:splat   301!
 
-/buy/business-builder-bundle  https://mikeguides8.gumroad.com/l/business_bundle_builder  301!?utm_source=site
-/buy/bundle                    https://mikeguides8.gumroad.com/l/business_bundle_builder  301!?utm_source=site
-/buy/business-bundle-builder   https://mikeguides8.gumroad.com/l/business_bundle_builder  301!?utm_source=site
+# AI Business Automation ROI
+/Enhanced_ai_business_automation/*    /products/ai-business-automation-roi/:splat  301!
+/program/ai-business-automation-roi/* /products/ai-business-automation-roi/:splat  301!
+/program/ai-business-automation/*     /products/ai-business-automation-roi/:splat  301!
 
-/ai-writing-workshop.html             /products/ai-writing-workshop/               301!?utm_source=site
-/buy/ai-writing-workshop  https://mikeguides8.gumroad.com/l/AI_Writing_Workshop  301!?utm_source=site
-/buy/ai-writing         https://mikeguides8.gumroad.com/l/AI_Writing_Workshop  301!?utm_source=site
-/buy/writing-workshop   https://mikeguides8.gumroad.com/l/AI_Writing_Workshop  301!?utm_source=site
+# Toolkit collection
+/toolkit/*                            /products/ai-marketing-toolkit/:splat        301!
 
-/bundle/*                             /products/business-builder-bundle/:splat     301!?utm_source=site
-/toolkit/*                            /products/ai-marketing-toolkit/:splat        301!?utm_source=site
+# Bundle → Gumroad
+/buy/bundle                           https://mikeguides8.gumroad.com/l/business_bundle_builder  301!
+/buy/business-bundle-builder          https://mikeguides8.gumroad.com/l/business_bundle_builder  301!
+/buy/business-builder-bundle          https://mikeguides8.gumroad.com/l/business_bundle_builder  301!
 
-/buy/pricing-for-profit  https://mikeguides8.gumroad.com/l/PRICING_FOR_PROFIT?utm_source=site  301!
+# AI Writing Workshop → Gumroad
+/buy/ai-writing-workshop              https://mikeguides8.gumroad.com/l/AI_Writing_Workshop      301!
+/buy/ai-writing                       https://mikeguides8.gumroad.com/l/AI_Writing_Workshop      301!
+/buy/writing-workshop                 https://mikeguides8.gumroad.com/l/AI_Writing_Workshop      301!
 
-/products.html  /products/  301
+# Pricing for Profit → Gumroad
+/buy/pricing-for-profit               https://mikeguides8.gumroad.com/l/PRICING_FOR_PROFIT?utm_source=site  301!
 
-/products.html                        /products/                                    301!
+# Store aliases to products index
 /store/*                              /products/:splat                              301!
 /store                                /products/                                    301!
+
+# If you relocated /images to /assets/images
+/images/*                             /assets/images/:splat                         301!
+
 
 # Force HTTPS (Netlify usually does this, but we make it explicit)
 http://mikeguides.co/*   https://mikeguides.co/:splat   301!
