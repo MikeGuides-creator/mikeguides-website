@@ -25,6 +25,8 @@
 
 /buy/pricing-for-profit  https://mikeguides8.gumroad.com/l/PRICING_FOR_PROFIT?utm_source=site  301!
 
+/products.html  /products/  301
+
 /products.html                        /products/                                    301!
 /store/*                              /products/:splat                              301!
 /store                                /products/                                    301!
