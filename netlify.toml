@@ -1,6 +1,5 @@
 [build]
-  command = "npx --yes tailwindcss -c tailwind.config.js -i ./css/tailwind.input.css -o ./css/site.css --minify"
+  command = "npm ci && npm run build"
   publish = "."
-
 [build.environment]
   NODE_VERSION = "20"
