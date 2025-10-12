@@ -4,9 +4,13 @@
   <meta charset="utf-8" />
   <title>MikeGuides — Products</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Browse MikeGuides products including Visual AI Studio, ChatGPT Mastery Simulator, and more." />
 
   <!-- ✅ load your Tailwind build -->
   <link rel="stylesheet" href="/css/site.css?v=2025-10-11" />
+
+  <!-- Poppins font (ensure .font-poppins works) -->
+  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
 
   <!-- (Optional) keep small page-specific CSS here -->
   <style>
@@ -21,69 +25,76 @@
     .p{font-weight:700}
     .cta{display:inline-block;margin-top:10px;background:#2563eb;color:#fff;padding:8px 12px;border-radius:10px;text-decoration:none}
     .cta:hover{opacity:.9}
+    .font-poppins { font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; }
   </style>
 </head>
 
 <body>
-  <section class="bg-slate-50">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <h1 class="font-poppins text-3xl sm:text-4xl font-extrabold text-slate-900">Products</h1>
+  <main>
+    <section class="bg-slate-50">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h1 class="font-poppins text-3xl sm:text-4xl font-extrabold text-slate-900">Products</h1>
 
-    <div id="products-grid" class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div id="products-grid" class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
 
-      <a class="card block overflow-hidden rounded-2xl bg-white ring-1 ring-slate-900/5 shadow-sm hover:shadow-md transition"
-         href="/products/visual-ai-studio/">
-        <img class="w-full aspect-[4/3] object-cover"
-             src="/assets/images/products/visual-ai-studio/visual-ai-studio.jpg"
-             alt="Visual AI Studio — drag-and-drop canvas to build AI workflows">
-        <div class="p-6">
-          <p class="font-poppins text-lg font-semibold text-slate-900">Visual AI Studio</p>
-          <div class="mt-4">
-            <span class="inline-flex items-center rounded-xl bg-mg-blue px-4 py-2 text-white font-semibold shadow hover:bg-blue-600 transition">View</span>
-          </div>
+          <a class="card block overflow-hidden rounded-2xl bg-white ring-1 ring-slate-900/5 shadow-sm hover:shadow-md transition"
+             href="/products/visual-ai-studio/">
+            <img class="w-full aspect-[4/3] object-cover"
+                 src="/assets/images/products/visual-ai-studio/visual-ai-studio.jpg"
+                 alt="Visual AI Studio — drag-and-drop canvas to build AI workflows">
+            <div class="p-6">
+              <p class="font-poppins text-lg font-semibold text-slate-900">Visual AI Studio</p>
+              <div class="mt-4">
+                <span class="inline-flex items-center rounded-xl bg-mg-blue px-4 py-2 text-white font-semibold shadow hover:bg-blue-600 transition">View</span>
+              </div>
+              <div class="mt-2 text-slate-600 text-sm"><span data-price="visual-ai-studio"></span></div>
+            </div>
+          </a>
+
+          <a class="card block overflow-hidden rounded-2xl bg-white ring-1 ring-slate-900/5 shadow-sm hover:shadow-md transition"
+             href="/products/chatgpt-mastery-simulator/">
+            <img class="w-full aspect-[4/3] object-cover"
+                 src="/assets/images/products/chatgpt-mastery-simulator/chatgpt-mastery-simulator.jpg"
+                 alt="ChatGPT Mastery Simulator — practice scenarios and instant feedback">
+            <div class="p-6">
+              <p class="font-poppins text-lg font-semibold text-slate-900">ChatGPT Mastery</p>
+              <div class="mt-4">
+                <span class="inline-flex items-center rounded-xl bg-mg-blue px-4 py-2 text-white font-semibold shadow hover:bg-blue-600 transition">View</span>
+              </div>
+              <div class="mt-2 text-slate-600 text-sm"><span data-price="chatgpt-mastery-simulator"></span></div>
+            </div>
+          </a>
+
+          <!-- Add additional cards here and use data-price="..." for price auto-inserting -->
+
         </div>
-      </a>
+      </div>
+    </section>
+  </main>
 
-      <a class="card block overflow-hidden rounded-2xl bg-white ring-1 ring-slate-900/5 shadow-sm hover:shadow-md transition"
-         href="/products/chatgpt-mastery-simulator/">
-        <img class="w-full aspect-[4/3] object-cover"
-             src="/assets/images/products/chatgpt-mastery-simulator/chatgpt-mastery-simulator.jpg"
-             alt="ChatGPT Mastery Simulator — practice scenarios and instant feedback">
-        <div class="p-6">
-          <p class="font-poppins text-lg font-semibold text-slate-900">ChatGPT Mastery</p>
-          <div class="mt-4">
-            <span class="inline-flex items-center rounded-xl bg-mg-blue px-4 py-2 text-white font-semibold shadow hover:bg-blue-600 transition">View</span>
-          </div>
-        </div>
-      </a>
-
-      <!-- add the rest of your cards here after you verify counts -->
-
-    </div>
-  </div>
-</section>
-
-
-window.MG_PRICES = {
-currency: "USD",
-products: {
-"visual-ai-studio": "19.95",
-"ai-marketing-toolkit": "19.95",
-"ai-writing-workshop": "19.95",
-"ai-business-automation-roi": "19.95",
-"business-builder-bundle": "79.95",
-"chatgpt-mastery-simulator": "19.95",
-"pricing-for-profit-system": "54.95"
-}
-};
-(function () {
-var p = (window.MG_PRICES && window.MG_PRICES.products) || {};
-document.querySelectorAll('[data-price]').forEach(function (el) {
-var slug = el.getAttribute('data-price');
-if (p[slug]) el.textContent = '$' + p[slug];
-});
-})();
-  <!-- Load the single source of truth for prices -->
+  <!-- Load prices and update UI -->
+  <script>
+    window.MG_PRICES = {
+      currency: "USD",
+      products: {
+        "visual-ai-studio": "19.95",
+        "ai-marketing-toolkit": "19.95",
+        "ai-writing-workshop": "19.95",
+        "ai-business-automation-roi": "19.95",
+        "business-builder-bundle": "79.95",
+        "chatgpt-mastery-simulator": "19.95",
+        "pricing-for-profit-system": "54.95"
+      }
+    };
+    (function () {
+      var p = (window.MG_PRICES && window.MG_PRICES.products) || {};
+      document.querySelectorAll('[data-price]').forEach(function (el) {
+        var slug = el.getAttribute('data-price');
+        if (p[slug]) el.textContent = '$' + p[slug];
+        else el.textContent = '';
+      });
+    })();
+  </script>
   <script src="/assets/js/prices.js"></script>
 </body>
 </html>
