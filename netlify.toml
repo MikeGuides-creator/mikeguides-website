@@ -1,6 +1,3 @@
 [build]
-  command = "echo '--- TAILWIND.CONFIG ---'; sed -n '1,120p' tailwind.config.js; echo '\n--- INPUT CSS ---'; sed -n '1,120p' css/tailwind.input.css; echo '\n--- RUN TAILWIND ---'; npx --yes tailwindcss -c tailwind.config.js -i ./css/tailwind.input.css -o ./css/site.css --minify; echo '\n--- CSS DIR ---'; ls -la css; echo '\n--- SITE.CSS BYTES ---'; wc -c css/site.css; echo '\n--- SITE.CSS HEAD ---'; head -n 40 css/site.css"
+  command = "npx --yes tailwindcss -c tailwind.config.js -i ./css/tailwind.input.css -o ./css/site.css --minify"
   publish = "."
-
-[build.environment]
-  NODE_VERSION = "20"
