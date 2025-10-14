@@ -9,24 +9,25 @@
   <!-- ✅ load your Tailwind build -->
   <link rel="stylesheet" href="/css/site.css?v=2025-10-11" />
 
-  <!-- Poppins font (ensure .font-poppins works) -->
-  <link href="https://fonts.googleapis.com/css?family=Poppins:400,600,700&display=swap" rel="stylesheet">
-
   <!-- (Optional) keep small page-specific CSS here -->
-  <style>
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;margin:0;background:#f9fafb;color:#111827}
-    .wrap{max-width:1100px;margin:0 auto;padding:24px}
-    h1{font-size:28px;margin:8px 0 20px}
-    .grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
-    .card{background:#fff;border-radius:16px;box-shadow:0 1px 4px rgba(0,0,0,.08);overflow:hidden;border:1px solid #e5e7eb}
-    .card img{display:block;width:100%;height:160px;object-fit:cover}
-    .card .b{padding:14px}
-    .t{font-weight:600;margin:0 0 6px;font-size:18px}
-    .p{font-weight:700}
-    .cta{display:inline-block;margin-top:10px;background:#2563eb;color:#fff;padding:8px 12px;border-radius:10px;text-decoration:none}
-    .cta:hover{opacity:.9}
-    .font-poppins { font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif; }
-  </style>
+ <style>
+  /* Safety: ensure the page can scroll even if some global CSS clamps height */
+  html, body { height:auto; overflow:auto; }
+
+  /* Fallback grid (works even if Tailwind classes didn't compile) */
+  #products-grid {
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+    align-content: start;
+  }
+
+  /* Basic card visuals (keeps layout usable without Tailwind) */
+  .card{background:#fff;border-radius:16px;box-shadow:0 1px 4px rgba(0,0,0,.08);overflow:hidden;border:1px solid #e5e7eb}
+  .card img{display:block;width:100%;height:160px;object-fit:cover}
+  .font-poppins { font-family: Poppins, Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+</style>
+
 </head>
 
 <body>
