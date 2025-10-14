@@ -1,2 +1,18 @@
-/products.html  /products/  301!
-/*              /404.html   404
+# Single-file route → folder page
+/products.html      /products/                                  301!
+
+# Product shortlinks (with UTMs so Gumroad attributes properly)
+# Feel free to tweak utm_campaign values
+/buy/visual-ai-studio           https://mikeguides8.gumroad.com/l/visual-ai-studio?utm_source=site&utm_medium=button&utm_campaign=product  301!
+/buy/chatgpt-mastery            https://mikeguides8.gumroad.com/l/chatgpt-mastery-simulator?utm_source=site&utm_medium=button&utm_campaign=product  301!
+/buy/ai-writing-workshop        https://mikeguides8.gumroad.com/l/AI_Writing_Workshop?utm_source=site&utm_medium=button&utm_campaign=product  301!
+/buy/ai-business-automation-roi https://mikeguides8.gumroad.com/l/ai-business-automation-roi?utm_source=site&utm_medium=button&utm_campaign=product  301!
+/buy/bundle                     https://mikeguides8.gumroad.com/l/business_bundle_builder?utm_source=site&utm_medium=button&utm_campaign=bundle  301!
+/buy/pricing-for-profit         https://mikeguides8.gumroad.com/l/PRICING_FOR_PROFIT?utm_source=site&utm_medium=button&utm_campaign=product  301!
+
+# Trailing-slash conveniences
+/guides       /guides/     301
+/toolkit      /toolkit/    301
+
+# Catch-all (keep last)
+/*             /404.html    404
