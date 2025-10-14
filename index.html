@@ -28,17 +28,23 @@
 
   <!-- Small page-specific CSS only -->
   <style>
-    :root{ --mg-blue:#2563eb; --mg-green:#22c55e; --mg-bg:#f9fafb; --mg-ink:#0f172a; }
-    body{ font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif; background:var(--mg-bg); color:var(--mg-ink); }
-    .brand{ font-family:Poppins,Inter,sans-serif; }
+  /* Safety: ensure the page can scroll even if some global CSS clamps height */
+  html, body { height:auto; overflow:auto; }
 
-    /* Fallback grid in case Tailwind doesn't load */
-    #shop-guides .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-    }
-  </style>
+  /* Fallback grid (works even if Tailwind classes didn't compile) */
+  #products-grid {
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+    align-content: start;
+  }
+
+  /* Basic card visuals (keeps layout usable without Tailwind) */
+  .card{background:#fff;border-radius:16px;box-shadow:0 1px 4px rgba(0,0,0,.08);overflow:hidden;border:1px solid #e5e7eb}
+  .card img{display:block;width:100%;height:160px;object-fit:cover}
+  .font-poppins { font-family: Poppins, Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+</style>
+
 </head>
 <body class="min-h-screen flex flex-col">
 
