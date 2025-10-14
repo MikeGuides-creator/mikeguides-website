@@ -6,69 +6,38 @@
   <title>MikeGuides — Interactive HTML Guides</title>
   <meta name="description" content="Interactive HTML guides, calculators, and toolkits to help small businesses price smarter, market faster, and grow profits." />
   <meta name="google-site-verification" content="xUyGVvdnc0RSV3EUkeDmRdLiqH_uTKMfTxJxrZcMZrI" />
-  <!-- Fonts + Tailwind CDN -->
+
+  <!-- SEO / OG (deduped & placed correctly in <head>) -->
+  <link rel="canonical" href="https://mikeguides.co/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mikeguides.co/" />
+  <meta property="og:site_name" content="MikeGuides" />
+  <meta property="og:title" content="MikeGuides — Interactive HTML Guides & AI Toolkits for Small Business" />
+  <meta property="og:description" content="Guides and tools that turn AI into a practical assistant — price smarter, market faster, and automate the busywork." />
+  <meta property="og:image" content="https://mikeguides.co/assets/images/og-cover/mikeguides-og-1200x630.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="MikeGuides wordmark and tagline on cobalt background with green accent" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MikeGuides — Interactive HTML Guides & AI Toolkits for Small Business" />
+  <meta name="twitter:description" content="Interactive guides and AI-powered toolkits to help small businesses work smarter, faster, and more profitably." />
+  <meta name="twitter:image" content="https://mikeguides.co/assets/images/og-cover/mikeguides-og-1200x630.jpg" />
+
+  <!-- Tailwind build -->
   <link rel="stylesheet" href="/css/site.css?v=2025-10-11">
-<section class="bg-white">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
-    <h1 class="text-3xl sm:text-5xl font-poppins font-extrabold tracking-tight text-slate-900">
-      Interactive HTML Guides that get things done!
-    </h1>
-    <p class="mt-4 max-w-2xl text-base sm:text-lg text-slate-600">
-      Clear steps, zero fluff…
-    </p>
-    <div class="mt-8 flex flex-wrap gap-3">
-      <a class="inline-flex items-center rounded-xl bg-mg-blue px-5 py-3 text-white font-semibold shadow hover:bg-blue-600 transition">
-        Get the Bundle
-      </a>
-      <a class="inline-flex items-center rounded-xl px-5 py-3 text-mg-blue ring-1 ring-mg-blue/20 hover:bg-blue-50 transition">
-        Automate - Create - Elevate
-      </a>
-    </div>
-  </div>
-</section>
+
+  <!-- Small page-specific CSS only -->
   <style>
     :root{ --mg-blue:#2563eb; --mg-green:#22c55e; --mg-bg:#f9fafb; --mg-ink:#0f172a; }
     body{ font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif; background:var(--mg-bg); color:var(--mg-ink); }
     .brand{ font-family:Poppins,Inter,sans-serif; }
-    
+
     /* Fallback grid in case Tailwind doesn't load */
     #shop-guides .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 24px;
     }
-    <!-- Open Graph -->
-<meta property="og:image" content="https://mikeguides.co/assets/images/products/business-builder-bundle/business-builder-bundle-og-600x600.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Business Builder Bundle by MikeGuides">
-<!-- ✅ MikeGuides Homepage SEO + OG Meta -->
-<title>MikeGuides — Interactive HTML Guides & AI Toolkits for Small Business</title>
-<meta name="description" content="Interactive HTML guides, calculators, and AI toolkits that help small business owners and creators price smarter, market faster, and grow profits with less guesswork." />
-<link rel="canonical" href="https://mikeguides.co/" />
-
-<!-- Open Graph -->
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://mikeguides.co/" />
-<meta property="og:site_name" content="MikeGuides" />
-<meta property="og:title" content="MikeGuides — Interactive HTML Guides & AI Toolkits for Small Business" />
-<meta property="og:description" content="Guides and tools that turn AI into a practical assistant — price smarter, market faster, and automate the busywork." />
-<meta property="og:image" content="https://mikeguides.co/assets/images/products/business-builder-bundle/business-builder-bundle-og-600x600.jpg" />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
-<meta property="og:image:alt" content="MikeGuides wordmark and tagline on cobalt background with green accent" />
-
-<!-- Twitter -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="MikeGuides — Interactive HTML Guides & AI Toolkits for Small Business" />
-<meta name="twitter:description" content="Interactive guides and AI-powered toolkits to help small businesses work smarter, faster, and more profitably." />
-<meta name="twitter:image" content="https://mikeguides.co/assets/images/products/business-builder-bundle/business-builder-bundle-og-600x600.jpg" />
-
-<!-- Twitter -->
-<meta name="twitter:image" content="https://mikeguides.co/assets/images/products/business-builder-bundle/business-builder-bundle-og-600x600.jpg">
-<meta property="og:image" content="https://mikeguides.co/assets/images/og-cover/mikeguides-og-1200x630.jpg" />
-<meta name="twitter:image" content="https://mikeguides.co/assets/images/og-cover/mikeguides-og-1200x630.jpg" />
-
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -83,22 +52,29 @@
       <a class="hover:text-[var(--mg-blue)]" href="/">Home</a>
       <a class="hover:text-[var(--mg-blue)]" href="/guides/">Guides</a>
       <a class="hover:text-[var(--mg-blue)]" href="/toolkit/">Toolkit</a>
-      <a class="hover:text-[var(--mg-green)]" href="https://blog.pricingforprofit.co" class="hover:text-[var(--mg-green)]">Blog</a>
+      <a class="hover:text-[var(--mg-green)]" href="https://blog.pricingforprofit.co">Blog</a>
       <a class="hover:text-[var(--mg-blue)]" href="https://mikeguides8.gumroad.com" target="_blank" rel="noopener">Store</a>
       <a class="hover:text-[var(--mg-blue)]" href="/#contact">Contact</a>
     </nav>
   </header>
 
-<!-- Open Graph -->
-<meta property="og:image" content="https://mikeguides.co/assets/images/products/ai-writing-workshop/ai-writing-workshop-og-1200x630.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="AI Writing Workshop by MikeGuides">
+  <!-- NEW: 16:9 hero image (drop your PNGs in /assets/images/hero/) -->
+  <section class="relative">
+    <picture>
+      <source type="image/png" srcset="
+        /assets/images/hero/hero.v20251012a.960.png 960w,
+        /assets/images/hero/hero.v20251012a.1280.png 1280w,
+        /assets/images/hero/hero.v20251012a.1920.png 1920w" sizes="100vw">
+      <img
+        class="w-full aspect-[16/9] object-cover"
+        src="/assets/images/hero/hero.v20251012a.1280.png"
+        alt="MikeGuides — practical, modern guides and tools"
+        width="1280" height="720"
+        loading="eager" decoding="async" fetchpriority="high">
+    </picture>
+  </section>
 
-<!-- Twitter -->
-<meta name="twitter:image" content="https://mikeguides.co/assets/images/products/ai-writing-workshop/ai-writing-workshop-og-1200x630.jpg">
-
-  <!-- Hero -->
+  <!-- Hero content (your existing two-column intro) -->
   <main class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-8 items-center w-full">
     <section class="py-6">
       <h1 class="brand text-4xl md:text-5xl font-bold text-slate-900">
@@ -108,7 +84,7 @@
       <div class="mt-6 flex flex-col sm:flex-row gap-3">
         <!-- Primary Bundle button (blue) -->
         <a
-          href="https://mikeguides8.gumroad.com/l/business_bundle_builder?_gl=1*1jswvh1*_ga*MjAyMzE1OTg3NC4xNzU0ODgwNzA0*_ga_6LJN6D94N6*czE3NTkyNTE1MzMkbzEwJGcxJHQxNzU5MjUzMTE0JGo2MCRsMCRoMA.."
+          href="https://mikeguides8.gumroad.com/l/business_bundle_builder"
           target="_blank" rel="noopener"
           class="inline-flex items-center justify-center rounded-xl px-5 py-3 font-semibold text-white bg-[var(--mg-blue)] hover:opacity-90 transition"
         >
@@ -117,7 +93,7 @@
 
         <!-- Secondary Bundle button (green) -->
         <a
-          href="https://mikeguides8.gumroad.com/l/business_bundle_builder?_gl=1*1jswvh1*_ga*MjAyMzE1OTg3NC4xNzU0ODgwNzA0*_ga_6LJN6D94N6*czE3NTkyNTE1MzMkbzEwJGcxJHQxNzU5MjUzMTE0JGo2MCRsMCRoMA.."
+          href="https://mikeguides8.gumroad.com/l/business_bundle_builder"
           target="_blank" rel="noopener"
           class="inline-flex items-center justify-center rounded-xl px-5 py-3 font-semibold text-white bg-[var(--mg-green)] hover:opacity-90 transition"
         >
@@ -135,19 +111,19 @@
           <li>Interactive, mobile-friendly guides</li>
           <li>Lifetime updates</li>
         </ul>
-        <a href="https://mikeguides8.gumroad.com/l/business_bundle_builder?_gl=1*1rqs2aj*_ga*MjAyMzE1OTg3NC4xNzU0ODgwNzA0*_ga_6LJN6D94N6*czE3NTkyNTkwOTEkbzEyJGcwJHQxNzU5MjU5MDk1JGo1NiRsMCRoMA.." target="_blank" rel="noopener" class="mt-5 inline-block px-5 py-3 rounded-xl bg-[var(--mg-green)] text-white font-semibold">Get the Bundle</a>
+        <a href="https://mikeguides8.gumroad.com/l/business_bundle_builder" target="_blank" rel="noopener" class="mt-5 inline-block px-5 py-3 rounded-xl bg-[var(--mg-green)] text-white font-semibold">Get the Bundle</a>
       </div>
     </section>
   </main>
 
-  <!-- Shop the Guides (matches /guides page styles) -->
+  <!-- Shop the Guides -->
   <section id="shop-guides" class="relative py-12 sm:py-16">
     <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl">
         <h2 class="brand font-extrabold text-3xl sm:text-4xl">Shop the Guides</h2>
         <p class="mt-2 text-slate-600">Interactive HTML guides, calculators, and toolkits to help you price smarter, market better, and grow profits.</p>
         <div class="mt-6 flex flex-col sm:flex-row gap-3">
-          <a href="https://mikeguides8.gumroad.com/l/business_bundle_builder?_gl=1*1jswvh1*_ga*MjAyMzE1OTg3NC4xNzU0ODgwNzA0*_ga_6LJN6D94N6*czE3NTkyNTE1MzMkbzEwJGcxJHQxNzU5MjUzMTE0JGo2MCRsMCRoMA.." target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-xl px-5 py-3 font-semibold text-white bg-[var(--mg-blue)] hover:opacity-90 transition">🎁 Bundle - Brand new low prices!</a>
+          <a href="https://mikeguides8.gumroad.com/l/business_bundle_builder" target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-xl px-5 py-3 font-semibold text-white bg-[var(--mg-blue)] hover:opacity-90 transition">🎁 Bundle - Brand new low prices!</a>
           <a href="/toolkit/" class="inline-flex items-center justify-center rounded-xl px-5 py-3 font-semibold text-[var(--mg-blue)] border border-[var(--mg-blue)] hover:bg-[var(--mg-blue)] hover:text-white transition">Open AI Marketing Toolkit</a>
         </div>
       </div>
@@ -162,7 +138,7 @@
           <h3 class="mt-3 brand text-2xl font-bold">Business Builder Bundle</h3>
           <p class="mt-2 text-slate-600">A curated set of MikeGuides tools to price smarter, market better, and move faster — all in one package.</p>
           <div class="mt-5 flex flex-wrap gap-3">
-            <a href="https://mikeguides8.gumroad.com/l/business_bundle_builder?_gl=1*1jswvh1*_ga*MjAyMzE1OTg3NC4xNzU0ODgwNzA0*_ga_6LJN6D94N6*czE3NTkyNTE1MzMkbzEwJGcxJHQxNzU5MjUzMTE0JGo2MCRsMCRoMA.." target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white bg-[var(--mg-blue)] hover:opacity-90">Get the Bundle</a>
+            <a href="https://mikeguides8.gumroad.com/l/business_bundle_builder" target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white bg-[var(--mg-blue)] hover:opacity-90">Get the Bundle</a>
           </div>
         </article>
 
@@ -205,7 +181,6 @@
             <a href="https://mikeguides8.gumroad.com/l/pricing-mistakes-checklist" target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white bg-[var(--mg-green)] hover:opacity-90">Get it Free</a>
           </div>
         </article>
-
       </div>
     </div>
   </section>
