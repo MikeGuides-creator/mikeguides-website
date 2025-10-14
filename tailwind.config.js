@@ -7,7 +7,7 @@ module.exports = {
   theme: {
     extend: {
       colors: { 'mg-blue': '#2563eb' },
-      fontFamily: { poppins: ['Poppins', 'ui-sans-serif', 'system-ui'] }
+      fontFamily: { poppins: ['Poppins','ui-sans-serif','system-ui'] },
     }
   },
   plugins: []
