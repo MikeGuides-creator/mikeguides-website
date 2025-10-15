@@ -1,0 +1,39 @@
+name: Daily SEO Signals
+on:
+  schedule:
+    - cron: "15 14 * * *"   # ~9:15 AM America/Chicago during CDT
+  workflow_dispatch: {}
+jobs:
+  seo:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - run: npm i googleapis@140 undici@6
+      - run: node tools/gsc.mjs
+        env:
+          GSC_SITE_URL: "https://mikeguides.co"
+          GCP_CLIENT_EMAIL: ${{ secrets.GCP_CLIENT_EMAIL }}
+          GCP_PRIVATE_KEY: ${{ secrets.GCP_PRIVATE_KEY }}
+      - run: node tools/plausible.mjs
+        env:
+          PLAUSIBLE_DOMAIN: "mikeguides.co"
+          PLAUSIBLE_TOKEN:  ${{ secrets.PLAUSIBLE_TOKEN }}
+      - name: Commit + Issue
+        run: |
+          mkdir -p reports/$(date +%F)
+          mv gsc-insights.md plausible-insights.md reports/$(date +%F)/
+          git config user.name "site-bot"
+          git config user.email "bot@example.com"
+          git add reports/
+          git commit -m "chore(reports): seo signals $(date +%F)" || echo "no changes"
+          git push
+      - uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: "SEO Insights — $(date +%F)"
+          content-file: reports/$(date +%F)/gsc-insights.md
+          labels: seo, automation
