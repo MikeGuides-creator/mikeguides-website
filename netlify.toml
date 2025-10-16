@@ -1,4 +1,8 @@
 [build]
-command = "npx --yes tailwindcss -c tailwind.config.js -i ./css/tailwind.input.css -o ./css/site.css --minify"
-publish = "/"
+  publish = "."
+  # command = ""
 
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
