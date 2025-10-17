@@ -21,9 +21,7 @@ body{
   background:var(--bg);
   line-height:1.6;
 }
-
 /* …(keep the rest exactly as you have)… */
-
 
 /* Layout helpers */
 .container{max-width:1080px;margin:0 auto;padding:24px}
