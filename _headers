@@ -2,17 +2,28 @@
 # Global security + HTML caching
 # -----------------------------
 /*
-  # --- Security hardening (safe defaults) ---
   Strict-Transport-Security: max-age=31536000
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), camera=(), microphone=(), interest-cohort=()
 
-  # --- Content Security Policy (enables Plausible + your current inline styles) ---
   Content-Security-Policy: default-src 'self'; script-src 'self' https://plausible.io 'unsafe-inline'; connect-src 'self' https://plausible.io https://plausible.events; img-src 'self' https: data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self' https: data:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests
 
-  Cache-Control: max-age=0, must-revalidate
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/robots.txt
+  Cache-Control: public, max-age=86400
+  Content-Type: text/plain; charset=utf-8
+
+/sitemap.xml
+  Cache-Control: public, max-age=86400
+  Content-Type: application/xml; charset=utf-8
+
 
 /images/*
   Cache-Control: public, max-age=31536000, immutable
@@ -20,8 +31,6 @@
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
 
-/*.html
-  Cache-Control: max-age=0, must-revalidate
 
 /assets/*favicon*.svg
   Cache-Control: public, max-age=31536000, immutable
