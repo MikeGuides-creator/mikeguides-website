@@ -27,3 +27,66 @@ p{margin:8px 0 0}
 
 /* Obvious hero color so you see styling applied */
 .hero, .hero-section{background:linear-gradient(180deg,#1a237e 0%, #121a5a 100%);color:#fff}
+
+/* ===== Tailwind-lite shim for MikeGuides (add at end of site.css) ===== */
+.max-w-6xl{max-width:72rem}
+.mx-auto{margin-left:auto;margin-right:auto}
+.w-full{width:100%}
+.min-h-screen{min-height:100vh}
+.flex{display:flex}
+.flex-col{flex-direction:column}
+.items-center{align-items:center}
+.justify-between{justify-content:space-between}
+.inline-flex{display:inline-flex}
+.grid{display:grid}
+.gap-3{gap:.75rem}
+.gap-5{gap:1.25rem}
+.gap-6{gap:1.5rem}
+.gap-8{gap:2rem}
+.px-4{padding-left:1rem;padding-right:1rem}
+.px-6{padding-left:1.5rem;padding-right:1.5rem}
+.py-3{padding-top:.75rem;padding-bottom:.75rem}
+.py-6{padding-top:1.5rem;padding-bottom:1.5rem}
+.mt-2{margin-top:.5rem}
+.mt-3{margin-top:.75rem}
+.mt-4{margin-top:1rem}
+.mt-5{margin-top:1.25rem}
+.mt-6{margin-top:1.5rem}
+.mt-8{margin-top:2rem}
+.text-sm{font-size:.875rem;line-height:1.25rem}
+.text-2xl{font-size:1.5rem;line-height:2rem}
+.text-3xl{font-size:1.875rem;line-height:2.25rem}
+.text-4xl{font-size:2.25rem;line-height:2.5rem}
+.font-semibold{font-weight:600}
+.font-bold{font-weight:700}
+.font-extrabold{font-weight:800}
+.text-slate-900{color:#0f172a}
+.text-slate-700{color:#334155}
+.text-slate-600{color:#475569}
+.text-slate-500{color:#64748b}
+.rounded-xl{border-radius:.75rem}
+.rounded-2xl{border-radius:1rem}
+.border{border:1px solid #e5e7eb}
+.border-slate-200{border-color:#e5e7eb}
+.shadow{box-shadow:0 1px 4px rgba(0,0,0,.08)}
+.shadow-\[0_10px_25px_-10px_rgba\(2,6,23,.1\)\]{box-shadow:0 10px 25px -10px rgba(2,6,23,.1)}
+.aspect-\[4\/3\]{aspect-ratio:4/3}
+.object-cover{object-fit:cover}
+.hover\:opacity-90:hover{opacity:.9}
+.text-\[var\(--mg-blue\)\]{color:var(--mg-blue)}
+.bg-\[var\(--mg-blue\)\]{background-color:var(--mg-blue)}
+.bg-\[var\(--mg-green\)\]{background-color:var(--mg-green)}
+.border-\[var\(--mg-blue\)\]{border-color:var(--mg-blue)}
+/* responsive grid utilities seen in your markup */
+@media (min-width:640px){
+  .sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sm\:py-16{padding-top:4rem;padding-bottom:4rem}
+}
+@media (min-width:768px){
+  .md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (min-width:1024px){
+  .lg\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .lg\:px-8{padding-left:2rem;padding-right:2rem}
+}
+
