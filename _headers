@@ -8,7 +8,19 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), camera=(), microphone=(), interest-cohort=()
 
-  Content-Security-Policy: default-src 'self'; script-src 'self' https://plausible.io 'unsafe-inline'; connect-src 'self' https://plausible.io https://plausible.events; img-src 'self' https: data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self' https: data:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests
+  /*
+  Content-Security-Policy: default-src 'self';
+  script-src 'self' https://plausible.io https://cdn.tailwindcss.com 'unsafe-inline';
+  connect-src 'self' https://plausible.io https://plausible.events;
+  img-src 'self' data: blob:;
+  style-src 'self' 'unsafe-inline';
+  font-src 'self' data:;
+  object-src 'none';
+  base-uri 'self';
+  frame-ancestors 'none';
+  form-action 'self';
+  upgrade-insecure-requests
+
 
 /*.html
   Cache-Control: public, max-age=0, must-revalidate
