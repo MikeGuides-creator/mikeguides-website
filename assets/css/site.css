@@ -93,4 +93,58 @@ p{margin:8px 0 0}
   .lg\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
   .lg\:px-8{padding-left:2rem;padding-right:2rem}
 }
+/* ======== MikeGuides polish v1 ======== */
+:root{
+  --mg-blue:#1a237e;         /* brand indigo */
+  --mg-green:#16a34a;        /* accent green */
+  --mg-text:#0b0f19;
+  --mg-muted:#5b6072;
+  --mg-bg:#ffffff;
+  --mg-card:#f8fafc;
+  --mg-radius:16px;
+  --mg-shadow:0 10px 25px -12px rgba(2,6,23,.18);
+}
+
+html,body{background:var(--mg-bg);color:var(--mg-text);}
+.brand{color:var(--mg-blue)}
+.text-muted{color:var(--mg-muted)}
+.container{max-width:1200px;margin:0 auto;padding:24px}
+
+/* Header */
+header{position:sticky;top:0;background:#fff;backdrop-filter:saturate(1.2) blur(6px);
+  border-bottom:1px solid #e5e7eb; z-index:20}
+header a{color:inherit;text-decoration:none}
+nav a{opacity:.85}
+nav a:hover{opacity:1;color:var(--mg-blue)}
+
+/* Hero picture full-bleed */
+.hero-picture{display:block;width:100%;max-height:540px;object-fit:cover}
+
+/* Section rhythm */
+.section{padding:56px 0}
+.section h2{font-weight:800;font-size:clamp(22px,3.5vw,30px);margin:0 0 12px}
+
+/* Cards / grid */
+.grid{display:grid;gap:24px}
+.grid-3{grid-template-columns: 1fr}
+@media (min-width: 640px){ .grid-3{grid-template-columns: repeat(2,1fr)}}
+@media (min-width: 1024px){ .grid-3{grid-template-columns: repeat(3,1fr)}}
+
+.card{
+  background:#fff;border:1px solid #e5e7eb;border-radius:var(--mg-radius);
+  box-shadow:var(--mg-shadow);padding:20px;
+}
+.card img{width:100%;height:220px;object-fit:cover;border-radius:12px}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;
+  padding:12px 18px;border-radius:12px;font-weight:700;text-decoration:none}
+.btn-primary{background:var(--mg-blue);color:#fff}
+.btn-primary:hover{opacity:.9}
+.btn-accent{background:var(--mg-green);color:#fff}
+.btn-outline{border:2px solid var(--mg-blue);color:var(--mg-blue)}
+.btn-outline:hover{background:var(--mg-blue);color:#fff}
+
+/* Footer */
+footer{border-top:1px solid #e5e7eb;color:var(--mg-muted)}
 
