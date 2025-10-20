@@ -77,6 +77,10 @@ p{margin:8px 0 0}
 .bg-\[var\(--mg-blue\)\]{background-color:var(--mg-blue)}
 .bg-\[var\(--mg-green\)\]{background-color:var(--mg-green)}
 .border-\[var\(--mg-blue\)\]{border-color:var(--mg-blue)}
+
+:root{ --mg-blue:#1a237e; --mg-green:#16a34a; }
+.brand{ color:var(--mg-blue); }
+
 /* responsive grid utilities seen in your markup */
 @media (min-width:640px){
   .sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
