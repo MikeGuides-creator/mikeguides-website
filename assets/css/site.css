@@ -147,4 +147,31 @@ nav a:hover{opacity:1;color:var(--mg-blue)}
 
 /* Footer */
 footer{border-top:1px solid #e5e7eb;color:var(--mg-muted)}
+/* --- Hero --- */
+.hero-picture{display:block;width:100%;max-height:560px;object-fit:cover}
+
+/* --- Section rhythm --- */
+.section{padding:56px 0}
+.section h2{font-weight:800;font-size:clamp(22px,3.6vw,30px);margin:0 0 12px}
+
+/* --- Product grid (3-up responsive) --- */
+#shop-guides .grid{display:grid;gap:24px}
+@media (min-width:640px){ #shop-guides .grid{grid-template-columns:repeat(2,1fr)} }
+@media (min-width:1024px){ #shop-guides .grid{grid-template-columns:repeat(3,1fr)} }
+
+/* --- Cards --- */
+.card{
+  background:#fff;border:1px solid #e5e7eb;border-radius:16px;
+  box-shadow:0 10px 25px -12px rgba(2,6,23,.18);padding:20px
+}
+.card img{width:100%;height:220px;object-fit:cover;border-radius:12px}
+
+/* --- Buttons --- */
+.btn{display:inline-flex;align-items:center;justify-content:center;
+  padding:12px 18px;border-radius:12px;font-weight:700;text-decoration:none}
+.btn-primary{background:#1a237e;color:#fff}
+.btn-primary:hover{opacity:.9}
+.btn-accent{background:#16a34a;color:#fff}
+.btn-outline{border:2px solid #1a237e;color:#1a237e}
+.btn-outline:hover{background:#1a237e;color:#fff}
 
