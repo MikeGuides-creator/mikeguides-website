@@ -1,29 +1,14 @@
-# -----------------------------
-# Global security + HTML caching
-# -----------------------------
 /*
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://plausible.io 'unsafe-inline'; connect-src 'self' https://plausible.io https://plausible.events; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests
   Strict-Transport-Security: max-age=31536000
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), camera=(), microphone=(), interest-cohort=()
-  Content-Security-Policy: default-src 'self';
-    script-src 'self' https://plausible.io 'unsafe-inline';
-    connect-src 'self' https://plausible.io https://plausible.events;
-    img-src 'self' data: blob:;
-    style-src 'self' 'unsafe-inline';
-    font-src 'self' data:;
-    object-src 'none';
-    base-uri 'self';
-    frame-ancestors 'none';
-    form-action 'self';
-    upgrade-insecure-requests
 
-# HTML should be revalidated so edits show immediately
 /*.html
   Cache-Control: public, max-age=0, must-revalidate
 
-# Long-cache static assets
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
 
@@ -40,28 +25,3 @@
 /sitemap.xml
   Cache-Control: public, max-age=86400
   Content-Type: application/xml; charset=utf-8
-
-# Favicons
-/assets/*favicon*.svg
-  Cache-Control: public, max-age=31536000, immutable
-  Content-Type: image/svg+xml
-
-/assets/*favicon*-180.png
-  Cache-Control: public, max-age=31536000, immutable
-  Content-Type: image/png
-
-/assets/*favicon*-32.png
-  Cache-Control: public, max-age=31536000, immutable
-  Content-Type: image/png
-
-/assets/*favicon*-16.png
-  Cache-Control: public, max-age=31536000, immutable
-  Content-Type: image/png
-
-/assets/favicon.ico
-  Cache-Control: public, max-age=31536000, immutable
-  Content-Type: image/x-icon
-
-/assets/apple-touch-icon.png
-  Cache-Control: public, max-age=31536000, immutable
-  Content-Type: image/png
