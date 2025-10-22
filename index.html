@@ -1,22 +1,22 @@
 <!doctype html>
 <html lang="en">
 <head>
-  
-   <script defer data-domain="mikeguides.co" src="https://plausible.io/js/script.js"></script>
-  
-  <link rel="icon" type="image/svg+xml" href="/assets/mg-favicon-dark.svg">
-<link rel="icon" href="/assets/favicon.ico" sizes="any">
-<link rel="apple-touch-icon" href="/assets/mg-favicon-dark-180.png" sizes="180x180">
-<link rel="icon" type="image/png" href="/assets/mg-favicon-dark-32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="/assets/mg-favicon-dark-16.png" sizes="16x16">
-
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>MikeGuides — Interactive HTML Guides</title>
   <meta name="description" content="Interactive HTML guides, calculators, and toolkits to help small businesses price smarter, market faster, and grow profits." />
   <meta name="google-site-verification" content="xUyGVvdnc0RSV3EUkeDmRdLiqH_uTKMfTxJxrZcMZrI" />
 
-  <!-- SEO / OG (deduped & placed correctly in <head>) -->
+  <!-- Single stylesheet (matches your repo: /css/site.css) -->
+  <link rel="stylesheet" href="/css/site.css?v=10" />
+
+  <!-- Favicons (match your root-level files) -->
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
+  <!-- (Optional) If you prefer the mg-favicon-dark-* set instead, keep those files and point these hrefs to /mg-favicon-dark-*.png and /mg-favicon-dark.svg at the root -->
+
+  <!-- Canonical / OG / Twitter -->
   <link rel="canonical" href="https://mikeguides.co/" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://mikeguides.co/" />
@@ -32,27 +32,24 @@
   <meta name="twitter:description" content="Interactive guides and AI-powered toolkits to help small businesses work smarter, faster, and more profitably." />
   <meta name="twitter:image" content="https://mikeguides.co/assets/images/og-cover/mikeguides-og-1200x630.jpg" />
 
-  <!-- Analytics -->
-<script defer data-domain="mikeguides.co" src="https://plausible.io/js/script.js"></script>
+  <!-- Plausible Analytics (keep only one) -->
+  <script defer data-domain="mikeguides.co" src="https://plausible.io/js/script.js"></script>
 
-<!-- Your site CSS (after Tailwind) -->
-<link rel="stylesheet" href="/assets/css/site.css?v=9">
-
-  /* Fallback grid (works even if Tailwind classes didn't compile) */
-  #products-grid {
-    display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 24px;
-    align-content: start;
-  }
-
-  /* Basic card visuals (keeps layout usable without Tailwind) */
-  .card{background:#fff;border-radius:16px;box-shadow:0 1px 4px rgba(0,0,0,.08);overflow:hidden;border:1px solid #e5e7eb}
-  .card img{display:block;width:100%;height:160px;object-fit:cover}
-  .font-poppins { font-family: Poppins, Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
-</style>
-
+  <!-- Optional: fallback CSS (wrap it in a <style> tag if you keep it here) -->
+  <style>
+    /* Fallback grid (works even if Tailwind didn’t compile) */
+    #products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 24px;
+      align-content: start;
+    }
+    .card{background:#fff;border-radius:16px;box-shadow:0 1px 4px rgba(0,0,0,.08);overflow:hidden;border:1px solid #e5e7eb}
+    .card img{display:block;width:100%;height:160px;object-fit:cover}
+    .font-poppins { font-family: Poppins, Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+  </style>
 </head>
+
 <body class="min-h-screen flex flex-col">
 
   <!-- Header -->
