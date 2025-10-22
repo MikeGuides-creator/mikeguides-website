@@ -1,34 +1,79 @@
-/* Base */
-*{box-sizing:border-box}
-html,body{height:100%}
-body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji";color:#0b0f19;background:#ffffff;line-height:1.6}
-.container{max-width:1080px;margin:0 auto;padding:24px}
-
-/* Generic sections so content isn't plain */
-.section,
-.hero,
-.hero-section,
-.problem-section,
-.solution-section,
-.testimonials-section,
-.final-cta-section{
-  background:#fff;border-radius:16px;padding:32px;margin:24px 0;border:1px solid #e5e7eb;
-  box-shadow:0 10px 24px -12px rgba(2,6,23,.12);
+/* ===== Base / Tokens ===== */
+:root{
+  --mg-blue:#1a237e;        /* brand indigo */
+  --mg-green:#16a34a;       /* accent green */
+  --mg-text:#0b0f19;
+  --mg-muted:#5b6072;
+  --mg-bg:#ffffff;
+  --mg-card:#f8fafc;
+  --mg-radius:16px;
+  --mg-shadow:0 10px 25px -12px rgba(2,6,23,.18);
 }
 
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Noto Sans","Apple Color Emoji","Segoe UI Emoji";
+  color:var(--mg-text); background:var(--mg-bg); line-height:1.6;
+}
+.container{max-width:1200px;margin:0 auto;padding:24px}
 h1{font-size:clamp(32px,5vw,48px);line-height:1.1;margin:0 0 12px}
-h2{font-size:clamp(22px,3.5vw,28px);margin:0 0 8px}
+h2{font-size:clamp(22px,3.6vw,30px);margin:0 0 12px}
 p{margin:8px 0 0}
+.brand{color:var(--mg-blue)}
+.text-muted{color:var(--mg-muted)}
 
-/* Simple grid helpers (if your markup uses them) */
+/* ===== Header ===== */
+header{
+  position:sticky; top:0; z-index:20;
+  background:#fff; border-bottom:1px solid #e5e7eb;
+  backdrop-filter:saturate(1.2) blur(6px);
+  -webkit-backdrop-filter:saturate(1.2) blur(6px);
+}
+header a{color:inherit;text-decoration:none}
+nav a{opacity:.85} nav a:hover{opacity:1;color:var(--mg-blue)}
+
+/* ===== Hero (full-bleed picture) ===== */
+.hero-picture{display:block;width:100%;max-height:560px;object-fit:cover}
+
+/* ===== Sections ===== */
+.section{padding:56px 0}
+.section h2{font-weight:800}
+
+/* ===== Grid (1/2/3 up) ===== */
 .grid{display:grid;gap:24px}
-.grid-2{grid-template-columns:1fr}
-@media (min-width: 960px){ .grid-2{grid-template-columns:1fr 1fr} }
+.grid-3{grid-template-columns:1fr}
+@media (min-width:640px){ .grid-3{grid-template-columns:repeat(2,1fr)} }
+@media (min-width:1024px){ .grid-3{grid-template-columns:repeat(3,1fr)} }
 
-/* Obvious hero color so you see styling applied */
-.hero, .hero-section{background:linear-gradient(180deg,#1a237e 0%, #121a5a 100%);color:#fff}
+/* Specific shop grid hook if you use it */
+#shop-guides .grid{display:grid;gap:24px}
+@media (min-width:640px){ #shop-guides .grid{grid-template-columns:repeat(2,1fr)} }
+@media (min-width:1024px){ #shop-guides .grid{grid-template-columns:repeat(3,1fr)} }
 
-/* ===== Tailwind-lite shim for MikeGuides (add at end of site.css) ===== */
+/* ===== Cards ===== */
+.card{
+  background:#fff; border:1px solid #e5e7eb; border-radius:var(--mg-radius);
+  box-shadow:var(--mg-shadow); padding:20px;
+}
+.card img{
+  width:100%; height:220px; object-fit:cover; border-radius:12px;
+}
+
+/* ===== Buttons ===== */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:12px 18px; border-radius:12px; font-weight:700; text-decoration:none;
+}
+.btn-primary{background:var(--mg-blue); color:#fff}
+.btn-primary:hover{opacity:.9}
+.btn-accent{background:var(--mg-green); color:#fff}
+.btn-outline{border:2px solid var(--mg-blue); color:var(--mg-blue)}
+.btn-outline:hover{background:var(--mg-blue); color:#fff}
+
+/* ===== Utilities (Tailwind-lite shim) ===== */
+/* spacing / layout */
 .max-w-6xl{max-width:72rem}
 .mx-auto{margin-left:auto;margin-right:auto}
 .w-full{width:100%}
@@ -38,12 +83,9 @@ p{margin:8px 0 0}
 .items-center{align-items:center}
 .justify-between{justify-content:space-between}
 .inline-flex{display:inline-flex}
-.grid{display:grid}
-.gap-3{gap:.75rem}
-.gap-5{gap:1.25rem}
-.gap-6{gap:1.5rem}
-.gap-8{gap:2rem}
+.inline-block{display:inline-block}
 .px-4{padding-left:1rem;padding-right:1rem}
+.px-5{padding-left:1.25rem;padding-right:1.25rem}
 .px-6{padding-left:1.5rem;padding-right:1.5rem}
 .py-3{padding-top:.75rem;padding-bottom:.75rem}
 .py-6{padding-top:1.5rem;padding-bottom:1.5rem}
@@ -53,6 +95,13 @@ p{margin:8px 0 0}
 .mt-5{margin-top:1.25rem}
 .mt-6{margin-top:1.5rem}
 .mt-8{margin-top:2rem}
+
+.grid{display:grid}
+.gap-3{gap:.75rem}
+.gap-5{gap:1.25rem}
+.gap-6{gap:1.5rem}
+.gap-8{gap:2rem}
+
 .text-sm{font-size:.875rem;line-height:1.25rem}
 .text-2xl{font-size:1.5rem;line-height:2rem}
 .text-3xl{font-size:1.875rem;line-height:2.25rem}
@@ -64,27 +113,31 @@ p{margin:8px 0 0}
 .text-slate-700{color:#334155}
 .text-slate-600{color:#475569}
 .text-slate-500{color:#64748b}
+
 .rounded-xl{border-radius:.75rem}
 .rounded-2xl{border-radius:1rem}
 .border{border:1px solid #e5e7eb}
 .border-slate-200{border-color:#e5e7eb}
 .shadow{box-shadow:0 1px 4px rgba(0,0,0,.08)}
 .shadow-\[0_10px_25px_-10px_rgba\(2,6,23,.1\)\]{box-shadow:0 10px 25px -10px rgba(2,6,23,.1)}
+
 .aspect-\[4\/3\]{aspect-ratio:4/3}
 .object-cover{object-fit:cover}
 .hover\:opacity-90:hover{opacity:.9}
+
 .text-\[var\(--mg-blue\)\]{color:var(--mg-blue)}
 .bg-\[var\(--mg-blue\)\]{background-color:var(--mg-blue)}
 .bg-\[var\(--mg-green\)\]{background-color:var(--mg-green)}
 .border-\[var\(--mg-blue\)\]{border-color:var(--mg-blue)}
 
-:root{ --mg-blue:#1a237e; --mg-green:#16a34a; }
-.brand{ color:var(--mg-blue); }
+.w-2\.5{width:0.625rem}
+.h-6{height:1.5rem}
 
-/* responsive grid utilities seen in your markup */
+/* responsive helpers */
 @media (min-width:640px){
   .sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
   .sm\:py-16{padding-top:4rem;padding-bottom:4rem}
+  .sm\:flex-row{flex-direction:row}
 }
 @media (min-width:768px){
   .md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -93,104 +146,3 @@ p{margin:8px 0 0}
   .lg\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
   .lg\:px-8{padding-left:2rem;padding-right:2rem}
 }
-/* ======== MikeGuides polish v1 ======== */
-:root{
-  --mg-blue:#1a237e;         /* brand indigo */
-  --mg-green:#16a34a;        /* accent green */
-  --mg-text:#0b0f19;
-  --mg-muted:#5b6072;
-  --mg-bg:#ffffff;
-  --mg-card:#f8fafc;
-  --mg-radius:16px;
-  --mg-shadow:0 10px 25px -12px rgba(2,6,23,.18);
-}
-
-html,body{background:var(--mg-bg);color:var(--mg-text);}
-.brand{color:var(--mg-blue)}
-.text-muted{color:var(--mg-muted)}
-.container{max-width:1200px;margin:0 auto;padding:24px}
-
-/* Header */
-header{position:sticky;top:0;background:#fff;backdrop-filter:saturate(1.2) blur(6px);
-  border-bottom:1px solid #e5e7eb; z-index:20}
-header a{color:inherit;text-decoration:none}
-nav a{opacity:.85}
-nav a:hover{opacity:1;color:var(--mg-blue)}
-
-/* Hero picture full-bleed */
-.hero-picture{display:block;width:100%;max-height:540px;object-fit:cover}
-
-/* Section rhythm */
-.section{padding:56px 0}
-.section h2{font-weight:800;font-size:clamp(22px,3.5vw,30px);margin:0 0 12px}
-
-/* Cards / grid */
-.grid{display:grid;gap:24px}
-.grid-3{grid-template-columns: 1fr}
-@media (min-width: 640px){ .grid-3{grid-template-columns: repeat(2,1fr)}}
-@media (min-width: 1024px){ .grid-3{grid-template-columns: repeat(3,1fr)}}
-
-.card{
-  background:#fff;border:1px solid #e5e7eb;border-radius:var(--mg-radius);
-  box-shadow:var(--mg-shadow);padding:20px;
-}
-.card img{width:100%;height:220px;object-fit:cover;border-radius:12px}
-
-/* Buttons */
-.btn{display:inline-flex;align-items:center;justify-content:center;
-  padding:12px 18px;border-radius:12px;font-weight:700;text-decoration:none}
-.btn-primary{background:var(--mg-blue);color:#fff}
-.btn-primary:hover{opacity:.9}
-.btn-accent{background:var(--mg-green);color:#fff}
-.btn-outline{border:2px solid var(--mg-blue);color:var(--mg-blue)}
-.btn-outline:hover{background:var(--mg-blue);color:#fff}
-
-/* Footer */
-footer{border-top:1px solid #e5e7eb;color:var(--mg-muted)}
-/* --- Hero --- */
-.hero-picture{display:block;width:100%;max-height:560px;object-fit:cover}
-
-/* --- Section rhythm --- */
-.section{padding:56px 0}
-.section h2{font-weight:800;font-size:clamp(22px,3.6vw,30px);margin:0 0 12px}
-
-/* --- Product grid (3-up responsive) --- */
-#shop-guides .grid{display:grid;gap:24px}
-@media (min-width:640px){ #shop-guides .grid{grid-template-columns:repeat(2,1fr)} }
-@media (min-width:1024px){ #shop-guides .grid{grid-template-columns:repeat(3,1fr)} }
-
-/* --- Cards --- */
-.card{
-  background:#fff;border:1px solid #e5e7eb;border-radius:16px;
-  box-shadow:0 10px 25px -12px rgba(2,6,23,.18);padding:20px
-}
-.card img{width:100%;height:220px;object-fit:cover;border-radius:12px}
-
-/* --- Buttons --- */
-.btn{display:inline-flex;align-items:center;justify-content:center;
-  padding:12px 18px;border-radius:12px;font-weight:700;text-decoration:none}
-.btn-primary{background:#1a237e;color:#fff}
-.btn-primary:hover{opacity:.9}
-.btn-accent{background:#16a34a;color:#fff}
-.btn-outline{border:2px solid #1a237e;color:#1a237e}
-.btn-outline:hover{background:#1a237e;color:#fff}
-
-/* --- tiny utility fill-ins (mikeguides) --- */
-.inline-block{display:inline-block}
-
-/* spacing */
-.px-5{padding-left:1.25rem;padding-right:1.25rem}
-
-/* display/layout */
-.sm\:flex-row{} /* placeholder to avoid parse errors */
-@media (min-width:640px){
-  .sm\:flex-row{flex-direction:row}
-}
-
-/* sizing used in header brand mark */
-.w-2\.5{width:0.625rem}
-.h-6{height:1.5rem}
-
-/* colors */
-.text-white{color:#fff}
-.bg-white{background:#fff}
