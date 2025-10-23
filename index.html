@@ -338,5 +338,32 @@
 </p>
     <p class="mt-2">© 2025 MikeGuides.co • Clear steps, no fluff.</p>
   </footer>
+  <script>
+  // ---- Season switch config ----
+  const FORCE_HALLOWEEN = null; // set to true, false, or null to auto by month
+  const AUTO_MONTH = 9;         // 0-based: 9 = October
+
+  (function () {
+    const now = new Date();
+    const auto = now.getMonth() === AUTO_MONTH;
+    const useHalloween = (FORCE_HALLOWEEN === true) || (FORCE_HALLOWEEN === null && auto);
+
+    // reflect on <html data-season="..."> for optional CSS tweaks
+    document.documentElement.setAttribute('data-season', useHalloween ? 'halloween' : 'normal');
+
+    document.querySelectorAll('img[data-src-normal][data-src-halloween]').forEach(img => {
+      const target = useHalloween ? img.dataset.srcHalloween : img.dataset.srcNormal;
+      if (img.src !== target) img.src = target;
+
+      // graceful 404 fallback (e.g., missing seasonal file)
+      img.addEventListener('error', () => {
+        if (useHalloween && img.src !== img.dataset.srcNormal) {
+          img.src = img.dataset.srcNormal;
+        }
+      }, { once: true });
+    });
+  })();
+</script>
+
 </body>
 </html>
