@@ -1,0 +1,40 @@
+name: MikeGuides Utilities
+
+on:
+  workflow_dispatch:
+    inputs:
+      task:
+        description: "What do you want to do?"
+        required: true
+        type: choice
+        default: "Just log success"
+        options:
+          - "Just log success"
+          - "Trigger Netlify build hook"
+
+permissions:
+  contents: read
+
+jobs:
+  run-task:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show selected task
+        run: |
+          echo "Selected task: '${{ github.event.inputs.task }}'"
+
+      - name: Trigger Netlify build hook (if selected)
+        if: ${{ github.event.inputs.task == 'Trigger Netlify build hook' }}
+        env:
+          NETLIFY_BUILD_HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
+        run: |
+          if [ -z "$NETLIFY_BUILD_HOOK" ]; then
+            echo "NETLIFY_BUILD_HOOK secret not set. Skipping."
+            exit 0
+          fi
+          echo "Calling Netlify build hook…"
+          curl -fsS -X POST -H "Content-Length: 0" "$NETLIFY_BUILD_HOOK"
+          echo "Netlify build hook triggered."
+
+      - name: Done
+        run: echo "✅ Utilities workflow finished."
