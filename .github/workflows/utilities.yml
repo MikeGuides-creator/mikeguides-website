@@ -18,11 +18,6 @@ on:
         required: true
         type: boolean
         default: false
-      confirm_text:
-        description: "For purge tasks, type CONFIRM (case-sensitive)"
-        required: false
-        type: string
-        default: ""
 
 permissions:
   contents: read
@@ -31,7 +26,7 @@ jobs:
   run-task:
     runs-on: ubuntu-latest
     steps:
-      - name: Show selection
+      - name: Show selection & enforce checkbox
         run: |
           echo "Selected task: '${{ github.event.inputs.task }}'"
           echo "Confirm checked: '${{ github.event.inputs.confirm }}'"
@@ -39,15 +34,6 @@ jobs:
             echo "❌ Confirmation checkbox not checked. Exiting."
             exit 1
           fi
-
-      - name: Require CONFIRM for destructive tasks
-        if: ${{ github.event.inputs.task == 'Purge Netlify cache and redeploy' || github.event.inputs.task == 'Bust image cache (purge CDN)' }}
-        run: |
-          if [ "${{ github.event.inputs.confirm_text }}" != "CONFIRM" ]; then
-            echo "❌ You must type CONFIRM (exactly, case-sensitive) to proceed with '${{ github.event.inputs.task }}'."
-            exit 1
-          fi
-          echo "✅ Text confirmation accepted."
 
       # --- Option 1: No-op (always safe) ---
       - name: No-op
