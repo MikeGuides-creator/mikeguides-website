@@ -4,13 +4,15 @@ on:
   workflow_dispatch:
     inputs:
       task:
-        description: "What do you want to do?"
+        description: "Choose a task"
         required: true
         type: choice
         default: "Just log success"
         options:
           - "Just log success"
           - "Trigger Netlify build hook"
+          - "Purge Netlify cache and redeploy"
+          - "Bust image cache (purge CDN)"
 
 permissions:
   contents: read
@@ -19,22 +21,58 @@ jobs:
   run-task:
     runs-on: ubuntu-latest
     steps:
-      - name: Show selected task
-        run: |
-          echo "Selected task: '${{ github.event.inputs.task }}'"
+      - name: Show selection
+        run: echo "Selected task: '${{ github.event.inputs.task }}'"
 
-      - name: Trigger Netlify build hook (if selected)
+      # --- Option 1: Just log (no-op) ---
+      - name: No-op
+        if: ${{ github.event.inputs.task == 'Just log success' }}
+        run: echo "✅ Done."
+
+      # --- Option 2: Trigger normal Netlify build hook ---
+      - name: Trigger Netlify build hook
         if: ${{ github.event.inputs.task == 'Trigger Netlify build hook' }}
         env:
           NETLIFY_BUILD_HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
         run: |
           if [ -z "$NETLIFY_BUILD_HOOK" ]; then
-            echo "NETLIFY_BUILD_HOOK secret not set. Skipping."
-            exit 0
+            echo "❌ NETLIFY_BUILD_HOOK not set."
+            exit 1
           fi
-          echo "Calling Netlify build hook…"
+          echo "▶️ Calling Netlify build hook…"
           curl -fsS -X POST -H "Content-Length: 0" "$NETLIFY_BUILD_HOOK"
-          echo "Netlify build hook triggered."
+          echo "✅ Netlify build triggered."
 
-      - name: Done
-        run: echo "✅ Utilities workflow finished."
+      # --- Option 3: Clear cache AND deploy (build hook with clear_cache=true) ---
+      - name: Purge Netlify cache and redeploy
+        if: ${{ github.event.inputs.task == 'Purge Netlify cache and redeploy' }}
+        env:
+          NETLIFY_BUILD_HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
+        run: |
+          if [ -z "$NETLIFY_BUILD_HOOK" ]; then
+            echo "❌ NETLIFY_BUILD_HOOK not set."
+            exit 1
+          fi
+          echo "🧹 Clearing Netlify build cache + deploying…"
+          # Build hooks accept clear_cache=true
+          curl -fsS -X POST -H "Content-Length: 0" "${NETLIFY_BUILD_HOOK}?clear_cache=true"
+          echo "✅ Clear cache + deploy requested."
+
+      # --- Option 4: Purge CDN cache (all) via Netlify Purge API ---
+      - name: Bust image cache (purge CDN)
+        if: ${{ github.event.inputs.task == 'Bust image cache (purge CDN)' }}
+        env:
+          NETLIFY_API_TOKEN: ${{ secrets.NETLIFY_API_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: |
+          if [ -z "$NETLIFY_API_TOKEN" ] || [ -z "$NETLIFY_SITE_ID" ]; then
+            echo "❌ NETLIFY_API_TOKEN or NETLIFY_SITE_ID not set."
+            exit 1
+          fi
+          echo "🧨 Purging Netlify CDN cache for site $NETLIFY_SITE_ID …"
+          curl -fsS -X POST \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${NETLIFY_API_TOKEN}" \
+            --data "{\"site_id\":\"${NETLIFY_SITE_ID}\"}" \
+            "https://api.netlify.com/api/v1/purge"
+          echo "✅ CDN cache purge requested."
