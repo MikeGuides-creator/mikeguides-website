@@ -13,6 +13,16 @@ on:
           - "Trigger Netlify build hook"
           - "Purge Netlify cache and redeploy"
           - "Bust image cache (purge CDN)"
+      confirm:
+        description: "Check to confirm you really want to run this task"
+        required: true
+        type: boolean
+        default: false
+      confirm_text:
+        description: "For purge tasks, type CONFIRM (case-sensitive)"
+        required: false
+        type: string
+        default: ""
 
 permissions:
   contents: read
@@ -22,9 +32,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Show selection
-        run: echo "Selected task: '${{ github.event.inputs.task }}'"
+        run: |
+          echo "Selected task: '${{ github.event.inputs.task }}'"
+          echo "Confirm checked: '${{ github.event.inputs.confirm }}'"
+          if [ "${{ github.event.inputs.confirm }}" != "true" ]; then
+            echo "❌ Confirmation checkbox not checked. Exiting."
+            exit 1
+          fi
 
-      # --- Option 1: Just log (no-op) ---
+      - name: Require CONFIRM for destructive tasks
+        if: ${{ github.event.inputs.task == 'Purge Netlify cache and redeploy' || github.event.inputs.task == 'Bust image cache (purge CDN)' }}
+        run: |
+          if [ "${{ github.event.inputs.confirm_text }}" != "CONFIRM" ]; then
+            echo "❌ You must type CONFIRM (exactly, case-sensitive) to proceed with '${{ github.event.inputs.task }}'."
+            exit 1
+          fi
+          echo "✅ Text confirmation accepted."
+
+      # --- Option 1: No-op (always safe) ---
       - name: No-op
         if: ${{ github.event.inputs.task == 'Just log success' }}
         run: echo "✅ Done."
@@ -54,11 +79,10 @@ jobs:
             exit 1
           fi
           echo "🧹 Clearing Netlify build cache + deploying…"
-          # Build hooks accept clear_cache=true
           curl -fsS -X POST -H "Content-Length: 0" "${NETLIFY_BUILD_HOOK}?clear_cache=true"
           echo "✅ Clear cache + deploy requested."
 
-      # --- Option 4: Purge CDN cache (all) via Netlify Purge API ---
+      # --- Option 4: Purge CDN cache for the whole site ---
       - name: Bust image cache (purge CDN)
         if: ${{ github.event.inputs.task == 'Bust image cache (purge CDN)' }}
         env:
