@@ -66,6 +66,13 @@ html[data-season="halloween"] .brand { color: #ef6c00; }          /* orange head
 html[data-season="halloween"] .btn-primary { background: #ef6c00; }
 html[data-season="halloween"] .btn-primary:hover { opacity: .9; }
 
+.theme-halloween {
+  --mg-blue: #f97316;  /* orange */
+  --mg-green: #f59e0b; /* amber */
+  --mg-ink: #0b1020;
+  --mg-bg: #fff7ed;
+}
+
 /* ===== Buttons ===== */
 .btn{
   display:inline-flex; align-items:center; justify-content:center;
