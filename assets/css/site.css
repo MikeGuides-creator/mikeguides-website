@@ -42,6 +42,8 @@ nav a{opacity:.85} nav a:hover{opacity:1;color:var(--mg-blue)}
 .section{padding:56px 0}
 .section h2{font-weight:800}
 
+<link rel="stylesheet" href="/assets/css/site.css?v=12">
+
 /* ===== Grid (1/2/3 up) ===== */
 .grid{display:grid;gap:24px}
 .grid-3{grid-template-columns:1fr}
