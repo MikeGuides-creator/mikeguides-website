@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Season Verify</title>
+  <link rel="stylesheet" href="/assets/css/site.css?v=13">
+  <style>
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: .5rem; border-bottom: 1px solid #e5e7eb; font-size: 14px; }
+    .ok { color: #16a34a; font-weight: 600; }
+    .miss { color: #dc2626; font-weight: 600; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  </style>
+</head>
+<body class="p-6">
+  <h1 class="text-2xl font-bold mb-4">Seasonal Image Verify</h1>
+  <p class="mb-4 text-slate-600">Lists default → derived Halloween paths for <code>[data-seasonal]</code> images on this page and checks if the Halloween file exists.</p>
+
+  <table id="results">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Alt / Context</th>
+        <th>Default src</th>
+        <th>Derived Halloween</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script defer src="/assets/js/season-toggle.js?v=2025-10-23b"></script>
+  <script>
+    // Reuse the mapper behavior from season-toggle by calling the same logic indirectly:
+    // We’ll mirror just enough here to compute the derived path synchronously.
+    (function () {
+      const PATH_MAPPER = {
+        HALLOWEEN_BASE: "/assets/images/products/",
+        SEASON_VER: "20251023a",
+        SIZE_TOKEN: "960x960",
+        EXT: "jpg",
+        deriveSlug(src) {
+          let m = src.match(/\/products\/([^/]+)\/\1\./i);
+          if (m) return m[1];
+          m = src.match(/\/products\/([^/]+)\//i);
+          if (m) return m[1];
+          m = src.match(/\/products\/([^/]+)\.[a-z0-9]+(?:\?|$)/i);
+          if (m) return m[1];
+          return null;
+        },
+        toHalloween(src) {
+          const slug = this.deriveSlug(src);
+          if (!slug) return null;
+          return this.HALLOWEEN_BASE + `card_hallow_${slug}.v${this.SEASON_VER}.${this.SIZE_TOKEN}.${this.EXT}`;
+        }
+      };
+
+      async function check(url) {
+        try {
+          const res = await fetch(url, { method: "HEAD", cache: "no-store" });
+          return res.ok ? "ok" : "miss";
+        } catch (e) {
+          return "miss";
+        }
+      }
+
+      function $(s, r=document){ return Array.from(r.querySelectorAll(s)); }
+
+      async function run() {
+        const rows = [];
+        const imgs = document.querySelectorAll("[data-seasonal]");
+        let idx = 1;
+
+        for (const img of imgs) {
+          const def = img.getAttribute("data-src-default") || img.getAttribute("src") || "";
+          const explicit = img.getAttribute("data-src-halloween");
+          const hlw = explicit || PATH_MAPPER.toHalloween(def);
+          const status = hlw ? await check(hlw) : "miss";
+
+          rows.push(`
+            <tr>
+              <td>${idx++}</td>
+              <td>${(img.getAttribute("alt")||"").replace(/</g,"&lt;")}</td>
+              <td><code>${def}</code></td>
+              <td><code>${hlw || "(could not derive)"}</code></td>
+              <td class="${status === "ok" ? "ok" : "miss"}">${status.toUpperCase()}</td>
+            </tr>
+          `);
+        }
+        document.querySelector("#results tbody").innerHTML = rows.join("");
+      }
+      document.addEventListener("DOMContentLoaded", run);
+    })();
+  </script>
+</body>
+</html>
