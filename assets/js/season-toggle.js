@@ -1,20 +1,17 @@
-/* MikeGuides Season Toggle v1.1 (2025-10-23)
-   - Toggles between "default" and "halloween"
-   - Swaps src/srcset for [data-seasonal] and [data-seasonal-picture]
-   - Applies .theme-halloween class (optional orange theme)
-   - Remembers user choice (localStorage)
-   - Honors ?season=halloween|default
-   - Auto-defaults to Halloween in October
+/* MikeGuides Season Toggle v1.1c (2025-10-23)
+   - Toggle between default and halloween
+   - Swap src/srcset for [data-seasonal] and [data-seasonal-picture]
+   - Apply .theme-halloween and remember choice
+   - Respect ?season=halloween|default and auto-enable in October
 */
-
 (function () {
   const STORAGE_KEY = "mg-season";
   const SEASONS = { DEFAULT: "default", HALLOWEEN: "halloween" };
 
-  // --- CONFIG: MikeGuides Halloween path convention (flat file) ---
+  // --- CONFIG: Halloween path convention (flat file names) ---
   const PATH_MAPPER = {
     HALLOWEEN_BASE: "/assets/images/products/",
-    SEASON_VER: "20251023a",   // update when you export a new batch
+    SEASON_VER: "20251023a",   // change when you export a new batch
     SIZE_TOKEN: "960x960",
     EXT: "jpg",
 
@@ -34,7 +31,6 @@
     deriveFile(defaultSrc) {
       const slug = this.deriveSlug(defaultSrc);
       if (!slug) return null;
-      // card_hallow_<slug>.v<ver>.<size>.<ext>
       return `card_hallow_${slug}.v${this.SEASON_VER}.${this.SIZE_TOKEN}.${this.EXT}`;
     },
 
@@ -74,7 +70,6 @@
     if (explicit) return explicit;
     const defSet = source.getAttribute("data-srcset-default") || source.getAttribute("srcset");
     if (!defSet) return null;
-    // Map each URL in the srcset
     const parts = defSet.split(",").map(s => s.trim()).filter(Boolean);
     const mapped = parts.map(entry => {
       const [url, size] = entry.split(/\s+/);
@@ -85,14 +80,12 @@
   }
 
   function swapPicture(picture, season) {
-    // Swap <source> elements
     $("source", picture).forEach((source) => {
       const defSet = source.getAttribute("data-srcset-default") || source.getAttribute("srcset");
       const hlwSet = computedHalloweenSrcset(source);
       const next = (season === SEASONS.HALLOWEEN && hlwSet) ? hlwSet : defSet;
       if (next) source.srcset = next;
     });
-    // Ensure the <img> swaps too
     const img = picture.querySelector("img[data-seasonal]") || picture.querySelector("img");
     if (img) swapImage(img, season);
   }
@@ -138,9 +131,14 @@
     $("[data-seasonal]").forEach((img) => {
       if (!img.getAttribute("data-src-halloween")) {
         const derived = computedHalloweenSrc(img);
-        if (!derived) undecided.push(img.getAttribute("src") || img.getAttribute("data-src-default") || "(unknown)"));
+        if (!derived) {
+          const s = img.getAttribute("src") || img.getAttribute("data-src-default") || "(unknown)";
+          undecided.push(s);
+        }
       }
     });
-    if (undecided.length) console.warn("[SeasonToggle] Could not derive Halloween paths for:", undecided);
+    if (undecided.length) {
+      console.warn("[SeasonToggle] Could not derive Halloween paths for:", undecided);
+    }
   });
 })();
