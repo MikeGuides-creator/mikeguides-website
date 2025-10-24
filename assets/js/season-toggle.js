@@ -15,18 +15,13 @@
     SIZE_TOKEN: "960x960",
     EXT: "jpg",
 
-    deriveSlug(defaultSrc) {
-      // 1) /products/<slug>/<slug>.*   -> slug
-      let m = defaultSrc.match(/\/products\/([^/]+)\/\1\./i);
-      if (m) return m[1];
-      // 2) /products/<slug>/(anything) -> slug
-      m = defaultSrc.match(/\/products\/([^/]+)\//i);
-      if (m) return m[1];
-      // 3) /products/<slug>.<ext>      -> slug
-      m = defaultSrc.match(/\/products\/([^/]+)\.[a-z0-9]+(?:\?|$)/i);
-      if (m) return m[1];
-      return null;
-    },
+    deriveFile(defaultSrc) {
+  const slug = this.deriveSlug(defaultSrc);
+  if (!slug) return null;
+  // Your Halloween files use compact slugs (no dashes), e.g. aimarketingtoolkit
+  const compact = slug.toLowerCase().replace(/-/g, "");
+  return `card_hallow_${compact}.v${this.SEASON_VER}.${this.SIZE_TOKEN}.${this.EXT}`;
+},
 
     deriveFile(defaultSrc) {
       const slug = this.deriveSlug(defaultSrc);
