@@ -2,6 +2,7 @@
 <script>
   const PRICES = {
     "visual-ai-studio": "19.95",
+  "chatgpt-mastery-simulator": "19.95",
     "ai-marketing-toolkit": "19.95",
     "ai-writing-workshop": "19.95",
     "ai-business-automation-roi": "19.95",
