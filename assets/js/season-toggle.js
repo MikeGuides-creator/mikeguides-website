@@ -8,20 +8,43 @@
   const STORAGE_KEY = "mg-season";
   const SEASONS = { DEFAULT: "default", HALLOWEEN: "halloween" };
 
-  // --- CONFIG: Halloween path convention (flat file names) ---
-  const PATH_MAPPER = {
-    HALLOWEEN_BASE: "/assets/images/products/",
-    SEASON_VER: "20251023a",   // change when you export a new batch
-    SIZE_TOKEN: "960x960",
-    EXT: "jpg",
+  // --- CONFIG: Halloween path convention (flat file names; compact slugs) ---
+const PATH_MAPPER = (() => {
+  const HALLOWEEN_BASE = "/assets/images/products/";
+  const SEASON_VER = "20251023a";   // change when you export a new batch
+  const SIZE_TOKEN = "960x960";
+  const EXT = "jpg";
 
-    deriveFile(defaultSrc) {
-  const slug = this.deriveSlug(defaultSrc);
-  if (!slug) return null;
-  // Your Halloween files use compact slugs (no dashes), e.g. aimarketingtoolkit
-  const compact = slug.toLowerCase().replace(/-/g, "");
-  return `card_hallow_${compact}.v${this.SEASON_VER}.${this.SIZE_TOKEN}.${this.EXT}`;
-},
+  // Extract <slug> from default paths like:
+  // /assets/images/products/<slug>/<slug>....png   OR
+  // /assets/images/products/<slug>/anything       OR
+  // /assets/images/products/<slug>.png
+  function deriveSlug(defaultSrc) {
+    let m = defaultSrc.match(/\/products\/([^/]+)\/\1\./i);
+    if (m) return m[1];
+    m = defaultSrc.match(/\/products\/([^/]+)\//i);
+    if (m) return m[1];
+    m = defaultSrc.match(/\/products\/([^/]+)\.[a-z0-9]+(?:\?|$)/i);
+    if (m) return m[1];
+    return null;
+  }
+
+  function deriveFile(defaultSrc) {
+    const slug = deriveSlug(defaultSrc);
+    if (!slug) return null;
+    // your Halloween filenames are compact (no dashes)
+    const compact = slug.toLowerCase().replace(/-/g, "");
+    return `card_hallow_${compact}.v${SEASON_VER}.${SIZE_TOKEN}.${EXT}`;
+  }
+
+  function toHalloween(defaultSrc) {
+    const file = deriveFile(defaultSrc);
+    return file ? HALLOWEEN_BASE + file : null;
+  }
+
+  return { HALLOWEEN_BASE, SEASON_VER, SIZE_TOKEN, EXT, deriveSlug, deriveFile, toHalloween };
+})();
+
 
     deriveFile(defaultSrc) {
       const slug = this.deriveSlug(defaultSrc);
