@@ -1,4 +1,4 @@
-name: MikeGuides Utilities
+name: "MikeGuides Utilities"
 
 on:
   workflow_dispatch:
@@ -22,7 +22,54 @@ on:
 permissions:
   contents: read
 
-      - name: Bust image cache (purge CDN)
+jobs:
+  run-task:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Show selection & enforce checkbox"
+        run: |
+          echo "Selected task: '${{ github.event.inputs.task }}'"
+          echo "Confirm checked: '${{ github.event.inputs.confirm }}'"
+          if [ "${{ github.event.inputs.confirm }}" != "true" ]; then
+            echo "❌ Confirmation checkbox not checked. Exiting."
+            exit 1
+          fi
+
+      # --- Option 1: No-op ---
+      - name: "No-op"
+        if: ${{ github.event.inputs.task == 'Just log success' }}
+        run: echo "✅ Done."
+
+      # --- Option 2: Trigger normal Netlify build hook ---
+      - name: "Trigger Netlify build hook"
+        if: ${{ github.event.inputs.task == 'Trigger Netlify build hook' }}
+        env:
+          NETLIFY_BUILD_HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
+        run: |
+          if [ -z "$NETLIFY_BUILD_HOOK" ]; then
+            echo "❌ NETLIFY_BUILD_HOOK not set."
+            exit 1
+          fi
+          echo "▶️ Calling Netlify build hook…"
+          curl -fsS -X POST -H "Content-Length: 0" "$NETLIFY_BUILD_HOOK"
+          echo "✅ Netlify build triggered."
+
+      # --- Option 3: Clear cache AND deploy ---
+      - name: "Purge Netlify cache and redeploy"
+        if: ${{ github.event.inputs.task == 'Purge Netlify cache and redeploy' }}
+        env:
+          NETLIFY_BUILD_HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
+        run: |
+          if [ -z "$NETLIFY_BUILD_HOOK" ]; then
+            echo "❌ NETLIFY_BUILD_HOOK not set."
+            exit 1
+          fi
+          echo "🧹 Clearing Netlify build cache + deploying…"
+          curl -fsS -X POST -H "Content-Length: 0" "${NETLIFY_BUILD_HOOK}?clear_cache=true"
+          echo "✅ Clear cache + deploy requested."
+
+      # --- Option 4: Purge CDN cache (whole site) ---
+      - name: "Bust image cache (purge CDN)"
         if: ${{ github.event.inputs.task == 'Bust image cache (purge CDN)' }}
         env:
           NETLIFY_API_TOKEN: ${{ secrets.NETLIFY_API_TOKEN }}
@@ -32,28 +79,16 @@ permissions:
             echo "❌ NETLIFY_API_TOKEN or NETLIFY_SITE_ID not set."
             exit 1
           fi
-
-          echo "🧨 Requesting purge for entire site $NETLIFY_SITE_ID"
-          # Purge entire site cache. If you ever want to purge SPECIFIC URLs, see the commented block below.
+          echo "🧨 Purging Netlify CDN cache for site $NETLIFY_SITE_ID …"
           http_code=$(curl -sS -o /tmp/resp.json -w "%{http_code}" \
             -X POST \
             -H "Authorization: Bearer ${NETLIFY_API_TOKEN}" \
             -H "Content-Type: application/json" \
             "https://api.netlify.com/api/v1/sites/${NETLIFY_SITE_ID}/purge")
-
           echo "Netlify response (HTTP $http_code):"
-          cat /tmp/resp.json | sed 's/.*/  &/'
-
+          sed 's/.*/  &/' /tmp/resp.json
           if [ "$http_code" -ge 400 ]; then
             echo "❌ Purge failed."
             exit 1
           fi
           echo "✅ CDN cache purge requested."
-
-          # --- Purge specific URLs (optional) ---
-          # To purge only certain files, use this instead (URLs must be on your site domain):
-          # curl -sS -X POST \
-          #   -H "Authorization: Bearer ${NETLIFY_API_TOKEN}" \
-          #   -H "Content-Type: application/json" \
-          #   --data "{\"urls\":[\"https://mikeguides.co/assets/images/products/card_hallow_aimarketingtoolkit.v20251023a.960x960.jpg\"]}" \
-          #   "https://api.netlify.com/api/v1/sites/${NETLIFY_SITE_ID}/purge"
