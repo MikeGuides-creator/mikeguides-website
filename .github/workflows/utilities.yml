@@ -68,6 +68,27 @@ jobs:
           curl -fsS -X POST -H "Content-Length: 0" "${NETLIFY_BUILD_HOOK}?clear_cache=true"
           echo "✅ Clear cache + deploy requested."
 
+      - name: "Show Netlify site info (sanity check)"
+        if: ${{ github.event.inputs.task == 'Bust image cache (purge CDN)' }}
+        env:
+          NETLIFY_API_TOKEN: ${{ secrets.NETLIFY_API_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: |
+          if [ -z "$NETLIFY_API_TOKEN" ] || [ -z "$NETLIFY_SITE_ID" ]; then
+            echo "❌ NETLIFY_API_TOKEN or NETLIFY_SITE_ID not set."
+            exit 1
+          fi
+          echo "Querying Netlify for site ${NETLIFY_SITE_ID}…"
+          http_code=$(curl -sS -o /tmp/site.json -w "%{http_code}" \
+            -H "Authorization: Bearer ${NETLIFY_API_TOKEN}" \
+            "https://api.netlify.com/api/v1/sites/${NETLIFY_SITE_ID}")
+          echo "HTTP $http_code"
+          cat /tmp/site.json | sed 's/.*/  &/'
+          if [ "$http_code" -ge 400 ]; then
+            echo "❌ Could not fetch site (check SITE_ID and token permissions)."
+            exit 1
+          fi
+
       # --- Option 4: Purge CDN cache (whole site) ---
       - name: "Bust image cache (purge CDN)"
         if: ${{ github.event.inputs.task == 'Bust image cache (purge CDN)' }}
