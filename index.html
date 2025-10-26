@@ -7,7 +7,21 @@
   <meta name="description" content="Interactive HTML guides, calculators, and toolkits to help small businesses price smarter, market faster, and grow profits." />
 
   <!-- ONE stylesheet, cache-busted -->
-  <link rel="stylesheet" href="/assets/css/site.css?v=13" />
+ <link rel="stylesheet" href="/assets/css/site.css">
+
+  <style>
+  /* grid tightening (keeps cards from being huge) */
+  .grid-3 { grid-template-columns: repeat(1, minmax(0,1fr)); }
+  @media (min-width: 640px){ .grid-3 { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+  @media (min-width: 1024px){ .grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+  @media (min-width: 1280px){ .grid-3 { grid-template-columns: repeat(4, minmax(0,1fr)); } }
+
+  /* keep images well-behaved */
+  img { max-width: 100%; height: auto; display: block; }
+  .card { padding: 1rem !important; }
+  .hero { position: relative; overflow: hidden; }
+  .hero picture, .hero img { display:block; margin: 0 auto; }
+</style>
 
   <!-- Preload hero (optional but nice) -->
   <link rel="preload" as="image" href="/assets/images/hero/hero.v20251022a.1200x630.jpg" imagesizes="100vw" />
