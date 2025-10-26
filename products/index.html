@@ -271,5 +271,51 @@
       probe.src = src;
     });
   </script>
+  <script>
+  // ... keep your existing JS above ...
+
+  function attachImgLoader(img){
+    const main = img.getAttribute('data-main');
+    const fallback = img.getAttribute('data-fallback');
+    const sizes = ['960x960','560x560','400x400'];
+
+    function useLastResort(){
+      const label = (img.getAttribute('alt') || 'MikeGuides').replace(/&/g,'&amp;').replace(/</g,'&lt;');
+      const svg = encodeURIComponent(
+        `<svg xmlns='http://www.w3.org/2000/svg' width='960' height='960'>
+           <defs>
+             <linearGradient id='g' x1='0' x2='1' y1='0' y2='1'>
+               <stop stop-color='#2563eb' offset='0'/><stop stop-color='#22c55e' offset='1'/>
+             </linearGradient>
+           </defs>
+           <rect width='100%' height='100%' fill='url(#g)'/>
+           <text x='50%' y='50%' fill='white' font-family='Poppins,Arial,sans-serif'
+                 font-size='42' text-anchor='middle' dominant-baseline='middle'>${label}</text>
+         </svg>`
+      );
+      img.src = `data:image/svg+xml;charset=utf-8,${svg}`;
+    }
+
+    function trySrc(srcBase){
+      if(!srcBase) return false;
+      let idx = 0;
+      const tryNext = ()=>{
+        if(idx >= sizes.length){ useLastResort(); return; }
+        const src = srcBase.replace(/\.(?:960x960|560x560|400x400)\./, `.${sizes[idx]}.`);
+        const probe = new Image();
+        probe.onload = ()=>{ img.src = src; };
+        probe.onerror = ()=>{ idx++; tryNext(); };
+        probe.src = src;
+      };
+      tryNext();
+      return true;
+    }
+
+    if(!trySrc(main)) if(!trySrc(fallback)) useLastResort();
+  }
+
+  document.querySelectorAll('img[data-main]').forEach(attachImgLoader);
+</script>
+
 </body>
 </html>
