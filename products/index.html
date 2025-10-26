@@ -32,6 +32,18 @@
     img.rounded { border-radius: 1rem; }
     .ring { box-shadow: 0 0 0 1px rgba(15,23,42,.08) inset }
   </style>
+  <style>
+  /* Make cards smaller on desktop */
+  .grid-3 { grid-template-columns: repeat(1, minmax(0,1fr)); }
+  @media (min-width: 640px){ .grid-3 { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+  @media (min-width: 1024px){ .grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+  @media (min-width: 1280px){ .grid-3 { grid-template-columns: repeat(4, minmax(0,1fr)); } } /* NEW: 4-up on xl */
+
+  /* Trim card padding and image presentation */
+  .card { padding: 1rem !important; }
+  .card img.rounded, .card img.ring { border-radius: .75rem; }
+</style>
+
 </head>
 <body>
   <header class="hero">
