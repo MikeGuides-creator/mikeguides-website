@@ -2,232 +2,262 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>MikeGuides — Products</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Browse MikeGuides products including Visual AI Studio, ChatGPT Mastery Simulator, and more." />
-
-  <!-- ✅ load your Tailwind build -->
- <link rel="stylesheet" href="/assets/css/site.css?v=12">
-
-  <!-- (Optional) keep small page-specific CSS here -->
- <style>
-  /* Safety: ensure the page can scroll even if some global CSS clamps height */
-  html, body { height:auto; overflow:auto; }
-
-  /* Fallback grid (works even if Tailwind classes didn't compile) */
-  #products-grid {
-    display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 24px;
-    align-content: start;
-  }
-
-  /* Basic card visuals (keeps layout usable without Tailwind) */
-  .card{background:#fff;border-radius:16px;box-shadow:0 1px 4px rgba(0,0,0,.08);overflow:hidden;border:1px solid #e5e7eb}
-  .card img{display:block;width:100%;height:160px;object-fit:cover}
-  .font-poppins { font-family: Poppins, Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
-</style>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shop Guides & Toolkits — MikeGuides</title>
+  <meta name="description" content="Interactive guides and toolkits from MikeGuides — pricing, marketing, writing, visuals, and automation. Buy direct via Gumroad." />
+  <link rel="preload" href="/css/site.css?v=2025-10-26a" as="style">
+  <link rel="stylesheet" href="/css/site.css?v=2025-10-26a">
+  <style>
+    /* Minimal guardrails in case site.css isn’t present for any reason */
+    :root { --mg-blue:#2563eb; --mg-green:#22c55e; }
+    .brand { font-family: Poppins, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; }
+    .container { max-width: 1120px; margin-inline: auto; padding-inline: 1rem; }
+    .section { padding: 2.5rem 0; }
+    .grid { display: grid; gap: 1.5rem; }
+    .grid-3 { grid-template-columns: repeat(1,minmax(0,1fr)); }
+    @media (min-width: 640px){ .grid-3{ grid-template-columns: repeat(2,minmax(0,1fr)); } }
+    @media (min-width: 1024px){ .grid-3{ grid-template-columns: repeat(3,minmax(0,1fr)); } }
+    .card { transition: transform .15s ease, box-shadow .15s ease; }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 20px 45px -20px rgba(2,6,23,.25) }
+    .muted { color: #64748b }
+    .shots { display:grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap:.5rem; margin-top:.75rem }
+    .btn { display:inline-flex; align-items:center; justify-content:center; border-radius: .75rem; padding:.625rem 1rem; font-weight:600; font-size:.9rem; }
+    .btn-primary { background: var(--mg-blue); color: #fff; }
+    .btn-outline { border:1px solid #cbd5e1; color:#0f172a; }
+    .badge { font-size:.7rem; font-weight:700; color:#64748b; display:inline-flex; align-items:center; gap:.4rem }
+    .dot { width:10px; height:10px; border-radius:999px; background:var(--mg-blue) }
+    .hero { background: var(--mg-blue); color:#fff; padding: 2.75rem 0; }
+    .hero h1 { font-size: clamp(1.75rem, 1.2rem + 2vw, 2.5rem); }
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    img.rounded { border-radius: 1rem; }
+    .ring { box-shadow: 0 0 0 1px rgba(15,23,42,.08) inset }
+  </style>
 </head>
-
 <body>
-  <main>
-    <section class="bg-slate-50">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h1 class="font-poppins text-3xl sm:text-4xl font-extrabold text-slate-900">Products</h1>
-
-        <div id="products-grid" class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-
-          <a class="card block overflow-hidden rounded-2xl bg-white ring-1 ring-slate-900/5 shadow-sm hover:shadow-md transition"
-             href="/products/visual-ai-studio/">
-           <picture>
-  <source
-    type="image/png"
-    srcset="
-      /assets/images/products/visual-ai-studio/visual-ai-studio.v20251012a.400.png 400w,
-      /assets/images/products/visual-ai-studio/visual-ai-studio.v20251012a.560.png 560w,
-      /assets/images/products/visual-ai-studio/visual-ai-studio.v20251012a.840.png 840w"
-    sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw">
-  <img
-    class="w-full aspect-[4/3] object-cover"
-    src="/assets/images/products/visual-ai-studio/visual-ai-studio.v20251012a.560.png"
-    alt="Visual AI Studio — drag-and-drop canvas to build AI workflows"
-    width="560" height="420" loading="lazy" decoding="async">
-</picture>
-            <div class="p-6">
-              <p class="font-poppins text-lg font-semibold text-slate-900">Visual AI Studio</p>
-              <div class="mt-4">
-                <span class="inline-flex items-center rounded-xl bg-mg-blue px-4 py-2 text-white font-semibold shadow hover:bg-blue-600 transition">View</span>
-              </div>
-              <div class="mt-2 text-slate-600 text-sm"><span data-price="visual-ai-studio"></span></div>
-            </div>
-          </a>
-
-          <a class="card block overflow-hidden rounded-2xl bg-white ring-1 ring-slate-900/5 shadow-sm hover:shadow-md transition"
-             href="/products/chatgpt-mastery-simulator/">
-            <picture>
-  <source type="image/png" srcset="
-    /assets/images/products/chatgpt-mastery-simulator/chatgpt-mastery-simulator.v20251012a.400.png 400w,
-    /assets/images/products/chatgpt-mastery-simulator/chatgpt-mastery-simulator.v20251012a.560.png 560w,
-    /assets/images/products/chatgpt-mastery-simulator/chatgpt-mastery-simulator.v20251012a.840.png 840w"
-    sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw">
-  <img class="w-full aspect-[4/3] object-cover"
-       src="/assets/images/products/chatgpt-mastery-simulator/chatgpt-mastery-simulator.v20251012a.560.png"
-       alt="ChatGPT Mastery Simulator — practice scenarios and instant feedback"
-       width="560" height="420" loading="lazy" decoding="async">
-</picture>
-            <div class="p-6">
-              <p class="font-poppins text-lg font-semibold text-slate-900">ChatGPT Mastery</p>
-              <div class="mt-4">
-                <span class="inline-flex items-center rounded-xl bg-mg-blue px-4 py-2 text-white font-semibold shadow hover:bg-blue-600 transition">View</span>
-              </div>
-              <div class="mt-2 text-slate-600 text-sm"><span data-price="chatgpt-mastery-simulator"></span></div>
-            </div>
-          </a>
-          
-          <!-- AI Business Automation ROI -->
-<a class="card block overflow-hidden rounded-2xl bg-white ring-1 ring-slate-900/5 shadow-sm hover:shadow-md transition"
-   href="/products/ai-business-automation-roi/">
-  <picture>
-  <source type="image/png" srcset="
-    /assets/images/products/ai-business-automation-roi/ai-business-automation-roi.v20251012a.400.png 400w,
-    /assets/images/products/ai-business-automation-roi/ai-business-automation-roi.v20251012a.560.png 560w,
-    /assets/images/products/ai-business-automation-roi/ai-business-automation-roi.v20251012a.840.png 840w"
-    sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw">
-  <img class="w-full aspect-[4/3] object-cover"
-       src="/assets/images/products/ai-business-automation-roi/ai-business-automation-roi.v20251012a.560.png"
-       alt="AI Business Automation ROI — calculator and workflow templates"
-       width="560" height="420" loading="lazy" decoding="async">
-</picture>
-  <div class="p-6">
-    <p class="font-poppins text-lg font-semibold text-slate-900">AI Business Automation — ROI</p>
-    <div class="mt-4">
-      <span class="inline-flex items-center rounded-xl bg-mg-blue px-4 py-2 text-white font-semibold shadow hover:bg-blue-600 transition">View</span>
-    </div>
-    <div class="mt-2 text-slate-600 text-sm"><span data-price="ai-business-automation-roi"></span></div>
-  </div>
-</a>
-
-<!-- AI Marketing Toolkit -->
-<a class="card block overflow-hidden rounded-2xl bg-white ring-1 ring-slate-900/5 shadow-sm hover:shadow-md transition"
-   href="/products/ai-marketing-toolkit/">
- <picture>
-  <source type="image/png" srcset="
-    /assets/images/products/ai-marketing-toolkit/ai-marketing-toolkit.v20251012a.400.png 400w,
-    /assets/images/products/ai-marketing-toolkit/ai-marketing-toolkit.v20251012a.560.png 560w,
-    /assets/images/products/ai-marketing-toolkit/ai-marketing-toolkit.v20251012a.840.png 840w"
-    sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw">
-  <img class="w-full aspect-[4/3] object-cover"
-       src="/assets/images/products/ai-marketing-toolkit/ai-marketing-toolkit.v20251012a.560.png"
-       alt="AI Marketing Toolkit — strategy → prompts → publish with consistency"
-       width="560" height="420" loading="lazy" decoding="async">
-</picture>
-  <div class="p-6">
-    <p class="font-poppins text-lg font-semibold text-slate-900">AI Marketing Toolkit</p>
-    <div class="mt-4">
-      <span class="inline-flex items-center rounded-xl bg-mg-blue px-4 py-2 text-white font-semibold shadow hover:bg-blue-600 transition">View</span>
-    </div>
-    <div class="mt-2 text-slate-600 text-sm"><span data-price="ai-marketing-toolkit"></span></div>
-  </div>
-</a>
-<!-- AI Writing Workshop -->
-<a class="card block overflow-hidden rounded-2xl bg-white ring-1 ring-slate-900/5 shadow-sm hover:shadow-md transition"
-   href="/products/ai-writing-workshop/">
-  <picture>
-  <source type="image/png" srcset="
-    /assets/images/products/ai-writing-workshop/ai-writing-workshop.v20251012a.400.png 400w,
-    /assets/images/products/ai-writing-workshop/ai-writing-workshop.v20251012a.560.png 560w,
-    /assets/images/products/ai-writing-workshop/ai-writing-workshop.v20251012a.840.png 840w"
-    sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw">
-  <img class="w-full aspect-[4/3] object-cover"
-       src="/assets/images/products/ai-writing-workshop/ai-writing-workshop.v20251012a.560.png"
-       alt="AI Writing Workshop — interactive prompt builder that interviews you"
-       width="560" height="420" loading="lazy" decoding="async">
-</picture>
-  <div class="p-6">
-    <p class="font-poppins text-lg font-semibold text-slate-900">AI Writing Workshop</p>
-    <div class="mt-4">
-      <span class="inline-flex items-center rounded-xl bg-mg-blue px-4 py-2 text-white font-semibold shadow hover:bg-blue-600 transition">View</span>
-    </div>
-    <div class="mt-2 text-slate-600 text-sm"><span data-price="ai-writing-workshop"></span></div>
-  </div>
-</a>
-
-<!-- Business Builder Bundle -->
-<a class="card block overflow-hidden rounded-2xl bg-white ring-1 ring-slate-900/5 shadow-sm hover:shadow-md transition"
-   href="/products/business-builder-bundle/">
-  <picture>
-  <source type="image/png" srcset="
-    /assets/images/products/business-builder-bundle/business-builder-bundle.v20251012a.400.png 400w,
-    /assets/images/products/business-builder-bundle/business-builder-bundle.v20251012a.560.png 560w,
-    /assets/images/products/business-builder-bundle/business-builder-bundle.v20251012a.840.png 840w"
-    sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw">
-  <img class="w-full aspect-[4/3] object-cover"
-       src="/assets/images/products/business-builder-bundle/business-builder-bundle.v20251012a.560.png"
-       alt="Business Builder Bundle — core guides and tools in one package"
-       width="560" height="420" loading="lazy" decoding="async">
-</picture>
-  <div class="p-6">
-    <p class="font-poppins text-lg font-semibold text-slate-900">Business Builder Bundle</p>
-    <div class="mt-4">
-      <span class="inline-flex items-center rounded-xl bg-mg-blue px-4 py-2 text-white font-semibold shadow hover:bg-blue-600 transition">View</span>
-    </div>
-    <div class="mt-2 text-slate-600 text-sm"><span data-price="business-builder-bundle"></span></div>
-  </div>
-</a>
-
-<!-- Pricing For Profit -->
-<a class="card block overflow-hidden rounded-2xl bg-white ring-1 ring-slate-900/5 shadow-sm hover:shadow-md transition"
-   href="/products/pricing-for-profit-system/">
-  <picture>
-  <source type="image/png" srcset="
-    /assets/images/products/pricing-for-profit-system/pricing-for-profit-system.v20251012a.400.png 400w,
-    /assets/images/products/pricing-for-profit-system/pricing-for-profit-system.v20251012a.560.png 560w,
-    /assets/images/products/pricing-for-profit-system/pricing-for-profit-system.v20251012a.840.png 840w"
-    sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw">
-  <img class="w-full aspect-[4/3] object-cover"
-       src="/assets/images/products/pricing-for-profit-system/pricing-for-profit-system.v20251012a.560.png"
-       alt="Pricing For Profit — system to set profitable prices"
-       width="560" height="420" loading="lazy" decoding="async">
-</picture>
-  <div class="p-6">
-    <p class="font-poppins text-lg font-semibold text-slate-900">Pricing For Profit</p>
-    <div class="mt-4">
-      <span class="inline-flex items-center rounded-xl bg-mg-blue px-4 py-2 text-white font-semibold shadow hover:bg-blue-600 transition">View</span>
-    </div>
-    <div class="mt-2 text-slate-600 text-sm"><span data-price="pricing-for-profit-system"></span></div>
-  </div>
-</a>
-          <!-- Add additional cards here and use data-price="..." for price auto-inserting -->
-
+  <header class="hero">
+    <div class="container">
+      <nav style="display:flex; align-items:center; justify-content:space-between; gap:1rem;">
+        <a href="/" class="btn btn-outline" style="background:rgba(255,255,255,.08); color:#fff; border-color:rgba(255,255,255,.2)">← Home</a>
+        <a href="/" class="brand" style="font-weight:800; letter-spacing:.2px; color:#fff; text-decoration:none;">MikeGuides</a>
+        <span aria-hidden="true"></span>
+      </nav>
+      <div class="grid" style="grid-template-columns:1.2fr 1fr; gap:1.5rem; align-items:center; margin-top:1.5rem;">
+        <div>
+          <p class="badge" style="color:rgba(255,255,255,.85)"><span class="dot" style="background:#22c55e"></span>Live & Selling</p>
+          <h1 class="brand" style="margin:.5rem 0 0">Shop Guides & Toolkits</h1>
+          <p style="margin:.5rem 0 0; color:rgba(255,255,255,.9)">Minimal, fast, and ready to ship. Each block links straight to Gumroad. Screenshots are optional and will hide if not found.</p>
+          <div style="margin-top:1rem; display:flex; gap:.5rem; flex-wrap:wrap">
+            <a class="btn btn-primary" href="#products">Browse Products</a>
+            <a class="btn btn-outline" style="background:rgba(255,255,255,.08); color:#fff; border-color:rgba(255,255,255,.2)" href="/products/">Permalink</a>
+          </div>
+        </div>
+        <div>
+          <picture>
+            <source srcset="/assets/images/hero/hero.v20251026a.1280.png" media="(min-width: 1024px)">
+            <img src="/assets/images/hero/hero.v20251026a.960.png" alt="MikeGuides cover" class="rounded ring" onerror="this.style.display='none'">
+          </picture>
         </div>
       </div>
-    </section>
+    </div>
+  </header>
+
+  <main id="products" class="section">
+    <div class="container">
+      <div class="grid grid-3">
+
+        <!-- Product Template (repeat):
+          data-main:    primary card path (e.g., seasonal)
+          data-fallback:backup card path (non-seasonal or different folder)
+          data-shot1/2: optional screenshot paths; hide if 404
+        -->
+
+        <!-- AI Marketing Toolkit -->
+        <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_10px_25px_-10px_rgba(2,6,23,.1)] card">
+          <a href="https://mikeguides8.gumroad.com/l/apiqo" target="_blank" rel="noopener">
+            <img class="rounded ring" width="960" height="960" alt="AI Marketing Toolkit"
+                 data-main="/assets/images/products/card_hallow_aimarketingtoolkit.v20251023a.960x960.jpg"
+                 data-fallback="/assets/images/products/ai-marketing-toolkit/card_ai-marketing-toolkit.v20251026a.960x960.jpg">
+          </a>
+          <div style="margin-top:.75rem" class="badge"><span class="dot"></span>Toolkit</div>
+          <h3 class="brand" style="margin:.25rem 0 0; font-size:1.25rem; font-weight:800">AI Marketing Toolkit</h3>
+          <p class="muted" style="margin-top:.25rem">Prompts, templates, and workflows to launch campaigns fast.</p>
+          <div class="shots">
+            <img class="rounded ring" alt="AI Marketing Toolkit screenshot 1" data-shot1="/assets/screenshots/aimarketingtoolkit/shot1.png">
+            <img class="rounded ring" alt="AI Marketing Toolkit screenshot 2" data-shot2="/assets/screenshots/aimarketingtoolkit/shot2.png">
+          </div>
+          <div style="margin-top:.75rem; display:flex; gap:.5rem; flex-wrap:wrap; align-items:center">
+            <a class="btn btn-primary" href="https://mikeguides8.gumroad.com/l/apiqo" target="_blank" rel="noopener">Get Toolkit</a>
+          </div>
+        </article>
+
+        <!-- Pricing for Profit -->
+        <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_10px_25px_-10px_rgba(2,6,23,.1)] card">
+          <a href="https://mikeguides8.gumroad.com/l/vlkwxj" target="_blank" rel="noopener">
+            <img class="rounded ring" width="960" height="960" alt="Pricing for Profit System"
+                 data-main="/assets/images/products/card_hallow_pricingforprofit.v20251023a.960x960.jpg"
+                 data-fallback="/assets/images/products/pricing-for-profit-system/card_pricing-for-profit-system.v20251026a.960x960.jpg">
+          </a>
+          <div style="margin-top:.75rem" class="badge"><span class="dot"></span>Guide + Calculator</div>
+          <h3 class="brand" style="margin:.25rem 0 0; font-size:1.25rem; font-weight:800">Pricing for Profit</h3>
+          <p class="muted" style="margin-top:.25rem">Know true costs, set margins, and price with confidence.</p>
+          <div class="shots">
+            <img class="rounded ring" alt="Pricing for Profit screenshot 1" data-shot1="/assets/screenshots/pricingforprofit/shot1.png">
+            <img class="rounded ring" alt="Pricing for Profit screenshot 2" data-shot2="/assets/screenshots/pricingforprofit/shot2.png">
+          </div>
+          <div style="margin-top:.75rem; display:flex; gap:.5rem; flex-wrap:wrap; align-items:center">
+            <a class="btn btn-primary" href="https://mikeguides8.gumroad.com/l/vlkwxj" target="_blank" rel="noopener">Get the Guide</a>
+          </div>
+        </article>
+
+        <!-- Business Builder Bundle -->
+        <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_10px_25px_-10px_rgba(2,6,23,.1)] card">
+          <a href="https://mikeguides8.gumroad.com/l/business_bundle_builder" target="_blank" rel="noopener">
+            <img class="rounded ring" width="960" height="960" alt="Business Builder Bundle"
+                 data-main="/assets/images/products/card_hallow_bbbundle.v20251023a.960x960.jpg"
+                 data-fallback="/assets/images/products/business-builder-bundle/card_business-builder-bundle.v20251026a.960x960.jpg">
+          </a>
+          <div style="margin-top:.75rem" class="badge"><span class="dot"></span>Bundle</div>
+          <h3 class="brand" style="margin:.25rem 0 0; font-size:1.25rem; font-weight:800">Business Builder Bundle</h3>
+          <p class="muted" style="margin-top:.25rem">Core guides in one place for faster implementation.</p>
+          <div class="shots">
+            <img class="rounded ring" alt="Bundle screenshot 1" data-shot1="/assets/screenshots/bbbundle/shot1.png">
+            <img class="rounded ring" alt="Bundle screenshot 2" data-shot2="/assets/screenshots/bbbundle/shot2.png">
+          </div>
+          <div style="margin-top:.75rem; display:flex; gap:.5rem; flex-wrap:wrap; align-items:center">
+            <a class="btn btn-primary" href="https://mikeguides8.gumroad.com/l/business_bundle_builder" target="_blank" rel="noopener">Buy Bundle</a>
+          </div>
+        </article>
+
+        <!-- AI Business Automation — ROI -->
+        <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_10px_25px_-10px_rgba(2,6,23,.1)] card">
+          <a href="https://mikeguides8.gumroad.com/l/ai-business-automation" target="_blank" rel="noopener">
+            <img class="rounded ring" width="960" height="960" alt="AI Business Automation ROI"
+                 data-main="/assets/images/products/card_hallow_aibusinessautomationroi.v20251023a.960x960.jpg"
+                 data-fallback="/assets/images/products/ai-business-automation-roi/card_ai-business-automation-roi.v20251026a.960x960.jpg">
+          </a>
+          <div style="margin-top:.75rem" class="badge"><span class="dot"></span>Workshop</div>
+          <h3 class="brand" style="margin:.25rem 0 0; font-size:1.25rem; font-weight:800">AI Business Automation — ROI</h3>
+          <p class="muted" style="margin-top:.25rem">Stop playing with AI—build automations that save money.</p>
+          <div class="shots">
+            <img class="rounded ring" alt="Automation screenshot 1" data-shot1="/assets/screenshots/aibusinessautomationroi/shot1.png">
+            <img class="rounded ring" alt="Automation screenshot 2" data-shot2="/assets/screenshots/aibusinessautomationroi/shot2.png">
+          </div>
+          <div style="margin-top:.75rem; display:flex; gap:.5rem; flex-wrap:wrap; align-items:center">
+            <a class="btn btn-primary" href="https://mikeguides8.gumroad.com/l/ai-business-automation" target="_blank" rel="noopener">See Details</a>
+          </div>
+        </article>
+
+        <!-- AI Writing Workshop -->
+        <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_10px_25px_-10px_rgba(2,6,23,.1)] card">
+          <a href="https://mikeguides8.gumroad.com/l/AI_Writing_Workshop" target="_blank" rel="noopener">
+            <img class="rounded ring" width="960" height="960" alt="AI Writing Workshop"
+                 data-main="/assets/images/products/card_hallow_aiwritingworkshop.v20251023a.960x960.jpg"
+                 data-fallback="/assets/images/products/ai-writing-workshop/card_ai-writing-workshop.v20251026a.960x960.jpg">
+          </a>
+          <div style="margin-top:.75rem" class="badge"><span class="dot"></span>Workshop</div>
+          <h3 class="brand" style="margin:.25rem 0 0; font-size:1.25rem; font-weight:800">AI Writing Workshop</h3>
+          <p class="muted" style="margin-top:.25rem">From blank page to polished copy—fast.</p>
+          <div class="shots">
+            <img class="rounded ring" alt="Writing screenshot 1" data-shot1="/assets/screenshots/aiwritingworkshop/shot1.png">
+            <img class="rounded ring" alt="Writing screenshot 2" data-shot2="/assets/screenshots/aiwritingworkshop/shot2.png">
+          </div>
+          <div style="margin-top:.75rem; display:flex; gap:.5rem; flex-wrap:wrap; align-items:center">
+            <a class="btn btn-primary" href="https://mikeguides8.gumroad.com/l/AI_Writing_Workshop" target="_blank" rel="noopener">Join Workshop</a>
+          </div>
+        </article>
+
+        <!-- Visual AI Studio -->
+        <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_10px_25px_-10px_rgba(2,6,23,.1)] card">
+          <a href="https://mikeguides8.gumroad.com/l/visual_ai_studio" target="_blank" rel="noopener">
+            <img class="rounded ring" width="960" height="960" alt="Visual AI Studio"
+                 data-main="/assets/images/products/card_hallow_visualaistudio.v20251023a.960x960.jpg"
+                 data-fallback="/assets/images/products/visual-ai-studio/card_visual-ai-studio.v20251026a.960x960.jpg">
+          </a>
+          <div style="margin-top:.75rem" class="badge"><span class="dot"></span>Studio</div>
+          <h3 class="brand" style="margin:.25rem 0 0; font-size:1.25rem; font-weight:800">Visual AI Studio</h3>
+          <p class="muted" style="margin-top:.25rem">Design, remix, and export visuals with AI—fast.</p>
+          <div class="shots">
+            <img class="rounded ring" alt="Visual AI Studio screenshot 1" data-shot1="/assets/screenshots/visualaistudio/shot1.png">
+            <img class="rounded ring" alt="Visual AI Studio screenshot 2" data-shot2="/assets/screenshots/visualaistudio/shot2.png">
+          </div>
+          <div style="margin-top:.75rem; display:flex; gap:.5rem; flex-wrap:wrap; align-items:center">
+            <a class="btn btn-primary" href="https://mikeguides8.gumroad.com/l/visual_ai_studio" target="_blank" rel="noopener">Explore Studio</a>
+          </div>
+        </article>
+
+        <!-- ChatGPT Mastery Simulator (optional, can hide later) -->
+        <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_10px_25px_-10px_rgba(2,6,23,.1)] card">
+          <a href="https://mikeguides8.gumroad.com/l/chatgpt-mastery-simulator" target="_blank" rel="noopener">
+            <img class="rounded ring" width="960" height="960" alt="ChatGPT Mastery Simulator"
+                 data-main="/assets/images/products/card_hallow_chatgpt_mastery.v20251023a.960x960.jpg"
+                 data-fallback="/assets/images/products/chatgpt-mastery-simulator/card_chatgpt-mastery-simulator.v20251026a.960x960.jpg">
+          </a>
+          <div style="margin-top:.75rem" class="badge"><span class="dot"></span>Simulator</div>
+          <h3 class="brand" style="margin:.25rem 0 0; font-size:1.25rem; font-weight:800">ChatGPT Mastery Simulator</h3>
+          <p class="muted" style="margin-top:.25rem">Practice advanced prompting and workflows—hands on.</p>
+          <div class="shots">
+            <img class="rounded ring" alt="Mastery screenshot 1" data-shot1="/assets/screenshots/chatgptmastery/shot1.png">
+            <img class="rounded ring" alt="Mastery screenshot 2" data-shot2="/assets/screenshots/chatgptmastery/shot2.png">
+          </div>
+          <div style="margin-top:.75rem; display:flex; gap:.5rem; flex-wrap:wrap; align-items:center">
+            <a class="btn btn-primary" href="https://mikeguides8.gumroad.com/l/chatgpt-mastery-simulator" target="_blank" rel="noopener">Start Training</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
   </main>
 
-  <!-- Load prices and update UI -->
+  <footer class="section" style="border-top:1px solid #e2e8f0">
+    <div class="container" style="display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap">
+      <p class="muted">© <span id="y"></span> MikeGuides.co</p>
+      <a class="btn btn-outline" href="https://mikeguides8.gumroad.com/" target="_blank" rel="noopener">MikeGuides on Gumroad</a>
+    </div>
+  </footer>
+
   <script>
-    window.MG_PRICES = {
-      currency: "USD",
-      products: {
-        "visual-ai-studio": "19.95",
-        "ai-marketing-toolkit": "19.95",
-        "ai-writing-workshop": "19.95",
-        "ai-business-automation-roi": "19.95",
-        "business-builder-bundle": "79.95",
-        "chatgpt-mastery-simulator": "19.95",
-        "pricing-for-profit-system": "54.95"
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // Helper: try main → fallback → size fallbacks, otherwise hide image
+    function attachImgLoader(img){
+      const main = img.getAttribute('data-main');
+      const fallback = img.getAttribute('data-fallback');
+      const sizes = ['960x960','560x560','400x400'];
+
+      function trySrc(srcBase){
+        if(!srcBase) return false;
+        let idx = 0;
+        const tryNext = ()=>{
+          if(idx >= sizes.length){ img.style.display='none'; return; }
+          const src = srcBase.replace(/\.(?:960x960|560x560|400x400)\./, `.${sizes[idx]}.`);
+          const probe = new Image();
+          probe.onload = ()=>{ img.src = src; };
+          probe.onerror = ()=>{ idx++; tryNext(); };
+          probe.src = src;
+        };
+        tryNext();
+        return true;
       }
-    };
-    (function () {
-      var p = (window.MG_PRICES && window.MG_PRICES.products) || {};
-      document.querySelectorAll('[data-price]').forEach(function (el) {
-        var slug = el.getAttribute('data-price');
-        if (p[slug]) el.textContent = '$' + p[slug];
-        else el.textContent = '';
-      });
-    })();
+
+      // Prefer main; if it fails entirely, try fallback
+      if(!trySrc(main)) trySrc(fallback);
+    }
+
+    // Load primary card images
+    document.querySelectorAll('img[data-main]').forEach(attachImgLoader);
+
+    // Load screenshots: if they 404, hide the element gracefully
+    document.querySelectorAll('img[data-shot1], img[data-shot2]').forEach(img => {
+      const s1 = img.getAttribute('data-shot1');
+      const s2 = img.getAttribute('data-shot2');
+      const src = s1 || s2; // only one attribute will be present per img
+      if(!src){ img.style.display='none'; return; }
+      const probe = new Image();
+      probe.onload = ()=>{ img.src = src; };
+      probe.onerror = ()=>{ img.style.display='none'; };
+      probe.src = src;
+    });
   </script>
-  <script src="/assets/js/prices.js"></script>
 </body>
 </html>
