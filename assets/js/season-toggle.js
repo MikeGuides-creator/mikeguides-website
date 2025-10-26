@@ -1,162 +1,53 @@
-/* MikeGuides Season Toggle v1.1c (2025-10-23)
-   - Toggle between default and halloween
-   - Swap src/srcset for [data-seasonal] and [data-seasonal-picture]
-   - Apply .theme-halloween and remember choice
-   - Respect ?season=halloween|default and auto-enable in October
-*/
-(function () {
-  const STORAGE_KEY = "mg-season";
-  const SEASONS = { DEFAULT: "default", HALLOWEEN: "halloween" };
+/*! season-toggle.js — minimal, dashless Halloween filename helper */
+(function (root, factory) {
+  root.SeasonToggle = factory();
+})(window, function () {
+  'use strict';
 
-  // --- CONFIG: Halloween path convention (flat file names; compact slugs) ---
-const PATH_MAPPER = (() => {
-  const HALLOWEEN_BASE = "/assets/images/products/";
-  const SEASON_VER = "20251023a";   // change when you export a new batch
-  const SIZE_TOKEN = "960x960";
-  const EXT = "jpg";
+  // Adjust if your paths or naming change later
+  var HALLOWEEN_BASE = '/assets/images/products/';
+  var SEASON_VER     = '20251023a';
+  var SIZE_TOKEN     = '960x960';
+  var EXT            = 'jpg';
 
-  // Extract <slug> from default paths like:
-  // /assets/images/products/<slug>/<slug>....png   OR
-  // /assets/images/products/<slug>/anything       OR
-  // /assets/images/products/<slug>.png
+  // Extracts slug from a default card path
+  // e.g. "/assets/images/products/card_ai-marketing-toolkit.v20251026a.960x960.jpg"
+  //   -> "ai-marketing-toolkit"
   function deriveSlug(defaultSrc) {
-    let m = defaultSrc.match(/\/products\/([^/]+)\/\1\./i);
-    if (m) return m[1];
-    m = defaultSrc.match(/\/products\/([^/]+)\//i);
-    if (m) return m[1];
-    m = defaultSrc.match(/\/products\/([^/]+)\.[a-z0-9]+(?:\?|$)/i);
-    if (m) return m[1];
-    return null;
+    if (!defaultSrc) return null;
+    try {
+      var filename = defaultSrc.split('/').pop();             // "card_ai-marketing-toolkit.v2025....jpg"
+      var base = filename.split('.')[0];                      // "card_ai-marketing-toolkit"
+      var slug = base.replace(/^card_/, '');                  // "ai-marketing-toolkit"
+      return slug || null;
+    } catch (e) { return null; }
   }
 
+  // "ai-marketing-toolkit" -> "aimarketingtoolkit"
+  function toCompact(s) { return s ? s.toLowerCase().replace(/-/g, '') : s; }
+
+  // Build the seasonal filename you’re using:
+  // "card_hallow_<slugNoDashes>.v<SEASON_VER>.<SIZE_TOKEN>.<EXT>"
   function deriveFile(defaultSrc) {
-    const slug = deriveSlug(defaultSrc);
+    var slug = deriveSlug(defaultSrc);
     if (!slug) return null;
-    // your Halloween filenames are compact (no dashes)
-    const compact = slug.toLowerCase().replace(/-/g, "");
-    return `card_hallow_${compact}.v${SEASON_VER}.${SIZE_TOKEN}.${EXT}`;
+    var compact = toCompact(slug);
+    return 'card_hallow_' + compact + '.v' + SEASON_VER + '.' + SIZE_TOKEN + '.' + EXT;
   }
 
+  // Full URL to seasonal card or null
   function toHalloween(defaultSrc) {
-    const file = deriveFile(defaultSrc);
+    var file = deriveFile(defaultSrc);
     return file ? HALLOWEEN_BASE + file : null;
   }
 
-  return { HALLOWEEN_BASE, SEASON_VER, SIZE_TOKEN, EXT, deriveSlug, deriveFile, toHalloween };
-})();
-
-
-    deriveFile(defaultSrc) {
-      const slug = this.deriveSlug(defaultSrc);
-      if (!slug) return null;
-      return `card_hallow_${slug}.v${this.SEASON_VER}.${this.SIZE_TOKEN}.${this.EXT}`;
-    },
-
-    toHalloween(defaultSrc) {
-      const file = this.deriveFile(defaultSrc);
-      return file ? this.HALLOWEEN_BASE + file : null;
-    }
+  return {
+    HALLOWEEN_BASE: HALLOWEEN_BASE,
+    SEASON_VER:     SEASON_VER,
+    SIZE_TOKEN:     SIZE_TOKEN,
+    EXT:            EXT,
+    deriveSlug:     deriveSlug,
+    deriveFile:     deriveFile,
+    toHalloween:    toHalloween
   };
-  // --- end CONFIG ---
-
-  // Utilities
-  const $ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
-  const getParam = (name) => new URLSearchParams(window.location.search).get(name) || "";
-
-  function applyThemeClass(season) {
-    const root = document.documentElement;
-    root.classList.toggle("theme-halloween", season === SEASONS.HALLOWEEN);
-    root.setAttribute("data-season", season);
-  }
-
-  function computedHalloweenSrc(img) {
-    const explicit = img.getAttribute("data-src-halloween");
-    if (explicit) return explicit;
-    const def = img.getAttribute("data-src-default") || img.getAttribute("src") || "";
-    return PATH_MAPPER.toHalloween(def);
-  }
-
-  function swapImage(img, season) {
-    const defSrc = img.getAttribute("data-src-default") || img.getAttribute("src");
-    const hlwSrc = computedHalloweenSrc(img);
-    const next = (season === SEASONS.HALLOWEEN && hlwSrc) ? hlwSrc : defSrc;
-    if (next && img.src !== next) img.src = next;
-  }
-
-  function computedHalloweenSrcset(source) {
-    const explicit = source.getAttribute("data-srcset-halloween");
-    if (explicit) return explicit;
-    const defSet = source.getAttribute("data-srcset-default") || source.getAttribute("srcset");
-    if (!defSet) return null;
-    const parts = defSet.split(",").map(s => s.trim()).filter(Boolean);
-    const mapped = parts.map(entry => {
-      const [url, size] = entry.split(/\s+/);
-      const derived = PATH_MAPPER.toHalloween(url);
-      return derived ? `${derived}${size ? " " + size : ""}` : null;
-    }).filter(Boolean);
-    return mapped.length ? mapped.join(", ") : null;
-  }
-
-  function swapPicture(picture, season) {
-    $("source", picture).forEach((source) => {
-      const defSet = source.getAttribute("data-srcset-default") || source.getAttribute("srcset");
-      const hlwSet = computedHalloweenSrcset(source);
-      const next = (season === SEASONS.HALLOWEEN && hlwSet) ? hlwSet : defSet;
-      if (next) source.srcset = next;
-    });
-    const img = picture.querySelector("img[data-seasonal]") || picture.querySelector("img");
-    if (img) swapImage(img, season);
-  }
-
-  function applySeason(season) {
-    applyThemeClass(season);
-    $("[data-seasonal]").forEach((img) => swapImage(img, season));
-    $("[data-seasonal-picture]").forEach((pic) => swapPicture(pic, season));
-    const btn = document.getElementById("seasonToggle");
-    if (btn) btn.setAttribute("aria-pressed", season === SEASONS.HALLOWEEN ? "true" : "false");
-  }
-
-  function setSeason(season, persist = true) {
-    season = (season === SEASONS.HALLOWEEN) ? SEASONS.HALLOWEEN : SEASONS.DEFAULT;
-    applySeason(season);
-    if (persist) localStorage.setItem(STORAGE_KEY, season);
-  }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const p = getParam("season").toLowerCase();
-    const saved = localStorage.getItem(STORAGE_KEY);
-    const isOctober = (new Date().getMonth() === 9);
-
-    const season =
-      p === "halloween" ? SEASONS.HALLOWEEN :
-      p === "default"   ? SEASONS.DEFAULT   :
-      (saved === SEASONS.HALLOWEEN || saved === SEASONS.DEFAULT) ? saved :
-      (isOctober ? SEASONS.HALLOWEEN : SEASONS.DEFAULT);
-
-    setSeason(season, false);
-
-    const btn = document.getElementById("seasonToggle");
-    if (btn) {
-      btn.addEventListener("click", () => {
-        const next = (document.documentElement.getAttribute("data-season") === SEASONS.HALLOWEEN)
-          ? SEASONS.DEFAULT : SEASONS.HALLOWEEN;
-        setSeason(next, true);
-      });
-    }
-
-    // Dev aid: warn if a seasonal path can't be derived and no explicit override is set
-    const undecided = [];
-    $("[data-seasonal]").forEach((img) => {
-      if (!img.getAttribute("data-src-halloween")) {
-        const derived = computedHalloweenSrc(img);
-        if (!derived) {
-          const s = img.getAttribute("src") || img.getAttribute("data-src-default") || "(unknown)";
-          undecided.push(s);
-        }
-      }
-    });
-    if (undecided.length) {
-      console.warn("[SeasonToggle] Could not derive Halloween paths for:", undecided);
-    }
-  });
-})();
+});
