@@ -96,6 +96,10 @@ html[data-season="halloween"] .btn-primary:hover { opacity: .9; }
 .btn-accent{background:var(--mg-green); color:#fff}
 .btn-outline{border:2px solid var(--mg-blue); color:var(--mg-blue)}
 .btn-outline:hover{background:var(--mg-blue); color:#fff}
+a.bg-\[var\(--mg-blue\)\],
+button.bg-\[var\(--mg-blue\)\] {
+  color: #fff !important;
+}
 
 /* ===== Utilities (Tailwind-lite shim) ===== */
 /* spacing / layout */
