@@ -75,6 +75,17 @@ html[data-season="halloween"] .btn-primary:hover { opacity: .9; }
   --mg-bg: #fff7ed;
 }
 
+.hero picture,
+.hero img {
+  display: block;
+  margin: 0 auto;
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  max-width: 1280px;
+  border-radius: 1rem;
+}
+
 /* ===== Buttons ===== */
 .btn{
   display:inline-flex; align-items:center; justify-content:center;
