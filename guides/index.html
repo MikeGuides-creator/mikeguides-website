@@ -217,19 +217,6 @@
     // Default highlight "All"
     document.querySelector('[data-filter="all"]').classList.add('ring-2','ring-[var(--mg-blue)]');
   </script>
-  <script>
-  document.addEventListener("click", function (e) {
-    const link = e.target.closest("a[data-gumroad]");
-    if (!link) return;
 
-    if (typeof gtag === "function") {
-      gtag("event", "gumroad_click", {
-        product: link.dataset.gumroad,
-        page_path: window.location.pathname,
-        link_url: link.href
-      });
-    }
-  });
-</script>
 </body>
 </html>
