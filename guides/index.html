@@ -222,13 +222,26 @@
     const link = e.target.closest("a[data-gumroad]");
     if (!link) return;
 
+    const payload = {
+      product: link.dataset.gumroad || "(unknown)",
+      page_path: window.location.pathname,
+      link_url: link.href
+    };
+
+    // GA4 gtag.js setup
     if (typeof gtag === "function") {
-      gtag("event", "gumroad_click", {
-        product: link.dataset.gumroad,
-        page_path: window.location.pathname,
-        link_url: link.href
-      });
+      gtag("event", "gumroad_click", payload);
+      return;
     }
+
+    // Google Tag Manager setup
+    if (Array.isArray(window.dataLayer)) {
+      window.dataLayer.push({ event: "gumroad_click", ...payload });
+      return;
+    }
+
+    // Optional: quick console breadcrumb for troubleshooting
+    console.warn("No gtag() or dataLayer found. Event not sent.", payload);
   });
 </script>
 
