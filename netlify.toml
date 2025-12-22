@@ -1,6 +1,8 @@
 [build]
-  command = "npm install --no-audit --no-fund && npm run build"
   publish = "."
+  # command = ""
 
-[build.environment]
-  NODE_VERSION = "20"
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

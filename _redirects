@@ -1,74 +1,18 @@
-# Force legacy single-file route to the folder page
+# Single-file route → folder page
 /products.html      /products/                                  301!
 
-# Legacy / shortlinks to product pages (URL-encoded spaces)
-# Visual AI Studio
-/Visual%20AI%20Studio/*               /products/visual-ai-studio/:splat            301!
-/visual%20ai%20studio/*               /products/visual-ai-studio/:splat            301!
+# Product shortlinks (with UTMs so Gumroad attributes properly)
+# Feel free to tweak utm_campaign values
+/buy/visual-ai-studio           https://mikeguides8.gumroad.com/l/visual-ai-studio?utm_source=site&utm_medium=button&utm_campaign=product  301!
+/buy/chatgpt-mastery            https://mikeguides8.gumroad.com/l/chatgpt-mastery-simulator?utm_source=site&utm_medium=button&utm_campaign=product  301!
+/buy/ai-writing-workshop        https://mikeguides8.gumroad.com/l/AI_Writing_Workshop?utm_source=site&utm_medium=button&utm_campaign=product  301!
+/buy/ai-business-automation-roi https://mikeguides8.gumroad.com/l/ai-business-automation-roi?utm_source=site&utm_medium=button&utm_campaign=product  301!
+/buy/bundle                     https://mikeguides8.gumroad.com/l/business_bundle_builder?utm_source=site&utm_medium=button&utm_campaign=bundle  301!
+/buy/pricing-for-profit         https://mikeguides8.gumroad.com/l/PRICING_FOR_PROFIT?utm_source=site&utm_medium=button&utm_campaign=product  301!
 
-# ChatGPT Mastery Simulator
-/EnhancedChatGPT_Simulator/*          /products/chatgpt-mastery-simulator/:splat   301!
-/enhancedChatGPT%20simulator/*        /products/chatgpt-mastery-simulator/:splat   301!
+# Trailing-slash conveniences
+/guides       /guides/     301
+/toolkit      /toolkit/    301
 
-# AI Business Automation ROI
-/Enhanced_ai_business_automation/*    /products/ai-business-automation-roi/:splat  301!
-/program/ai-business-automation-roi/* /products/ai-business-automation-roi/:splat  301!
-/program/ai-business-automation/*     /products/ai-business-automation-roi/:splat  301!
-
-# Toolkit collection
-/toolkit/*                            /products/ai-marketing-toolkit/:splat        301!
-
-# Bundle → Gumroad
-/buy/bundle                           https://mikeguides8.gumroad.com/l/business_bundle_builder  301!
-/buy/business-bundle-builder          https://mikeguides8.gumroad.com/l/business_bundle_builder  301!
-/buy/business-builder-bundle          https://mikeguides8.gumroad.com/l/business_bundle_builder  301!
-
-# AI Writing Workshop → Gumroad
-/buy/ai-writing-workshop              https://mikeguides8.gumroad.com/l/AI_Writing_Workshop      301!
-/buy/ai-writing                       https://mikeguides8.gumroad.com/l/AI_Writing_Workshop      301!
-/buy/writing-workshop                 https://mikeguides8.gumroad.com/l/AI_Writing_Workshop      301!
-
-# Pricing for Profit → Gumroad
-/buy/pricing-for-profit               https://mikeguides8.gumroad.com/l/PRICING_FOR_PROFIT?utm_source=site  301!
-
-# Store aliases to products index
-/store/*                              /products/:splat                              301!
-/store                                /products/                                    301!
-
-# If you relocated /images to /assets/images
-/images/*                             /assets/images/:splat                         301!
-
-
-# Force HTTPS (Netlify usually does this, but we make it explicit)
-http://mikeguides.co/*   https://mikeguides.co/:splat   301!
-http://www.mikeguides.co/* https://mikeguides.co/:splat 301!
-
-# Canonical host (send www → apex)
-https://www.mikeguides.co/*  https://mikeguides.co/:splat  301!
-
-# Shortcuts
-/blog        https://blog.pricingforprofit.co                    301
-/store       https://mikeguides8.gumroad.com                     301
-/gumroad     https://mikeguides8.gumroad.com                     301
-
-# Pretty product links
-/buy/bundle  https://mikeguides8.gumroad.com/l/business_bundle_builder  301
-
-# Trailing slash conveniences
-/guides      /guides/   301
-/toolkit     /toolkit/  301
-
-# Catch-all (must be last)
-# Unmatched paths go to your 404 page
-/*  /404.html  404
-
-/buy/visual-ai-studio  https://mikeguides8.gumroad.com/l/visual-ai-studio  301!?utm_source=site
-
-https://www.mikeguides.co/*  https://mikeguides.co/:splat  301!?utm_source=site
-
-# Blog → external site
-/blog/* https://blog.pricingforprofit.co/:splat 301!?utm_source=site
-
-
-# If you relocate /images to /assets/images
-/images/* /assets/images/:splat 301!
+# Catch-all (keep last)
+/*             /404.html    404
