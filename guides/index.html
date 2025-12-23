@@ -118,13 +118,14 @@
    class="inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold text-[var(--mg-blue)] border border-[var(--mg-blue)] hover:bg-[var(--mg-blue)] hover:text-white">
   On Gumroad
 </a>
-<a href="https://mikeguides8.gumroad.com/l/apiqo"
+<a href="https://mikeguides8.gumroad.com"
    target="_blank"
    rel="noopener"
    data-gumroad="AI Marketing Toolkit"
-   class="inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white bg-[var(--mg-blue)] hover:opacity-90">
-  View on Gumroad
+   class="...">
+  On Gumroad
 </a>
+
 >>>>>>> b9999912edc8af602581dd9f03104e87d8b15221
         </div>
       </article>
@@ -265,6 +266,30 @@
     }
 
     // Optional: quick console breadcrumb for troubleshooting
+    console.warn("No gtag() or dataLayer found. Event not sent.", payload);
+  });
+</script>
+<script>
+  document.addEventListener("click", function (e) {
+    const link = e.target.closest("a[data-gumroad]");
+    if (!link) return;
+
+    const payload = {
+      product: link.dataset.gumroad || "(unknown)",
+      page_path: window.location.pathname,
+      link_url: link.href
+    };
+
+    if (typeof gtag === "function") {
+      gtag("event", "gumroad_click", payload);
+      return;
+    }
+
+    if (Array.isArray(window.dataLayer)) {
+      window.dataLayer.push({ event: "gumroad_click", ...payload });
+      return;
+    }
+
     console.warn("No gtag() or dataLayer found. Event not sent.", payload);
   });
 </script>
