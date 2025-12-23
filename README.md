@@ -172,8 +172,8 @@ If you find old prices in HTML, replace with `<span data-price="slug"></span>`.
 
 ```
 /buy/business-builder-bundle  https://mikeguides8.gumroad.com/l/business_bundle_builder?utm_source=site  301!
-/buy/ai-writing               https://mikeguides8.gumroad.com/l/AI_Writing_Workshop?utm_source=site      301!
-/buy/writing-workshop         https://mikeguides8.gumroad.com/l/AI_Writing_Workshop?utm_source=site      301!
+/buy/ai-writing               ?utm_source=site      301!
+/buy/writing-workshop         ?utm_source=site      301!
 /buy/pricing-for-profit       https://mikeguides8.gumroad.com/l/PRICING_FOR_PROFIT?utm_source=site       301!
 ```
 
