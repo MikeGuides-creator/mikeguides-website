@@ -16,6 +16,14 @@
 </script>
 
   <style>
+    .toolkit-page {
+  all: initial;
+}
+.toolkit-page * {
+  box-sizing: border-box;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
     :root{
       --mg-blue:#2563eb; /* brand primary */
       --mg-green:#22c55e; /* brand accent */
@@ -221,7 +229,7 @@ class="hover:text-[var(--mg-blue)]">Toolkit</a>
   <!-- Footer -->
   <footer class="mt-auto border-t border-slate-200 bg-white/70">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 text-sm text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-2">
-      <p>Â© 2025 MikeGuides. All rights reserved.</p>
+      <p>&copy; 2025 MikeGuides. All rights reserved.</p>
       <div class="flex items-center gap-4">
         <a href="{{ '/' | relative_url }}" class="hover:text-[var(--mg-blue)]">Home</a>
         <a href="{{ '/guides/' | relative_url }}" class="hover:text-[var(--mg-blue)]">Guides</a>
