@@ -210,3 +210,18 @@ button.bg-\[var\(--mg-blue\)\] {
   .lg\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
   .lg\:px-8{padding-left:2rem;padding-right:2rem}
 }
+
+/* Consistent product thumbnails */
+.thumb{
+  aspect-ratio: 16 / 9;   /* use 1 / 1 if you want square cards */
+  overflow: hidden;
+  border-radius: 16px;
+  background: #fff;
+}
+
+.thumb img{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
