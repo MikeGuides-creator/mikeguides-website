@@ -213,7 +213,7 @@ button.bg-\[var\(--mg-blue\)\] {
 
 /* Consistent product thumbnails */
 .thumb{
-  aspect-ratio: 16 / 9;   /* use 1 / 1 if you want square cards */
+  aspect-ratio: 1 / 1;   /* use 1 / 1 if you want square cards */
   overflow: hidden;
   border-radius: 16px;
   background: #fff;
