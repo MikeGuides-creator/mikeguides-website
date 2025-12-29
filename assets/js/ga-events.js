@@ -5,7 +5,12 @@
 
   function track(el, eventName, params) {
     if (!el) return;
+
     el.addEventListener("click", function () {
+
+      // 🔍 ADD THIS LINE (temporary debug)
+      console.log("GA click detected:", params);
+
       if (!canTrack()) return;
       try {
         window.gtag("event", eventName, params);
