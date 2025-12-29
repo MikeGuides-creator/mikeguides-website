@@ -7,10 +7,8 @@
     if (!el) return;
 
     el.addEventListener("click", function () {
-
-      // 🔍 ADD THIS LINE (temporary debug)
-      console.log("GA click detected:", params);
-
+console.log("tracked click:", eventName, params);
+     
       if (!canTrack()) return;
       try {
         window.gtag("event", eventName, params);
