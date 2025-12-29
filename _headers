@@ -1,6 +1,5 @@
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://umami-hosted.vercel.app 'unsafe-inline'; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://umami-hosted.vercel.app; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com;
- style-src 'self' 'unsafe-inline'; font-src 'self' data:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://umami-hosted.vercel.app 'unsafe-inline'; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://umami-hosted.vercel.app; img-src 'self' data: blob: https://www.google-analytics.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'; upgrade-insecure-requests;
   Strict-Transport-Security: max-age=31536000
   X-Content-Type-Options: nosniff
   X-Frame-Options: SAMEORIGIN
