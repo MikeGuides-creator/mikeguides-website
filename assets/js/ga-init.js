@@ -1,6 +1,11 @@
-// GA4 init (CSP-safe: no inline script needed)
+// /assets/js/ga-init.js
 window.dataLayer = window.dataLayer || [];
-window.gtag = function () { window.dataLayer.push(arguments); };
 
-window.gtag('js', new Date());
-window.gtag('config', 'G-PHWLTS997T');
+function gtag() {
+  window.dataLayer.push(arguments);
+}
+
+window.gtag = gtag;
+
+gtag("js", new Date());
+gtag("config", "G-PHWLTS997T");
