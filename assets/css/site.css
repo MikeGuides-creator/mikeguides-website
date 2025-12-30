@@ -263,3 +263,7 @@ button.bg-\[var\(--mg-blue\)\] {
 .card h3 {
   color: #000;
 }
+/* Center CTAs inside cards */
+.card .flex {
+  justify-content: center;
+}
