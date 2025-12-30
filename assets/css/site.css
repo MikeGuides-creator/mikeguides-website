@@ -253,3 +253,13 @@ button.bg-\[var\(--mg-blue\)\] {
 .btn-toolkit:hover {
   opacity: 0.9;
 }
+/* Card content alignment & tone */
+.card {
+  text-align: center;
+  color: #000;
+}
+
+.card p,
+.card h3 {
+  color: #000;
+}
