@@ -240,3 +240,16 @@ button.bg-\[var\(--mg-blue\)\] {
   display: block;
   object-fit: cover;
 }
+/* CTA button intent styles */
+.btn-primary {
+  background-color: var(--mg-blue);
+}
+
+.btn-toolkit {
+  background-color: var(--mg-green);
+}
+
+.btn-primary:hover,
+.btn-toolkit:hover {
+  opacity: 0.9;
+}
