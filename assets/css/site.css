@@ -411,7 +411,7 @@ button.bg-\[var\(--mg-blue\)\] {
 }
 /* ===== Home Hero (centered, dark blue, constrained image) ===== */
 #home-hero{
-  background: #0f172a; /* dark navy */
+ background: var(--mg-blue);
   color: #f8fafc;
   padding: 64px 0;
 }
