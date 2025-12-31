@@ -458,3 +458,13 @@ button.bg-\[var\(--mg-blue\)\] {
   #home-hero .home-hero-media{ justify-content: flex-end; }
 }
 */
+/* Hero secondary CTA + browse link — white */
+#home-hero .bundle-cta,
+#home-hero .hero-browse a {
+  color: #ffffff;
+}
+
+#home-hero .bundle-cta:hover,
+#home-hero .hero-browse a:hover {
+  color: rgba(255, 255, 255, 0.85);
+}
