@@ -372,3 +372,40 @@ button.bg-\[var\(--mg-blue\)\] {
     justify-content: flex-start;
   }
 }
+/* Hero text color for dark background */
+.hero {
+  color: #f8fafc; /* very light gray / near-white */
+}
+
+.hero .hero-kicker {
+  color: rgba(248, 250, 252, 0.75);
+}
+
+.hero .hero-title {
+  color: #ffffff;
+}
+
+.hero .hero-sub {
+  color: rgba(248, 250, 252, 0.9);
+}
+
+.hero .hero-note {
+  color: rgba(248, 250, 252, 0.7);
+}
+
+/* Hero pills */
+.hero .inline-flex {
+  background: rgba(255, 255, 255, 0.12);
+  color: #f8fafc;
+  ring-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Ghost button on dark background */
+.hero .btn-ghost {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+}
+
+.hero .btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
