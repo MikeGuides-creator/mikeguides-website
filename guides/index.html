@@ -122,10 +122,11 @@ class="hover:text-[var(--mg-blue)]">Toolkit</a>
         </p>
         <div class="mt-5 mt-auto">
           <a href="https://mikeguides8.gumroad.com/l/business_bundle_builder"
-             target="_blank" rel="noopener"
-             class="inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white bg-[var(--mg-blue)] hover:opacity-90 transition">
-            Get the Bundle
-          </a>
+   target="_blank" rel="noopener"
+   data-gumroad="business_builder_bundle"
+   class="inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white bg-[var(--mg-blue)] hover:opacity-90 transition">
+  Get the Bundle
+</a>
         </div>
       </article>
 
@@ -137,10 +138,11 @@ class="hover:text-[var(--mg-blue)]">Toolkit</a>
         </p>
         <div class="mt-5 mt-auto">
           <a href="https://mikeguides8.gumroad.com/l/apiqo"
-             target="_blank" rel="noopener"
-             class="inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white bg-[var(--mg-green)] hover:opacity-90 transition">
-            Get the Toolkit
-          </a>
+   target="_blank" rel="noopener"
+   data-gumroad="ai_marketing_toolkit"
+   class="inline-flex items-center justify-center rounded-xl px-4 py-2.5 text-sm font-semibold text-white bg-[var(--mg-green)] hover:opacity-90 transition">
+  Get the Toolkit
+</a>
         </div>
       </article>
     </div>
@@ -160,35 +162,6 @@ class="hover:text-[var(--mg-blue)]">Toolkit</a>
     </div>
   </footer>
 
-  <script>
-    // Simple search + tag filter
-    const cards = Array.from(document.querySelectorAll('#grid article'));
-    const search = document.getElementById('search');
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    let activeFilter = 'all';
-
-    function applyFilters(){
-      const q = (search.value || '').toLowerCase().trim();
-      cards.forEach(card => {
-        const tags = (card.dataset.tags || '').toLowerCase();
-        const text = card.innerText.toLowerCase();
-        const tagOk = activeFilter === 'all' || tags.includes(activeFilter);
-        const textOk = !q || text.includes(q);
-        card.style.display = (tagOk && textOk) ? '' : 'none';
-      });
-    }
-
-    search?.addEventListener('input', applyFilters);
-    filterBtns.forEach(btn => btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('ring-2','ring-[var(--mg-blue)]'));
-      btn.classList.add('ring-2','ring-[var(--mg-blue)]');
-      activeFilter = btn.dataset.filter;
-      applyFilters();
-    }));
-
-    // Default highlight "All"
-    document.querySelector('[data-filter="all"]').classList.add('ring-2','ring-[var(--mg-blue)]');
-  </script>
 <script>
   document.addEventListener("click", function (e) {
     const link = e.target.closest("a[data-gumroad]");
