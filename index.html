@@ -257,15 +257,7 @@
 </section>
 
 <script src="/assets/js/pathfinder.js"></script>
-<script>
-  MGPathfinder.init({
-    storageKey: "mg_bundle_path_v1",
-    onChange: (state) => {
-      // optional: hook Umami/GA4 events here later
-      // console.log("Path chosen:", state);
-    }
-  });
-</script>
+
 
     <div class="grid grid-3 mt-6">
 
@@ -756,5 +748,11 @@
 <!-- Click tracking -->
 <script defer src="/assets/js/ga-events.js?v=2"></script>
 
+  <script src="/assets/js/pathfinder.js"></script>
+<script>
+  MGPathfinder.init({
+    storageKey: "mg_bundle_path_v1"
+  });
+</script>
 </body>
 </html>
