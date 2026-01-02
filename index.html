@@ -198,6 +198,74 @@
 <section id="shop" class="section">
   <div class="container">
     <h2 class="brand">Shop Guides & Toolkits</h2>
+<section class="card" style="padding:16px; border:1px solid #e2e8f0; border-radius:16px;">
+  <h2 style="margin:0 0 8px;">Pick your best starting point</h2>
+  <p style="margin:0 0 14px; color:#475569;">
+    Two minutes. No grades. This just helps the guide skip what you don’t need.
+  </p>
+
+  <form data-mg="path-quiz">
+    <fieldset style="border:0; padding:0; margin:0 0 12px;">
+      <legend style="font-weight:600; margin-bottom:6px;">1) Have you done this before?</legend>
+      <label><input type="radio" name="q1" data-score="5" required> Not yet</label><br>
+      <label><input type="radio" name="q1" data-score="15"> A little</label><br>
+      <label><input type="radio" name="q1" data-score="25"> Yes, regularly</label>
+    </fieldset>
+
+    <fieldset style="border:0; padding:0; margin:0 0 12px;">
+      <legend style="font-weight:600; margin-bottom:6px;">2) When you learn, you prefer…</legend>
+      <label><input type="radio" name="q2" data-score="5" required> Step-by-step with examples</label><br>
+      <label><input type="radio" name="q2" data-score="15"> A mix of steps + shortcuts</label><br>
+      <label><input type="radio" name="q2" data-score="25"> Give me the challenge version</label>
+    </fieldset>
+
+    <button type="submit" style="padding:10px 14px; border-radius:12px; border:0; background:#2563eb; color:white; font-weight:700;">
+      Choose my path
+    </button>
+  </form>
+
+  <div data-mg="path-result" hidden style="margin-top:14px; padding:12px; border-radius:14px; background:#f8fafc;">
+    <div style="display:flex; justify-content:space-between; gap:12px; align-items:flex-start;">
+      <div>
+        <div data-mg="path-title" style="font-weight:800;"></div>
+        <div data-mg="path-summary" style="color:#475569; margin-top:4px;"></div>
+        <div data-mg="path-meta" style="color:#64748b; margin-top:6px; font-size:12px;"></div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <button type="button" data-mg="apply-path" data-path="foundational" style="padding:8px 10px; border-radius:10px;">Foundational</button>
+        <button type="button" data-mg="apply-path" data-path="accelerated" style="padding:8px 10px; border-radius:10px;">Accelerated</button>
+        <button type="button" data-mg="apply-path" data-path="advanced" style="padding:8px 10px; border-radius:10px;">Advanced</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Example gated blocks -->
+  <div data-mg-path="foundational" hidden style="margin-top:14px;">
+    <h3 style="margin:0 0 6px;">Start here: Core Foundations</h3>
+    <p style="margin:0; color:#475569;">We’ll walk through the basics with examples you can copy.</p>
+  </div>
+
+  <div data-mg-path="accelerated" hidden style="margin-top:14px;">
+    <h3 style="margin:0 0 6px;">Start here: Fast Track</h3>
+    <p style="margin:0; color:#475569;">We skip the intro and move straight to doing.</p>
+  </div>
+
+  <div data-mg-path="advanced" hidden style="margin-top:14px;">
+    <h3 style="margin:0 0 6px;">Start here: Advanced Application</h3>
+    <p style="margin:0; color:#475569;">Edge cases, constraints, and tougher practice.</p>
+  </div>
+</section>
+
+<script src="/assets/js/pathfinder.js"></script>
+<script>
+  MGPathfinder.init({
+    storageKey: "mg_bundle_path_v1",
+    onChange: (state) => {
+      // optional: hook Umami/GA4 events here later
+      // console.log("Path chosen:", state);
+    }
+  });
+</script>
 
     <div class="grid grid-3 mt-6">
 
