@@ -760,39 +760,53 @@
 <script>
   MGPathfinder.init({
     storageKey: "mg_bundle_path_v1",
-    onChange: applyStartHere
+    onChange: (state) => {
+      applyStartHere(state);
+      wireResetButton();   // 👈 add this
+    }
   });
 
-  function applyStartHere(state) {
-    // 1) Clear any previous highlighting
-    document.querySelectorAll('[data-start-for]').forEach(card => {
-      card.classList.remove('ring-2','ring-[var(--mg-green)]','shadow-lg','relative');
-      const badge = card.querySelector('[data-start-badge]');
-      if (badge) badge.remove();
+  function wireResetButton() {
+    const key = "mg_bundle_path_v1";
+    const btn = document.querySelector('[data-mg="reset-path"]');
+    if (!btn || btn.dataset.bound) return;
+
+    btn.dataset.bound = "true"; // prevent double-binding
+
+    btn.addEventListener("click", () => {
+      // Clear saved path
+      localStorage.removeItem(key);
+
+      // Clear visual state
+      document.documentElement.removeAttribute("data-mg-selected-path");
+
+      document.querySelectorAll('[data-start-for]').forEach(card => {
+        card.classList.remove(
+          'ring-2',
+          'ring-[var(--mg-green)]',
+          'shadow-lg',
+          'relative'
+        );
+        const badge = card.querySelector('[data-start-badge]');
+        if (badge) badge.remove();
+      });
+
+      // Show all cards
+      document.querySelectorAll('[data-mg-path]').forEach(el => {
+        el.hidden = false;
+      });
+
+      // Hide result box
+      const result = document.querySelector('[data-mg="path-result"]');
+      if (result) result.hidden = true;
+
+      // Reset quiz
+      const form = document.querySelector('[data-mg="path-quiz"]');
+      if (form) form.reset();
+
+      // Scroll back to quiz
+      form?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
-
-    // 2) Find the correct card for this path
-    const target = document.querySelector(
-      `[data-start-for="${state.pathKey}"]`
-    );
-    if (!target) return;
-
-    // 3) Highlight the card
-    target.classList.add(
-      'ring-2',
-      'ring-[var(--mg-green)]',
-      'shadow-lg',
-      'relative'
-    );
-
-    // 4) Add the "Start here" badge
-    const badge = document.createElement('div');
-    badge.setAttribute('data-start-badge','');
-    badge.className =
-      'absolute -top-3 -right-3 bg-[var(--mg-green)] text-white text-xs font-bold px-3 py-1 rounded-full shadow';
-    badge.textContent = 'Start here';
-
-    target.appendChild(badge);
   }
 </script>
 
