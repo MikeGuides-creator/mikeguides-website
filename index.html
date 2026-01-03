@@ -244,6 +244,9 @@
   Reset / Choose again
 </button>
   </div>
+<p class="mt-2 text-sm text-slate-600">
+  We’ve highlighted the best guide to start with based on your answers.
+</p>
 
   <!-- Example gated blocks -->
   <div data-mg-path="foundational" hidden style="margin-top:14px;">
@@ -312,7 +315,9 @@
       </article>
 
       <!-- Pricing for Profit -->
-      <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_10px_25px_-10px_rgba(2,6,23,.1)] card">
+      <article
+  class="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_10px_25px_-10px_rgba(2,6,23,.1)] card"
+  data-start-for="accelerated">
         <a href="https://mikeguides8.gumroad.com/l/vlkwxj" target="_blank" rel="noopener" class="block">
           <span class="product-thumb">
             <img src="/assets/images/products/pricing-for-profit.v20251230a.960.png"
@@ -389,7 +394,9 @@
       </article>
 
       <!-- AI Business Automation ROI -->    
-      <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_10px_25px_-10px_rgba(2,6,23,.1)] card" data-mg-path="foundational,accelerated,advanced">
+      <article
+  class="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_10px_25px_-10px_rgba(2,6,23,.1)] card"
+  data-start-for="advanced">
         <a href="https://mikeguides8.gumroad.com/l/ai-business-automation-roi" target="_blank" rel="noopener" class="block">
           <span class="product-thumb">
             <img src="/assets/images/products/ai-business-automation-roi.v20251230a.960.png"
@@ -424,7 +431,9 @@
       </article>
 
       <!-- AI Writing Workshop -->
-      <article class="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_10px_25px_-10px_rgba(2,6,23,.1)] card">
+      <article
+  class="rounded-2xl border border-slate-200 bg-white p-6 shadow-[0_10px_25px_-10px_rgba(2,6,23,.1)] card"
+  data-start-for="foundational">
         <a href="https://mikeguides8.gumroad.com/l/AI_Writing_Workshop" target="_blank" rel="noopener" class="block">
           <span class="product-thumb">
             <img src="/assets/images/products/ai-writing-workshop.v20251230a.960.png"
@@ -750,27 +759,41 @@
   <script src="/assets/js/pathfinder.js?v=5"></script>
 <script>
   MGPathfinder.init({
-    storageKey: "mg_bundle_path_v1"
+    storageKey: "mg_bundle_path_v1",
+    onChange: applyStartHere
   });
 
-  (function () {
-    const key = "mg_bundle_path_v1";
-    const btn = document.querySelector('[data-mg="reset-path"]');
-    if (!btn) return;
-
-    btn.addEventListener("click", () => {
-      localStorage.removeItem(key);
-      document.documentElement.removeAttribute("data-mg-selected-path");
-      document.querySelectorAll('[data-mg-path]').forEach(el => (el.hidden = false));
-
-      const result = document.querySelector('[data-mg="path-result"]');
-      if (result) result.hidden = true;
-
-      const form = document.querySelector('[data-mg="path-quiz"]');
-      if (form) form.reset();
-      form?.scrollIntoView({ behavior: "smooth", block: "start" });
+  function applyStartHere(state) {
+    // 1) Clear any previous highlighting
+    document.querySelectorAll('[data-start-for]').forEach(card => {
+      card.classList.remove('ring-2','ring-[var(--mg-green)]','shadow-lg','relative');
+      const badge = card.querySelector('[data-start-badge]');
+      if (badge) badge.remove();
     });
-  })();
+
+    // 2) Find the correct card for this path
+    const target = document.querySelector(
+      `[data-start-for="${state.pathKey}"]`
+    );
+    if (!target) return;
+
+    // 3) Highlight the card
+    target.classList.add(
+      'ring-2',
+      'ring-[var(--mg-green)]',
+      'shadow-lg',
+      'relative'
+    );
+
+    // 4) Add the "Start here" badge
+    const badge = document.createElement('div');
+    badge.setAttribute('data-start-badge','');
+    badge.className =
+      'absolute -top-3 -right-3 bg-[var(--mg-green)] text-white text-xs font-bold px-3 py-1 rounded-full shadow';
+    badge.textContent = 'Start here';
+
+    target.appendChild(badge);
+  }
 </script>
 
 </body>
