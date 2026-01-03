@@ -188,34 +188,8 @@
       });
     });
   }
-<button type="button" data-mg="reset-path"
-  class="mt-3 inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-semibold border border-slate-200 hover:bg-slate-50">
-  Reset / Choose again
-</button>
-
   window.MGPathfinder = { init };
 })();
 
-<script>
-  MGPathfinder.init({ storageKey: "mg_bundle_path_v1" });
 
-  // Reset button support
-  (function () {
-    const key = "mg_bundle_path_v1";
-    const btn = document.querySelector('[data-mg="reset-path"]');
-    if (!btn) return;
-
-    btn.addEventListener("click", () => {
-      localStorage.removeItem(key);
-      // Optional: also clear the UI state immediately
-      document.documentElement.removeAttribute("data-mg-selected-path");
-      document.querySelectorAll('[data-mg-path]').forEach(el => el.hidden = false);
-      const result = document.querySelector('[data-mg="path-result"]');
-      if (result) result.hidden = true;
-      const form = document.querySelector('[data-mg="path-quiz"]');
-      if (form) form.reset();
-      // Scroll back to the quiz so it feels intentional
-      form?.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-  })();
-</script>
+ 
