@@ -468,3 +468,6 @@ button.bg-\[var\(--mg-blue\)\] {
 #home-hero .hero-browse a:hover {
   color: rgba(255, 255, 255, 0.85);
 }
+/* Pathfinder polish */
+.mg-dim { opacity: .45; }
+.mg-dim:hover { opacity: 1; }
