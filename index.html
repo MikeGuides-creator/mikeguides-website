@@ -743,7 +743,35 @@
 <!-- GA4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PHWLTS997T"></script>
 <script defer src="/assets/js/ga-init.js?v=2"></script>
+// Reset / Choose again button
+  (function () {
+    const key = "mg_bundle_path_v1";
+    const btn = document.querySelector('[data-mg="reset-path"]');
+    if (!btn) return;
 
+    btn.addEventListener("click", () => {
+      // 1) Remove saved choice
+      localStorage.removeItem(key);
+
+      // 2) Clear the UI state
+      document.documentElement.removeAttribute("data-mg-selected-path");
+
+      // 3) Show all cards again
+      document.querySelectorAll('[data-mg-path]').forEach(el => (el.hidden = false));
+
+      // 4) Hide the result box again (so it feels like a fresh start)
+      const result = document.querySelector('[data-mg="path-result"]');
+      if (result) result.hidden = true;
+
+      // 5) Clear the quiz answers
+      const form = document.querySelector('[data-mg="path-quiz"]');
+      if (form) form.reset();
+
+      // 6) Scroll back to the quiz
+      form?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  })();
+</script>
 <!-- Click tracking -->
 <script defer src="/assets/js/ga-events.js?v=2"></script>
 
