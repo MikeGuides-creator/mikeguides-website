@@ -755,6 +755,7 @@
 
   <script src="/assets/js/pathfinder.js?v=11"></script>
 <script>
+  
   // --- Start Here highlighter (must be defined BEFORE init) ---
   function applyStartHere(state) {
     // Clear previous highlighting/badges
@@ -786,6 +787,17 @@ function applyNextUp(state) {
   const el = document.querySelector('[data-mg="next-up"]');
   if (!el) return;
   el.textContent = map[state.pathKey] || "—";
+}
+  function applyDimming(state) {
+  const startCard = document.querySelector(`[data-start-for="${state.pathKey}"]`);
+  const cards = document.querySelectorAll('article.card');
+
+  cards.forEach(c => c.classList.remove('mg-dim'));
+  if (!startCard) return;
+
+  cards.forEach(c => {
+    if (c !== startCard) c.classList.add('mg-dim');
+  });
 }
   // --- Reset wiring ---
   function wireResetButton() {
@@ -823,9 +835,11 @@ function applyNextUp(state) {
   MGPathfinder.init({
     storageKey: "mg_bundle_path_v1",
     onChange: (state) => {
-      applyStartHere(state);
-      wireResetButton();
-    }
+  applyStartHere(state);
+  applyNextUp(state);
+  applyDimming(state);
+  wireResetButton();
+}
   });
 </script>
 
