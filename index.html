@@ -743,7 +743,16 @@
 <!-- GA4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-PHWLTS997T"></script>
 <script defer src="/assets/js/ga-init.js?v=2"></script>
-// Reset / Choose again button
+
+<!-- Click tracking -->
+<script defer src="/assets/js/ga-events.js?v=2"></script>
+
+  <script src="/assets/js/pathfinder.js"></script>
+<script>
+  MGPathfinder.init({
+    storageKey: "mg_bundle_path_v1"
+  });
+  // Reset / Choose again button
   (function () {
     const key = "mg_bundle_path_v1";
     const btn = document.querySelector('[data-mg="reset-path"]');
@@ -772,14 +781,6 @@
     });
   })();
 </script>
-<!-- Click tracking -->
-<script defer src="/assets/js/ga-events.js?v=2"></script>
-
-  <script src="/assets/js/pathfinder.js"></script>
-<script>
-  MGPathfinder.init({
-    storageKey: "mg_bundle_path_v1"
-  });
 </script>
 </body>
 </html>
