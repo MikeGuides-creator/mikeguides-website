@@ -783,7 +783,19 @@
     badge.textContent = 'Start here';
     target.appendChild(badge);
   }
+function applyNextUp(state) {
+    const map = {
+      foundational: "Pricing for Profit System",
+      accelerated: "AI Marketing Toolkit",
+      advanced: "Visual AI Studio"
+    };
 
+    const el = document.querySelector('[data-mg="next-up"]');
+    if (!el) return;
+
+    el.textContent = map[state.pathKey] || "—";
+  }
+  
   // --- Reset wiring ---
   function wireResetButton() {
     const key = "mg_bundle_path_v1";
