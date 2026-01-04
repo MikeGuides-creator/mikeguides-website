@@ -853,9 +853,9 @@ function moveStartHereToTop(state) {
     storageKey: "mg_bundle_path_v1",
     onChange: (state) => {
   applyStartHere(state);
+  moveStartHereToTop(state);
   applyNextUp(state);
   applyDimming(state);
-  moveStartHereToTop(state);
   wireResetButton();
 }
   });
