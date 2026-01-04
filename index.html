@@ -810,7 +810,18 @@ function applyNextUp(state) {
 
       document.querySelectorAll('article.card')
   .forEach(c => c.classList.remove('mg-dim'));
+const grid = document.querySelector('.grid.grid-3.mt-6');
+if (grid && grid.dataset.originalOrder) {
+  const order = JSON.parse(grid.dataset.originalOrder);
+  const byId = new Map(
+    Array.from(grid.children).map(el => [el.dataset.uid, el])
+  );
 
+  order.forEach(id => {
+    const el = byId.get(id);
+    if (el) grid.appendChild(el);
+  });
+}
       // Remove "Start here" highlight/badge
       document.querySelectorAll('[data-start-for]').forEach(card => {
         card.classList.remove('ring-2','ring-[var(--mg-green)]','shadow-lg','relative');
