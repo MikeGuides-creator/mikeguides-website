@@ -8,7 +8,7 @@
 (function () {
   const DEFAULTS = {
     storageKey: "mg_pathfinder_v1",
-    thresholds: { foundationalMax: 49, acceleratedMax: 79 },
+    thresholds: { foundationalMax: 20, acceleratedMax: 40 },
     paths: {
       foundational: {
         id: "foundational_core_modules",
