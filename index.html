@@ -822,6 +822,23 @@ function applyNextUp(state) {
       form?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   }
+function moveStartHereToTop(state) {
+  const grid = document.querySelector('.grid.grid-3.mt-6');
+  if (!grid) return;
+
+  const startCard = document.querySelector(
+    `[data-start-for="${state.pathKey}"]`
+  );
+  if (!startCard) return;
+
+  // Remember original order once
+  if (!grid.dataset.originalOrder) {
+    const ids = Array.from(grid.children).map(el => el.dataset.uid);
+    grid.dataset.originalOrder = JSON.stringify(ids);
+  }
+
+  grid.prepend(startCard);
+}
 
   // --- Init Pathfinder (after helpers exist) ---
   MGPathfinder.init({
