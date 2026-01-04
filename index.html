@@ -860,16 +860,18 @@ function moveStartHereToTop(state) {
 }
 
   // --- Init Pathfinder (after helpers exist) ---
-  MGPathfinder.init({
-    storageKey: "mg_bundle_path_v1",
-    onChange: (state) => {
-  applyStartHere(state);
-  moveStartHereToTop(state);
-  applyNextUp(state);
-  applyDimming(state);
-  wireResetButton();
-}
-  });
+ MGPathfinder.init({
+  storageKey: "mg_bundle_path_v1",
+  onChange: (state) => {
+    console.log("onChange fired:", state);
+    applyStartHere(state);
+    moveStartHereToTop(state);
+    applyNextUp(state);
+    applyDimming(state);
+    wireResetButton();
+  }
+});
+
 </script>
 
 </body>
