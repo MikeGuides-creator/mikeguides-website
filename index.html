@@ -865,6 +865,7 @@ function moveStartHereToTop(state) {
   storageKey: "mg_bundle_path_v1",
   onChange: (state) => {
     console.log("onChange fired:", state);
+    console.log("score:", state.score, "pathKey:", state.pathKey);
     applyStartHere(state);
     moveStartHereToTop(state);
     applyNextUp(state);
