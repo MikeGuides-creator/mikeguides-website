@@ -1,15 +1,3 @@
-Conversation opened. 1 unread message. 
-
-Skip to content
-Using Gmail with screen readers
-1 of 17
-Email.js
-Inbox
-
-John <mikeguidesblog@gmail.com>
-9:32 AM (0 minutes ago)
-to me
-
 // ============================================
 // EMAIL NOTIFICATION SYSTEM
 // Integrated with EmailJS (free tier)
