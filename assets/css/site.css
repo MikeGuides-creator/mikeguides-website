@@ -471,3 +471,184 @@ button.bg-\[var\(--mg-blue\)\] {
 /* Pathfinder polish */
 .mg-dim { opacity: .45; }
 .mg-dim:hover { opacity: 1; }
+
+Conversation opened. 1 unread message.
+
+Skip to content
+Using Gmail with screen readers
+1 of 14
+Site-css extend
+Inbox
+
+John <mikeguidesblog@gmail.com>
+9:07 AM (0 minutes ago)
+to me
+
+/* ============================================
+CALENDAR-SPECIFIC STYLES
+Extends your existing site.css
+============================================ */
+
+/* Calendar grid */
+.calendar-grid {
+display: grid;
+grid-template-columns: repeat(7, 1fr);
+gap: 0.75rem;
+margin-top: 1.5rem;
+}
+
+.calendar-day {
+background: white;
+border: 2px solid #e2e8f0;
+border-radius: 0.75rem;
+padding: 1rem;
+min-height: 180px;
+transition: all 0.2s ease;
+}
+
+.calendar-day:hover {
+border-color: #c7d2fe;
+transform: translateY(-2px);
+box-shadow: 0 10px 25px -10px rgba(2, 6, 23, 0.1);
+}
+
+.calendar-day-header {
+font-weight: 600;
+margin-bottom: 0.75rem;
+color: #475569;
+border-bottom: 1px solid #e2e8f0;
+padding-bottom: 0.5rem;
+font-size: 0.875rem;
+}
+
+.calendar-day.weekend {
+background: #f8fafc;
+border-color: #cbd5e1;
+}
+
+.calendar-day.today {
+border-color: var(--mg-blue);
+background: #eff6ff;
+}
+
+/* Post items */
+.post-item {
+background: #f8fafc;
+padding: 0.75rem;
+margin-bottom: 0.5rem;
+border-radius: 0.5rem;
+font-size: 0.75rem;
+border-left: 3px solid var(--mg-blue);
+transition: all 0.2s ease;
+}
+
+.post-item:hover {
+background: #f1f5f9;
+transform: translateX(2px);
+}
+
+.post-item.platform-instagram { border-left-color: #e4405f; }
+.post-item.platform-facebook { border-left-color: #1877f2; }
+.post-item.platform-linkedin { border-left-color: #0a66c2; }
+.post-item.platform-tiktok { border-left-color: #000000; }
+.post-item.platform-twitter { border-left-color: #1da1f2; }
+.post-item.platform-pinterest { border-left-color: #e60023; }
+
+.post-time {
+font-weight: 600;
+color: #475569;
+font-size: 0.7rem;
+}
+
+.post-content {
+color: #64748b;
+font-size: 0.7rem;
+line-height: 1.3;
+margin-top: 0.25rem;
+}
+
+.post-type {
+display: inline-block;
+padding: 0.1rem 0.4rem;
+background: #e2e8f0;
+border-radius: 0.25rem;
+font-size: 0.6rem;
+color: #475569;
+margin-top: 0.25rem;
+}
+
+/* Loading states */
+.loading-calendar {
+position: relative;
+min-height: 300px;
+}
+
+.loading-calendar::after {
+content: '';
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 40px;
+height: 40px;
+border: 3px solid #e2e8f0;
+border-top-color: var(--mg-blue);
+border-radius: 50%;
+animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Progress bars for insights */
+.insight-bar {
+height: 6px;
+background: rgba(255, 255, 255, 0.2);
+border-radius: 3px;
+overflow: hidden;
+margin-top: 0.25rem;
+}
+
+.insight-bar-fill {
+height: 100%;
+background: white;
+border-radius: 3px;
+transition: width 0.5s ease;
+}
+
+/* Export buttons */
+.export-format {
+display: inline-flex;
+align-items: center;
+gap: 0.5rem;
+padding: 0.5rem 1rem;
+background: white;
+border: 1px solid #e2e8f0;
+border-radius: 0.5rem;
+font-size: 0.875rem;
+cursor: pointer;
+transition: all 0.2s;
+}
+
+.export-format:hover {
+background: #f8fafc;
+border-color: #cbd5e1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+.calendar-grid {
+grid-template-columns: repeat(2, 1fr);
+}
+
+.calendar-day {
+min-height: 160px;
+}
+}
+
+@media (max-width: 480px) {
+.calendar-grid {
+grid-template-columns: 1fr;
+}
+}
