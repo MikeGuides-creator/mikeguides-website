@@ -1,1 +1,441 @@
 
+John <mikeguidesblog@gmail.com>
+8:54 AM (0 minutes ago)
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<title>AI Content Calendar Builder | MikeGuides Toolkit</title>
+<meta name="description" content="Generate a strategic 30-day content plan optimized by AI algorithms. Industry-specific timing, platform optimization, and performance predictions.">
+
+<!-- Open Graph / Social -->
+<meta property="og:title" content="AI Content Calendar Builder | MikeGuides">
+<meta property="og:description" content="Generate AI-optimized content calendars with industry-specific algorithms.">
+<meta property="og:image" content="https://mikeguides.co/assets/images/og/mikeguides-home-xmas.v20251127a.png">
+<meta property="og:url" content="https://mikeguides.co/toolkit/content-calendar/">
+<meta property="og:type" content="website">
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI Content Calendar Builder | MikeGuides">
+<meta name="twitter:description" content="Generate AI-optimized content calendars with industry-specific algorithms.">
+<meta name="twitter:image" content="https://mikeguides.co/assets/images/og/mikeguides-home-xmas.v20251127a.png">
+
+<!-- Canonical -->
+<link rel="canonical" href="https://mikeguides.co/toolkit/content-calendar/" />
+
+<!-- Your existing CSS -->
+<link rel="stylesheet" href="/assets/css/site.css">
+
+<!-- Calendar-specific styles -->
+<link rel="stylesheet" href="calendar-styles.css">
+
+<!-- EmailJS for notifications -->
+<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+<style>
+/* Calendar-specific overrides using your design system */
+:root {
+--calendar-primary: var(--mg-blue, #2563eb);
+--calendar-success: var(--mg-green, #10b981);
+--calendar-warning: #f59e0b;
+--calendar-bg: #f8fafc;
+}
+
+/* Ensure calendar fits your existing layout */
+.mg-container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 0 1rem;
+}
+
+/* Your existing button styles extended */
+.mg-btn-primary {
+background-color: var(--mg-blue);
+color: white;
+border-radius: 0.75rem;
+padding: 0.75rem 1.5rem;
+font-weight: 600;
+border: none;
+cursor: pointer;
+transition: opacity 0.2s;
+}
+
+.mg-btn-primary:hover {
+opacity: 0.9;
+}
+
+.mg-btn-success {
+background-color: var(--mg-green);
+color: white;
+border-radius: 0.75rem;
+padding: 0.75rem 1.5rem;
+font-weight: 600;
+border: none;
+cursor: pointer;
+transition: opacity 0.2s;
+}
+</style>
+</head>
+
+<body class="min-h-screen flex flex-col bg-slate-50">
+<!-- Reuse your existing header -->
+<header class="max-w-6xl mx-auto px-6 py-6 w-full flex items-center justify-between">
+<a href="/" class="brand text-2xl font-extrabold text-slate-900 flex items-center gap-2">
+<span class="inline-block w-2.5 h-6 rounded bg-[var(--mg-blue)]"></span>
+MikeGuides
+</a>
+<nav class="flex gap-5 text-sm font-semibold">
+<a class="hover:text-[var(--mg-blue)]" href="/">Home</a>
+<a class="hover:text-[var(--mg-blue)]" href="/guides/">Guides</a>
+<a class="hover:text-[var(--mg-blue)]" href="/toolkit/">Toolkit</a>
+<a class="hover:text-[var(--mg-green)]" href="https://blog.pricingforprofit.co">Blog</a>
+<a class="hover:text-[var(--mg-blue)]" href="https://mikeguides8.gumroad.com" target="_blank" rel="noopener">Store</a>
+<a class="hover:text-[var(--mg-blue)]" href="/#contact">Contact</a>
+</nav>
+</header>
+
+<main class="flex-1 mg-container py-8">
+<!-- Page Header -->
+<div class="text-center mb-10">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800 mb-3">
+🎯 AI-Powered Tool
+</span>
+<h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4">
+AI Content Calendar Builder
+</h1>
+<p class="text-lg text-slate-600 max-w-3xl mx-auto">
+Generate a strategic 30-day content plan optimized by algorithms. Get industry-specific timing,
+platform recommendations, and performance predictions.
+</p>
+</div>
+
+<!-- Two-column layout: Inputs + Calendar -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left Column: Configuration Panel -->
+<div class="lg:col-span-1">
+<div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm sticky top-8">
+<h2 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
+<span class="text-[var(--mg-blue)]">⚙️</span> Calendar Settings
+</h2>
+
+<!-- Industry Selection -->
+<div class="mb-6">
+<label class="block text-sm font-semibold text-slate-700 mb-2">
+Industry / Business Type
+</label>
+<select id="industry" class="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+<option value="">Select your industry</option>
+<option value="ecommerce">E-commerce & Retail</option>
+<option value="b2b">B2B & Services</option>
+<option value="saas">SaaS & Tech</option>
+<option value="agency">Marketing Agency</option>
+<option value="creator">Content Creator</option>
+<option value="health">Health & Wellness</option>
+<option value="education">Education</option>
+<option value="consulting">Consulting</option>
+</select>
+</div>
+
+<!-- Platform Selection -->
+<div class="mb-6">
+<label class="block text-sm font-semibold text-slate-700 mb-2">
+Content Platforms
+</label>
+<div class="space-y-2">
+<label class="flex items-center gap-3 p-3 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
+<input type="checkbox" name="platform" value="instagram" class="rounded text-blue-600">
+<span>Instagram</span>
+</label>
+<label class="flex items-center gap-3 p-3 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
+<input type="checkbox" name="platform" value="facebook" class="rounded text-blue-600">
+<span>Facebook</span>
+</label>
+<label class="flex items-center gap-3 p-3 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
+<input type="checkbox" name="platform" value="linkedin" class="rounded text-blue-600">
+<span>LinkedIn</span>
+</label>
+<label class="flex items-center gap-3 p-3 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
+<input type="checkbox" name="platform" value="tiktok" class="rounded text-blue-600">
+<span>TikTok</span>
+</label>
+<label class="flex items-center gap-3 p-3 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
+<input type="checkbox" name="platform" value="twitter" class="rounded text-blue-600">
+<span>Twitter/X</span>
+</label>
+<label class="flex items-center gap-3 p-3 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
+<input type="checkbox" name="platform" value="pinterest" class="rounded text-blue-600">
+<span>Pinterest</span>
+</label>
+</div>
+</div>
+
+<!-- Audience Size -->
+<div class="mb-6">
+<label class="block text-sm font-semibold text-slate-700 mb-2">
+Audience Size
+</label>
+<div class="grid grid-cols-3 gap-2">
+<button type="button" data-size="small" class="size-option py-2 px-3 text-center border rounded-lg hover:bg-slate-50">
+Small<br><span class="text-xs text-slate-500">&lt; 10K</span>
+</button>
+<button type="button" data-size="medium" class="size-option active py-2 px-3 text-center border rounded-lg bg-blue-50 border-blue-200 text-blue-700">
+Medium<br><span class="text-xs text-blue-600">10K-100K</span>
+</button>
+<button type="button" data-size="large" class="size-option py-2 px-3 text-center border rounded-lg hover:bg-slate-50">
+Large<br><span class="text-xs text-slate-500">100K+</span>
+</button>
+</div>
+<input type="hidden" id="audienceSize" value="medium">
+</div>
+
+<!-- Content Goals -->
+<div class="mb-6">
+<label class="block text-sm font-semibold text-slate-700 mb-2">
+Primary Goals
+</label>
+<div class="space-y-2">
+<label class="flex items-center gap-3 p-3 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
+<input type="checkbox" name="goal" value="awareness" class="rounded text-blue-600">
+<span>Brand Awareness</span>
+</label>
+<label class="flex items-center gap-3 p-3 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
+<input type="checkbox" name="goal" value="engagement" class="rounded text-blue-600">
+<span>Engagement</span>
+</label>
+<label class="flex items-center gap-3 p-3 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
+<input type="checkbox" name="goal" value="leads" class="rounded text-blue-600">
+<span>Lead Generation</span>
+</label>
+<label class="flex items-center gap-3 p-3 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer">
+<input type="checkbox" name="goal" value="sales" class="rounded text-blue-600">
+<span>Direct Sales</span>
+</label>
+</div>
+</div>
+
+<!-- Content Themes -->
+<div class="mb-8">
+<label class="block text-sm font-semibold text-slate-700 mb-2">
+Content Themes/Topics
+</label>
+<input type="text" id="contentThemes" placeholder="e.g., sustainability, productivity, tech tips"
+class="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+<p class="text-xs text-slate-500 mt-1">Separate with commas</p>
+</div>
+
+<!-- Generate Button -->
+<button id="generateCalendar" class="w-full mg-btn-primary py-4 text-lg font-bold flex items-center justify-center gap-2">
+🚀 Generate AI-Optimized Calendar
+</button>
+
+<p class="text-xs text-slate-500 mt-3 text-center">
+No account required • 100% private • Algorithm-powered
+</p>
+</div>
+</div>
+
+<!-- Right Column: Calendar & Results -->
+<div class="lg:col-span-2">
+<!-- Calendar Output -->
+<div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm mb-8">
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-xl font-bold text-slate-900">
+📅 Your 30-Day Content Calendar
+</h2>
+<div class="flex gap-2">
+<button id="exportPDF" class="px-4 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50">
+📄 PDF
+</button>
+<button id="exportCSV" class="px-4 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50">
+📊 CSV
+</button>
+<button id="exportGoogle" class="px-4 py-2 text-sm border border-slate-300 rounded-lg hover:bg-slate-50">
+📅 Google
+</button>
+</div>
+</div>
+
+<div id="calendarOutput" class="min-h-[400px] flex items-center justify-center text-slate-400">
+<div class="text-center">
+<div class="text-5xl mb-4">📅</div>
+<p class="text-lg font-medium text-slate-700">Your calendar will appear here</p>
+<p class="text-slate-500">Configure your settings and click "Generate"</p>
+</div>
+</div>
+</div>
+
+<!-- AI Insights Panel -->
+<div id="aiInsights" class="bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-2xl p-6 mb-8 hidden">
+<h2 class="text-xl font-bold mb-6 flex items-center gap-2">
+🎯 AI Optimization Insights
+</h2>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+<!-- Optimal Times -->
+<div class="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+<h3 class="font-bold mb-3 flex items-center gap-2">
+⏰ Best Posting Times
+</h3>
+<div id="optimalTimesDisplay" class="text-sm"></div>
+</div>
+
+<!-- Content Mix -->
+<div class="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+<h3 class="font-bold mb-3 flex items-center gap-2">
+📊 Content Mix
+</h3>
+<div id="contentMixDisplay" class="text-sm"></div>
+</div>
+
+<!-- Performance Predictions -->
+<div class="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+<h3 class="font-bold mb-3 flex items-center gap-2">
+📈 Predictions
+</h3>
+<div id="performancePredictions" class="text-sm"></div>
+</div>
+</div>
+
+<div class="flex gap-3">
+<button id="applyOptimizations" class="px-5 py-2 bg-white text-blue-700 font-semibold rounded-lg hover:bg-blue-50">
+Apply Optimizations
+</button>
+<button id="saveCalendar" class="px-5 py-2 bg-white/20 text-white font-semibold rounded-lg hover:bg-white/30">
+Save Calendar
+</button>
+</div>
+</div>
+
+<!-- Email Notifications Panel -->
+<div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+<h2 class="text-xl font-bold text-slate-900 mb-4 flex items-center gap-2">
+📧 Email Reminders & Reports
+</h2>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Email Input -->
+<div>
+<label class="block text-sm font-semibold text-slate-700 mb-2">
+Your Email Address
+</label>
+<div class="flex gap-2">
+<input type="email" id="userEmail" placeholder="you@example.com"
+class="flex-1 p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+<button id="setupEmail" class="px-5 py-3 bg-[var(--mg-green)] text-white font-semibold rounded-lg hover:opacity-90">
+Enable
+</button>
+</div>
+</div>
+
+<!-- Notification Preferences -->
+<div id="emailPreferences" class="hidden">
+<label class="block text-sm font-semibold text-slate-700 mb-2">
+Notification Preferences
+</label>
+<div class="space-y-2">
+<label class="flex items-center gap-2">
+<input type="checkbox" id="dailyReminders" checked class="rounded text-blue-600">
+<span class="text-sm">Daily posting reminders</span>
+</label>
+<label class="flex items-center gap-2">
+<input type="checkbox" id="weeklyReports" checked class="rounded text-blue-600">
+<span class="text-sm">Weekly performance reports</span>
+</label>
+<label class="flex items-center gap-2">
+<input type="checkbox" id="engagementAlerts" class="rounded text-blue-600">
+<span class="text-sm">High engagement alerts</span>
+</label>
+</div>
+</div>
+</div>
+
+<div id="emailConfirmation" class="hidden mt-4 p-4 bg-green-50 border border-green-200 rounded-lg">
+<div class="flex items-center gap-2 text-green-800">
+<span class="text-lg">✅</span>
+<span class="font-semibold">Email notifications enabled!</span>
+</div>
+<p class="text-sm text-green-700 mt-1">
+You'll receive your first reminder tomorrow at your selected time.
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Usage Tips -->
+<div class="mt-12 bg-blue-50 border border-blue-100 rounded-2xl p-6">
+<h3 class="text-lg font-bold text-slate-900 mb-3">💡 How to Use This Calendar</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="p-3">
+<div class="font-semibold text-blue-700 mb-1">1. Configure Settings</div>
+<p class="text-sm text-slate-600">Select your industry, platforms, and goals for personalized optimization.</p>
+</div>
+<div class="p-3">
+<div class="font-semibold text-blue-700 mb-1">2. Generate & Review</div>
+<p class="text-sm text-slate-600">The AI creates a 30-day plan with optimal times and content types.</p>
+</div>
+<div class="p-3">
+<div class="font-semibold text-blue-700 mb-1">3. Export & Execute</div>
+<p class="text-sm text-slate-600">Export to your preferred format or enable email reminders.</p>
+</div>
+</div>
+</div>
+</main>
+
+<!-- Footer matching your site -->
+<footer class="mt-16 border-t border-slate-200 py-8">
+<div class="mg-container">
+<div class="text-center">
+<p class="text-slate-600">
+Part of the <a href="/toolkit/" class="text-[var(--mg-blue)] font-semibold">MikeGuides Toolkit</a>
+</p>
+<p class="text-sm text-slate-500 mt-2">
+© 2024 MikeGuides. Interactive business tools.
+</p>
+</div>
+</div>
+</footer>
+
+<!-- Scripts -->
+<script src="calendar-engine.js"></script>
+<script src="email-system.js"></script>
+
+<script>
+// Initialize EmailJS (you'll need to add your own User ID)
+(function() {
+// Replace with your actual EmailJS User ID
+emailjs.init("YOUR_EMAILJS_USER_ID");
+})();
+
+// Simple UI interactions
+document.addEventListener('DOMContentLoaded', function() {
+// Audience size buttons
+document.querySelectorAll('.size-option').forEach(btn => {
+btn.addEventListener('click', function() {
+document.querySelectorAll('.size-option').forEach(b => b.classList.remove('active', 'bg-blue-50', 'border-blue-200', 'text-blue-700'));
+this.classList.add('active', 'bg-blue-50', 'border-blue-200', 'text-blue-700');
+document.getElementById('audienceSize').value = this.dataset.size;
+});
+});
+
+// Platform checkboxes styling
+document.querySelectorAll('input[name="platform"]').forEach(cb => {
+cb.addEventListener('change', function() {
+const parent = this.closest('label');
+if (this.checked) {
+parent.classList.add('bg-blue-50', 'border-blue-300');
+} else {
+parent.classList.remove('bg-blue-50', 'border-blue-300');
+}
+});
+});
+});
+</script>
+</body>
+</html>
+
