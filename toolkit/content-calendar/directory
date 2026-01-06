@@ -1,0 +1,5 @@
+/toolkit/content-calendar/ ← New directory
+├── index.html ← Main calendar interface
+├── calendar-engine.js ← All AI algorithms
+├── email-system.js ← Email notifications
+└── calendar-styles.css ← Additional styles
