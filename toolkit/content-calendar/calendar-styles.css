@@ -1,378 +1,346 @@
-// ============================================
-// EMAIL NOTIFICATION SYSTEM
-// Integrated with EmailJS (free tier)
-// ============================================
+/* ============================================
+   AI CONTENT CALENDAR STYLES
+   Custom styles for the calendar display
+   ============================================ */
 
-// Configuration - UPDATE THESE WITH YOUR EMAILJS CREDENTIALS
-const EMAIL_CONFIG = {
-service_id: 'YOUR_SERVICE_ID', // From EmailJS dashboard
-template_id: 'YOUR_TEMPLATE_ID', // From EmailJS dashboard
-user_id: 'YOUR_PUBLIC_USER_ID' // From EmailJS dashboard
-};
-
-// Initialize email system
-document.addEventListener('DOMContentLoaded', function() {
-// Check if email is already configured
-const savedEmail = localStorage.getItem('mg_calendar_email');
-if (savedEmail) {
-document.getElementById('userEmail').value = savedEmail;
-showEmailPreferences();
+/* Calendar Grid Layout */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
 }
 
-// Setup email button
-document.getElementById('setupEmail').addEventListener('click', setupEmailNotifications);
-
-// Save preferences when Apply Optimizations is clicked
-document.getElementById('applyOptimizations')?.addEventListener('click', function() {
-saveEmailPreferences();
-// Also apply calendar optimizations
-if (window.currentCalendarData) {
-alert('Optimizations applied to your calendar!');
-}
-});
-
-// Save calendar button
-document.getElementById('saveCalendar')?.addEventListener('click', function() {
-saveCalendarToAccount();
-});
-});
-
-// Setup email notifications
-function setupEmailNotifications() {
-const email = document.getElementById('userEmail').value.trim();
-
-if (!validateEmail(email)) {
-showError('Please enter a valid email address.');
-return;
+/* Calendar Day Container */
+.calendar-day {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-// Save email to localStorage
-localStorage.setItem('mg_calendar_email', email);
-localStorage.setItem('mg_email_notifications', 'true');
-
-// Show preferences section
-showEmailPreferences();
-
-// Send welcome email
-sendWelcomeEmail(email);
-
-// Show confirmation
-document.getElementById('emailConfirmation').classList.remove('hidden');
-
-// Update button text
-document.getElementById('setupEmail').textContent = '✓ Enabled';
-document.getElementById('setupEmail').classList.remove('bg-[var(--mg-green)]');
-document.getElementById('setupEmail').classList.add('bg-blue-500');
+.calendar-day:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
 }
 
-// Show email preferences panel
-function showEmailPreferences() {
-const prefsSection = document.getElementById('emailPreferences');
-if (prefsSection) {
-prefsSection.classList.remove('hidden');
-
-// Load saved preferences
-const savedPrefs = localStorage.getItem('mg_email_preferences');
-if (savedPrefs) {
-try {
-const prefs = JSON.parse(savedPrefs);
-document.getElementById('dailyReminders').checked = prefs.dailyReminders !== false;
-document.getElementById('weeklyReports').checked = prefs.weeklyReports !== false;
-document.getElementById('engagementAlerts').checked = prefs.engagementAlerts || false;
-} catch (e) {
-console.warn('Could not parse saved preferences:', e);
-}
-}
-}
+.calendar-day.today {
+  border-color: #3b82f6;
+  border-width: 2px;
+  background-color: #eff6ff;
 }
 
-// Save email preferences
-function saveEmailPreferences() {
-const email = localStorage.getItem('mg_calendar_email');
-if (!email) {
-showError('Please enter your email first.');
-return;
+.calendar-day.weekend {
+  background-color: #f8fafc;
 }
 
-const preferences = {
-email: email,
-dailyReminders: document.getElementById('dailyReminders').checked,
-weeklyReports: document.getElementById('weeklyReports').checked,
-engagementAlerts: document.getElementById('engagementAlerts').checked,
-reminderTime: '09:00', // Default time
-enabledAt: new Date().toISOString()
-};
-
-localStorage.setItem('mg_email_preferences', JSON.stringify(preferences));
-
-// Schedule reminders
-scheduleEmailReminders();
-
-// Show success
-showSuccess('Email preferences saved! You\'ll receive your first reminder tomorrow.');
+.calendar-day-header {
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #f1f5f9;
 }
 
-// Send welcome email
-function sendWelcomeEmail(email) {
-const calendarData = window.currentCalendarData;
-
-const templateParams = {
-to_email: email,
-user_name: email.split('@')[0],
-calendar_duration: '30 days',
-total_posts: calendarData?.metadata?.totalPosts || '20-30',
-platforms: calendarData?.metadata?.platforms?.join(', ') || 'multiple',
-best_time: '9:00 AM',
-next_reminder: getNextReminderTime(),
-dashboard_link: window.location.href
-};
-
-// Only send if EmailJS is configured
-if (EMAIL_CONFIG.user_id && EMAIL_CONFIG.user_id !== 'YOUR_PUBLIC_USER_ID') {
-emailjs.send(EMAIL_CONFIG.service_id, 'welcome_template', templateParams, EMAIL_CONFIG.user_id)
-.then(response => {
-console.log('Welcome email sent:', response.status);
-})
-.catch(error => {
-console.warn('Email error (might be missing template):', error);
-// Fallback: Show success message anyway
-showSuccess('Email notifications enabled! Check your inbox for the welcome email.');
-});
-} else {
-console.log('EmailJS not configured - welcome email would be sent to:', email);
-showSuccess('Email notifications enabled! (EmailJS not fully configured yet)');
-}
+/* Post Items */
+.post-item {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-left-width: 4px;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  transition: all 0.2s ease;
 }
 
-// Schedule email reminders
-function scheduleEmailReminders() {
-// In a real app, this would use cron jobs or scheduled functions
-// For now, we'll simulate with localStorage
-const nextReminder = new Date();
-nextReminder.setDate(nextReminder.getDate() + 1);
-nextReminder.setHours(9, 0, 0, 0);
-
-localStorage.setItem('mg_next_reminder', nextReminder.toISOString());
-console.log('Next reminder scheduled for:', nextReminder.toLocaleString());
-
-// Also schedule weekly report (every Monday at 10 AM)
-const nextMonday = new Date();
-const daysUntilMonday = (8 - nextMonday.getDay()) % 7 || 7;
-nextMonday.setDate(nextMonday.getDate() + daysUntilMonday);
-nextMonday.setHours(10, 0, 0, 0);
-
-localStorage.setItem('mg_next_weekly_report', nextMonday.toISOString());
+.post-item:hover {
+  background-color: #f8fafc;
+  border-color: #cbd5e1;
 }
 
-// Send daily reminder (would be called by a scheduled job)
-function sendDailyReminder() {
-const preferences = JSON.parse(localStorage.getItem('mg_email_preferences'));
-
-if (!preferences?.dailyReminders || !preferences.email) {
-return;
+.post-item.platform-instagram {
+  border-left-color: #E4405F;
 }
 
-const today = new Date();
-const dayOfWeek = today.toLocaleDateString('en-US', { weekday: 'long' });
-
-// Get today's posts from calendar
-const todayPosts = getTodaysPosts(); // This function would need to be implemented
-
-const templateParams = {
-to_email: preferences.email,
-day_of_week: dayOfWeek,
-date: today.toLocaleDateString(),
-total_posts: todayPosts?.length || 0,
-posts: todayPosts ? formatPostsForEmail(todayPosts) : 'Check your calendar dashboard',
-reminder_time: preferences.reminderTime || '9:00',
-tips: getDailyContentTip()
-};
-
-if (EMAIL_CONFIG.user_id && EMAIL_CONFIG.user_id !== 'YOUR_PUBLIC_USER_ID') {
-emailjs.send(EMAIL_CONFIG.service_id, 'daily_reminder_template', templateParams, EMAIL_CONFIG.user_id);
-}
+.post-item.platform-facebook {
+  border-left-color: #1877F2;
 }
 
-// Send weekly report (would be called by a scheduled job)
-function sendWeeklyReport() {
-const preferences = JSON.parse(localStorage.getItem('mg_email_preferences'));
-
-if (!preferences?.weeklyReports || !preferences.email) {
-return;
+.post-item.platform-linkedin {
+  border-left-color: #0A66C2;
 }
 
-const weeklyStats = calculateWeeklyStats(); // This would need to be implemented
-
-const templateParams = {
-to_email: preferences.email,
-week_start: getWeekStartDate(),
-total_posts: weeklyStats?.totalPosts || 0,
-estimated_reach: weeklyStats?.estimatedReach || '100-500',
-best_performing: weeklyStats?.bestPost || 'Check your analytics',
-engagement_rate: weeklyStats?.engagementRate || '2.5',
-recommendations: weeklyStats?.recommendations || 'Keep posting consistently!',
-next_week_preview: getNextWeekPreview()
-};
-
-if (EMAIL_CONFIG.user_id && EMAIL_CONFIG.user_id !== 'YOUR_PUBLIC_USER_ID') {
-emailjs.send(EMAIL_CONFIG.service_id, 'weekly_report_template', templateParams, EMAIL_CONFIG.user_id);
-}
+.post-item.platform-tiktok {
+  border-left-color: #000000;
 }
 
-// Send engagement alert
-function sendEngagementAlert(postData, engagementRate) {
-const preferences = JSON.parse(localStorage.getItem('mg_email_preferences'));
-
-if (!preferences?.engagementAlerts || !preferences.email || engagementRate < 15) {
-return; // Only send for high engagement (>15%)
+.post-item.platform-twitter {
+  border-left-color: #1DA1F2;
 }
 
-const templateParams = {
-to_email: preferences.email,
-post_platform: postData.platform,
-post_content: postData.content?.substring(0, 100) + '...' || 'Your recent post',
-engagement_rate: engagementRate + '%',
-recommendations: getEngagementBoostTips(postData.platform),
-similar_content_ideas: getSimilarContentIdeas(postData)
-};
-
-if (EMAIL_CONFIG.user_id && EMAIL_CONFIG.user_id !== 'YOUR_PUBLIC_USER_ID') {
-emailjs.send(EMAIL_CONFIG.service_id, 'engagement_alert_template', templateParams, EMAIL_CONFIG.user_id);
-}
+.post-item.platform-pinterest {
+  border-left-color: #E60023;
 }
 
-// Save calendar to user account (simulated)
-function saveCalendarToAccount() {
-const calendarData = window.currentCalendarData;
-if (!calendarData) {
-showError('Please generate a calendar first.');
-return;
+/* Post Content Elements */
+.post-time {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1e293b;
+  background: #f1f5f9;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
 }
 
-// Save to localStorage for demo purposes
-// In production, this would send to your backend
-const savedCalendars = JSON.parse(localStorage.getItem('mg_saved_calendars') || '[]');
-calendarData.savedAt = new Date().toISOString();
-calendarData.id = 'cal_' + Date.now();
-savedCalendars.push(calendarData);
-
-localStorage.setItem('mg_saved_calendars', JSON.stringify(savedCalendars));
-
-showSuccess('Calendar saved! You can access it anytime from your account.');
+.post-content {
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  color: #334155;
+  font-weight: 500;
 }
 
-// Utility functions
-function validateEmail(email) {
-const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-return re.test(email);
+.post-type {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #64748b;
+  background: #f8fafc;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  text-transform: capitalize;
 }
 
-function getNextReminderTime() {
-const next = localStorage.getItem('mg_next_reminder');
-if (next) {
-const date = new Date(next);
-return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-}
-return '9:00 AM';
-}
-
-// Check if email is setup
-function checkEmailSetup() {
-const hasEmail = localStorage.getItem('mg_calendar_email');
-if (hasEmail) {
-document.getElementById('userEmail').value = hasEmail;
-showEmailPreferences();
-}
+/* Insight Bars for AI Panel */
+.insight-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  overflow: hidden;
 }
 
-// Helper functions (to be implemented based on your backend)
-function getTodaysPosts() {
-// This would query your database/API for today's posts
-// For now, return empty array
-return [];
+.insight-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #60a5fa, #3b82f6);
+  border-radius: 3px;
+  transition: width 0.5s ease;
 }
 
-function formatPostsForEmail(posts) {
-return posts.map(p => `• ${p.optimalTime} on ${p.platform}: ${p.content}`).join('\n');
+/* Platform Tags */
+.platform-tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
-function getDailyContentTip() {
-const tips = [
-"Engage with 3 comments on your posts today",
-"Try a poll or question in your Stories",
-"Reply to every comment for 24 hours",
-"Use 2-3 trending hashtags relevant to your niche"
-];
-return tips[Math.floor(Math.random() * tips.length)];
+.platform-tag.instagram {
+  background: #fdf2f8;
+  color: #be185d;
 }
 
-function calculateWeeklyStats() {
-// This would calculate from your analytics
-return {
-totalPosts: 12,
-estimatedReach: '1,200-1,800',
-bestPost: 'Product tutorial on Instagram',
-engagementRate: '3.2%',
-recommendations: 'Try more video content next week'
-};
+.platform-tag.facebook {
+  background: #eff6ff;
+  color: #1d4ed8;
 }
 
-function getWeekStartDate() {
-const today = new Date();
-const dayOfWeek = today.getDay();
-const diff = today.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1);
-const monday = new Date(today.setDate(diff));
-return monday.toLocaleDateString();
+.platform-tag.linkedin {
+  background: #f0f9ff;
+  color: #0369a1;
 }
 
-function getNextWeekPreview() {
-return "Next week focuses on educational content and user testimonials.";
+.platform-tag.tiktok {
+  background: #f5f5f5;
+  color: #000000;
 }
 
-function getEngagementBoostTips(platform) {
-const tips = {
-instagram: "Use Instagram Reels with trending audio",
-facebook: "Ask questions that spark conversation",
-linkedin: "Share industry insights with data",
-tiktok: "Participate in the latest challenges",
-twitter: "Create threads with valuable insights",
-pinterest: "Create step-by-step tutorial pins"
-};
-return tips[platform] || "Engage with your audience in comments.";
+.platform-tag.twitter {
+  background: #f0f9ff;
+  color: #0ea5e9;
 }
 
-function getSimilarContentIdeas(postData) {
-return [
-"Create a follow-up post on the same topic",
-"Make a video version of this content",
-"Turn this into a carousel post with more details",
-"Share a behind-the-scenes of creating this content"
-];
+.platform-tag.pinterest {
+  background: #fef2f2;
+  color: #dc2626;
 }
 
-function showError(message) {
-alert(`❌ ${message}`);
+/* Loading States */
+.loading-calendar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  color: #64748b;
 }
 
-function showSuccess(message) {
-// Create a temporary success message
-const successDiv = document.createElement('div');
-successDiv.className = 'fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50';
-successDiv.innerHTML = `✅ ${message}`;
-document.body.appendChild(successDiv);
-
-setTimeout(() => {
-successDiv.remove();
-}, 3000);
+.loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #e2e8f0;
+  border-top-color: #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
 }
 
-// Export to use in calendar-engine.js
-window.emailSystem = {
-setupEmailNotifications,
-saveEmailPreferences,
-checkEmailSetup,
-sendDailyReminder,
-sendWeeklyReport,
-sendEngagementAlert,
-saveCalendarToAccount
-};
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Calendar Controls */
+.calendar-controls {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.calendar-control-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.calendar-control-btn:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+/* Export Buttons */
+.export-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.export-btn:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .calendar-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .calendar-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .calendar-day {
+    padding: 1rem;
+  }
+  
+  .post-item {
+    padding: 0.875rem;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .calendar-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem;
+  }
+  
+  .calendar-day {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    border: 1px solid #d1d5db;
+    box-shadow: none;
+  }
+  
+  .post-item {
+    border: 1px solid #e5e7eb;
+    border-left-width: 3px;
+  }
+  
+  /* Hide non-essential elements */
+  button, 
+  #aiInsights,
+  #emailPreferences,
+  footer {
+    display: none !important;
+  }
+}
+
+/* Animation for new posts */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.post-item {
+  animation: fadeInUp 0.3s ease forwards;
+}
+
+/* Calendar empty state */
+.calendar-empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: #64748b;
+}
+
+.calendar-empty-icon {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.5;
+}
+
+/* Content type indicators */
+.content-type-indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 0.375rem;
+}
+
+.content-type-indicator.educational {
+  background-color: #10b981;
+}
+
+.content-type-indicator.promotional {
+  background-color: #3b82f6;
+}
+
+.content-type-indicator.entertainment {
+  background-color: #f59e0b;
+}
+
+.content-type-indicator.engagement {
+  background-color: #8b5cf6;
+}
